@@ -12,7 +12,8 @@ root.render(
     domain="dev-gm7u55v7jisqivq4.us.auth0.com"
     clientId="YF49GD9OiTsFcBxsSJw650hwDuP2y0uX"
     authorizationParams={{
-      redirect_uri: window.location.origin
+      /*redirect_uri: window.location.origin*/
+      redirect_uri: "https://gaboamador.github.io/payday2"
     }}
   >
     <App />

@@ -73,8 +73,14 @@ header {
 .container {
   margin: 0 auto;
   padding: 20px;
-  width: 350px;
   
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
 }
 
 h1 {
@@ -85,6 +91,8 @@ h1 {
 }
 
 form {
+  margin-top: 10px;
+  margin-bottom: 10px;
   background-color: rgba(242,242,242,1);
   /*padding-top: 10px;*/
   border-radius: 5px;
@@ -92,11 +100,35 @@ form {
   padding: 5px 5px 1px 5px;
 }
 
-label {
+.form-label {
   /*display: block;*/
-  margin: 5px 0px 5px 0px;
+  /*margin: 5px 0px 5px 0px;*/
+  /*color:#459bd5;*/
+  cursor: pointer;
+  color: white !important;
+  font-weight: bolder;
+  background: linear-gradient(-45deg, #459bd5 0%, #459bd5 30%, #2a5979 30%, #2a5979 70%, #459bd5 70%, #459bd5 100%);
+  background-size: 400% 400%;
+  animation: gradient-shiny 6s ease infinite;
+  padding: 0px 5px;
+  border-radius: 5px;
 }
 
+.form-check {
+text-align: left;
+}
+
+.checkUncheckAllButton {
+  color:#459bd5 !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+}
+.checkUncheckAllButton:hover {
+  color: whitesmoke !important;
+  background-color: #459bd5 !important;
+}
+/*
 input[type=checkbox] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -129,41 +161,29 @@ input[type=checkbox]:checked:before {
 input[type=checkbox]:hover:not(:checked) {
   border-color: #459bd5;
 }
-
+*/
 fieldset {
-  display: block;
-  
-      max-width: 80vh;
-      margin-bottom: 20px;
-      padding: 10px;
-      /*border: none;*/
-      border-radius: 5px;
-      text-align: left;
-      background-color: #f2f2f2;
-      }
+    display: block;
+    max-width: 80vh;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    /*border: none;*/
+    border-radius: 5px;
+    text-align: left;
+    background-color: #f2f2f2;
+  }
 
 fieldset legend {
     display: inline-block;
     padding: 5px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size:medium;
     font-weight: bold;
     cursor: pointer;
-    background-color: #459bd5;
+    background-color: rgba(69, 155, 213, 0.5);
   }
-
-
-#primaryGuns-container.hidden,
-#secondaryGuns-container.hidden,
-#perkDecks-container.hidden,
-#armors-container.hidden,
-#throwables-container.hidden,
-#equipments-container.hidden,
-#melees-container.hidden,
-#heists-container.hidden {
-  display: none;
-}
-
 
 button {
   font-family: 'Figtree', sans-serif;
@@ -187,6 +207,7 @@ button:hover {
 
 .eyeSlashButton{
   width:fit-content !important;
+  align-items:center !important;
 }
 
 .randomizeButton {
@@ -212,6 +233,7 @@ animation: gradient-shiny 6s ease infinite;
   border: 1px solid #459bd5;
   margin: 0 auto 10px;
   display: block;
+  color: black;
 }
 
 .buttonGoToTop:hover {
@@ -219,15 +241,6 @@ animation: gradient-shiny 6s ease infinite;
   color:#459bd5;
 }
 
-@media (max-width: 480px) {
-  .container {
-    max-width: 100%;
-    padding: 10px;
-  }
-  /*form {
-    padding: 10px;
-  }*/
-}
  #result {
   margin: 0 auto;
   padding-top: 0px !important;
@@ -333,6 +346,7 @@ animation: gradient-shiny 6s ease infinite;
 
 .buttons {
     text-align: center;
+    width:100%!important;
 }
   .buttons button {
   display: inline-block;
@@ -370,9 +384,28 @@ animation: gradient-shiny 6s ease infinite;
   padding: 3px;
 }
 
+.fieldsetsContainer {
+width:100vh !important;
+}
+@media (min-width: 768px) {
+  /* Target devices with a screen width of 768px or more (desktops) */
+  .fieldsetsContainer {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+}
+
+
 .fieldsetOptions {
   text-align: left !important;
   
+}
+
+.randomBuildContainer {
+  margin: 15px 15px auto;
+  padding: 5px;
+  border: 1px dotted #459bd5;
+  border-radius: 15px;
 }
 
 .randomBuildTable {
@@ -382,7 +415,74 @@ animation: gradient-shiny 6s ease infinite;
 
 @media (min-width: 768px) {
   /* Target devices with a screen width of 768px or more (desktops) */
-  .randomBuildTable {
-    width: 40%;
+  .randomBuildContainer {
+    width: 500px;
   }
+  .randomBuildTable {
+    width: 90%;
+  }
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #459bd5;
+}
+
+@media (min-width: 600px) {
+.icon {
+  flex-basis: 25%; /* Set the width to 25% to display 4 icons per row */
+}
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /*background-color: rgba(255,255,255,0.9);*/
+  background-image: radial-gradient(
+  rgba(255,255,255,1) 50%,
+  #459bd5 65%,
+  rgba(32,42,243,1) 70%);
+  
+  box-shadow: 0px 0px 20px #459bd5;
+}
+
+.icon-wrapper .icon > svg {
+  width: 32px;
+  height: 32px;
+}
+
+.label {
+  color: #459bd5;
+  margin-top: 0px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bolder;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Set the white-space property to normal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70px; /* Set a fixed height for the label container */
+}
+
+.loginButtons {
+  
 }

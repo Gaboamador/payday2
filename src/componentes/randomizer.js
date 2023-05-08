@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import {Button, Row, Col, Container, ListGroup, Table, FormCheck, FormSelect} from 'react-bootstrap';
+import {Button, Row, Col, Container, ListGroup, Table, Form} from 'react-bootstrap';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { VscExpandAll, VscCollapseAll } from "react-icons/vsc"
+import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im"
+import '../App.css';
 
 const options = {
   primaryGuns: ["AMCAR Rifle","Commando 553 Rifle","Eagle Heavy Rifle","AK Rifle","CAR-4 Rifle","UAR Rifle","Cavity 9mm","AK.762 Rifle","JP36 Rifle","AK17 Rifle","Golden AK.762 Rifle","Bootleg Rifle","Queen's Wrath Rifle","M308 Rifle","Clarion Rifle","Lion's Roar Rifle","Valkyria Rifle","AK5 Rifle","Gecko 7.62 Rifle","AMR-16 Rifle","Little Friend 7.62 Assault Rifle","Falcon Rifle","Gewehr 3 Rifle","Predator 12G Shotgun","Breaker 12G Shotgun","Reinfeld 880 Shotgun","M1014 Shotgun","Raven Shotgun","IZHMA 12G Shotgun","Mosconi 12G Shotgun","Joceline O/U 12G Shotgun","Steakout 12G Shotgun","RPK Light Machine Gun","KSP 58 Light Machine Gun","KSP Light Machine Gun","Buzzsaw 42 Light Machine Gun","Brenner-21 Light Machine Gun","Rattlesnake Sniper Rifle","Platypus 70 Sniper Rifle","Lebensauger .308 Sniper Rifle","Desertfox Sniper Rifle","Contractor .308 Sniper Rifle","R93 Sniper Rifle","Repeater 1874 Sniper Rifle","Grom Sniper Rifle","Nagant Sniper Rifle","Thanatos .50 cal Sniper Rifle","Akimbo Chimano Compact Pistols","Akimbo Crosskill Pistols","Akimbo Bernetti 9 Pistols","Akimbo Deagle Pistols","Akimbo Chimano 88 Pistols","Akimbo Chimano Custom Pistols","Akimbo Signature .40 Pistols","Akimbo Gruber Kurz Pistols","Akimbo Interceptor 45 Pistols","Akimbo Contractor Pistols","Akimbo Bronco .44 Revolvers","Akimbo White Streak Pistols","Akimbo Baby Deagle Pistols","Akimbo Broomstick Pistols","Akimbo Castigo .44 Revolvers","Akimbo Crosskill Guard Pistols","Akimbo LEO Pistols","Akimbo STRYK 18c Pistols","Akimbo Matever .357 Revolvers","Akimbo Krinkov Submachine Guns","Akimbo Swedish K Submachine Guns","Akimbo Compact-5 Submachine Guns","Akimbo SpecOps Submachine Guns","Akimbo Heather Submachine Guns","Akimbo CR 805B Submachine Guns","Akimbo Mark 10 Submachine Guns","Akimbo Jacket's Piece","Akimbo Chicago Typewriter SMGs","Akimbo Cobra Submachine Guns","Akimbo Micro Uzi Submachine Guns","Akimbo CMP Submachine Guns","Akimbo Para Submachine Guns","Akimbo Jackal Submachine Guns","Akimbo Signature Submachine Guns","Akimbo Blaster 9mm Submachine Guns","Akimbo Kobus 90 Submachine Guns","Akimbo Kross Vertex Submachine Guns","Akimbo Tatonka Submachine Guns","Akimbo Patchett L2A1 Submachine Guns","Akimbo Uzi Submachine Guns","Akimbo Goliath 12G Shotguns","Brother Grimm 12G Shotguns","Akimbo Judge Shotguns","OVE9000 Saw","Plainsrider Bow","Light Crossbow","English Longbow","XL 5.56 Microgun","Vulcan Minigun","Heavy Crossbow","Piglet Grenade Launcher","Flamethrower Mk.1","GL40 Grenade Launcher"],
@@ -55,20 +57,6 @@ const Payday2Randomizer = () => {
     };
 
     setRandomizedBuild(randomizedBuild);
-    /*const table = document.getElementById("randomized-build-table");
-    const tbody = document.createElement("tbody");
-    Object.keys(randomizedBuild).forEach((category) => {
-      const row = document.createElement("tr");
-      const categoryCell = document.createElement("td");
-      categoryCell.textContent = category;
-      const itemCell = document.createElement("td");
-      itemCell.textContent = randomizedBuild[category];
-      row.appendChild(categoryCell);
-      row.appendChild(itemCell);
-      tbody.appendChild(row);
-    });
-    table.innerHTML = "";
-    table.appendChild(tbody);*/
     setShowTable(true);
   };
 
@@ -80,8 +68,6 @@ const Payday2Randomizer = () => {
     return items[randomIndex];
   };
 
-  /*const [collapsed, setCollapsed] = useState({});*/
-
   const [collapsed, setCollapsed] = useState({
     primaryGuns: false,
     secondaryGuns: false,
@@ -90,7 +76,7 @@ const Payday2Randomizer = () => {
     throwables: false,
     equipments: false,
     melees: false,
-    all: false // new state variable for all fieldsets
+    all: false
   });
 
 
@@ -101,8 +87,7 @@ const Payday2Randomizer = () => {
     }));
   };
 
-   // new function to toggle all fieldsets at once
-   const toggleAllCollapse = () => {
+  const toggleAllCollapse = () => {
     setCollapsed((prev) => ({
       ...prev,
       all: !prev.all,
@@ -127,197 +112,251 @@ const Payday2Randomizer = () => {
     });
   };
   
+  function goToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
 
-  return (
-    <div>
-        <div style={{border: "1px dotted #459bd5", margin: "15px", borderRadius: "15px"}}>
-            <div className="container">
-                <div className="buttons">
-                        <Button className="randomizeButton" onClick={handleRandomize}>RANDOMIZE BUILD</Button>
-                        <Button onClick={() => setShowTable((prevState) => !prevState)}>{showTable ? <FiEyeOff/> : <FiEye/>}</Button>
-                    </div>
-                </div>
-                {showTable && (
-  <Table className="randomBuildTable">
-    <tbody>
-        <tr>
-            <td>Primary Gun</td>
-            <td>{randomizedBuild.primaryGun}</td>
-        </tr>
-        <tr>
-            <td>Secondary Gun</td>
-            <td>{randomizedBuild.secondaryGun}</td>
-        </tr>
-        <tr>
-            <td>Perk Deck</td>
-            <td>{randomizedBuild.perkDeck}</td>
-        </tr>
-        <tr>
-            <td>Armor</td>
-            <td>{randomizedBuild.armor}</td>
-        </tr>
-        <tr>
-            <td>Throwable</td>
-            <td>{randomizedBuild.throwable}</td>
-        </tr>
-        <tr>
-            <td>Equipment</td>
-            <td>{randomizedBuild.equipment}</td>
-        </tr>
-        <tr>
-            <td>Melee</td>
-            <td>{randomizedBuild.melee}</td>
-        </tr>
-    </tbody>
-  </Table>
-)}
-            </div>
-        <div>
-        <Button onClick={toggleAllCollapse}>{collapsed.all ? (<VscExpandAll/>) : (<VscCollapseAll/>)}{collapsed.all ? " Expand All" : " Collapse All"}</Button>
-        <fieldset>
-        <legend onClick={() => toggleCollapse("primaryGuns")}>PRIMARY GUNS</legend>
-        <button onClick={() => handleToggleCheckAll("primaryGuns")}>
-        {selectedOptions.primaryGuns.length === options.primaryGuns.length
-            ? "Uncheck all"
-            : "Check all"}
-        </button>
-        {!collapsed.primaryGuns &&
-            options.primaryGuns.map((option) => (
-            <div key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                value={option}
-                checked={selectedOptions.primaryGuns.includes(option)}
-                onChange={(e) =>
-                  handleOptionChange("primaryGuns", option, e.target.checked)
-                }
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-        </fieldset>
-        
-        <fieldset>
-        <legend onClick={() => toggleCollapse("secondaryGuns")}>Secondary Gun</legend>
-        {!collapsed.secondaryGuns &&
-            options.secondaryGuns.map((option) => (
-            <div key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                value={option}
-                checked={selectedOptions.secondaryGuns.includes(option)}
-                onChange={(e) =>
-                  handleOptionChange(
-                    "secondaryGuns",
-                    option,
-                    e.target.checked
-                  )
-                }
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-        </fieldset>
+return (
+<div>
+  <div className="randomBuildContainer">
 
-        <fieldset>
-        <legend onClick={() => toggleCollapse("perkDecks")}>Perk Deck</legend>
-        {!collapsed.perkDecks &&
-            options.perkDecks.map((option) => (
-            <div key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                value={option}
-               
-                checked={selectedOptions.perkDecks.includes(option)}
-                onChange={(e) =>
-                  handleOptionChange("perkDecks", option, e.target.checked)
-                }
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-        </fieldset>
-        
-        <fieldset>
-        <legend onClick={() => toggleCollapse("armors")}>Armor</legend>
-        {!collapsed.armors &&
-            options.armors.map((option) => (
-            <div key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                value={option}
-                checked={selectedOptions.armors.includes(option)}
-                onChange={(e) =>
-                  handleOptionChange("armors", option, e.target.checked)
-                }
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-        </fieldset>
+        <div className="buttons">
+          <Button className="randomizeButton" onClick={handleRandomize}>RANDOMIZE BUILD</Button>
+          <Button onClick={() => setShowTable((prevState) => !prevState)}>{showTable ? <FiEyeOff/> : <FiEye/>}</Button>
+        </div>
 
-        <fieldset>
-        <legend onClick={() => toggleCollapse("throwables")}>Throwable</legend>
-        {!collapsed.throwables &&
-            options.throwables.map((option) => (
-            <div key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                value={option}
-                checked={selectedOptions.throwables.includes(option)}
-                onChange={(e) =>
-                  handleOptionChange("throwables", option, e.target.checked)
-                }
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-        </fieldset>
+    {showTable && (
+    <Table className="randomBuildTable">
+      <tbody>
+          <tr>
+              <td>Primary Gun</td>
+              <td>{randomizedBuild.primaryGun}</td>
+          </tr>
+          <tr>
+              <td>Secondary Gun</td>
+              <td>{randomizedBuild.secondaryGun}</td>
+          </tr>
+          <tr>
+              <td>Perk Deck</td>
+              <td>{randomizedBuild.perkDeck}</td>
+          </tr>
+          <tr>
+              <td>Armor</td>
+              <td>{randomizedBuild.armor}</td>
+          </tr>
+          <tr>
+              <td>Throwable</td>
+              <td>{randomizedBuild.throwable}</td>
+          </tr>
+          <tr>
+              <td>Equipment</td>
+              <td>{randomizedBuild.equipment}</td>
+          </tr>
+          <tr>
+              <td>Melee</td>
+              <td>{randomizedBuild.melee}</td>
+          </tr>
+      </tbody>
+    </Table>
+    )}
+  </div>
 
-        <fieldset>
-        <legend onClick={() => toggleCollapse("equipments")}>Equipment</legend>
-        {!collapsed.equipments &&
-            options.equipments.map((option) => (
-            <div key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                value={option}
-                checked={selectedOptions.equipments.includes(option)}
-                onChange={(e) =>
-                  handleOptionChange("equipments", option, e.target.checked)
-                }
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-        </fieldset>
+  <div className="container">
+    <Button onClick={toggleAllCollapse}>{collapsed.all ? (<VscExpandAll/>) : (<VscCollapseAll/>)}{collapsed.all ? " Expand All" : " Collapse All"}</Button>
+      <Form>
+        <Form.Group>
+        <Form.Label onClick={() => toggleCollapse("primaryGuns")}>PRIMARY GUNS</Form.Label>
+        {!collapsed.primaryGuns && (
+          <>
+            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("primaryGuns")}>
+              {selectedOptions.primaryGuns.length === options.primaryGuns.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
+              {selectedOptions.primaryGuns.length === options.primaryGuns.length ? " Uncheck All" : " Check All"}
+            </Button>
+            {options.primaryGuns.map((option) => (
+              <div key={option}>
+                <Form.Check
+                  type="checkbox"
+                  label={option}
+                  id={option}
+                  value={option}
+                  checked={selectedOptions.primaryGuns.includes(option)}
+                  onChange={(e) =>
+                    handleOptionChange("primaryGuns", option, e.target.checked)
+                  }
+                />
+              </div>
+            ))}
+          </>
+        )}
+      </Form.Group>
+      </Form>
+      
 
-        <fieldset>
-        <legend onClick={() => toggleCollapse("melees")}>Melee</legend>
-        {!collapsed.melees &&
-            options.melees.map((option) => (
-            <div key={option}>
-              <input
-                type="checkbox"
-                id={option}
-                value={option}
-                checked={selectedOptions.melees.includes(option)}
-                onChange={(e) =>
-                  handleOptionChange("melees", option, e.target.checked)
-                }
-              />
-              <label htmlFor={option}>{option}</label>
-            </div>
-          ))}
-        </fieldset>
-      </div>
-    </div>
+      <fieldset>
+        <legend onClick={() => toggleCollapse("secondaryGuns")}>SECONDARY GUNS</legend>
+        {!collapsed.secondaryGuns && (
+          <>
+            <button onClick={() => handleToggleCheckAll("secondaryGuns")}>
+              {selectedOptions.secondaryGuns.length === options.secondaryGuns.length
+                ? "Uncheck all"
+                : "Check all"}
+            </button>
+            {options.secondaryGuns.map((option) => (
+              <div key={option}>
+                <input
+                  type="checkbox"
+                  id={option}
+                  value={option}
+                  checked={selectedOptions.secondaryGuns.includes(option)}
+                  onChange={(e) =>
+                    handleOptionChange("secondaryGuns", option, e.target.checked)
+                  }
+                />
+                <label htmlFor={option}>{option}</label>
+              </div>
+            ))}
+          </>
+        )}
+      </fieldset>
+
+      <fieldset>
+        <legend onClick={() => toggleCollapse("perkDecks")}>PERK DECKS</legend>
+        {!collapsed.perkDecks && (
+          <>
+            <button onClick={() => handleToggleCheckAll("perkDecks")}>
+              {selectedOptions.perkDecks.length === options.perkDecks.length
+                ? "Uncheck all"
+                : "Check all"}
+            </button>
+            {options.perkDecks.map((option) => (
+              <div key={option}>
+                <input
+                  type="checkbox"
+                  id={option}
+                  value={option}
+                  checked={selectedOptions.perkDecks.includes(option)}
+                  onChange={(e) =>
+                    handleOptionChange("perkDecks", option, e.target.checked)
+                  }
+                />
+                <label htmlFor={option}>{option}</label>
+              </div>
+            ))}
+          </>
+        )}
+      </fieldset>
+              
+      <fieldset>
+        <legend onClick={() => toggleCollapse("armors")}>ARMORS</legend>
+        {!collapsed.armors && (
+          <>
+            <button onClick={() => handleToggleCheckAll("armors")}>
+              {selectedOptions.armors.length === options.armors.length
+                ? "Uncheck all"
+                : "Check all"}
+            </button>
+            {options.armors.map((option) => (
+              <div key={option}>
+                <input
+                  type="checkbox"
+                  id={option}
+                  value={option}
+                  checked={selectedOptions.armors.includes(option)}
+                  onChange={(e) =>
+                    handleOptionChange("armors", option, e.target.checked)
+                  }
+                />
+                <label htmlFor={option}>{option}</label>
+              </div>
+            ))}
+          </>
+        )}
+      </fieldset>
+
+      <fieldset>
+        <legend onClick={() => toggleCollapse("throwables")}>THROWABLES</legend>
+        {!collapsed.throwables && (
+          <>
+            <button onClick={() => handleToggleCheckAll("throwables")}>
+              {selectedOptions.throwables.length === options.throwables.length
+                ? "Uncheck all"
+                : "Check all"}
+            </button>
+            {options.throwables.map((option) => (
+              <div key={option}>
+                <input
+                  type="checkbox"
+                  id={option}
+                  value={option}
+                  checked={selectedOptions.throwables.includes(option)}
+                  onChange={(e) =>
+                    handleOptionChange("throwables", option, e.target.checked)
+                  }
+                />
+                <label htmlFor={option}>{option}</label>
+              </div>
+            ))}
+          </>
+        )}
+      </fieldset>
+
+      <fieldset>
+        <legend onClick={() => toggleCollapse("equipments")}>EQUIPMENTS</legend>
+        {!collapsed.equipments && (
+          <>
+            <button onClick={() => handleToggleCheckAll("equipments")}>
+              {selectedOptions.equipments.length === options.equipments.length
+                ? "Uncheck all"
+                : "Check all"}
+            </button>
+            {options.equipments.map((option) => (
+              <div key={option}>
+                <input
+                  type="checkbox"
+                  id={option}
+                  value={option}
+                  checked={selectedOptions.equipments.includes(option)}
+                  onChange={(e) =>
+                    handleOptionChange("equipments", option, e.target.checked)
+                  }
+                />
+                <label htmlFor={option}>{option}</label>
+              </div>
+            ))}
+          </>
+        )}
+      </fieldset>
+
+      <fieldset>
+        <legend onClick={() => toggleCollapse("melees")}>MELEES</legend>
+        {!collapsed.melees && (
+          <>
+            <button onClick={() => handleToggleCheckAll("melees")}>
+              {selectedOptions.melees.length === options.melees.length
+                ? "Uncheck all"
+                : "Check all"}
+            </button>
+            {options.melees.map((option) => (
+              <div key={option}>
+                <input
+                  type="checkbox"
+                  id={option}
+                  value={option}
+                  checked={selectedOptions.melees.includes(option)}
+                  onChange={(e) =>
+                    handleOptionChange("melees", option, e.target.checked)
+                  }
+                />
+                <label htmlFor={option}>{option}</label>
+              </div>
+            ))}
+          </>
+        )}
+      </fieldset>
+  </div>
+  <button className="buttonGoToTop" onClick={() => goToTop()}>Ir arriba</button>
+</div>
 );
 };
 
