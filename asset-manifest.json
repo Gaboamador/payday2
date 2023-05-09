@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.30dfe256.css",
-    "main.js": "/payday2/static/js/main.3f6ea9eb.js",
+    "main.css": "/payday2/static/css/main.3dea8b5b.css",
+    "main.js": "/payday2/static/js/main.6f967836.js",
     "static/js/787.5769c993.chunk.js": "/payday2/static/js/787.5769c993.chunk.js",
-    "static/media/logo.svg": "/payday2/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/payday2/index.html",
-    "main.30dfe256.css.map": "/payday2/static/css/main.30dfe256.css.map",
-    "main.3f6ea9eb.js.map": "/payday2/static/js/main.3f6ea9eb.js.map",
+    "main.3dea8b5b.css.map": "/payday2/static/css/main.3dea8b5b.css.map",
+    "main.6f967836.js.map": "/payday2/static/js/main.6f967836.js.map",
     "787.5769c993.chunk.js.map": "/payday2/static/js/787.5769c993.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.30dfe256.css",
-    "static/js/main.3f6ea9eb.js"
+    "static/css/main.3dea8b5b.css",
+    "static/js/main.6f967836.js"
   ]
 }
