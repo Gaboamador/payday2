@@ -193,19 +193,20 @@ return (
       </Form>
       
 
-      <fieldset>
-        <legend onClick={() => toggleCollapse("secondaryGuns")}>SECONDARY GUNS</legend>
+      <Form>
+        <Form.Group>
+        <Form.Label onClick={() => toggleCollapse("secondaryGuns")}>SECONDARY GUNS</Form.Label>
         {!collapsed.secondaryGuns && (
           <>
-            <button onClick={() => handleToggleCheckAll("secondaryGuns")}>
-              {selectedOptions.secondaryGuns.length === options.secondaryGuns.length
-                ? "Uncheck all"
-                : "Check all"}
-            </button>
+            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("secondaryGuns")}>
+              {selectedOptions.secondaryGuns.length === options.secondaryGuns.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
+              {selectedOptions.secondaryGuns.length === options.secondaryGuns.length ? " Uncheck All" : " Check All"}
+            </Button>
             {options.secondaryGuns.map((option) => (
               <div key={option}>
-                <input
+                <Form.Check
                   type="checkbox"
+                  label={option}
                   id={option}
                   value={option}
                   checked={selectedOptions.secondaryGuns.includes(option)}
@@ -213,26 +214,27 @@ return (
                     handleOptionChange("secondaryGuns", option, e.target.checked)
                   }
                 />
-                <label htmlFor={option}>{option}</label>
               </div>
             ))}
           </>
         )}
-      </fieldset>
+      </Form.Group>
+      </Form>
 
-      <fieldset>
-        <legend onClick={() => toggleCollapse("perkDecks")}>PERK DECKS</legend>
+      <Form>
+        <Form.Group>
+        <Form.Label onClick={() => toggleCollapse("perkDecks")}>PERK DECKS</Form.Label>
         {!collapsed.perkDecks && (
           <>
-            <button onClick={() => handleToggleCheckAll("perkDecks")}>
-              {selectedOptions.perkDecks.length === options.perkDecks.length
-                ? "Uncheck all"
-                : "Check all"}
-            </button>
+            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("perkDecks")}>
+              {selectedOptions.perkDecks.length === options.perkDecks.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
+              {selectedOptions.perkDecks.length === options.perkDecks.length ? " Uncheck All" : " Check All"}
+            </Button>
             {options.perkDecks.map((option) => (
               <div key={option}>
-                <input
+                <Form.Check
                   type="checkbox"
+                  label={option}
                   id={option}
                   value={option}
                   checked={selectedOptions.perkDecks.includes(option)}
@@ -240,26 +242,27 @@ return (
                     handleOptionChange("perkDecks", option, e.target.checked)
                   }
                 />
-                <label htmlFor={option}>{option}</label>
               </div>
             ))}
           </>
         )}
-      </fieldset>
+      </Form.Group>
+      </Form>
               
-      <fieldset>
-        <legend onClick={() => toggleCollapse("armors")}>ARMORS</legend>
+      <Form>
+        <Form.Group>
+        <Form.Label onClick={() => toggleCollapse("armors")}>ARMORS</Form.Label>
         {!collapsed.armors && (
           <>
-            <button onClick={() => handleToggleCheckAll("armors")}>
-              {selectedOptions.armors.length === options.armors.length
-                ? "Uncheck all"
-                : "Check all"}
-            </button>
+            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("armors")}>
+              {selectedOptions.armors.length === options.armors.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
+              {selectedOptions.armors.length === options.armors.length ? " Uncheck All" : " Check All"}
+            </Button>
             {options.armors.map((option) => (
               <div key={option}>
-                <input
+                <Form.Check
                   type="checkbox"
+                  label={option}
                   id={option}
                   value={option}
                   checked={selectedOptions.armors.includes(option)}
@@ -267,26 +270,27 @@ return (
                     handleOptionChange("armors", option, e.target.checked)
                   }
                 />
-                <label htmlFor={option}>{option}</label>
               </div>
             ))}
           </>
         )}
-      </fieldset>
+      </Form.Group>
+      </Form>
 
-      <fieldset>
-        <legend onClick={() => toggleCollapse("throwables")}>THROWABLES</legend>
+      <Form>
+        <Form.Group>
+        <Form.Label onClick={() => toggleCollapse("throwables")}>THROWABLES</Form.Label>
         {!collapsed.throwables && (
           <>
-            <button onClick={() => handleToggleCheckAll("throwables")}>
-              {selectedOptions.throwables.length === options.throwables.length
-                ? "Uncheck all"
-                : "Check all"}
-            </button>
+            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("throwables")}>
+              {selectedOptions.throwables.length === options.throwables.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
+              {selectedOptions.throwables.length === options.throwables.length ? " Uncheck All" : " Check All"}
+            </Button>
             {options.throwables.map((option) => (
               <div key={option}>
-                <input
+                <Form.Check
                   type="checkbox"
+                  label={option}
                   id={option}
                   value={option}
                   checked={selectedOptions.throwables.includes(option)}
@@ -294,26 +298,27 @@ return (
                     handleOptionChange("throwables", option, e.target.checked)
                   }
                 />
-                <label htmlFor={option}>{option}</label>
               </div>
             ))}
           </>
         )}
-      </fieldset>
+      </Form.Group>
+      </Form>
 
-      <fieldset>
-        <legend onClick={() => toggleCollapse("equipments")}>EQUIPMENTS</legend>
+      <Form>
+        <Form.Group>
+        <Form.Label onClick={() => toggleCollapse("equipments")}>EQUIPMENTS</Form.Label>
         {!collapsed.equipments && (
           <>
-            <button onClick={() => handleToggleCheckAll("equipments")}>
-              {selectedOptions.equipments.length === options.equipments.length
-                ? "Uncheck all"
-                : "Check all"}
-            </button>
+            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("equipments")}>
+              {selectedOptions.equipments.length === options.equipments.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
+              {selectedOptions.equipments.length === options.equipments.length ? " Uncheck All" : " Check All"}
+            </Button>
             {options.equipments.map((option) => (
               <div key={option}>
-                <input
+                <Form.Check
                   type="checkbox"
+                  label={option}
                   id={option}
                   value={option}
                   checked={selectedOptions.equipments.includes(option)}
@@ -321,26 +326,27 @@ return (
                     handleOptionChange("equipments", option, e.target.checked)
                   }
                 />
-                <label htmlFor={option}>{option}</label>
               </div>
             ))}
           </>
         )}
-      </fieldset>
+      </Form.Group>
+      </Form>
 
-      <fieldset>
-        <legend onClick={() => toggleCollapse("melees")}>MELEES</legend>
+      <Form>
+        <Form.Group>
+        <Form.Label onClick={() => toggleCollapse("melees")}>MELEES</Form.Label>
         {!collapsed.melees && (
           <>
-            <button onClick={() => handleToggleCheckAll("melees")}>
-              {selectedOptions.melees.length === options.melees.length
-                ? "Uncheck all"
-                : "Check all"}
-            </button>
+            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("melees")}>
+              {selectedOptions.melees.length === options.melees.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
+              {selectedOptions.melees.length === options.melees.length ? " Uncheck All" : " Check All"}
+            </Button>
             {options.melees.map((option) => (
               <div key={option}>
-                <input
+                <Form.Check
                   type="checkbox"
+                  label={option}
                   id={option}
                   value={option}
                   checked={selectedOptions.melees.includes(option)}
@@ -348,14 +354,15 @@ return (
                     handleOptionChange("melees", option, e.target.checked)
                   }
                 />
-                <label htmlFor={option}>{option}</label>
               </div>
             ))}
           </>
         )}
-      </fieldset>
+      </Form.Group>
+      </Form>
+
   </div>
-  <button className="buttonGoToTop" onClick={() => goToTop()}>Ir arriba</button>
+  <Button className="buttonGoToTop" onClick={() => goToTop()}>Ir arriba</Button>
 </div>
 );
 };
