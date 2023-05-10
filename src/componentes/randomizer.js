@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./login";
 import {Button, Row, Col, Container, ListGroup, Table, Form} from 'react-bootstrap';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { VscExpandAll, VscCollapseAll } from "react-icons/vsc"
@@ -16,6 +18,41 @@ const options = {
 };
 
 const Payday2Randomizer = () => {
+
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const [userMetadata, setUserMetadata] = useState(null);
+
+  useEffect(() => {
+    const getUserMetadata = async () => {
+      const domain = "dev-gm7u55v7jisqivq4.us.auth0.com";
+  
+      try {
+        const accessToken = await getAccessTokenSilently({
+          authorizationParams: {
+            audience: `https://${domain}/api/v2/`,
+            scope: "read:current_user",
+          },
+        });
+  
+        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
+  
+        const metadataResponse = await fetch(userDetailsByIdUrl, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+  
+        const { user_metadata } = await metadataResponse.json();
+  
+        setUserMetadata(user_metadata);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+  
+    getUserMetadata();
+  }, [getAccessTokenSilently, user?.sub]);
+
   const [selectedOptions, setSelectedOptions] = useState({
     primaryGuns: options.primaryGuns,
     secondaryGuns: options.secondaryGuns,
@@ -111,6 +148,27 @@ const Payday2Randomizer = () => {
       };
     });
   };
+
+  const handleToggleCheckAllCategories = () => {
+    setSelectedOptions((prevState) => {
+      const allCategoriesChecked = Object.keys(prevState).every(
+        (category) => prevState[category].length === options[category].length
+      );
+  
+      const updatedSelection = allCategoriesChecked
+        ? Object.keys(prevState).reduce((acc, category) => {
+            acc[category] = [];
+            return acc;
+          }, {})
+        : Object.keys(prevState).reduce((acc, category) => {
+            acc[category] = options[category];
+            return acc;
+          }, {});
+  
+      return updatedSelection;
+    });
+  };
+  
   
   function goToTop() {
     document.body.scrollTop = 0; // For Safari
@@ -119,8 +177,9 @@ const Payday2Randomizer = () => {
 
 return (
 <div>
+{isAuthenticated ? (
+    <>
   <div className="randomBuildContainer">
-
         <div className="buttons">
           <Button className="randomizeButton" onClick={handleRandomize}>RANDOMIZE BUILD</Button>
           <Button onClick={() => setShowTable((prevState) => !prevState)}>{showTable ? <FiEyeOff/> : <FiEye/>}</Button>
@@ -164,6 +223,10 @@ return (
 
   <div className="container">
     <Button onClick={toggleAllCollapse}>{collapsed.all ? (<VscExpandAll/>) : (<VscCollapseAll/>)}{collapsed.all ? " Expand All" : " Collapse All"}</Button>
+    <Button className="checkUncheckAllCategoriesButton" variant="outline-secondary" onClick={() => handleToggleCheckAllCategories()}>
+              {selectedOptions.primaryGuns.length === options.primaryGuns.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
+              {selectedOptions.primaryGuns.length === options.primaryGuns.length ? " Uncheck All Categories" : " Check All Categories"}
+            </Button>
       <Form>
         <Form.Group>
         <Form.Label onClick={() => toggleCollapse("primaryGuns")}>PRIMARY GUNS</Form.Label>
@@ -360,9 +423,14 @@ return (
         )}
       </Form.Group>
       </Form>
-
+      
   </div>
   <Button className="buttonGoToTop" onClick={() => goToTop()}>Ir arriba</Button>
+  </> ) : (
+    <Container>
+    <LoginButton/>
+    </Container>
+  )}
 </div>
 );
 };

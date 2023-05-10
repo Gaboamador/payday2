@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./login";
+import {Container, Spinner} from 'react-bootstrap';
 
 const Profile = () => {
     
@@ -38,15 +40,23 @@ const Profile = () => {
   }, [getAccessTokenSilently, user?.sub]);
   console.log(userMetadata, "user metadata");
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return (
+      <Container>
+      <Spinner animation="border" variant="primary" role="status"></Spinner>
+      <Container>Loading...</Container>
+    </Container>
+    )
   }
  
 
   return (
 
 
-    isAuthenticated && (
+    
       <div>
+        {isAuthenticated ? (
+        <>
+        <Container>
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
@@ -56,9 +66,14 @@ const Profile = () => {
         ) : (
           "No user metadata defined"
         )}
-      </div>
-    )
-  );
-};
+        </Container>
+      </>
+    ) : (
+      <Container>
+  <LoginButton/>
+  </Container>
+  )}
+  </div>
+)};
 
 export default Profile;

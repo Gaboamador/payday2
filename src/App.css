@@ -59,12 +59,28 @@ header {
         text-align: center;
         display: flex;
         align-items: center;
-        justify-content: left;
+        justify-content: space-between !important;
       }
 
 .homeIcon {
   margin-left: 20%;
   color: #459bd5;
+}
+
+.userPicture {
+  margin-right: 1%;
+}
+
+.loginIcon {
+  /*border-radius: 20%;*/
+  border-radius: 20%;
+  width: 32px;
+  height: 32px;
+  color: whitesmoke;
+  border: #459bd5 ridge 2px;
+  background: linear-gradient(45deg, #459bd5 0%, #459bd5 30%, #2a5979 30%, #2a5979 70%, #459bd5 70%, #459bd5 100%);
+background-size: 400% 400%;
+animation: gradient-shiny 6s ease infinite;
 }
 
       body {
@@ -123,6 +139,21 @@ form {
 text-align: left;
 }
 
+.checkUncheckAllCategoriesButton {
+  color:#0b5ed7 !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  padding: 0px !important;
+  border: none !important;
+  font-weight: bold !important;
+  margin: 10px 0px !important;  
+}
+.checkUncheckAllCategoriesButton:hover {
+  color: #0b5ed7 !important;
+  background-color: transparent !important;
+}
+
 .checkUncheckAllButton {
   color:#459bd5 !important;
   cursor: pointer;
@@ -131,6 +162,7 @@ text-align: left;
   padding: 0px !important;
   border: none !important;
   font-weight: bold !important;
+  margin: 10px 0px !important;
 }
 .checkUncheckAllButton:hover {
   color: #459bd5 !important;
