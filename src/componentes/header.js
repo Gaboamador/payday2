@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import '../App.css';
-import {Row, Col, Dropdown, Button} from 'react-bootstrap';
+import {Row, Col, Dropdown, Button, Form} from 'react-bootstrap';
 import {ImHome} from 'react-icons/im';
 import {FiLogIn} from 'react-icons/fi';
+import {AiOutlineLogin} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import LogoutButton from "./logout";
+import Profile from "./profile";
 
 const Header = () => {
     const [sticky, setSticky] = useState(false);
@@ -69,7 +71,7 @@ const Header = () => {
     const { logout } = useAuth0();
   
     const handleLogout = () => {
-      /*logout({ logoutParams: { returnTo: window.location.origin } })*/
+      //logout({ logoutParams: { returnTo: window.location.origin } })
       logout({ logoutParams: { returnTo: "https://gaboamador.github.io/payday2" } })
     };
 
@@ -94,22 +96,39 @@ const Header = () => {
           />
            <Dropdown show={showDropdown} onToggle={handleToggleDropdown}>
               <Dropdown.Toggle className="visually-hidden" variant="primary" id="dropdown-profile" />
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={handleLogout}>Log out</Dropdown.Item>
+              <Dropdown.Menu className="dropdownMenu">
+              <Link to="/profile" style={{textDecoration:"none"}}>
+                <Dropdown.Item href="#/action-1" className="dropdownItem">Profile</Dropdown.Item>
+                </Link>
+                <Dropdown.Divider />
+                <Dropdown.Item onClick={handleLogout} className="dropdownItem">Log out</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
             </div>
     </> ) : (
         <div className="userPicture">
+        {/*
         <FiLogIn
         className="loginIcon"
         onClick={handleToggleDropdown}/>
+        */}
+        <div className="login-box2" style={{ maxWidth: "80%", margin: '0 auto' }}>
+            <div className="form2">
+            <Form className="button2" variant="outline-light" type="submit">
+            <AiOutlineLogin
+            className="loginIcon2"
+            onClick={handleToggleDropdown}/>
+            <span className="span2"></span>
+            </Form>
+          </div>
+          </div>
         <Dropdown show={showDropdown} onToggle={handleToggleDropdown}>
               <Dropdown.Toggle className="visually-hidden" variant="primary" id="dropdown-profile" />
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={handleLogin}>Log in</Dropdown.Item>
+              <Dropdown.Menu className="dropdownMenu">
+                <Dropdown.Item onClick={handleLogin} className="dropdownItem">Log in</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            
             </div>
     )}
 </header>

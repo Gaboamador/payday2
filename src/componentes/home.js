@@ -55,7 +55,7 @@ function Home() {
   
   const icons = [
     { icon: GiPerspectiveDiceSixFacesRandom, label: 'Randomizer', to: '/randomizer' },
-    { icon: ImProfile, label: 'Profile', to: './profile' },
+    /*{ icon: ImProfile, label: 'Profile', to: './profile' },*/
   ];
   
 
@@ -68,7 +68,7 @@ return (
     <Link to={item.to} key={index} className='icon'>
       <div className="icon-wrapper">
         <div className="icon">
-          <item.icon />
+          <item.icon className="iconDiceRotate"/>
         </div>
       </div>
       <div className="label">{item.label}</div>
