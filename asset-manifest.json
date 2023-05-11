@@ -1,15 +1,20 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.9caa6c16.css",
-    "main.js": "/payday2/static/js/main.999dc760.js",
+    "main.css": "/payday2/static/css/main.fc4d3f05.css",
+    "main.js": "/payday2/static/js/main.fe061a25.js",
     "static/js/787.5769c993.chunk.js": "/payday2/static/js/787.5769c993.chunk.js",
+    "static/media/Rift-Bold.otf": "/payday2/static/media/Rift-Bold.f4cd06201f6852d2056f.otf",
+    "static/media/Rift-Demi.otf": "/payday2/static/media/Rift-Demi.f1f7e4f6d46d4d7eedad.otf",
+    "static/media/Rift-Regular.otf": "/payday2/static/media/Rift-Regular.81af222e61616a7ea95c.otf",
+    "static/media/Rift-Medium.otf": "/payday2/static/media/Rift-Medium.8768b86fa35ea6b5d69e.otf",
+    "static/media/Rift-Light.otf": "/payday2/static/media/Rift-Light.6c224ab314c02acea4a2.otf",
     "index.html": "/payday2/index.html",
-    "main.9caa6c16.css.map": "/payday2/static/css/main.9caa6c16.css.map",
-    "main.999dc760.js.map": "/payday2/static/js/main.999dc760.js.map",
+    "main.fc4d3f05.css.map": "/payday2/static/css/main.fc4d3f05.css.map",
+    "main.fe061a25.js.map": "/payday2/static/js/main.fe061a25.js.map",
     "787.5769c993.chunk.js.map": "/payday2/static/js/787.5769c993.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9caa6c16.css",
-    "static/js/main.999dc760.js"
+    "static/css/main.fc4d3f05.css",
+    "static/js/main.fe061a25.js"
   ]
 }
