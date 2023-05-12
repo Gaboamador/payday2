@@ -38,7 +38,12 @@
 }
 
 /**/
-
+.backgroundImage {
+  background-image: url('https://pd2builder.netlify.app/img/bg.png');
+  /*background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;*/
+}
 
 .iconDiceRotate:active {
   animation: DiceBounce 1s linear;
@@ -202,9 +207,14 @@ form {
   /*margin: 5px 0px 5px 0px;*/
   /*color:#459bd5;*/
   cursor: pointer;
-  color: #2a5979 !important;
+  /*color: #2a5979 !important;*/
+  color: #8bcefa !important;
   font-weight: bolder;
-  background-color: rgba(69, 155, 213, 0.25);
+  /*background-color: rgba(69, 155, 213, 0.25);*/
+  background-image: url('https://pd2builder.netlify.app/img/bg.png');
+  /*background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;*/
   margin-bottom: 5px !important;
   border-radius: 5px;
   width: 100%;
@@ -220,10 +230,9 @@ text-align: left;
   cursor: pointer;
   display: flex !important;
   align-items: center;
-  padding: 0px !important;
+  padding: 5px 0px !important;
   border: none !important;
   font-weight: bold !important;
-  margin: 10px 0px !important;
 }
 .checkUncheckAllButton:hover {
   color: #459bd5 !important;
@@ -322,6 +331,7 @@ animation: gradient-shiny 6s ease infinite;
   margin-top: 5px !important;
   border-collapse: collapse;
   border-radius: 15px;
+  vertical-align: middle !important;
 }
 
 .randomBuildTable td:nth-child(2) {
@@ -421,6 +431,10 @@ animation: gradient-shiny 6s ease infinite;
   padding: 5px 10px !important;
 }
   
+.form-check {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 
 .buttons .expandAllCategoriesButton {
   color: #459bd5;  

@@ -39,6 +39,8 @@ const Profile = () => {
     getUserMetadata();
   }, [getAccessTokenSilently, user?.sub]);
   console.log(userMetadata, "user metadata");
+  console.log(user, "user");
+
   if (isLoading) {
     return (
       <Container>
@@ -47,19 +49,16 @@ const Profile = () => {
     </Container>
     )
   }
- 
 
   return (
-
-
-    
+  
       <div>
         {isAuthenticated ? (
         <>
         <Container>
         <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
+        <h3>Nickname: {user.nickname}</h3>
+        <p>Email: {user.email}</p>
         <h3>User Metadata</h3>
         {userMetadata ? (
           <pre>{JSON.stringify(userMetadata, null, 2)}</pre>

@@ -24,7 +24,7 @@ const LoginButton = () => {
     
         <div className="login-box" style={{ maxWidth: "80%", margin: '0 auto' }}>
           <div className="form">
-            <Form className="button" variant="outline-light" type="submit">
+            <Form className="button" variant="outline-light" type="submit" style={{cursor: "default"}}>
               LOG IN TO ACCESS
               <span></span>
               <span></span>

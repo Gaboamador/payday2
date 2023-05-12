@@ -5,6 +5,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import {GiPerspectiveDiceSixFacesRandom} from 'react-icons/gi';
+import {MdBuildCircle} from 'react-icons/md';
 import {ImProfile} from 'react-icons/im';
 import LoginButton from './login';
 import LogoutButton from './logout';
@@ -55,12 +56,12 @@ function Home() {
   
   const icons = [
     { icon: GiPerspectiveDiceSixFacesRandom, label: 'Randomizer', to: '/randomizer' },
-    /*{ icon: ImProfile, label: 'Profile', to: './profile' },*/
+    { icon: MdBuildCircle, label: 'PD2 Builder', to: 'https://pd2builder.netlify.app/' },
   ];
   
 
 return (
-<div className="contentHome">
+<div className="backgroundImage">
 {isAuthenticated ? (
   <>
 <Container className="navigation">

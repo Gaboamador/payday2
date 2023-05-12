@@ -65,10 +65,77 @@ const Payday2Randomizer = () => {
     heists: options.heists,
   });
 
-  const [randomizedBuild, setRandomizedBuild] = useState({});
-  const [randomizedHeist, setRandomizedHeist] = useState({});
+  /*const [randomizedBuild, setRandomizedBuild] = useState({});*/
+  const [randomizedBuild, setRandomizedBuild] = useState({
+    armor: localStorage.getItem("randomizedBuild_armor") || "",
+    equipment: localStorage.getItem("randomizedBuild_equipment") || "",
+    melee: localStorage.getItem("randomizedBuild_melee") || "",
+    perkDeck: localStorage.getItem("randomizedBuild_perkDeck") || "",
+    primaryGun: localStorage.getItem("randomizedBuild_primaryGun") || "",
+    secondaryGun: localStorage.getItem("randomizedBuild_secondaryGun") || "",
+    throwable: localStorage.getItem("randomizedBuild_throwable") || ""
+  });
+  const armor = randomizedBuild.armor;
+  const equipment = randomizedBuild.equipment;
+  const melee = randomizedBuild.melee;
+  const perkDeck = randomizedBuild.perkDeck;
+  const primaryGun = randomizedBuild.primaryGun;
+  const secondaryGun = randomizedBuild.secondaryGun;
+  const throwable = randomizedBuild.throwable;
+
+  useEffect(() => {
+    localStorage.setItem("randomizedBuild_armor", randomizedBuild.armor);
+    localStorage.setItem("randomizedBuild_equipment", randomizedBuild.equipment);
+    localStorage.setItem("randomizedBuild_melee", randomizedBuild.melee);
+    localStorage.setItem("randomizedBuild_perkDeck", randomizedBuild.perkDeck);
+    localStorage.setItem("randomizedBuild_primaryGun", randomizedBuild.primaryGun);
+    localStorage.setItem("randomizedBuild_secondaryGun", randomizedBuild.secondaryGun);
+    localStorage.setItem("randomizedBuild_throwable", randomizedBuild.throwable);
+  }, [randomizedBuild]);
+
+
+  /**/
+  /*const [randomizedHeist, setRandomizedHeist] = useState({});*/
+  const [randomizedHeist, setRandomizedHeist] = useState({
+    heist: localStorage.getItem("randomizedHeist_heist") || "",
+  })
+  const heist = randomizedHeist.heist;
+  useEffect(() => {
+    localStorage.setItem("randomizedHeist_heist", randomizedHeist.heist);
+  }, [randomizedHeist]);
+
+
   const [showTable, setShowTable] = useState(false);
+
   const [showTableHeist, setShowTableHeist] = useState(false);
+
+  const handleResetBuild = () => {
+    setRandomizedBuild({
+      armor: "",
+      equipment: "",
+      melee: "",
+      perkDeck: "",
+      primaryGun: "",
+      secondaryGun: "",
+      throwable: ""
+    });
+    localStorage.removeItem("randomizedBuild_armor");
+    localStorage.removeItem("randomizedBuild_equipment");
+    localStorage.removeItem("randomizedBuild_melee");
+    localStorage.removeItem("randomizedBuild_perkDeck");
+    localStorage.removeItem("randomizedBuild_primaryGun");
+    localStorage.removeItem("randomizedBuild_secondaryGun");
+    localStorage.removeItem("randomizedBuild_throwable");
+    setShowTable(false)
+  };
+
+  const handleResetHeist = () => {
+    setRandomizedHeist({
+      heist: ""
+    });
+    localStorage.removeItem("randomizedHeist_heist");
+    setShowTableHeist(false)
+  };
 
   const handleOptionChange = (category, item, isChecked) => {
     setSelectedOptions((prevState) => {
@@ -194,10 +261,11 @@ return (
 <div>
 {isAuthenticated ? (
     <>
-  <div className="randomBuildContainer">
+  <div className="randomBuildContainer backgroundImage">
         <div className="buttons">
           <Button className="randomizeButton" onClick={handleRandomize}>RANDOMIZE BUILD</Button>
           <Button className="eyeSlashButton" onClick={() => setShowTable((prevState) => !prevState)}>{showTable ? <FiEyeOff/> : <FiEye/>}</Button>
+          <Button className="eyeSlashButton" onClick={() => handleResetBuild()}>Reset Build</Button>
         </div>
 
     {showTable && (
@@ -236,10 +304,11 @@ return (
     )}
   </div>
 
-  <div className="randomBuildContainer">
+  <div className="randomBuildContainer backgroundImage">
         <div className="buttons">
           <Button className="randomizeButton" onClick={handleRandomizeHeist}>RANDOMIZE HEIST</Button>
           <Button className="eyeSlashButton" onClick={() => setShowTableHeist((prevState) => !prevState)}>{showTableHeist ? <FiEyeOff/> : <FiEye/>}</Button>
+          <Button className="eyeSlashButton" onClick={() => handleResetHeist()}>Reset Heist</Button>
         </div>
 
     {showTableHeist && (
@@ -488,7 +557,7 @@ return (
       </Form>
       
   </div>
-  <Button className="buttonGoToTop" onClick={() => goToTop()}>Ir arriba</Button>
+  <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>
   </> ) : (
     <Container>
     <LoginButton/>
