@@ -155,13 +155,13 @@ const Payday2Randomizer = () => {
 
   const handleRandomize = () => {
     const randomizedBuild = {
-      primaryGun: getRandomItem(selectedOptions.primaryGuns),
-      secondaryGun: getRandomItem(selectedOptions.secondaryGuns),
-      perkDeck: getRandomItem(selectedOptions.perkDecks),
-      armor: getRandomItem(selectedOptions.armors),
-      throwable: getRandomItem(selectedOptions.throwables),
-      equipment: getRandomItem(selectedOptions.equipments),
-      melee: getRandomItem(selectedOptions.melees),
+      primaryGun: selectedCategories.includes('primaryGuns') ? getRandomItem(selectedOptions.primaryGuns) : localStorage.getItem("randomizedBuild_primaryGun") || "",
+      secondaryGun: selectedCategories.includes('secondaryGuns') ? getRandomItem(selectedOptions.secondaryGuns) : localStorage.getItem("randomizedBuild_secondaryGun") || "",
+      perkDeck: selectedCategories.includes('perkDecks') ? getRandomItem(selectedOptions.perkDecks) : localStorage.getItem("randomizedBuild_perkDeck") || "",
+      armor: selectedCategories.includes('armors') ? getRandomItem(selectedOptions.armors) : localStorage.getItem("randomizedBuild_armor") || "",
+      throwable: selectedCategories.includes('throwables') ? getRandomItem(selectedOptions.throwables) : localStorage.getItem("randomizedBuild_throwable") || "",
+      equipment: selectedCategories.includes('equipments') ? getRandomItem(selectedOptions.equipments) : localStorage.getItem("randomizedBuild_equipment") || "",
+      melee: selectedCategories.includes('melees') ? getRandomItem(selectedOptions.melees) : localStorage.getItem("randomizedBuild_melee") || "",
     };
 
     setRandomizedBuild(randomizedBuild);
@@ -194,7 +194,8 @@ const Payday2Randomizer = () => {
     equipments: false,
     melees: false,
     heists: false,
-    all: false
+    all: false,
+    selectedCategories: true,
   });
 
 
@@ -231,6 +232,12 @@ const Payday2Randomizer = () => {
     });
   };
 
+  const handleToggleSelectedCategories = () => {
+    setSelectedCategories((prevState) => {
+      return prevState.length === Object.keys(selectedOptions).length ? [] : Object.keys(selectedOptions);
+    });
+  };
+  
   const handleToggleCheckAllCategories = () => {
     setSelectedOptions((prevState) => {
       const allCategoriesChecked = Object.keys(prevState).every(
@@ -257,12 +264,66 @@ const Payday2Randomizer = () => {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
+
+  const categories = [
+    { key: "primaryGuns", label: "Primary Guns" },
+    { key: "secondaryGuns", label: "Secondary Guns" },
+    { key: "perkDecks", label: "Perk Decks" },
+    { key: "armors", label: "Armors" },
+    { key: "throwables", label: "Throwables" },
+    { key: "equipments", label: "Equipments" },
+    { key: "melees", label: "Melees" },
+  ];  
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const handleToggleCategory = (category) => {
+    setSelectedCategories((prevSelectedCategories) => {
+      if (prevSelectedCategories.includes(category)) {
+        return prevSelectedCategories.filter((c) => c !== category);
+      } else {
+        return [...prevSelectedCategories, category];
+      }
+    });
+  };
+
+  
 return (
 <div>
 {isAuthenticated ? (
     <>
-  <div className="randomBuildContainer backgroundImage">
+    <div className="container">
+<Form>
+  <Form.Group>
+    <Form.Label onClick={() => toggleCollapse("selectedCategories")}>SELECT CATEGORIES TO RANDOMIZE</Form.Label>
+    {!collapsed.selectedCategories && (
+      <>
+        <Button
+          className="checkUncheckAllButton"
+          variant="outline-secondary"
+          onClick={handleToggleSelectedCategories}
+        >
+          {selectedCategories.length === categories.length ? <ImCheckboxUnchecked /> : <ImCheckboxChecked />}
+          {selectedCategories.length === categories.length ? " Uncheck All" : " Check All"}
+        </Button>
+        {categories.map((category) => (
+          <div key={category.key}>
+            <Form.Check
+              type="checkbox"
+              label={category.label}
+              checked={selectedCategories.includes(category.key)}
+              onChange={() => handleToggleCategory(category.key)}
+            />
+          </div>
+        ))}
+      </>
+    )}
+  </Form.Group>
+</Form>
+</div>
+
+  <div className="randomBuildContainer backgroundImage" style={{marginTop: 0}}>
         <div className="buttons">
+        
+
           <Button className="randomizeButton" onClick={handleRandomize}>RANDOMIZE BUILD</Button>
           <Button className="eyeSlashButton" onClick={() => setShowTable((prevState) => !prevState)}>{showTable ? <FiEyeOff/> : <FiEye/>}</Button>
           <Button className="eyeSlashButton" onClick={() => handleResetBuild()}>Reset Build</Button>
@@ -358,7 +419,6 @@ return (
         )}
       </Form.Group>
       </Form>
-      
 
       <Form>
         <Form.Group>

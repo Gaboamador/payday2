@@ -71,7 +71,7 @@ const Header = () => {
     const { logout } = useAuth0();
   
     const handleLogout = () => {
-      //logout({ logoutParams: { returnTo: window.location.origin } })
+      // logout({ logoutParams: { returnTo: window.location.origin } })
       logout({ logoutParams: { returnTo: "https://gaboamador.github.io/payday2" } })
     };
 
