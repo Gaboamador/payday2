@@ -1,0 +1,778 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/**/
+.backgroundImage {
+  background-image: url('https://pd2builder.netlify.app/img/bg.png');
+  /*background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;*/
+}
+
+.iconDiceRotate:active {
+  animation: DiceBounce 1s linear;
+}
+@keyframes DiceBounce {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(0);    
+  }
+  75% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .iconDiceRotate {
+    animation: DiceRotate infinite 3s linear;
+  }
+}
+@keyframes DiceRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@900&family=Figtree:wght@300&display=swap');
+
+@font-face {
+  font-family: 'RiftBold';
+  src: url("fuentes/Rift-Bold.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+ }
+ @font-face {
+  font-family: 'RiftDemi';
+  src: url("fuentes/Rift-Demi.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+ }
+ @font-face {
+  font-family: 'RiftLight';
+  src: url("fuentes/Rift-Light.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+ }
+ @font-face {
+  font-family: 'RiftMedium';
+  src: url("fuentes/Rift-Medium.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+ }
+ @font-face {
+  font-family: 'RiftRegular';
+  src: url("fuentes/Rift-Regular.otf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+ }
+
+header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 45px;
+        background-color: #131313; /* optional, to make header visible */
+        opacity: 95%;
+        z-index: 1000; /* optional, to make header on top of other elements */
+        box-shadow: 0px 0px 0px 1px #424242;
+        font-family: 'Chivo Mono', monospace;
+        background-image: url("https://www.paydaythegame.com/wp-content/themes/pd2tg/img/crimenet/logo-pd2.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between !important;
+      }
+
+.homeIcon {
+  margin-left: 20%;
+  color: #459bd5;
+}
+
+.userPicture {
+  margin-right: 1%;
+}
+
+.loginIcon {
+  /*border-radius: 20%;*/
+  border-radius: 20%;
+  width: 32px;
+  height: 32px;
+  color: whitesmoke;
+  border: #459bd5 ridge 2px;
+  background: linear-gradient(45deg, #459bd5 0%, #459bd5 30%, #2a5979 30%, #2a5979 70%, #459bd5 70%, #459bd5 100%);
+background-size: 400% 400%;
+animation: gradient-shiny 2s ease infinite;
+}
+
+      body {
+        padding-top: 45px !important;
+        margin: 0;
+        padding: 0;
+        font-family: 'Figtree', sans-serif;
+        background-color: #131313;
+      }
+
+.container {
+  margin: 0 auto;
+  padding: 20px;
+
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    padding: 10px;
+  }
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  margin-top: 0;
+  padding-top: 5px;
+}
+
+form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgba(242,242,242,1);
+  /*padding-top: 10px;*/
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(69, 155, 213, 0.75);
+  padding: 5px 5px 1px 5px;
+}
+
+@media (min-width: 768px) {
+  /* Target devices with a screen width of 768px or more (desktops) */
+  form {
+    width: 50%;
+  margin: 10px auto;
+  }
+}
+
+
+.form-label {
+  /*display: block;*/
+  /*margin: 5px 0px 5px 0px;*/
+  /*color:#459bd5;*/
+  cursor: pointer;
+  /*color: #2a5979 !important;*/
+  color: #8bcefa !important;
+  font-weight: bolder;
+  /*background-color: rgba(69, 155, 213, 0.25);*/
+  background-image: url('https://pd2builder.netlify.app/img/bg.png');
+  /*background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;*/
+  margin-bottom: 5px !important;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.form-check {
+text-align: left;
+}
+
+.checkUncheckAllButton {
+  color:#459bd5 !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  padding: 5px 0px !important;
+  border: none !important;
+  font-weight: bold !important;
+}
+.checkUncheckAllButton:hover {
+  color: #459bd5 !important;
+  background-color: transparent !important;
+}
+
+
+fieldset legend {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size:medium;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: rgba(69, 155, 213, 0.5);
+  }
+
+button {
+  font-family: 'Figtree', sans-serif;
+  background-color: #459bd5;
+  color: white;
+  padding: 5px 10px !important;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  margin: 0px !important;
+  width: fit-content !important;
+  border: 1px solid #459bd5;
+}
+
+button:hover {
+  background-color: #2a5979;
+}
+
+.randomizeButton {
+border: 2px ridge #459bd5 !important;
+color: white !important;
+background: linear-gradient(45deg, #459bd5 0%, #459bd5 30%, #2a5979 30%, #2a5979 70%, #459bd5 70%, #459bd5 100%);
+background-size: 400% 400%;
+animation: gradient-shiny 6s ease infinite;
+
+}
+@keyframes gradient-shiny {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.randomizeButton:hover {
+  background: linear-gradient(45deg, #2a5979 0%, #2a5979 30%, #459bd5 30%, #459bd5 70%, #2a5979 70%, #2a5979 100%);
+background-size: 400% 400%;
+animation: gradient-shiny 6s ease infinite;
+}
+
+.buttonGoToTop {
+  width:fit-content !important;
+  background-color: transparent !important;
+  border: 1px solid #459bd5 !important;
+  margin: 0 auto 10px !important;
+  display: block !important;
+  color: #2a5979 !important;
+}
+
+.buttonGoToTop:hover {
+  background-color: transparent;
+  color:#459bd5;
+}
+
+ #result {
+  margin: 0 auto;
+  padding-top: 0px !important;
+  padding: 10px;
+  max-width: 80vh;
+  border-radius: 10px;
+}
+
+#resultHeist {
+  margin: 0 auto;
+  padding-top: 0px !important;
+  padding: 10px;
+  max-width: 80vh;
+  border-radius: 10px;
+}
+
+#pointsResult {
+  margin: 0 auto;
+  padding-top: 0px !important;
+  padding: 10px;
+  max-width: 80vh;
+  border-radius: 10px;
+}
+
+.randomBuildTable {
+  margin-top: 5px !important;
+  border-collapse: collapse;
+  border-radius: 15px;
+  vertical-align: middle !important;
+}
+
+.randomBuildTable td:nth-child(2) {
+  
+  border-style: none ridge none none;
+  border-color: #2a5979;
+  border-left: 2px solid #2a5979;
+}
+
+.randomBuildTable td:first-child {
+  font-weight: bold;
+  border-style: none ridge none none;
+  
+}
+.randomBuildTable {
+  margin: 0 auto;
+  padding-top: 0px !important;
+  padding: 10px;
+  max-width: 80vh;
+  border-radius: 10px;
+  border-collapse: collapse;
+  
+  background-color: #8bcefa !important;
+}
+.randomBuildTable td {
+  padding: 8px;
+  text-align: left;  
+}
+.randomBuildTable tr:nth-child(even) {
+  background-color: white;
+}
+.randomBuildTable th:nth-child(1),
+.randomBuildTable td:nth-child(1) {
+  width: 37%;
+}
+.randomBuildTable th:nth-child(2),
+.randomBuildTable td:nth-child(2) {
+  width: 63%;
+}
+
+.heist-table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+}
+.heist-table td {
+  padding: 8px;
+  text-align: left;  
+}
+.heist-table th:nth-child(1),
+.heist-table td:nth-child(1) {
+  width: 10%;
+}
+.heist-table th:nth-child(2),
+.heist-table td:nth-child(2) {
+  text-align: center;
+  width: 90%;
+}
+
+
+.result-table {
+  border-collapse: collapse;
+  border-radius: 15px;
+  width: 100%;
+  background-color: #8bcefa;
+  table-layout: fixed;
+}
+.result-table td {
+  padding: 8px;
+  text-align: left;  
+}
+.result-table tr:nth-child(even) {
+  background-color: white;
+}
+.result-table th:nth-child(1),
+.result-table td:nth-child(1) {
+  width: 50%;
+}
+.result-table th:nth-child(2),
+.result-table td:nth-child(2) {
+  text-align: center;
+  width: 50%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.eyeSlashButton{
+  display: flex;
+  align-items: center !important;
+  color: #459bd5 !important;
+  background-color: whitesmoke !important;
+  border: 2px ridge #459bd5 !important;
+  /*border: 1px solid #459bd5 !important;*/
+  padding: 5px 10px !important;
+}
+  
+.form-check {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.buttons .expandAllCategoriesButton {
+  color: #459bd5;  
+  background-color: transparent;
+  border: 1px solid #459bd5;
+}
+
+.buttons .expandAllCategoriesButton:active {
+  color: white;
+  background-color: #459bd5 !important;
+  border: 1px solid #459bd5 !important;
+}
+
+.buttons .expandAllCategoriesButton:hover {
+  color: #459bd5;
+  background-color: transparent;
+  border: 1px solid #459bd5;
+}
+
+.buttons .checkUncheckAllCategoriesButton {
+  color: #459bd5;  
+  background-color: transparent;
+  border: 1px solid #459bd5;
+}
+.buttons .checkUncheckAllCategoriesButton:active {
+  color: white;
+  background-color: #459bd5 !important;
+  border: 1px solid #459bd5 !important;
+}
+
+.buttons .checkUncheckAllCategoriesButton:hover {
+  color: #459bd5;
+  background-color: transparent;
+  border: 1px solid #459bd5;
+}
+
+
+.fieldsetsContainer {
+width:100vh !important;
+}
+@media (min-width: 768px) {
+  /* Target devices with a screen width of 768px or more (desktops) */
+  .fieldsetsContainer {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+}
+
+
+.fieldsetOptions {
+  text-align: left !important;
+  
+}
+
+.randomBuildContainer {
+  margin: 15px 15px auto;
+  padding: 5px;
+  border: 1px ridge #459bd5;
+  box-shadow: 2px 2px 2px #459bd5;
+  border-radius: 15px;
+}
+
+.randomBuildTable {
+  margin-bottom: 0px !important;
+  margin: 10px auto;
+  width: 90%;
+}
+
+@media (min-width: 768px) {
+  /* Target devices with a screen width of 768px or more (desktops) */
+  .randomBuildContainer {
+    width: 500px;
+    margin: 15px auto !important;
+  }
+  .randomBuildTable {
+    width: 90%;
+  }
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  height: 100vh !important;
+  padding: 50px;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #459bd5;
+}
+
+@media (min-width: 600px) {
+.icon {
+  flex-basis: 25%; /* Set the width to 25% to display 4 icons per row */
+}
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 40% 0% 40% 0%;
+  /*background-color: rgba(255,255,255,0.9);*/
+  /*background-image: linear-gradient(to bottom right,
+  rgba(255,255,255,1) 70%,#459bd5 100%);*/
+  box-shadow: 5px 5px 20px #459bd5;
+  border: solid 1px #459bd5;
+}
+
+.icon-wrapper .icon > svg {
+  width: 32px;
+  height: 32px;
+}
+
+.label {
+  color: #459bd5;
+  margin-top: 0px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bolder;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Set the white-space property to normal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70px; /* Set a fixed height for the label container */
+}
+
+.loginButtons {
+  
+}
+
+.dropdownMenu {
+  font-family: "RiftBold", sans-serif;
+  background-color: #459bd5 !important;
+  letter-spacing: 2px;
+  border-radius: 40px 0px 40px 0px !important;
+  text-align: end !important;
+  min-width: fit-content !important;
+  padding: 15px !important;
+  transform:translate(-15px, 10px) !important;
+}
+
+.dropdownItem {
+  color: white !important;
+  /*width: fit-content !important;*/
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+/*INICIO CSS LOGIN FORM*/
+.login-box {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 75%;
+  
+  transform: translate(-50%, -50%);
+  background: rgba(171,171,171,.1);
+  box-sizing: border-box;
+  box-shadow: 5px 5px 20px #459bd5;
+  border-radius: 10px;
+}
+
+.login-box .form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box .form .button {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #459bd5;
+  font-family: 'Figtree', sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  letter-spacing: 2px;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.login-box .button span {
+  position: absolute;
+  display: block;
+}
+
+.login-box .button span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #459bd5);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.login-box .button span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #459bd5);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.login-box .button span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #459bd5);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.login-box .button span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #459bd5);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+/*FINAL CSS LOGIN FORM*/
+
+
+.loginIcon2 {
+  width: 32px;
+  height: 32px;
+  color: #459bd5;
+}
+/*INICIO CSS LOGIN FORM LOGIN ICON*/
+.login-box2 {
+  position: absolute;
+  top: 50%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+}
+
+.login-box2 .form2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+}
+
+.login-box2 .form2 .button2 {
+  position: relative;
+  display: inline-block;
+  padding: 0px !important;
+  color: #459bd5;
+  font-family: 'Figtree', sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  letter-spacing: 2px;
+  box-shadow: none;
+  background-color: transparent;
+  border-radius: 50%;
+}
+
+.login-box2 .button2 .span2 {
+  position: absolute;
+  display: block;
+}
+
+.login-box2 .button2 .span2:nth-child(2) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 200%;
+  background: linear-gradient(270deg, transparent, #459bd5);
+  animation: btn-anim3 1s linear infinite;
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+
+/*FINAL CSS LOGIN FORM*/
