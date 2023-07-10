@@ -62,7 +62,7 @@ function Home() {
   
 
 return (
-<Payday2Randomizer/> //AGREGADO CON EL CAMBIO DE SACARLE LOGIN
+<Payday2Randomizer/> //AGREGADO CON EL CAMBIO DE SACARLE LOGIN. Sacar esta linea si se vuelve a habilitar el login.
 /* <div className="backgroundImage">
 {isAuthenticated ? (
   <>
