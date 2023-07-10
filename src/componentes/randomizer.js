@@ -289,8 +289,8 @@ const Payday2Randomizer = () => {
 
 return (
 <div>
-{isAuthenticated ? (
-    <>
+{/* {isAuthenticated ? (
+    <> */}
     <div className="container">
 <Form>
   <Form.Group>
@@ -617,11 +617,11 @@ return (
       
   </div>
   <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>
-  </> ) : (
+  {/* </> ) : (
     <Container>
     <LoginButton/>
     </Container>
-  )}
+  // )} */}
 </div>
 );
 };

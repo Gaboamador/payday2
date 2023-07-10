@@ -8,20 +8,6 @@ const LoginButton = () => {
   
   return (
   <>
-  {/*<Form style={{ maxWidth: "80%", margin: '0 auto' }}>
-      <Form.Label>
-        LOG IN TO ACCESS
-      </Form.Label>
-      
-    <ButtonToolbar className="well" style={{margin: '0 auto 5px',  display: 'flex', justifyContent: 'center'}}>
-    <Button variant="success" onClick={() => loginWithRedirect()}>
-      Log In
-      </Button>
-      </ButtonToolbar>
-    
-    </Form>
-    */}
-    
         <div className="login-box" style={{ maxWidth: "80%", margin: '0 auto' }}>
           <div className="form">
             <Form className="button" variant="outline-light" type="submit" style={{cursor: "default"}}>

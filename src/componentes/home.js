@@ -10,6 +10,7 @@ import {ImProfile} from 'react-icons/im';
 import LoginButton from './login';
 import LogoutButton from './logout';
 import Profile from "./profile";
+import Payday2Randomizer from "./randomizer";
 
 function Home() {
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
@@ -61,7 +62,8 @@ function Home() {
   
 
 return (
-<div className="backgroundImage">
+<Payday2Randomizer/> //AGREGADO CON EL CAMBIO DE SACARLE LOGIN
+/* <div className="backgroundImage">
 {isAuthenticated ? (
   <>
 <Container className="navigation">
@@ -83,7 +85,7 @@ return (
   </Container>
   )}  
 
-</div>
+</div> */
 );
 }  
 export default Home;

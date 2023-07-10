@@ -16,7 +16,7 @@ function App() {
   <Routes>
       <Route exact path="/" element={<Home/>}></Route>
       <Route path="/randomizer" element={<Payday2Randomizer/>}></Route>
-      <Route path="/profile" element={<Profile/>}></Route>
+      {/* <Route path="/profile" element={<Profile/>}></Route> */}
     </Routes>
 </Router>
 

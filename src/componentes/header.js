@@ -82,7 +82,7 @@ const Header = () => {
     
     return (
 <header id="header" className={`header ${sticky ? "header--sticky" : ""}`}>
-        <Link to="/">
+        {/* <Link to="/">
           <ImHome size={32} className="homeIcon"/>
         </Link>
         {isAuthenticated ? (
@@ -107,11 +107,6 @@ const Header = () => {
             </div>
     </> ) : (
         <div className="userPicture">
-        {/*
-        <FiLogIn
-        className="loginIcon"
-        onClick={handleToggleDropdown}/>
-        */}
         <div className="login-box2" style={{ maxWidth: "80%", margin: '0 auto' }}>
             <div className="form2">
             <Form className="button2" variant="outline-light" type="submit">
@@ -127,10 +122,9 @@ const Header = () => {
               <Dropdown.Menu className="dropdownMenu">
                 <Dropdown.Item onClick={handleLogin} className="dropdownItem">Log in</Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown>
-            
+            </Dropdown>      
             </div>
-    )}
+    )} */}
 </header>
 
     );
