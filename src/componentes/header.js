@@ -39,7 +39,7 @@ const Header = () => {
   
         setUserMetadata(user_metadata);
       } catch (e) {
-        console.log(e.message);
+        // console.log(e.message);
       }
     };
   
@@ -85,7 +85,7 @@ const Header = () => {
         <Link to="/">
           <ImHome size={32} className="homeIcon"/>
         </Link>
-        {isAuthenticated ? (
+        {/* {isAuthenticated ? (
           <>
           <div className="userPicture">
           <img
@@ -107,11 +107,6 @@ const Header = () => {
             </div>
     </> ) : (
         <div className="userPicture">
-        {/*
-        <FiLogIn
-        className="loginIcon"
-        onClick={handleToggleDropdown}/>
-        */}
         <div className="login-box2" style={{ maxWidth: "80%", margin: '0 auto' }}>
             <div className="form2">
             <Form className="button2" variant="outline-light" type="submit">
@@ -130,7 +125,7 @@ const Header = () => {
             </Dropdown>
             
             </div>
-    )}
+    )} */}
 </header>
 
     );

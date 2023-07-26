@@ -1,0 +1,7 @@
+{
+  "1": [
+    { "perkDeck": ["Stoic"] },
+    { "antiSpecials": ["Shield", "Bulldozer", "Captain Winters", "SWAT Turret"] },
+    { "support": ["Transporter", "Drill Sawgeant"] }
+  ]
+}
