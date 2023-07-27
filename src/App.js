@@ -5,6 +5,7 @@ import Home from './componentes/home'
 import Payday2Randomizer from './componentes/randomizer';
 import BuildSelector from './componentes/selector';
 import ProfileConstructor from './componentes/constructor';
+import Builder from './componentes/builder';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Route path="/randomizer" element={<Payday2Randomizer/>}></Route>
       <Route path="/selector" element={<BuildSelector/>}></Route>
       <Route path="/constructor" element={<ProfileConstructor/>}></Route>
+      <Route path="/builder" element={<Builder/>}></Route>
     </Routes>
 </Router>
 

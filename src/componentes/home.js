@@ -59,6 +59,7 @@ function Home() {
     { icon: GiPerspectiveDiceSixFacesRandom, label: 'Randomizer', to: '/randomizer' },
     { icon: BiSelectMultiple, label: 'Selector', to: '/selector' },
     { icon: MdBuildCircle, label: 'Constructor', to: '/constructor' },
+    { icon: MdBuildCircle, label: 'Builder', to: '/builder' },
     // { icon: MdBuildCircle, label: 'PD2 Builder', to: 'https://pd2builder.netlify.app/' },
   ];
   
