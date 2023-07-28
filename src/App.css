@@ -776,3 +776,136 @@ width:100vh !important;
 
 
 /*FINAL CSS LOGIN FORM*/
+
+
+/* INICIO BUILD SELECTOR */
+
+.category-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.category-section{
+  border-collapse: collapse;
+    table-layout: fixed;
+    margin: 10px;
+    border: solid grey 1px;
+    border-radius: 10px;
+}
+
+.category-label {
+ padding: 3px;
+}
+
+.category-name {
+    color: #131313;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    border-bottom: solid grey 1px;
+    background-color: #A6CFEB;
+    border-radius: 10px 10px 0px 0px;
+    min-width: 350px;
+}
+
+
+.category-checkbox-container {
+  /* display: flex !important; */
+  flex-wrap: wrap !important;
+  justify-content: space-evenly !important;
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.filteredProfiles {
+  margin: 0 auto;
+}
+
+.filteredProfiles table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 10px;
+}
+
+.filteredProfiles th,
+.filteredProfiles td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.filteredProfiles th {
+  background-color: #f2f2f2;
+}
+
+
+.filteredProfiles td:first-child,
+.filteredProfiles th:first-child {
+position: sticky;
+left: 10px;
+background-color: #f2f2f2;
+z-index: 1;
+}
+
+.filteredProfiles tr:first-child {
+position: sticky;
+top: 0;
+background-color: #f2f2f2;
+z-index: 1;
+}
+
+.filtered-profiles-table-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+
+.exportButton {
+  height: 40px !important;
+}
+/* FINAL BUILD SELECTOR*/
+
+
+/* Inicio ProfileConstructor */
+.profile-constructor {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+.profileNumber-title {
+
+  text-align: end;
+}
+.profile {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin-bottom: 8px;
+}
+
+h4 {
+  margin-bottom: 6px;
+}
+
+.category {
+  margin-bottom: 15px;
+}
+
+.item-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+/* FIN ProfileConstructor */

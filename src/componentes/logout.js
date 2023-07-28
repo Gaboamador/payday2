@@ -6,8 +6,8 @@ const LogoutButton = () => {
   const { logout } = useAuth0();
 
   return (
-    <Button variant="secondary" onClick={() => logout({ logoutParams: { returnTo: "https://gaboamador.github.io/payday2" } })}>Log Out</Button>
-    // <Button variant="secondary" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</Button>
+    // <Button variant="secondary" onClick={() => logout({ logoutParams: { returnTo: "https://gaboamador.github.io/payday2" } })}>Log Out</Button>
+    <Button variant="secondary" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Log Out</Button>
   );
 };
 

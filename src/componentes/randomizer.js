@@ -47,7 +47,7 @@ const Payday2Randomizer = () => {
   
         setUserMetadata(user_metadata);
       } catch (e) {
-        console.log(e.message);
+        // console.log(e.message);
       }
     };
   
@@ -168,14 +168,55 @@ const Payday2Randomizer = () => {
     setShowTable(true);
   };
 
-  const handleRandomizeHeist = () => {
-    const randomizedHeist = {
-      heist: getRandomItem(selectedOptions.heists),
-    };
+  // const handleRandomizeHeist = () => {
+  //   const randomizedHeist = {
+  //     heist: getRandomItem(selectedOptions.heists),
+  //   };
 
-    setRandomizedHeist(randomizedHeist);
-    setShowTableHeist(true);
+  //   setRandomizedHeist(randomizedHeist);
+  //   setShowTableHeist(true);
+  // };
+
+  const [heistWeights, setHeistWeights] = useState({});
+
+  const handleRandomizeHeist = () => {
+    const remainingHeists = options.heists.filter(heist => !heistWeights[heist]);
+    if (remainingHeists.length === 0) {
+      // All heists have been picked, reset the weights
+      setHeistWeights({});
+    } else {
+      const randomHeist = getRandomWeightedItem(remainingHeists, heistWeights);
+      const updatedWeights = {
+        ...heistWeights,
+        [randomHeist]: (heistWeights[randomHeist] || 1) * 0.5, // Decrease the weight by half
+      };
+      setHeistWeights(updatedWeights);
+      setRandomizedHeist({ heist: randomHeist });
+      setShowTableHeist(true);
+    }
   };
+  
+  const getRandomWeightedItem = (items, weights) => {
+    // Calculate the total weight
+    const totalWeight = items.reduce((sum, item) => sum + (weights[item] || 1), 0);
+  
+    // Generate a random number between 0 and the total weight
+    const randomNumber = Math.random() * totalWeight;
+  
+    // Iterate through the items and pick the one based on the weights
+    let accumulatedWeight = 0;
+    for (const item of items) {
+      accumulatedWeight += weights[item] || 1;
+      if (randomNumber <= accumulatedWeight) {
+        return item;
+      }
+    }
+  
+    // Fallback in case something went wrong
+    return items[items.length - 1];
+  };  
+
+  // FIN NUEVA FUNCIÓN RANDOMIZER CON WEIGHT
 
   const getRandomItem = (items) => {
     if (items.length === 0) {
@@ -285,10 +326,10 @@ const Payday2Randomizer = () => {
     });
   };
 
-  const selectedCategoriesNoHeists = selectedCategories.filter(category => category !== "heists");
-
+  
 return (
 <div>
+{/* <Button onClick={handleReset}>Reset Loaded Profiles</Button> */}
 {/* {isAuthenticated ? (
     <> */}
     <div className="container">
@@ -302,8 +343,8 @@ return (
           variant="outline-secondary"
           onClick={handleToggleSelectedCategories}
         >
-          {selectedCategoriesNoHeists.length === categories.length ? <ImCheckboxUnchecked /> : <ImCheckboxChecked />}
-          {selectedCategoriesNoHeists.length === categories.length ? " Uncheck All" : " Check All"}
+          {selectedCategories.length === categories.length ? <ImCheckboxUnchecked /> : <ImCheckboxChecked />}
+          {selectedCategories.length === categories.length ? " Uncheck All" : " Check All"}
         </Button>
         {categories.map((category) => (
           <div key={category.key}>
@@ -621,7 +662,7 @@ return (
     <Container>
     <LoginButton/>
     </Container>
-  // )} */}
+  )} */}
 </div>
 );
 };

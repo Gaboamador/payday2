@@ -39,7 +39,7 @@ const Header = () => {
   
         setUserMetadata(user_metadata);
       } catch (e) {
-        console.log(e.message);
+        // console.log(e.message);
       }
     };
   
@@ -85,7 +85,7 @@ const Header = () => {
         {/* <Link to="/">
           <ImHome size={32} className="homeIcon"/>
         </Link>
-        {isAuthenticated ? (
+        {/* {isAuthenticated ? (
           <>
           <div className="userPicture">
           <img

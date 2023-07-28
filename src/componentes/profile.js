@@ -32,14 +32,14 @@ const Profile = () => {
   
         setUserMetadata(user_metadata);
       } catch (e) {
-        console.log(e.message);
+        // console.log(e.message);
       }
     };
   
     getUserMetadata();
   }, [getAccessTokenSilently, user?.sub]);
-  console.log(userMetadata, "user metadata");
-  console.log(user, "user");
+  // console.log(userMetadata, "user metadata");
+  // console.log(user, "user");
 
   if (isLoading) {
     return (
