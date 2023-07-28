@@ -82,7 +82,7 @@ const Header = () => {
     
     return (
 <header id="header" className={`header ${sticky ? "header--sticky" : ""}`}>
-        {/* <Link to="/">
+        <Link to="/">
           <ImHome size={32} className="homeIcon"/>
         </Link>
         {/* {isAuthenticated ? (

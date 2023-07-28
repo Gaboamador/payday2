@@ -421,6 +421,11 @@ animation: gradient-shiny 6s ease infinite;
     justify-content: space-evenly;
 }
 
+.buttonsSkills {
+  display: flex;
+  justify-content: left;
+}
+
 .eyeSlashButton{
   display: flex;
   align-items: center !important;
@@ -868,6 +873,64 @@ z-index: 1;
 .exportButton {
   height: 40px !important;
 }
+
+.tree {
+  margin: 5px 0px;
+  padding: 5px;
+  border: solid #316385 2px;
+  border-radius: 15px;
+}
+
+.subtree {
+  margin: 5px 0px;
+  padding: 5px;
+  border: dashed #316385 1px;
+  border-radius: 15px;
+}
+
+.treeName {
+    color: #131313;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+    padding: 5px;
+    background-color: #A6CFEB;
+    border-radius: 10px;
+
+}
+
+.subtreeName {
+  color: #4EA0D7;
+}
+
+.totalSkillPointsDIV {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.totalSkillPoints {
+  position: fixed;
+  text-align: center;
+  background-color: white;
+  opacity: 75%;
+  z-index: 1000;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 15px;
+  color: #316385;
+  border: solid 1px #316385;
+}
+
+.skillCol  {
+  align-items: center !important;
+  vertical-align: middle !important;
+  padding: 5px !important;
+}
+
+.skillButton {
+  width: 100px !important;
+}
+
 /* FINAL BUILD SELECTOR*/
 
 
