@@ -7,9 +7,13 @@ import iconsImage from '../imagenes/icons.png';
 const Builder = () => {
     const MAX_SKILL_POINTS = 120;
   
-    // State to keep track of selected skills and their points
-    const [selectedSkills, setSelectedSkills] = useState({});
-    // const [totalSkillPoints, setTotalSkillPoints] = useState(0);
+   // State to keep track of selected skills and their points for all profiles
+  const [selectedSkills, setSelectedSkills] = useState(() => {
+    // Initialize the array with 15 profiles, each with an empty object of selected skills
+    return Array.from({ length: 15 }, () => ({}));
+  });
+  
+  const [currentProfile, setCurrentProfile] = useState(1); // The default selected profile
   
 
  // Function to check if a skill is already selected
@@ -73,48 +77,59 @@ const Builder = () => {
     ];
   }, []);
     
- // Function to handle selecting or unselecting a skill
-  // Function to handle selecting or unselecting a skill
-  const handleSkillSelect = (skillName) => {
+   // Function to handle selecting or unselecting a skill for the current profile
+   const handleSkillSelect = (skillName) => {
     const skillInfo = organizedSkillsFlat.find((skill) => skill.name === skillName);
-
+  
     if (skillInfo) {
       setSelectedSkills((prevSelectedSkills) => {
-        const newSelectedSkills = { ...prevSelectedSkills };
-        const currentSelected = prevSelectedSkills[skillName];
-
+        const newSelectedSkills = prevSelectedSkills.map((profileSkills) => ({ ...profileSkills }));
+        const currentSelected = newSelectedSkills[currentProfile - 1][skillName];
+  
         if (!currentSelected) {
           // Skill is not selected, add it and its state (basic or ace)
-          if (totalSkillPoints + skillInfo.basic <= MAX_SKILL_POINTS) {
-            newSelectedSkills[skillName] = 'basic';
+            if (getProfileTotalPoints(newSelectedSkills, currentProfile - 1) + skillInfo.basic <= MAX_SKILL_POINTS) {
+            newSelectedSkills[currentProfile - 1][skillName] = 'basic';
           } else {
             // Skill points exceed the maximum allowed
-            alert('Maximum skill points exceeded!');
+            // alert('Maximum skill points exceeded!');
           }
         } else if (currentSelected === 'basic') {
           // Toggle to 'Ace' state
-          newSelectedSkills[skillName] = 'ace';
+          newSelectedSkills[currentProfile - 1][skillName] = 'ace';
         } else if (currentSelected === 'ace') {
           // Toggle to 'Unselected' state
-          delete newSelectedSkills[skillName];
+          delete newSelectedSkills[currentProfile - 1][skillName];
         }
-
+  
         return newSelectedSkills;
       });
     } else {
       console.error(`Invalid skill for: ${skillName}`);
     }
   };
+  
+  
+  
+  
 
-  // Calculate the totalSkillPoints based on the selected skills
-  const totalSkillPoints = Object.entries(selectedSkills).reduce((total, [skillName, state]) => {
+// Function to calculate the total skill points for a given profile
+const getProfileTotalPoints = (skills, profileIndex) => {
+  let totalPoints = 0;
+  const currentSkills = skills[profileIndex] || {};
+  Object.entries(currentSkills).forEach(([skillName, state]) => {
     const skillInfo = organizedSkillsFlat.find((skill) => skill.name === skillName);
     if (skillInfo) {
       const points = state === 'ace' ? skillInfo.ace + skillInfo.basic : skillInfo.basic;
-      return total + points;
+      totalPoints += points;
     }
-    return total;
-  }, 0);
+  });
+  return totalPoints;
+};
+
+
+// Calculate the totalSkillPoints based on the selected skills for the current profile
+const totalSkillPoints = getProfileTotalPoints(selectedSkills, currentProfile - 1);
 
  // Calculate subtotals for each tree
  const treeSubtotals = {};
@@ -122,8 +137,8 @@ const Builder = () => {
    treeSubtotals[tree] = Object.values(organizedSkills[tree])
      .flat()
      .reduce((subtotal, skill) => {
-       if (isSkillSelected(skill.name)) {
-         subtotal += selectedSkills[skill.name] === 'basic' ? skill.basic : skill.ace + skill.basic;
+       if (selectedSkills[currentProfile - 1][skill.name]) {
+         subtotal += selectedSkills[currentProfile - 1][skill.name] === 'basic' ? skill.basic : skill.ace + skill.basic;
        }
        return subtotal;
      }, 0);
@@ -243,7 +258,6 @@ const Builder = () => {
 
         return (
         <div className="container">
-
           <div className="totalSkillPointsDIV">
             <div className="totalSkillPoints">
               <span>Rem. SP</span>
@@ -251,11 +265,22 @@ const Builder = () => {
               <span>{120-totalSkillPoints}</span>
             </div>
           </div>
-          
           <div className="buttonsSkills">
             <Button onClick={exportSelectedSkills}>Export Skills</Button>
             <UploadButton handleFileChange={handleFileChange} />
           </div>
+
+          <div className="container">
+          <Form.Group>
+        <Form.Control as="select" value={currentProfile} onChange={(e) => setCurrentProfile(Number(e.target.value))}>
+          {Array.from({ length: 15 }, (_, index) => index + 1).map((profileNumber) => (
+            <option key={profileNumber} value={profileNumber}>
+              Profile {profileNumber}
+            </option>
+          ))}
+        </Form.Control>
+        </Form.Group>
+        </div>
 
           {Object.entries(sortedOrganizedSkills).map(([treeName, subtrees]) => (
             <div key={treeName} className="tree">
@@ -277,9 +302,9 @@ const Builder = () => {
                               <Button
                                 onClick={() => handleSkillSelect(skill.name)}
                                 variant={
-                                  selectedSkills[skill.name] === 'basic'
+                                  selectedSkills[currentProfile - 1][skill.name] === 'basic'
                                     ? 'primary'
-                                    : selectedSkills[skill.name] === 'ace'
+                                    : selectedSkills[currentProfile - 1][skill.name] === 'ace'
                                     ? 'outline-info'
                                     : 'outline-secondary'
                                 }
@@ -287,43 +312,41 @@ const Builder = () => {
                                 title={skill.description}
                                 style={{
                                   backgroundImage:
-                                    selectedSkills[skill.name] === 'basic'
+                                    selectedSkills[currentProfile - 1][skill.name] === 'basic'
                                       ? 'none'
-                                      : selectedSkills[skill.name] === 'ace'
+                                      : selectedSkills[currentProfile - 1][skill.name] === 'ace'
                                       ? `url(${aceImage})`
                                       : 'none',
-                                      backgroundSize: '50px',
-                                      backgroundRepeat: 'no-repeat',
-                                      backgroundPosition: 'center',
-                                      overflow: 'visible',
+                                  backgroundSize: '50px',
+                                  backgroundRepeat: 'no-repeat',
+                                  backgroundPosition: 'center',
+                                  overflow: 'visible',
                                 }}
                               >
-                                {selectedSkills[skill.name] === 'basic'
+                                {selectedSkills[currentProfile - 1][skill.name] === 'basic'
                                   ? 'Basic'
-                                  : selectedSkills[skill.name] === 'ace'
+                                  : selectedSkills[currentProfile - 1][skill.name] === 'ace'
                                   ? ' '
                                   : '🔒'}
                               </Button>
-                                <div>
+                              <div>
                                 <span
-                                style={{
-                                  fontWeight:
-                                    selectedSkills[skill.name] === 'basic'
-                                      ? 'bold'
-                                      : selectedSkills[skill.name] === 'ace'
-                                      ? 'bold'
-                                      : '',
-                                  color:
-                                    selectedSkills[skill.name] === 'basic'
-                                      ? '#0D6EFD'
-                                      : selectedSkills[skill.name] === 'ace'
-                                      ? '#08AFFF'
-                                      : '#6C757D',
-                                }}
+                                  style={{
+                                    fontWeight:
+                                      selectedSkills[currentProfile - 1][skill.name] === 'basic' || selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                                        ? 'bold'
+                                        : '',
+                                    color:
+                                      selectedSkills[currentProfile - 1][skill.name] === 'basic'
+                                        ? '#0D6EFD'
+                                        : selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                                        ? '#08AFFF'
+                                        : '#6C757D',
+                                  }}
                                 >
-                                    {skill.name}
-                                  </span>
-                                </div>
+                                  {skill.name}
+                                </span>
+                              </div>
                             </Col>
                           ))}
                         </Row>
