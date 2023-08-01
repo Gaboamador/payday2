@@ -1,0 +1,36 @@
+{
+  "subcategories": [
+    {
+      "name": "Assault Rifles",
+      "weapons": ["AK Rifle","AK.762 Rifle","AK17 Rifle","AK5 Rifle","AMCAR Rifle","AMR-16 Rifle","Bootleg Rifle","CAR-4 Rifle","Cavity 9mm","Clarion Rifle","Commando 553 Rifle","Eagle Heavy Rifle","Falcon Rifle","Gecko 7.62 Rifle","Gewehr 3 Rifle","Golden AK.762 Rifle","JP36 Rifle","Lion's Roar Rifle","Little Friend 7.62 Assault Rifle","M308 Rifle","Queen's Wrath Rifle","UAR Rifle","Valkyria Rifle"]
+    },
+    {
+      "name": "Shotguns",
+      "weapons": ["Breaker 12G Shotgun","IZHMA 12G Shotgun","Joceline O/U 12G Shotgun","M1014 Shotgun","Mosconi 12G Shotgun","Predator 12G Shotgun","Raven Shotgun","Reinfeld 880 Shotgun","Steakout 12G Shotgun"]
+    },
+    {
+      "name": "Akimbo Pistols",
+      "weapons": ["Akimbo Baby Deagle Pistols","Akimbo Bernetti 9 Pistols","Akimbo Bronco .44 Revolvers","Akimbo Broomstick Pistols","Akimbo Castigo .44 Revolvers","Akimbo Chimano 88 Pistols","Akimbo Chimano Compact Pistols","Akimbo Chimano Custom Pistols","Akimbo Contractor Pistols","Akimbo Crosskill Guard Pistols","Akimbo Crosskill Pistols","Akimbo Deagle Pistols","Akimbo Gruber Kurz Pistols","Akimbo Interceptor 45 Pistols","Akimbo LEO Pistols","Akimbo Matever .357 Revolvers","Akimbo Signature .40 Pistols","Akimbo STRYK 18c Pistols","Akimbo White Streak Pistols"]
+    },
+    {
+      "name": "Akimbo Shotguns",
+      "weapons": ["Akimbo Goliath 12G Shotguns","Akimbo Judge Shotguns","Brother Grimm 12G Shotguns"]
+    },
+    {
+      "name": "Akimbo SMGs",
+      "weapons": ["Akimbo Blaster 9mm Submachine Guns","Akimbo Chicago Typewriter SMGs","Akimbo CMP Submachine Guns","Akimbo Cobra Submachine Guns","Akimbo Compact-5 Submachine Guns","Akimbo CR 805B Submachine Guns","Akimbo Heather Submachine Guns","Akimbo Jackal Submachine Guns","Akimbo Jacket's Piece","Akimbo Kobus 90 Submachine Guns","Akimbo Krinkov Submachine Guns","Akimbo Kross Vertex Submachine Guns","Akimbo Mark 10 Submachine Guns","Akimbo Micro Uzi Submachine Guns","Akimbo Para Submachine Guns","Akimbo Patchett L2A1 Submachine Guns","Akimbo Signature Submachine Guns","Akimbo SpecOps Submachine Guns","Akimbo Swedish K Submachine Guns","Akimbo Tatonka Submachine Guns","Akimbo Uzi Submachine Guns"]
+    },
+    {
+      "name": "Sniper Rifles",
+      "weapons": ["Contractor .308 Sniper Rifle","Desertfox Sniper Rifle","Grom Sniper Rifle","Lebensauger .308 Sniper Rifle","Nagant Sniper Rifle","Platypus 70 Sniper Rifle","R93 Sniper Rifle","Rattlesnake Sniper Rifle","Repeater 1874 Sniper Rifle","Thanatos .50 cal Sniper Rifle"]
+    },
+    {
+      "name": "Light Machine Guns",
+      "weapons": ["Brenner-21 Light Machine Gun","Buzzsaw 42 Light Machine Gun","KSP 58 Light Machine Gun","KSP Light Machine Gun","RPK Light Machine Gun"]
+    },
+    {
+      "name": "Specials",
+      "weapons": ["English Longbow","Flamethrower Mk.1","GL40 Grenade Launcher","Heavy Crossbow","Light Crossbow","OVE9000 Saw","Piglet Grenade Launcher","Plainsrider Bow","Vulcan Minigun","XL 5.56 Microgun"]
+    }
+  ]
+}

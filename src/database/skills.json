@@ -1,5 +1,7 @@
 {
     "combat_medic": {
+        "idWidth": 400,
+        "idHeight": 560,
         "name": "Combat Medic",
         "description": "BASIC: 1 point\tYou gain a 30% damage reduction for 5 seconds both after and during reviving another player.\nACE: 3 points\tReviving a crew member gives them 30% more health.",
         "basic": 1,
@@ -9,6 +11,8 @@
         "tree": "mastermind"
     },
     "quick_fix": {
+        "idWidth": 80,
+        "idHeight": 880,
         "name": "Quick Fix",
         "description": "BASIC: 2 points\tDecreases your First Aid Kit and Doctor Bag deploy time by 50%.\nACE: 4 points\tCrew Members that use your First Aid Kits or Doctor Bags take 10% less damage for 120 seconds.",
         "basic": 2,
@@ -18,6 +22,8 @@
         "tree": "mastermind"
     },
     "painkillers": {
+        "idWidth": 0,
+        "idHeight": 800,
         "name": "Painkillers",
         "description": "BASIC: 2 points\tCrew members you revive take 30% less damage for 5 seconds.\nACE: 4 points\tThe damage reduction is increased by an additional 50%",
         "basic": 2,
@@ -27,6 +33,8 @@
         "tree": "mastermind"
     },
     "uppers": {
+        "idWidth": 160,
+        "idHeight": 880,
         "name": "Uppers",
         "description": "BASIC: 3 points\tAdds 7 more First Aid Kits to your inventory.\nACE: 6 points\tAdds 3 First Aid Kits to your inventory. Your deployed First Aid Kits will be automatically used if a player is downed within a 5 meter radius of the First Aid Kit. This cannot occur more than once every 20 seconds.",
         "basic": 3,
@@ -36,6 +44,8 @@
         "tree": "mastermind"
     },
     "combat_doctor": {
+        "idWidth": 400,
+        "idHeight": 640,
         "name": "Combat Doctor",
         "description": "BASIC: 3 points\tYou can now deploy 2 Doctor Bags instead of just one.\nACE: 6 points\tYour doctor bags have 2 more charges.",
         "basic": 3,
@@ -45,6 +55,8 @@
         "tree": "mastermind"
     },
     "inspire": {
+        "idWidth": 320,
+        "idHeight": 720,
         "name": "Inspire",
         "description": "BASIC: 4 points\tYou revive crew members 100% faster. Shouting at your teammates will increase their movement and reload speed by 20% for 10 seconds.\nACE: 8 points\tThere is a 100% chance that you can revive crew members at a distance of up to 9 meters by shouting at them. This cannot occur more than every 20 seconds.",
         "basic": 4,

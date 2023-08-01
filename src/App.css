@@ -113,6 +113,12 @@
   font-weight: 500;
   font-style: normal;
  }
+ @font-face {
+  font-family: 'DINEngschrift';
+  src: url("fuentes/DINEngschrift.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+ }
 
 header {
         position: fixed;
@@ -159,14 +165,14 @@ animation: gradient-shiny 2s ease infinite;
         padding-top: 45px !important;
         margin: 0;
         padding: 0;
-        font-family: 'Figtree', sans-serif;
+        /* font-family: 'Figtree', sans-serif; */
+        font-family: 'DINEngschrift', sans-serif !important;
         background-color: #131313;
       }
 
 .container {
   margin: 0 auto;
   padding: 20px;
-
 }
 
 @media (max-width: 480px) {
@@ -884,8 +890,19 @@ z-index: 1;
 .subtree {
   margin: 5px 0px;
   padding: 5px;
-  border: dashed #316385 1px;
+  /* border: solid #316385 1px; */
   border-radius: 15px;
+  background-image: url('./imagenes/bg.png') !important;
+}
+
+.categoryName {
+  color: #131313;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  padding: 5px;
+  background-color: rgba(3, 6, 32, 0.26);
+  border-radius: 10px;
 }
 
 .treeName {
@@ -896,11 +913,14 @@ z-index: 1;
     padding: 5px;
     background-color: #A6CFEB;
     border-radius: 10px;
-
 }
 
 .subtreeName {
+  font-family: 'DINEngschrift', sans-serif;
+  font-weight: bold;
   color: #4EA0D7;
+  border-top: solid #4EA0D7 1px;
+  margin: 0 auto !important;
 }
 
 .totalSkillPointsDIV {
@@ -930,6 +950,28 @@ z-index: 1;
 .skillButton {
   width: 100px !important;
 }
+
+.basicButton {
+  height: 80px !important;
+  width: 80px !important;
+  border: none !important;
+  background-color: rgba(255,255,255,0) !important;
+}
+
+.aceButton {
+  height: 80px !important;
+  width: 80px !important;
+  background-color: rgba(255,255,255,0) !important;
+  border: none !important;
+}
+
+.unselectedButton {
+  height: 80px !important;
+  width: 80px !important;
+  background-color: rgba(255,255,255,0) !important;
+  border: none !important;
+}
+
 
 /* FINAL BUILD SELECTOR*/
 
