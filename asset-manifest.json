@@ -1,11 +1,9 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.63363d4c.css",
-    "main.js": "/payday2/static/js/main.5157e81a.js",
+    "main.css": "/payday2/static/css/main.7d200929.css",
+    "main.js": "/payday2/static/js/main.f1d0f247.js",
     "static/js/787.5769c993.chunk.js": "/payday2/static/js/787.5769c993.chunk.js",
     "static/media/icons.png": "/payday2/static/media/icons.7ad65b2dffcd3fa9a44d.png",
-    "static/media/icons_unselected.png": "/payday2/static/media/icons_unselected.9c7f127d9ed3a6a88fd8.png",
-    "static/media/background.png": "/payday2/static/media/background.6395142cf7531ab8c130.png",
     "static/media/DINEngschrift.ttf": "/payday2/static/media/DINEngschrift.e224b82b21f6b42041c6.ttf",
     "static/media/bg.png": "/payday2/static/media/bg.9c7362716c9b052c3a11.png",
     "static/media/Rift-Bold.otf": "/payday2/static/media/Rift-Bold.f4cd06201f6852d2056f.otf",
@@ -14,12 +12,12 @@
     "static/media/Rift-Medium.otf": "/payday2/static/media/Rift-Medium.8768b86fa35ea6b5d69e.otf",
     "static/media/Rift-Light.otf": "/payday2/static/media/Rift-Light.6c224ab314c02acea4a2.otf",
     "index.html": "/payday2/index.html",
-    "main.63363d4c.css.map": "/payday2/static/css/main.63363d4c.css.map",
-    "main.5157e81a.js.map": "/payday2/static/js/main.5157e81a.js.map",
+    "main.7d200929.css.map": "/payday2/static/css/main.7d200929.css.map",
+    "main.f1d0f247.js.map": "/payday2/static/js/main.f1d0f247.js.map",
     "787.5769c993.chunk.js.map": "/payday2/static/js/787.5769c993.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.63363d4c.css",
-    "static/js/main.5157e81a.js"
+    "static/css/main.7d200929.css",
+    "static/js/main.f1d0f247.js"
   ]
 }
