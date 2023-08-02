@@ -63,9 +63,12 @@
         "ace": 8,
         "tier": 4,
         "subtree": "medic",
-        "tree": "mastermind"
+        "tree": "mastermind",
+        "selector": "support"
     },
     "forced_friendship": {
+        "idWidth": 320,
+        "idHeight": 560,
         "name": "Forced Friendship",
         "description": "BASIC: 1 point\tIncrease your supply of cable ties by 4. You can cable tie hostages 75% faster.\nACE: 3 points\tYou and your crew gain 0.5 damage absorptions for each hostage you have. This effect stacks with up to a maximum of 8 hostages.\nNote: This skill does not stack with other players Forced Friendship skill.",
         "basic": 1,
@@ -75,6 +78,8 @@
         "tree": "mastermind"
     },
     "confident": {
+        "idWidth": 160,
+        "idHeight": 640,
         "name": "Confident",
         "description": "BASIC: 2 points\tThe power and range of your intimidation is increased by 50%.\nACE: 4 points\tYou can now have 2 converted enemies at the same time.",
         "basic": 2,
@@ -84,6 +89,8 @@
         "tree": "mastermind"
     },
     "joker": {
+        "idWidth": 480,
+        "idHeight": 640,
         "name": "Joker",
         "description": "BASIC: 2 points\tYou can convert a non-special enemy to fight on your side.\tThis can not be done during stealth and the enemy must have surrendered in order for you to convert them.\nYou can only convert one non-special enemy at a time.\nACE: 4 points\tYour converted enemy deals 35% more damage. The time to convert an enemy is reduced by 65%.",
         "basic": 2,
@@ -93,6 +100,8 @@
         "tree": "mastermind"
     },
     "stockholm_syndrome": {
+        "idWidth": 240,
+        "idHeight": 640,
         "name": "Stockholm Syndrome",
         "description": "BASIC: 3 points\tCivilians are intimidated by the noise you make and remain intimidated 50% longer.\nACE: 6 points\tYour hostages will not flee when they have been rescued by law enforcers. Whenever you get into custody, your hostages will trade themselves for your safe return. This effect can occur during assaults, but only 1 time during a heist.",
         "basic": 3,
@@ -102,6 +111,8 @@
         "tree": "mastermind"
     },
     "partners_in_crime": {
+        "idWidth": 80,
+        "idHeight": 800,
         "name": "Partners in Crime",
         "description": "BASIC: 3 points\tHaving a converted enemy increases your movement speed by 10%.\nYour converted enemy takes 45% less damage.\nACE: 6 points\tHaving a converted enemy increases your health by 30%.\nYour converted enemy takes an additional 54% less damage.",
         "basic": 3,
@@ -111,6 +122,8 @@
         "tree": "mastermind"
     },
     "hostage_taker": {
+        "idWidth": 160,
+        "idHeight": 800,
         "name": "Hostage Taker",
         "description": "BASIC: 4 points\tHaving at least one of your own hostage or converted law enforcer makes you regenerate 1.5% health every 5 seconds.\nACE: 8 points\tHaving at least one of your own hostage or converted law enforcer makes you regenerate 4.5% health every 5 seconds.",
         "basic": 4,
@@ -120,6 +133,8 @@
         "tree": "mastermind"
     },
     "stable_shot": {
+        "idWidth": 0,
+        "idHeight": 400,
         "name": "Stable Shot",
         "description": "BASIC: 1 point\tYou gain 8 weapon stability.\nACE: 3 points\tYou gain 16 weapon accuracy while standing still.",
         "basic": 1,
@@ -129,6 +144,8 @@
         "tree": "mastermind"
     },
     "rifleman": {
+        "idWidth": 480,
+        "idHeight": 400,
         "name": "Rifleman",
         "description": "BASIC: 2 points\tYour snap to zoom is 100% faster with all weapons.\nYour movement speed is unhindered while using steel sight.\nACE: 4 points\tYour weapon zoom level is increased by 25% with all weapons. Your weapon accuracy while moving with SMGs, Assault Rifles and Sniper Rifles is increased by 16.",
         "vr_description": "Addition in VR:\tBASIC: Every kill while aiming down sight will regenerate 2% stamina.\tEvery 25 points of stamina consumed by dashing will refill 5% of their ammo pool to single shot weapons.\tACE: The improved accuracy lasts from 1 up to a maximum of 5 seconds after dashing.",
@@ -139,6 +156,8 @@
         "tree": "mastermind"
     },
     "marksman": {
+        "idWidth": 640,
+        "idHeight": 80,
         "name": "Marksman",
         "description": "BASIC: 2 points\tYou gain 8 weapon accuracy with all SMGs, Assault Rifles and Sniper Rifles fired in single shot fire mode.\nACE: 4 points\tYou gain a 20% accuracy bonus while aiming down sights with all SMGs, Assault Rifles and Sniper Rifles fired in single shot fire mode.",
         "basic": 2,
@@ -148,6 +167,8 @@
         "tree": "mastermind"
     },
     "ammo_efficiency": {
+        "idWidth": 640,
+        "idHeight": 320,
         "name": "Ammo Efficiency",
         "description": "BASIC: 3 points\tGetting 3 headshots in less than 6 seconds will refund 1 bullet to your used weapon. Can only be triggered by SMGs, Assault Rifles and Sniper Rifles fired in single shot fire mode.\nACE: 6 points\tThe amount of headshots required is reduced to 2.",
         "basic": 3,
@@ -157,6 +178,8 @@
         "tree": "mastermind"
     },
     "aggressive_reload": {
+        "idWidth": 640,
+        "idHeight": 240,
         "name": "Aggressive Reload",
         "description": "BASIC: 3 points\tIncreases your reload speed with SMGs, Assault Rifles and Sniper Rifles by 15%.\nACE: 6 points\tAny killing headshot will increase your reload speed by 100% for 4 seconds. Can only be triggered by SMGs, Assault Rifles and Sniper Rifles fired in single shot fire mode.",
         "basic": 3,
@@ -166,6 +189,8 @@
         "tree": "mastermind"
     },
     "graze": {
+        "idWidth": 880,
+        "idHeight": 720,
         "name": "Graze",
         "description": "BASIC: 4 points\tSnipers that hit their target deal 20% of the damage dealth in a 100cm radius around the bullet trajectory.\nACE: 8 points\tIf a bullet would headshot-kill someone, the graze skill will deal 100% of the weapon's damage instead of 20%.",
         "basic": 4,
@@ -175,6 +200,8 @@
         "tree": "mastermind"
     },
     "underdog": {
+        "idWidth": 160,
+        "idHeight": 80,
         "name": "Underdog",
         "description": "BASIC: 1 point\tWhen three or more enemies within 10 meters are targeting you, you receive a 15% damage bonus that lasts for 7 seconds.\nACE: 3 points\tWhen three or more enemies within 18 meters are targeting you, you also receive a 10% damage reduction that lasts for 7 seconds.\nNote: Does not apply to melee damage, throwables, grenade launchers or rocket launchers.",
         "basic": 1,
@@ -184,6 +211,8 @@
         "tree": "enforcer"
     },
     "shotgun_cqb": {
+        "idWidth": 640,
+        "idHeight": 560,
         "name": "Shotgun CQB",
         "description": "BASIC: 2 points\tYou reload Shotguns 15% faster.\nACE: 4 points\tYou reload Shotguns 35% faster. You gain a 125% increased steel sight zoom speed when using Shotguns.",
         "vr_description": "Addition in VR:\tACE: Every kill while aiming down sight will regenerate 2% stamina.",
@@ -194,6 +223,8 @@
         "tree": "enforcer"
     },
     "shotgun_impact": {
+        "idWidth": 320,
+        "idHeight": 80,
         "name": "Shotgun Impact",
         "description": "BASIC: 2 points\tYour weapon stability with all shotguns is increased by 8. You deal 5% more damage with Shotguns.\nACE: 4 points\tYou deal an additional 10% more damage with shotguns.",
         "basic": 2,
@@ -203,6 +234,8 @@
         "tree": "enforcer"
     },
     "far_away": {
+        "idWidth": 640,
+        "idHeight": 400,
         "name": "Far Away",
         "description": "BASIC: 3 points\tYour accuracy bonus while aiming down sights with Shotguns is increased by 40%.\nACE: 6 points\tYou gain a 50% increased effective range with Shotguns when aiming down sights.",
         "basic": 3,
@@ -212,6 +245,8 @@
         "tree": "enforcer"
     },
     "close_by": {
+        "idWidth": 640,
+        "idHeight": 480,
         "name": "Close By",
         "description": "BASIC: 3 points\tYou can now hip-fire with your Shotguns while sprinting.\nACE: 6 points\tYour rate of fire is increased by 35% while firing from the hip with single shot Shotguns. Sotguns with magazines have their magazine sizes increased by 15 shells",
         "vr_description": "Addition in VR:\tBASIC: After dashing the player kills have a 100% chance to fear enemies within 8 meters of the player for 1 up to a maximum of 3 seconds depending on the amount of stamina consumed by the jump.",
@@ -222,6 +257,8 @@
         "tree": "enforcer"
     },
     "overkill": {
+        "idWidth": 240,
+        "idHeight": 160,
         "name": "Overkill",
         "description": "BASIC: 4 points\tWhen you kill an enemy with a Shotgun or the OVE9000 portable saw, you receive 75% damage increase for 20 seconds.\nACE: 8 points\tThe damage bonus now applies to all weapons. Skill must still be activated using a Shotgun or the OVE9000 portable saw. Your weapon swap speed is increased by 80%.\nNote: Does not apply to melee damage, throwables, grenade launchers or rocket launchers.",
         "basic": 4,
@@ -231,6 +268,8 @@
         "tree": "enforcer"
     },
     "resilience": {
+        "idWidth": 160,
+        "idHeight": 960,
         "name": "Resilience",
         "description": "BASIC: 1 point\tIncreases your armor recovery rate by 15%.\nACE: 3 points\tReduces the visual effect duration of Flashbangs by 75%.",
         "basic": 1,
@@ -240,6 +279,8 @@
         "tree": "enforcer"
     },
     "die_hard": {
+        "idWidth": 640,
+        "idHeight": 720,
         "name": "Die Hard",
         "description": "BASIC: 2 points\tYou take 50% less damage while interacting with objects.\nACE: 4 points\tIncreases the armor of all Ballistic vests by 20.",
         "basic": 2,
@@ -260,6 +301,8 @@
         }
     },
     "transporter": {
+        "idWidth": 640,
+        "idHeight": 640,
         "name": "Transporter",
         "description": "BASIC: 2 points\tYou can throw bags 50% further.\nACE: 4 points\tFor each 10 armor points the bag movement penalty is reduced by 1%.",
         "basic": 2,
@@ -269,6 +312,8 @@
         "tree": "enforcer"
     },
     "shock_and_awe": {
+        "idWidth": 640,
+        "idHeight": 800,
         "name": "Shock and Awe",
         "description": "BASIC: 3 points\tIncreases the armor recovery rate for you and your crew by 25%.\nACE: 6 points\tEnables your weapons to have a chance to knock back Shield enemies when attacking them. Ranged weapons' knockback chance is increased the higher the total damage of the weapon is. Melee weapons' knockback chance is 100%.",
         "basic": 3,
@@ -278,6 +323,8 @@
         "tree": "enforcer"
     },
     "bullseye": {
+        "idWidth": 480,
+        "idHeight": 880,
         "name": "Bullseye",
         "description": "BASIC: 3 points\tYou regenerate 5 armor for each succesful headshot. This can not occur more than once every 2 seconds.\nACE: 6 points\tYou regenerate an additional 20 armor for each succesful headshot.",
         "basic": 3,
@@ -287,6 +334,8 @@
         "tree": "enforcer"
     },
     "iron_man": {
+        "idWidth": 240,
+        "idHeight": 80,
         "name": "Iron Man",
         "description": "BASIC: 4 points\tYour total armor value is increased by 30%.\nACE: 8 points\tUnlocks the ability to wear the Improved Combined Tactical Vest.",
         "basic": 4,
@@ -309,6 +358,8 @@
         }
     },
     "scavenger": {
+        "idWidth": 640,
+        "idHeight": 880,
         "name": "Scavenger",
         "description": "BASIC: 1 point\tYour ammo pick up range is increased by 50%.\nACE: 3 points\tEvery 6th enemy you kill will drop an extra ammo box.",
         "basic": 1,
@@ -318,6 +369,8 @@
         "tree": "enforcer"
     },
     "bulletstorm": {
+        "idWidth": 320,
+        "idHeight": 400,
         "name": "Bulletstorm",
         "description": "BASIC: 2 points\tAmmo bags placed by you grant players the ability to shoot without depleting their ammunition for up to 5 seconds after interacting with it. The more ammo players replenish, the longer the duration of the effect.\nACE: 4 points\tIncreases the base duration of the effect by up to 15 seconds.",
         "basic": 2,
@@ -327,6 +380,8 @@
         "tree": "enforcer"
     },
     "portable_saw": {
+        "idWidth": 0,
+        "idHeight": 80,
         "name": "Portable Saw",
         "description": "BASIC: 2 points\tUnlocks the OVE9000 portable saw for you to use as a secondary weapon.\nACE: 4 points\tYou gain 1 extra saw blade for the OVE9000 portable saw. You replace your saw blades with carbon blades, increasing your saw efficiency by 40%.",
         "basic": 2,
@@ -336,6 +391,8 @@
         "tree": "enforcer"
     },
     "extra_lead": {
+        "idWidth": 560,
+        "idHeight": 80,
         "name": "Extra Lead",
         "description": "BASIC: 3 points\tYou can now place 2 ammo bags instead of just one.\nACE: 6 points\tEach ammo bag now contains 50% more ammunition.",
         "basic": 3,
@@ -345,6 +402,8 @@
         "tree": "enforcer"
     },
     "saw_massacre": {
+        "idWidth": 0,
+        "idHeight": 160,
         "name": "Saw Massacre",
         "description": "BASIC: 3 points\tReducing the wear down of the blades on enemies by 50%.\nACE: 6 points\tYou can now saw through shield enemies with your OVE9000 portable saw. When killing an enemy with the saw, you have a 50% chance to cause nearby enemies in a 10m radius to panic. Panic will make enemies go into short bursts of uncontrollable fear.",
         "basic": 3,
@@ -354,6 +413,8 @@
         "tree": "enforcer"
     },
     "fully_loaded": {
+        "idWidth": 240,
+        "idHeight": 0,
         "name": "Fully Loaded",
         "description": "BASIC: 4 points\tYour total ammo capacity is increased by 25%.\nACE: 8 points\tIncreases the amount of ammo you gain from ammo boxes by 75%. You also gain a 5% base chance to get a throwable from an ammo box. The base chance is increased by 1% for each ammo box you pick up that does not contain a throwable. When a throwable has been found, the chance is reset to it's base value\nNote: Does not stack with the perk deck skill \"Walk-in Closet\".",
         "basic": 4,
@@ -363,6 +424,8 @@
         "tree": "enforcer"
     },
     "third_law": {
+        "idWidth": 720,
+        "idHeight": 0,
         "name": "Third Law",
         "description": "BASIC: 1 point\tThe cost of deploying a sentry gun is reduced by 5%.\nACE: 3 points\tYour sentry guns gain a protective shield.",
         "basic": 1,
@@ -372,6 +435,8 @@
         "tree": "technician"
     },
     "sentry_targeting_package": {
+        "idWidth": 720,
+        "idHeight": 80,
         "name": "Sentry Targeting Package",
         "description": "BASIC: 2 points\tYour sentry guns gain a 100% increase in accuracy.\nACE: 4 points\tYour sentry guns rotation speed is increased by 150%. Your sentry guns also have 50% more ammunition.",
         "basic": 2,
@@ -381,6 +446,8 @@
         "tree": "technician"
     },
     "eco_sentry": {
+        "idWidth": 720,
+        "idHeight": 160,
         "name": "Eco Sentry",
         "description": "BASIC: 2 points\tThe cost of deploying a sentry gun is reduced by 5%.\nACE: 4 points\tYour sentry guns gain 150% increased health.",
         "basic": 2,
@@ -390,6 +457,8 @@
         "tree": "technician"
     },
     "engineering": {
+        "idWidth": 720,
+        "idHeight": 240,
         "name": "Engineering",
         "description": "BASIC: 3 points\tYou can now select a less noisy version of the sentry guns, making them much less likely to be targeted by enemies.\nACE: 6 points\tYou can now toggle AP rounds on your sentry guns, lowering the rate of fire by 75%, but increasing damage by 250% and allowing it to pierce through enemies and shields.",
         "basic": 3,
@@ -402,6 +471,8 @@
         ]
     },
     "jack_of_all_trades": {
+        "idWidth": 720,
+        "idHeight": 320,
         "name": "Jack of All Trades",
         "description": "BASIC: 3 points\tYou deploy and interact with all deployable 100% faster.\nACE: 6 points\tYou can now equip a secondary deployable to bring with you. If your deployable is equipped as a secondary deployable, you can only bring half of what you should bring if it was equipped as a primary deployable.",
         "basic": 3,
@@ -414,6 +485,8 @@
         ]
     },
     "tower_defense": {
+        "idWidth": 720,
+        "idHeight": 400,
         "name": "Tower Defense",
         "description": "BASIC: 4 points\tYou can now carry 1 extra sentry gun.\nACE: 8 points\tYou can now carry an additional 2 extra sentry guns.",
         "basic": 4,
@@ -423,6 +496,8 @@
         "tree": "technician"
     },
     "hardware_expert": {
+        "idWidth": 720,
+        "idHeight": 480,
         "name": "Hardware Expert",
         "description": "BASIC: 1 point\tYou fix drills and saws 25% faster. Decreases trip mine deploy time by 20%. Drills and saws are also silent. Civilians and guards must see the drill or saw in order to become alerted.\nACE: 3 points\tGives your drills and saws a 10% chance to automatically restart after breaking\nNote: Skill does not affect the OVE9000 saw.",
         "basic": 1,
@@ -432,6 +507,8 @@
         "tree": "technician"
     },
     "combat_engineering": {
+        "idWidth": 80,
+        "idHeight": 400,
         "name": "Combat Engineering",
         "description": "BASIC: 2 points\tThe radius of your trip mine explosion is increased by 30%.\nACE: 4 points\tYour trip mine damage is increased by 50%.",
         "basic": 2,
@@ -441,6 +518,8 @@
         "tree": "technician"
     },
     "drill_sawgeant": {
+        "idWidth": 240,
+        "idHeight": 480,
         "name": "Drill Sawgeant",
         "description": "BASIC: 2 points\tYour drill and saw timer is decreased by 15%.\nACE: 4 points\tYour drill and saw timer is decreased by an additional 15%.\nNote: Skill does not affect the OVE9000 saw",
         "basic": 2,
@@ -450,6 +529,8 @@
         "tree": "technician"
     },
     "more_firepower": {
+        "idWidth": 720,
+        "idHeight": 560,
         "name": "More Firepower",
         "description": "BASIC: 3 points\tYou gain 1 more shaped charge and 4 more trip mines.\nACE: 6 points\tYou gain more shaped charges and 7 more trip mines.",
         "basic": 3,
@@ -459,6 +540,8 @@
         "tree": "technician"
     },
     "kickstarter": {
+        "idWidth": 720,
+        "idHeight": 640,
         "name": "Kickstarter",
         "description": "BASIC: 3 points\tYour drills and saws gain an additional 20% chance to automatically restart after breaking.\nACE: 6 points\tEnables the ability to reset a broken drill or saw with a melee attack. The ability has a 50% chance to fix the drill or saw. The ability can only be used once per time the drill or saw is broken.\nNote: Skill does not affect the OVE9000 saw.",
         "basic": 3,
@@ -468,6 +551,8 @@
         "tree": "technician"
     },
     "fire_trap": {
+        "idWidth": 720,
+        "idHeight": 720,
         "name": "Fire Trap",
         "description": "BASIC: 4 points\tYour trip mines now spread fire around the area of detonation for 10 seconds in a 4 meter diameter.\nACE: 8 points\tIncreases the fire effect duration by 10 seconds and increases the fire effect radius by 50%.",
         "basic": 4,
@@ -477,6 +562,8 @@
         "tree": "technician"
     },
     "steady_grip": {
+        "idWidth": 720,
+        "idHeight": 880,
         "name": "Steady Grip",
         "description": "BASIC: 1 point\tYou gain 8 weapon accuracy.\nACE: 3 points\tYou gain 16 weapon stability.",
         "basic": 1,
@@ -486,6 +573,8 @@
         "tree": "technician"
     },
     "heavy_impact": {
+        "idWidth": 800,
+        "idHeight": 80,
         "name": "Heavy Impact",
         "description": "BASIC: 2 points\tYour shots have a 5% chance to stagger all enemies except Bulldozers and Captain Winters.\nACE: 4 points\tIncreases your stagger chance to 20%.",
         "basic": 2,
@@ -495,6 +584,8 @@
         "tree": "technician"
     },
     "fire_control": {
+        "idWidth": 720,
+        "idHeight": 800,
         "name": "Fire Control",
         "description": "BASIC: 2 points\tYou gain 12 weapon accuracy while firing from the hip.\nACE: 4 points\tYour accuracy penalty is decreased by 20% when shooting while moving.",
         "vr_description": "Addition in VR:\tACE: The decreased accuracy penalty lasts from 1 up to a maximum of 5 seconds after dashing.",
@@ -505,6 +596,8 @@
         "tree": "technician"
     },
     "lock_n_load": {
+        "idWidth": 800,
+        "idHeight": 0,
         "name": "Lock N' Load",
         "description": "BASIC: 3 points\tYou can how hip-fire with your weapons while sprinting.\nACE: 6 points\tKilling 2 enemies with SMGs, LMGs, Assault Rifles or Special Weapons set on automatic fire mode will increase your next reload speed by up to 100%. This bonus is reduced by 1% for each bullet above 20 in the total magazine size, down to a maximum of 40% reload speed increase.",
         "vr_description": "Addition in VR:\tBASIC: Every 40 points of stamina consumed by dashin will refill 5% of their ammo pool to automatic weapons.",
@@ -515,6 +608,8 @@
         "tree": "technician"
     },
     "surefire": {
+        "idWidth": 800,
+        "idHeight": 160,
         "name": "Surefire",
         "description": "BASIC: 3 points\t Your SMGs, LMGs and Assault Rifles gain 15 more bullets in their magazines. This does not affect the \"Lock n' Load\" Ace skill.\nAce: 6 points\tYour ranged weapons can now pierce through enemy body armor.\nNote: Does not apply to throwable weapons.",
         "basic": 3,
@@ -524,6 +619,8 @@
         "tree": "technician"
     },
     "body_expertise": {
+        "idWidth": 800,
+        "idHeight": 240,
         "name": "Body Expertise",
         "description": "BASIC: 4 points\t30% from the bonus headshot damage is permanently applied to hitting enemies on the body. This skill is only activated by SMGs, LMGs, Assault Rifles or Special Weapons fired in automatic fire mode.\nACE: 8 points\t90% from the bonus headshot damage is permanently applied to hitting enemies on the body. This skill is only activated by SMGs, LMGs, Assault Rifles or Special Weapons fired in automatic fire mode.",
         "basic": 4,
@@ -533,6 +630,8 @@
         "tree": "technician"
     },
     "chameleon": {
+        "idWidth": 400,
+        "idHeight": 240,
         "name": "Chamaleon",
         "description": "BASIC: 1 point\tIncreases the time before you start getting detected by 25% while in casing mode. You can also mark enemies while in casing mode.\nACE: 3 points\tYou can pick up items while in casing mode. You can also gain 30% more value to items and cash that you pick up.",
         "basic": 1,
@@ -542,6 +641,8 @@
         "tree": "ghost"
     },
     "cleaner": {
+        "idWidth": 560,
+        "idHeight": 160,
         "name": "Cleaner",
         "description": "BASIC: 2 points\tYou gain 1 additional body bag in your inventory. Also increases the body bag inventory space to 3.\nACE: 4 points\tYou gain the ability to place 2 body bags cases.",
         "basic": 2,
@@ -551,6 +652,8 @@
         "tree": "ghost"
     },
     "sixth_sense": {
+        "idWidth": 480,
+        "idHeight": 800,
         "name": "Sixth Sense",
         "description": "BASIC: 2 points\tYou gain the ability to automatically mark enemies within a 10 meter radius around you after standing still for 3.5 seconds while in stealth.\nACE: 4 points\tYou gain access to all insider assets. Cleaning costs after killing a civilian is reduced by 75%.",
         "basic": 2,
@@ -560,6 +663,8 @@
         "tree": "ghost"
     },
     "nimble": {
+        "idWidth": 800,
+        "idHeight": 320,
         "name": "Nimble",
         "description": "BASIC: 3 points\tYou gain the ability to disable 1 camera from detecting you and your crew. Effect lasts for 25 seconds.\nACE: 6 points\tYou lockpick 100% faster. You also gain the ability to lockpick safes.",
         "basic": 3,
@@ -569,6 +674,8 @@
         "tree": "ghost"
     },
     "ecm_overdrive": {
+        "idWidth": 480,
+        "idHeight": 240,
         "name": "ECM Overdrive",
         "description": "BASIC: 3 points\tYour ECM jammer and feedback duration is increased by 25%.\nACE: 6 points\tYour ECM jammer can now also be used to open certain electronic doors.",
         "basic": 3,
@@ -578,6 +685,8 @@
         "tree": "ghost"
     },
     "ecm_specialist": {
+        "idWidth": 240,
+        "idHeight": 320,
         "name": "ECM Specialist",
         "description": "BASIC: 4 points\tYou can now place 2 ECM jammers instead of just one.\nACE: 8 points\tThe ECM jammer duration is increased by an additional 25% and the ECM feedback duration lasts 25% longer. Pagers are delayed by the ECM jammers.",
         "basic": 4,
@@ -587,6 +696,8 @@
         "tree": "ghost"
     },
     "duck_and_cover": {
+        "idWidth": 800,
+        "idHeight": 400,
         "name": "Duck and Cover",
         "description": "BASIC: 1 point\tYour stamina starts regenerating 25% earlier and 25% faster. You also sprint 25% faster.\nACE: 3 points\tYou have a 10% increased chance to dodge while sprinting you gain 15% chance to dodge while ziplining.",
         "vr_description": "Addition in VR\tACE: The increased dodge chance lasts from 1 up to a maximum of 5 seconds after dashing.",
@@ -597,6 +708,8 @@
         "tree": "ghost"
     },
     "parkour": {
+        "idWidth": 800,
+        "idHeight": 480,
         "name": "Parkour",
         "description": "BASIC: 2 points\tYou gain 10% additional movement speed and 20% increased speed while climbing ladders.\nACE: 4 points\tYou gain the ability to sprint in any direction.\nRun and reload — you can reload your weapons while sprinting",
         "vr_description": "Addition in VR:\tACE: After dashing you will get 20% up to a maximum of 50% reload speed increase.",
@@ -607,6 +720,8 @@
         "tree": "ghost"
     },
     "inner_pockets": {
+        "idWidth": 800,
+        "idHeight": 560,
         "name": "Inner Pockets",
         "description": "BASIC: 2 points\tIncreases the concealment of melee weapons by 2.\nACE: 4 points\tIncreases the concealment of all ballistic vests by 4.",
         "basic": 2,
@@ -616,6 +731,8 @@
         "tree": "ghost"
     },
     "dire_need": {
+        "idWidth": 800,
+        "idHeight": 640,
         "name": "Dire Need",
         "description": "BASIC: 3 points\tWhen your armor breaks, the first shot on every enemy will cause that enemy to stagger. This effect ends when your armor recovers.\nACE: 6 points\tThe effect persists for 6 after your armor has recovered.",
         "basic": 3,
@@ -625,6 +742,8 @@
         "tree": "ghost"
     },
     "shockproof": {
+        "idWidth": 240,
+        "idHeight": 400,
         "name": "Shockproof",
         "description": "BASIC: 3 points\tWhen tased, the shock effect has a 30% chance to backfire on the Taser, knocking them back.\nACE: 6 points\tWhen tased, you are able to free yourself from the taser by interacting with it within 2 seconds of getting tased.",
         "basic": 3,
@@ -634,6 +753,8 @@
         "tree": "ghost"
     },
     "sneaky_bastard": {
+        "idWidth": 80,
+        "idHeight": 960,
         "name": "Sneaky Bastard",
         "description": "BASIC: 4 points\tYou gain a 1% chance for every 3 points of detection rate under 35 up to 10%.\nACE: 8 points\tYou gain a 1% dodge chance for every 1 point of detection rate under 35 up to 10%.",
         "basic": 4,
@@ -643,6 +764,8 @@
         "tree": "ghost"
     },
     "second_wind": {
+        "idWidth": 800,
+        "idHeight": 720,
         "name": "Second Wind",
         "description": "BASIC: 1 point\tWhen your armor breaks your movement speed is increased by 30% for 5 seconds.\nACE: 3 points\tThis effect also applies to your crew when triggered.",
         "basic": 1,
@@ -652,6 +775,8 @@
         "tree": "ghost"
     },
     "optical_illusions": {
+        "idWidth": 800,
+        "idHeight": 800,
         "name": "Optical Illusions",
         "description": "BASIC: 2 points\tYou are 35% less likely to be targeted by enemies.\nACE: 4 points\tYou gain 1 concealment for each silenced weapon you equip and reduces the concealment penalty of silencers by 2.",
         "basic": 2,
@@ -661,6 +786,8 @@
         "tree": "ghost"
     },
     "the_professional": {
+        "idWidth": 320,
+        "idHeight": 320,
         "name": "The Professional",
         "description": "BASIC: 2 points\tYou gain 8 weapon stability and 100% snap to zoom speed increase with silenced weapons.\nACE: 4 points\tYou gain 12 weapon accuracy with silenced weapons.",
         "vr_description": "Addition in VR:\tBASIC: Every kill while aiming down sight will regenerate 2% stamina.",
@@ -671,6 +798,8 @@
         "tree": "ghost"
     },
     "low_blow": {
+        "idWidth": 0,
+        "idHeight": 960,
         "name": "Low Blow",
         "description": "BASIC: 3 points\tYou gain a 3% critical hit for every 3 points of detection rate under 35 up to 30%.\nACE: 6 points\tYou gain 3% critical hit chance for every 1 point of detection rate under 35 up to 30%.\nNote: Does not apply to grenade launchers.",
         "basic": 3,
@@ -680,6 +809,8 @@
         "tree": "ghost"
     },
     "high_value_target": {
+        "idWidth": 640,
+        "idHeight": 160,
         "name": "High Value Target",
         "description": "BASIC: 3 points\tEnemies you mark take 15% more damage.\nACE: 6 points\tEnemies you mark take an additional 50% damage when further away than 10 meters. Increase the duration of marked enemies by 100% and you can now mark specials by aiming down at them with any weapon.",
         "basic": 3,
@@ -689,6 +820,8 @@
         "tree": "ghost"
     },
     "unseen_strike": {
+        "idWidth": 800,
+        "idHeight": 880,
         "name": "Unseen Strike",
         "description": "BASIC: 4 points\tIf you do not lose any armor or health for 4 seconds, you gain 35% critical hit chance for 6 seconds.\nACE: 8 points\tThe critical hit chance duration is increased to 18 seconds.\nTaking any damage will cancel the effect.",
         "basic": 4,
@@ -698,6 +831,8 @@
         "tree": "ghost"
     },
     "equilibrium": {
+        "idWidth": 240,
+        "idHeight": 720,
         "name": "Equilibrium",
         "description": "BASIC: 1 point\tDecreases the time it takes to draw end holster pistols by 33%.\nACE: 3 points\tYou gain 8 weapon accuracy with all pistols.",
         "basic": 1,
@@ -707,6 +842,8 @@
         "tree": "fugitive"
     },
     "gun_nut": {
+        "idWidth": 880,
+        "idHeight": 0,
         "name": "Gun Nut",
         "description": "BASIC: 2 points\tYour pistoll magazine sizes are increased by 5 bullets.\nACE: 4 points\tYou gain a 50% increased rate of fire with pistols.",
         "basic": 2,
@@ -716,6 +853,8 @@
         "tree": "fugitive"
     },
     "akimbo": {
+        "idWidth": 240,
+        "idHeight": 800,
         "name": "Akimbo",
         "description": "BASIC: 2 points\tYour Akimbo weapons' stability penalty is reduced by 8.\nACE: 4 points\tYour Akimbo weapons' stability penalty is reduced by an additional 8 and they also have 50% increased ammo capacity.",
         "basic": 2,
@@ -725,6 +864,8 @@
         "tree": "fugitive"
     },
     "one_handed_talent": {
+        "idWidth": 560,
+        "idHeight": 880,
         "name": "One Handed Talent",
         "description": "BASIC: 3 points\tThe base damage of all pistols is increased by 5.\nACE: 6 points\tThe base damage of all pistols is increased by an additional 10 damage.",
         "basic": 3,
@@ -734,6 +875,8 @@
         "tree": "fugitive"
     },
     "desperado": {
+        "idWidth": 880,
+        "idHeight": 80,
         "name": "Desperado",
         "description": "BASIC: 3 points\tEach successful pistol hit gives you a 10% accuracy bonus for 10% and you can stack it 4 times.\nACE: 6 points\tYou reload 50% faster.",
         "basic": 3,
@@ -743,6 +886,8 @@
         "tree": "fugitive"
     },
     "trigger_happy": {
+        "idWidth": 880,
+        "idHeight": 160,
         "name": "Trigger Happy",
         "description": "BASIC: 4 points\tFor every hit with a pistol you gain a 120% damage boost that lasts for 2 seconds.\tStacks up to 1 time.\nACE: 8 points\tIncreases the damage boost duration to 4 seconds.",
         "basic": 4,
@@ -752,6 +897,8 @@
         "tree": "fugitive"
     },
     "nine_lives": {
+        "idWidth": 400,
+        "idHeight": 160,
         "name": "Nine Lives",
         "description": "BASIC: 1 point\tYou gain a 50% increase to your bleedout health.\nACE: 3 points\tYou gain the ability to get downed 1 more time before going into custody.",
         "basic": 1,
@@ -761,6 +908,8 @@
         "tree": "fugitive"
     },
     "running_from_death": {
+        "idWidth": 880,
+        "idHeight": 240,
         "name": "Running from Death",
         "description": "BASIC: 2 points\tYou reload and swap weapons 100% faster for 10% seconds after being revived.\nACE: 4 points\tYou move 30% faster for 10 seconds after being revived.",
         "basic": 2,
@@ -770,6 +919,8 @@
         "tree": "fugitive"
     },
     "up_you_go": {
+        "idWidth": 880,
+        "idHeight": 320,
         "name": "Up You Go",
         "description": "BASIC: 2 points\tYou take 30% less damage for 10 seconds after being revived.\nACE: 4 points\tYou receive 40% more health when revived.",
         "basic": 2,
@@ -779,6 +930,8 @@
         "tree": "fugitive"
     },
     "swan_song": {
+        "idWidth": 400,
+        "idHeight": 960,
         "name": "Swan Song",
         "description": "BASIC: 3 points\tInstead of getting downed instantly, you gain the ability to keep on fighting for 3 seconds with a 60% movement penalty before going down.\nNote: Does not trigger on fall or fire damage.\nACE: 6 points\tIncreases the duration of Swan Song by 3 seconds. Ammunition won't be depleted while the effect is active.",
         "basic": 3,
@@ -788,6 +941,8 @@
         "tree": "fugitive"
     },
     "feign_death": {
+        "idWidth": 880,
+        "idHeight": 400,
         "name": "Feign Death",
         "description": "BASIC: 3 points\tWhen you get downed, you have a 15% chance to instantly get revived\nACE: 6 points\tThe chance to get instantly revived is increased by an additional 30%.",
         "basic": 3,
@@ -797,6 +952,8 @@
         "tree": "fugitive"
     },
     "messiah": {
+        "idWidth": 160,
+        "idHeight": 720,
         "name": "Messiah",
         "description": "BASIC: 4 points\tWhile in bleedout, you can revive yourself if you kill an enemy. You only have 1 charge.\nACE: 8 points\tYour messiah charge is replenished whenever you use a doctor bag.",
         "basic": 4,
@@ -806,6 +963,8 @@
         "tree": "fugitive"
     },
     "martial_arts": {
+        "idWidth": 880,
+        "idHeight": 560,
         "name": "Martial Arts",
         "description": "BASIC: 1 point\tYou take 50% less damage from all melee attacks. Because of training.\nACE: 3 points\tYou are 50% more likely to knock down enemies with a melee strike.",
         "basic": 1,
@@ -815,6 +974,8 @@
         "tree": "fugitive"
     },
     "bloodthirst": {
+        "idWidth": 880,
+        "idHeight": 480,
         "name": "Bloodthirst",
         "description": "BASIC: 2 points\tEvery kill you get will increase your next melee attack damage by 100%, up to a maximum of 1600%. This effect gets reset when you kill an enemy with a melee attack.\nACE: 4 points\tWhenever you kill an enemy with a melee attack, you will gain a 50% increase in reload speed for 10 seconds.",
         "basic": 2,
@@ -824,6 +985,8 @@
         "tree": "fugitive"
     },
     "pumping_iron": {
+        "idWidth": 80,
+        "idHeight": 240,
         "name": "Pumping Iron",
         "description": "BASIC: 2 points\tYour melee attacks against non-special enemies do 100% more damage.\nACE: 4 points\tYour melee attacks against special enemies do 100% more damage",
         "basic": 2,
@@ -833,6 +996,8 @@
         "tree": "fugitive"
     },
     "counterstrike": {
+        "idWidth": 320,
+        "idHeight": 960,
         "name": "Counterstrike",
         "description": "BASIC: 3 points\tWhen charging your melee weapons you will counterattack enemies that try to strike you, knocking them down. The knockdown does not deal any damage\nACE: 6 points\tYou gain the ability to counterattack cloakers and their kicks",
         "basic": 3,
@@ -842,6 +1007,8 @@
         "tree": "fugitive"
     },
     "berserker": {
+        "idWidth": 160,
+        "idHeight": 160,
         "name": "Berserker",
         "description": "BASIC: 3 points\tThe lower your health, the more damage you do. When your health is below 50%, you will do up to 250% more melee and saw damage.\nACE 6 points\tThe lower your health, the more damage you do. When your health is below 50%, you will do up to 100% more damage with ranged weapons as well.\nNote: Does not apply to throwables, grenade launchers or rocket launchers.\nEntering berserker state negates third-party regeneration effects.",
         "basic": 3,
@@ -851,6 +1018,8 @@
         "tree": "fugitive"
     },
     "frenzy": {
+        "idWidth": 880,
+        "idHeight": 640,
         "name": "Frenzy",
         "description": "BASIC: 4 points\tYou only get 30% of your maximum health and cannot heal above it but you take 10% less damage and healing received is reduced by 75%.\nACE: 8 points\tDamage taken is now reduced by 25% and healing received is reduced by 0%",
         "basic": 4,

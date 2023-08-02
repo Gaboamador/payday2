@@ -6,6 +6,7 @@ import Payday2Randomizer from './componentes/randomizer';
 import BuildSelector from './componentes/selector';
 import ProfileConstructor from './componentes/constructor';
 import Builder from './componentes/builder';
+import BuildSelectorNew from './componentes/selectorNew';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route path="/selector" element={<BuildSelector/>}></Route>
       <Route path="/constructor" element={<ProfileConstructor/>}></Route>
       <Route path="/builder" element={<Builder/>}></Route>
+      <Route path="/selectorNew" element={<BuildSelectorNew/>}></Route>
     </Routes>
 </Router>
 

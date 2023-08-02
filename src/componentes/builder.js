@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { BiExport, BiImport } from "react-icons/bi";
 import skillsData from '../database/skills.json';
 import primaryWeapons from '../database/primary.json';
 import secondaryWeapons from '../database/secondary.json';
@@ -9,8 +10,6 @@ import equipments from '../database/equipments.json';
 import melees from '../database/melees.json';
 import {Button, Row, Col, Container, ListGroup, Table, Form} from 'react-bootstrap';
 import aceImage from '../imagenes/ace.png';
-import lockSkill from '../imagenes/lock_skill.png';
-import basicImage from '../imagenes/background.png'
 import iconSkills from '../imagenes/icons.png'
 
 const Builder = () => {
@@ -48,8 +47,11 @@ const Builder = () => {
   }, [selectedSkills]);
 
   const handleResetSkills = () => {
+    const confirmed = window.confirm(`Are you sure you want to reset all profiles? This will clear all skills and categories.`);
+  if (confirmed) {
     setSelectedSkills(Array.from({ length: 15 }, () => ({})));
     localStorage.removeItem('selectedSkills');
+  }
   };
 
  const handleResetProfile = () => {
@@ -332,7 +334,7 @@ const toggleButtonContainerVisibility = () => {
     };
   
     return (
-      <div>
+      <>
         <input
           id="input-file"
           onChange={(e) => {
@@ -343,13 +345,15 @@ const toggleButtonContainerVisibility = () => {
           type="file"
           accept=".json"
         />
-        <button
+        <Button
           onClick={handleImport}
-          className={`btn btn-outline-${uploadedFileName ? 'success' : 'primary'}`}
-        >
-          {uploadedFileName ? uploadedFileName : 'Load profiles'}
-        </button>
-      </div>
+          className="mainButtons"
+          // <Button onClick={handleResetSkills} variant="danger" className="mainButtons">Reset All Profiles</Button>
+          // className={`btn btn-outline-${uploadedFileName ? 'success' : 'primary'}`}
+        ><BiImport size={20} style={{ marginRight: '8px' }} />
+          {uploadedFileName ? uploadedFileName : 'Import profiles'}
+        </Button>
+      </>
     );
   }
   const handleFileChange = (event) => {
@@ -374,12 +378,6 @@ const toggleButtonContainerVisibility = () => {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
-// Constants for sprite image and skill icon dimensions
-const ICON_WIDTH = 50; // Width of each individual skill icon in pixels
-const ICON_HEIGHT = 50; // Height of each individual skill icon in pixels
-const TOTAL_WIDTH = 1040; // Total width of the sprite image in pixels
-const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
-
         return (
 <div className="container">
           
@@ -391,26 +389,20 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
             </div>
           </div>
 
-<div className="buttonContainer">
-  {/* Button to toggle the visibility of the container */}
-  <Button onClick={toggleButtonContainerVisibility}>Toggle Buttons</Button>
-  {/* The container will only be visible when buttonContainerVisible is true */}
+<Form.Group>
+  <Button variant="success" onClick={toggleButtonContainerVisibility}>Toggle Buttons</Button>
   {buttonContainerVisible && (
-    <div className="container">
-      <div className="buttons">
-      <Button onClick={exportSelectedSkills}>Export Profiles</Button>
-      <UploadButton handleFileChange={handleFileChange}/>
-      </div>
-      <div className="buttons">
-      <Button onClick={handleResetSkills}>Reset All Profiles</Button>
-      <Button onClick={handleResetProfile}>Reset Profile {currentProfile}</Button>
-      </div>
-    </div>
+    <Form className="buttonContainer">
+      <Button onClick={exportSelectedSkills} className="mainButtons"><BiExport size={20} style={{ marginRight: '8px' }}/>Export Profiles</Button>
+      <Button onClick={handleResetSkills} variant="danger" className="mainButtons">Reset All Profiles</Button>
+      <UploadButton handleFileChange={handleFileChange} className="mainButtons"/>
+      <Button onClick={handleResetProfile} className="mainButtons">Reset Profile {currentProfile}</Button>
+    </Form>
   )}
-</div>
+</Form.Group>
 
           <div className="container">
-          <Form.Group>
+          <Form.Group className="selectProfile">
         <Form.Control as="select" value={currentProfile} onChange={(e) => setCurrentProfile(Number(e.target.value))}>
           {Array.from({ length: 15 }, (_, index) => index + 1).map((profileNumber) => (
             <option key={profileNumber} value={profileNumber}>
@@ -422,8 +414,9 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
         </div>
 
 {/* PRIMARY WEAPON START*/}
-<div className="tree">
-        <h4 onClick={() => toggleCategoryVisibility('primaryWeapon')} className="categoryName">Primary Weapon</h4>
+<Form>
+        <Form.Label onClick={() => toggleCategoryVisibility('primaryWeapon')} className="categoryName">
+        PRIMARY WEAPON</Form.Label>
         {categoryVisibility['primaryWeapon'] && (
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.primaryWeapon?.subcategory || ''}
@@ -431,7 +424,7 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
             const subcategoryName = e.target.value;
             handleSelectPrimaryWeapon(currentProfile - 1, subcategoryName, '');
           }}
-          className="tree"
+          className="primarySecondayWeapon"
         >
           <option value="">Select Subcategory</option>
           {primaryWeapons.subcategories.map((subcategory) => (
@@ -441,7 +434,6 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
           ))}
         </Form.Control>
         )}
-
         {selectedSkills[currentProfile - 1]?.primaryWeapon?.subcategory && categoryVisibility['primaryWeapon'] && (
           <Form.Control as="select"
             value={selectedSkills[currentProfile - 1]?.primaryWeapon?.weapon || ''}
@@ -449,6 +441,7 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
               const weaponName = e.target.value;
               handleSelectPrimaryWeapon(currentProfile - 1, selectedSkills[currentProfile - 1]?.primaryWeapon?.subcategory, weaponName);
             }}
+            className="tree"
           >
             <option value="">Select Weapon</option>
             {primaryWeapons.subcategories
@@ -460,12 +453,12 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
               ))}
           </Form.Control>
         )}
-      </div>
+      </Form>
       {/* PRIMARY WEAPON END*/}
 
 {/* SECONDARY WEAPON START*/}
-<div className="tree">
-<h4 onClick={() => toggleCategoryVisibility('secondaryWeapon')} className="categoryName">Secondary Weapon</h4>
+<Form>
+<Form.Label onClick={() => toggleCategoryVisibility('secondaryWeapon')} className="categoryName">SECONDARY WEAPON</Form.Label>
         {categoryVisibility['secondaryWeapon'] && (
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.secondaryWeapon?.subcategory || ''}
@@ -473,7 +466,7 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
             const subcategoryName = e.target.value;
             handleSelectSecondaryWeapon(currentProfile - 1, subcategoryName, '');
           }}
-          className="tree"
+          className="primarySecondayWeapon"
         >
           <option value="">Select Subcategory</option>
           {secondaryWeapons.subcategories.map((subcategory) => (
@@ -491,6 +484,7 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
               const weaponName = e.target.value;
               handleSelectSecondaryWeapon(currentProfile - 1, selectedSkills[currentProfile - 1]?.secondaryWeapon?.subcategory, weaponName);
             }}
+            className="tree"
           >
             <option value="">Select Weapon</option>
             {secondaryWeapons.subcategories
@@ -502,12 +496,12 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
               ))}
           </Form.Control>
         )}
-      </div>
+      </Form>
 {/* SECONDARY WEAPON END */}
 
 {/* PERK DECK START */}
-<div className="tree">
-<h4 onClick={() => toggleCategoryVisibility('perkDeck')} className="categoryName">Perk Deck</h4>
+<Form>
+<Form.Label onClick={() => toggleCategoryVisibility('perkDeck')} className="categoryName">PERK DECK</Form.Label>
         {categoryVisibility['perkDeck'] && (
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.perkDeck || ''}
@@ -525,12 +519,12 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
           ))}
         </Form.Control>
         )}
-      </div>
+      </Form>
 {/* PERK DECK END */}
 
 {/* ARMOR START */}
-<div className="tree">
-<h4 onClick={() => toggleCategoryVisibility('armor')} className="categoryName">Armor</h4>
+<Form>
+<Form.Label onClick={() => toggleCategoryVisibility('armor')} className="categoryName">ARMOR</Form.Label>
         {categoryVisibility['armor'] && (
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.armor || ''}
@@ -548,12 +542,12 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
           ))}
         </Form.Control>
         )}
-      </div>
+      </Form>
 {/* ARMOR END */}
 
 {/* THROWABLES START */}
-<div className="tree">
-<h4 onClick={() => toggleCategoryVisibility('throwable')} className="categoryName">Throwable</h4>
+<Form>
+<Form.Label onClick={() => toggleCategoryVisibility('throwable')} className="categoryName">THROWABLE</Form.Label>
         {categoryVisibility['throwable'] && (
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.throwable || ''}
@@ -571,12 +565,12 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
           ))}
         </Form.Control>
         )}
-      </div>
+      </Form>
 {/* THROWABLES END */}
 
-{/* EQUIMPENTS START */}
-<div className="tree">
-<h4 onClick={() => toggleCategoryVisibility('equipment')} className="categoryName">Equipment</h4>
+{/* EQUIPMENTS START */}
+<Form>
+<Form.Label onClick={() => toggleCategoryVisibility('equipment')} className="categoryName">EQUIPMENT</Form.Label>
         {categoryVisibility['equipment'] && (
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.equipment || ''}
@@ -594,12 +588,12 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
           ))}
         </Form.Control>
         )}
-      </div>
-{/* EQUIMPENTS END */}
+      </Form>
+{/* EQUIPMENTS END */}
 
 {/* MELEES START */}
-<div className="tree">
-<h4 onClick={() => toggleCategoryVisibility('melee')} className="categoryName">Melee</h4>
+<Form>
+<Form.Label onClick={() => toggleCategoryVisibility('melee')} className="categoryName">MELEE</Form.Label>
         {categoryVisibility['melee'] && (
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.melee || ''}
@@ -617,17 +611,17 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
           ))}
         </Form.Control>
         )}
-      </div>
+      </Form>
 {/* MELEES END */}
 
 {/* SKILLS START */}
-<div className="tree">
-          <h4 onClick={() => toggleCategoryVisibility('skill')} className="categoryName">Skills</h4>
+<Form>
+          <Form.Label onClick={() => toggleCategoryVisibility('skill')} className="categoryName">SKILLS</Form.Label>
           {categoryVisibility['skill'] && (
             <>
           {Object.entries(sortedOrganizedSkills).map(([treeName, subtrees]) => (
             <div key={treeName} className="tree">
-              <h2 className="treeName" onClick={() => toggleCategoryVisibility(treeName)}>{treeName.toUpperCase()} ({treeSubtotals[treeName]})</h2>
+              <Form.Label onClick={() => toggleCategoryVisibility(treeName)} className="skillTreeName">{treeName.toUpperCase()} ({treeSubtotals[treeName]})</Form.Label>
               {categoryVisibility[treeName] && (
             <React.Fragment>
               {Object.entries(subtrees).map(([subtreeName, skills]) => {
@@ -642,77 +636,61 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
                         <Row key={tier}>
                           {tierSkills.map((skill) => (
                             <Col key={skill.name} className="skillCol">
-
-                               <Button
-                onClick={() => handleSkillSelect(skill.name)}
-                className={
-                                  'skillButton ' +
-                                  (selectedSkills[currentProfile - 1][skill.name] === 'basic'
-                                    ? 'basicButton'
-                                    : selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                                    ? 'aceButton'
-                                    : 'unselectedButton')
-                                }  
-                                title={skill.description}
-                style={{
-                  backgroundImage: selectedSkills[currentProfile - 1][skill.name] === 'basic'
-                    ? `url(${iconSkills})`
-                    : selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                    ? `url(${iconSkills})`
-                    : `url(${lockSkill})`,
-                  backgroundPosition:
-                  selectedSkills[currentProfile - 1][skill.name] === 'basic' || selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                  ? `-${skill.idWidth}px -${skill.idHeight}px`
-                  // ? `-720px -400px`
-                  : 'center',
-                  backgroundSize:
-                  selectedSkills[currentProfile - 1][skill.name] === 'basic' || selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                  // ? `${TOTAL_WIDTH}px ${TOTAL_HEIGHT}px`
-                  ? `960px 1040px`
-                  : '80px',
-                  backgroundRepeat: 'no-repeat',
-                  overflow: 'visible',
-                }}
-              >
-        {selectedSkills[currentProfile - 1][skill.name] === 'basic' ? ' ' : ' '}
-  {selectedSkills[currentProfile - 1][skill.name] === 'ace' && (
-    <img
-      src={aceImage}
-      alt=""
-      style={{ width: '80px', height: '80px', position: 'absolute', transform: 'translate(-55%, -35%)'}}
-    />
-  )}
-              </Button>
-                              {/* <Button
-                                onClick={() => handleSkillSelect(skill.name)}
-                                className={
-                                  'skillButton ' +
-                                  (selectedSkills[currentProfile - 1][skill.name] === 'basic'
-                                    ? 'basicButton'
-                                    : selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                                    ? 'aceButton'
-                                    : 'unselectedButton')
-                                }  
-                                title={skill.description}
-                                style={{
-                                  backgroundImage:
-                                    selectedSkills[currentProfile - 1][skill.name] === 'basic'
-                                      ? `url(${basicImage})`
-                                      : selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                                      ? `url(${aceImage})`
-                                      : `url(${lockSkill})`,
-                                  backgroundSize: '50px',
-                                  backgroundRepeat: 'no-repeat',
-                                  backgroundPosition: 'center',
-                                  overflow: 'visible',
-                                }}
-                              >
-                                {selectedSkills[currentProfile - 1][skill.name] === 'basic'
-                                  ? ' '
-                                  : selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                                  ? ' '
-                                  : ' '}
-                              </Button> */}
+                        <Button
+                        onClick={() => handleSkillSelect(skill.name)}
+                        className={
+                        'skillButton ' +
+                        (selectedSkills[currentProfile - 1][skill.name] === 'basic'
+                        ? 'basicButton'
+                        : selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                        ? 'aceButton'
+                        : 'unselectedButton')
+                        }  
+                        title={skill.description}
+                        style={{
+                        backgroundImage: selectedSkills[currentProfile - 1][skill.name] === 'basic'
+                        ? 'none'
+                        : selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                        ? {aceImage}
+                        : 'none',
+                        backgroundPosition: 'center',
+                        backgroundSize: '80px',
+                        backgroundRepeat: 'no-repeat',
+                        overflow: 'visible',
+                        }}
+                        >
+                        {(selectedSkills[currentProfile - 1][skill.name] === 'basic' || selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                        ?
+                        <img
+                        src={iconSkills}
+                        alt={skill.name}
+                        style={{
+                        width: '80px',
+                        height: '80px',
+                        objectFit: 'none',
+                        objectPosition: `-${skill.idWidth}px -${skill.idHeight}px`,
+                        display: 'block',
+                        marginTop: '0px',
+                        marginLeft: '0px',
+                        }}
+                        />
+                        :
+                        <img
+                        src={iconSkills}
+                        alt={skill.name}
+                        style={{
+                        width: '80px',
+                        height: '80px',
+                        objectFit: 'none',
+                        objectPosition: `-${skill.idWidth}px -${skill.idHeight}px`,
+                        display: 'block',
+                        marginTop: '0px',
+                        marginLeft: '0px',
+                        opacity: '40%',
+                        }}
+                        />
+                        )}
+                        </Button>
                               <div>
                                 <span
                                   style={{
@@ -747,7 +725,7 @@ const TOTAL_HEIGHT = 960; // Total height of the sprite image in pixels
           ))}
           </>
           )}
-  </div>
+  </Form>
 {/* SKILLS END */}
 
           <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>

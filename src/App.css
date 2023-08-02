@@ -82,40 +82,41 @@
 
 
 @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@900&family=Figtree:wght@300&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Sans+SC&amp;display=swap'); */
 
 @font-face {
   font-family: 'RiftBold';
-  src: url("fuentes/Rift-Bold.otf") format("truetype");
+  src: url("./fuentes/Rift-Bold.otf") format("truetype");
   font-weight: 500;
   font-style: normal;
  }
  @font-face {
   font-family: 'RiftDemi';
-  src: url("fuentes/Rift-Demi.otf") format("truetype");
+  src: url("./fuentes/Rift-Demi.otf") format("truetype");
   font-weight: 500;
   font-style: normal;
  }
  @font-face {
   font-family: 'RiftLight';
-  src: url("fuentes/Rift-Light.otf") format("truetype");
+  src: url("./fuentes/Rift-Light.otf") format("truetype");
   font-weight: 500;
   font-style: normal;
  }
  @font-face {
   font-family: 'RiftMedium';
-  src: url("fuentes/Rift-Medium.otf") format("truetype");
+  src: url("./fuentes/Rift-Medium.otf") format("truetype");
   font-weight: 500;
   font-style: normal;
  }
  @font-face {
   font-family: 'RiftRegular';
-  src: url("fuentes/Rift-Regular.otf") format("truetype");
+  src: url("./fuentes/Rift-Regular.otf") format("truetype");
   font-weight: 500;
   font-style: normal;
  }
  @font-face {
   font-family: 'DINEngschrift';
-  src: url("fuentes/DINEngschrift.ttf") format("truetype");
+  src: url('./fuentes/DINEngschrift.ttf') format("truetype");
   font-weight: 500;
   font-style: normal;
  }
@@ -791,6 +792,25 @@ width:100vh !important;
 
 /* INICIO BUILD SELECTOR */
 
+.buttonContainer {
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 5px;
+  /* align-items: center !important;
+  vertical-align: middle !important; */
+  padding: 5px !important;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-around !important;
+  
+}
+
+.mainButtons {
+margin: 5px !important;
+display: flex !important;
+align-items: center !important;
+}
+
 .category-buttons {
   margin-top: 20px;
   display: flex;
@@ -883,6 +903,29 @@ z-index: 1;
 .tree {
   margin: 5px 0px;
   padding: 5px;
+  /* border: solid #316385 2px; */
+  border-radius: 10px;
+  font-weight: bold !important;
+  /* background-color: black; */
+}
+
+.tree .form-control {
+  margin: 5px 0px;
+  padding: 5px;
+  /* border: solid #316385 2px; */
+  border-radius: 10px;
+  font-weight: bold !important;
+  /* background-color: red; */
+  
+}
+
+.selectProfile .form-control {
+  background-color: rgba(78, 160, 215, 0.5) !important;
+}
+
+.primarySecondayWeapon {
+  margin: 5px 0px;
+  padding: 5px;
   border: solid #316385 2px;
   border-radius: 15px;
 }
@@ -890,18 +933,20 @@ z-index: 1;
 .subtree {
   margin: 5px 0px;
   padding: 5px;
-  /* border: solid #316385 1px; */
+  border-top: solid #316385 1px;
+  border-bottom: solid #316385 1px;
   border-radius: 15px;
   background-image: url('./imagenes/bg.png') !important;
 }
 
 .categoryName {
-  color: #131313;
+  color: whitesmoke;
   font-weight: bold;
   margin: 0;
   text-align: center;
   padding: 5px;
-  background-color: rgba(3, 6, 32, 0.26);
+  /* background-color: rgba(3, 6, 32, 0.26); */
+  background-image: url('./imagenes/bg.png') !important;
   border-radius: 10px;
 }
 
@@ -911,15 +956,24 @@ z-index: 1;
     margin: 0;
     text-align: center;
     padding: 5px;
-    background-color: #A6CFEB;
+    /* width:fit-content; */
+    margin: 0 auto;
+    /* background-color: #459bd5; */
+    background-color: white;
     border-radius: 10px;
 }
 
+.skillTreeName {
+margin: 0 auto !important;
+color: whitesmoke !important;
+}
+
 .subtreeName {
-  font-family: 'DINEngschrift', sans-serif;
+  font-family: "DINEngschrift", "Noto Sans", sans-serif;
   font-weight: bold;
-  color: #4EA0D7;
-  border-top: solid #4EA0D7 1px;
+  color: #285a82;
+  border-top: solid #afb3b6 2px;
+  padding-top: 5px;
   margin: 0 auto !important;
 }
 
@@ -947,27 +1001,30 @@ z-index: 1;
   padding: 5px !important;
 }
 
-.skillButton {
+/* .skillButton {
   width: 100px !important;
-}
+} */
 
 .basicButton {
-  height: 80px !important;
-  width: 80px !important;
+  /* height: 80px !important;
+  width: 80px !important; */
   border: none !important;
   background-color: rgba(255,255,255,0) !important;
 }
 
 .aceButton {
-  height: 80px !important;
-  width: 80px !important;
+  /* height: 80px !important;
+  width: 80px !important; */
   background-color: rgba(255,255,255,0) !important;
+  background-image: url('./imagenes/ace.png') !important;
+  background-size: 100% !important;
   border: none !important;
+
 }
 
 .unselectedButton {
-  height: 80px !important;
-  width: 80px !important;
+  /* height: 80px !important;
+  width: 80px !important; */
   background-color: rgba(255,255,255,0) !important;
   border: none !important;
 }
