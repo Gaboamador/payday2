@@ -58,10 +58,10 @@ function Home() {
   
   const icons = [
     { icon: GiPerspectiveDiceSixFacesRandom, label: 'Randomizer', to: '/randomizer' },
-    { icon: BiSelectMultiple, label: 'Selector', to: '/selector' },
-    { icon: MdBuildCircle, label: 'Constructor', to: '/constructor' },
+    // { icon: BiSelectMultiple, label: 'Selector', to: '/selector' },
+    // { icon: MdBuildCircle, label: 'Constructor', to: '/constructor' },
     { icon: MdBuildCircle, label: 'Builder', to: '/builder' },
-    { icon: MdBuildCircle, label: 'Selector New', to: '/selectorNew' },
+    { icon: BiSelectMultiple, label: 'Selector', to: '/selectorNew' },
     // { icon: MdBuildCircle, label: 'PD2 Builder', to: 'https://pd2builder.netlify.app/' },
   ];
   
@@ -74,7 +74,6 @@ return (
     <Link to={item.to} key={index} className='icon'>
       <div className="icon-wrapper">
         <div className="icon">
-          {/* <item.icon className="iconDiceRotate"/> */}
           <item.icon/>
         </div>
       </div>

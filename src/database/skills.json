@@ -86,7 +86,8 @@
         "ace": 4,
         "tier": 2,
         "subtree": "controller",
-        "tree": "mastermind"
+        "tree": "mastermind",
+        "selector": "active_mechanic"
     },
     "joker": {
         "idWidth": 480,
@@ -97,7 +98,8 @@
         "ace": 4,
         "tier": 2,
         "subtree": "controller",
-        "tree": "mastermind"
+        "tree": "mastermind",
+        "selector": "active_mechanic"
     },
     "stockholm_syndrome": {
         "idWidth": 240,
@@ -130,7 +132,8 @@
         "ace": 8,
         "tier": 4,
         "subtree": "controller",
-        "tree": "mastermind"
+        "tree": "mastermind",
+        "selector": "active_mechanic"
     },
     "stable_shot": {
         "idWidth": 0,
@@ -309,7 +312,8 @@
         "ace": 4,
         "tier": 2,
         "subtree": "tank",
-        "tree": "enforcer"
+        "tree": "enforcer",
+        "selector": "support"
     },
     "shock_and_awe": {
         "idWidth": 640,
@@ -377,7 +381,8 @@
         "ace": 4,
         "tier": 2,
         "subtree": "ammo_specialist",
-        "tree": "enforcer"
+        "tree": "enforcer",
+        "selector": "support"
     },
     "portable_saw": {
         "idWidth": 0,
@@ -526,7 +531,8 @@
         "ace": 4,
         "tier": 2,
         "subtree": "breacher",
-        "tree": "technician"
+        "tree": "technician",
+        "selector": "support"
     },
     "more_firepower": {
         "idWidth": 720,
@@ -817,7 +823,8 @@
         "ace": 6,
         "tier": 3,
         "subtree": "silent_killer",
-        "tree": "ghost"
+        "tree": "ghost",
+        "selector": "active_mechanic"
     },
     "unseen_strike": {
         "idWidth": 800,
@@ -854,7 +861,7 @@
     },
     "akimbo": {
         "idWidth": 240,
-        "idHeight": 800,
+        "idHeight": 880,
         "name": "Akimbo",
         "description": "BASIC: 2 points\tYour Akimbo weapons' stability penalty is reduced by 8.\nACE: 4 points\tYour Akimbo weapons' stability penalty is reduced by an additional 8 and they also have 50% increased ammo capacity.",
         "basic": 2,
@@ -905,7 +912,8 @@
         "ace": 3,
         "tier": 1,
         "subtree": "revenant",
-        "tree": "fugitive"
+        "tree": "fugitive",
+        "selector": "active_mechanic"
     },
     "running_from_death": {
         "idWidth": 880,
@@ -938,7 +946,8 @@
         "ace": 6,
         "tier": 3,
         "subtree": "revenant",
-        "tree": "fugitive"
+        "tree": "fugitive",
+        "selector": "active_mechanic"
     },
     "feign_death": {
         "idWidth": 880,

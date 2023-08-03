@@ -36,6 +36,8 @@ const Builder = () => {
     throwable: null,
     equipment: null,
     melee: null,
+    equipment1: null, // Add this property for secondary equipment
+    equipment2: null, // Add this property for primary equipment
     }));
   };
   const [selectedSkills, setSelectedSkills] = useState(() => {
@@ -134,7 +136,7 @@ const Builder = () => {
    // Function to handle selecting or unselecting a skill for the current profile
    const handleSkillSelect = (skillName) => {
     const skillInfo = organizedSkillsFlat.find((skill) => skill.name === skillName);
-  
+  console.log(organizedSkillsFlat, "organizedSkillsFlat")
     if (skillInfo) {
       setSelectedSkills((prevSelectedSkills) => {
         const newSelectedSkills = prevSelectedSkills.map((profileSkills) => ({ ...profileSkills }));
@@ -253,14 +255,39 @@ const handleSelectThrowable = (profileIndex, selectedThrowable) => {
   });
 };
 
+// const handleSelectEquipment = (profileIndex, selectedEquipment) => {
+//   setSelectedSkills((prevSelectedSkills) => {
+//     const newSelectedSkills = [...prevSelectedSkills];
+//     const selectedProfile = newSelectedSkills[profileIndex];
+//     selectedProfile.equipment = selectedEquipment;
+//     return newSelectedSkills;
+//   });
+// };
+
 const handleSelectEquipment = (profileIndex, selectedEquipment) => {
   setSelectedSkills((prevSelectedSkills) => {
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
-    selectedProfile.equipment = selectedEquipment;
+
+    // Check if the skill "Jack of All Trades" has an "ace" value for this profile
+    const hasJackOfAllTradesAce = selectedProfile["Jack of All Trades"] === "ace";
+
+    if (hasJackOfAllTradesAce) {
+      // If "Jack of All Trades" has an "ace" value, allow selection of both primary and secondary equipment
+      selectedProfile.equipment1 = selectedEquipment.primary;
+      selectedProfile.equipment2 = selectedEquipment.secondary;
+      selectedProfile.equipment = `${selectedProfile.equipment1}, ${selectedProfile.equipment2}`;
+    } else {
+      // If "Jack of All Trades" does not have an "ace" value, only allow selection of a single equipment
+      selectedProfile.equipment1 = selectedEquipment.primary;
+      selectedProfile.equipment2 = null;
+      selectedProfile.equipment = selectedEquipment.primary;
+    }
+
     return newSelectedSkills;
   });
 };
+
 
 const handleSelectMelee = (profileIndex, selectedMelee) => {
   setSelectedSkills((prevSelectedSkills) => {
@@ -351,7 +378,7 @@ const toggleButtonContainerVisibility = () => {
           // <Button onClick={handleResetSkills} variant="danger" className="mainButtons">Reset All Profiles</Button>
           // className={`btn btn-outline-${uploadedFileName ? 'success' : 'primary'}`}
         ><BiImport size={20} style={{ marginRight: '8px' }} />
-          {uploadedFileName ? uploadedFileName : 'Import profiles'}
+          {uploadedFileName ? uploadedFileName : 'Import Profiles'}
         </Button>
       </>
     );
@@ -569,26 +596,53 @@ const toggleButtonContainerVisibility = () => {
 {/* THROWABLES END */}
 
 {/* EQUIPMENTS START */}
+
 <Form>
-<Form.Label onClick={() => toggleCategoryVisibility('equipment')} className="categoryName">EQUIPMENT</Form.Label>
-        {categoryVisibility['equipment'] && (
-        <Form.Control as="select"
-          value={selectedSkills[currentProfile - 1]?.equipment || ''}
-          onChange={(e) => {
-            const selectedEquipment = e.target.value;
-            handleSelectEquipment(currentProfile - 1, selectedEquipment);
-          }}
-          className="tree"
-        >
-          <option value="">Select Equipment</option>
-          {equipments.map((equipment) => (
-            <option key={equipment} value={equipment}>
-              {equipment}
-            </option>
-          ))}
-        </Form.Control>
-        )}
-      </Form>
+  <Form.Label onClick={() => toggleCategoryVisibility('equipment')} className="categoryName">EQUIPMENT</Form.Label>
+  {categoryVisibility['equipment'] && (
+    <Form.Control
+      as="select"
+      value={selectedSkills[currentProfile - 1]?.equipment1 || ''}
+      onChange={(e) => {
+        const selectedPrimaryEquipment = e.target.value;
+        handleSelectEquipment(currentProfile - 1, { primary: selectedPrimaryEquipment });
+      }}
+      className="tree"
+    >
+      <option value="">Select Equipment</option>
+      {equipments.map((equipment) => (
+        <option key={equipment} value={equipment}>
+          {equipment}
+        </option>
+      ))}
+    </Form.Control>
+  )}
+
+  {/* Render secondary equipment select when "Jack of All Trades" has an "ace" value */}
+  {selectedSkills[currentProfile - 1]?.["Jack of All Trades"] === "ace" && categoryVisibility['equipment'] && (
+    <Form.Control
+  as="select"
+  value={selectedSkills[currentProfile - 1]?.equipment2 || ''}
+  onChange={(e) => {
+    const selectedPrimaryEquipment = selectedSkills[currentProfile - 1]?.equipment1 || '';
+    const selectedSecondaryEquipment = e.target.value;
+    handleSelectEquipment(currentProfile - 1, {
+      primary: selectedPrimaryEquipment,
+      secondary: selectedSecondaryEquipment,
+    });
+  }}
+  className="tree"
+>
+  <option value="">Select Secondary Equipment</option>
+  {equipments.map((equipment) => (
+    <option key={equipment} value={equipment}>
+      {equipment}
+    </option>
+  ))}
+</Form.Control>
+  )}
+</Form>
+
 {/* EQUIPMENTS END */}
 
 {/* MELEES START */}

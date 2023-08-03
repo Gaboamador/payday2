@@ -167,7 +167,7 @@ animation: gradient-shiny 2s ease infinite;
         margin: 0;
         padding: 0;
         /* font-family: 'Figtree', sans-serif; */
-        font-family: 'DINEngschrift', sans-serif !important;
+        /* font-family: 'DINEngschrift', sans-serif !important; */
         background-color: #131313;
       }
 
@@ -866,6 +866,7 @@ align-items: center !important;
 .filteredProfiles td {
   border: 1px solid #ddd;
   padding: 8px;
+  max-width: fit-content !important;
 }
 
 .filteredProfiles th {
