@@ -7,7 +7,6 @@ import skillsData from '../database/skills.json'
 
 const BuildSelectorNew = () => {
     
-  // COMIENZO DE MAPPEO DE SKILLS
   // Convert skillsData object to an array of skills
  const skillsArray = Object.values(skillsData);
  // Organize skills by trees and subtrees
@@ -47,10 +46,8 @@ const BuildSelectorNew = () => {
       }, []),
     ];
   }, []);
-// FIN DE MAPPEO DE SKILLS
 
 
-  // RENOMBRA LAS CATEGORIAS CON LOS NOMBRES QUE VAN A APARECER EN LA TABLA
     const categoryNames = {
         perkDeck: "PERK DECK",
         equipment: "DEPLOYABLE",
@@ -114,7 +111,7 @@ const BuildSelectorNew = () => {
             // If the key is primaryWeapon or secondaryWeapon, display the subcategory property
             value = value ? (
                 <div>
-                  <div>{value.subcategory}</div>
+                  <div style={{textDecoration:'underline'}}>{value.subcategory}</div>
                   <div>{value.weapon}</div>
                 </div>
               ): null;
@@ -194,178 +191,23 @@ selectedSkills.forEach((profile, profileIndex) => {
  
 
  const categoryItems = filterCategoryItems();
-console.log(categoryItems, "category items")
-//////////////////////////////////////////////////////////////////////////////////////
-const [loadedData, setLoadedData] = useState(null);
-const storedProfiles = localStorage.getItem("profiles");
-      const profiles = loadedData || (storedProfiles ? JSON.parse(storedProfiles) : {});
-      const [selectedItems, setSelectedItems] = useState({});
-      const [filterMode, setFilterMode] = useState('and');
-      const [filteredProfiles, setFilteredProfiles] = useState([]);
-    
-      const handleCheckboxChange = (category, item) => {
-        setSelectedItems(prevSelectedItems => {
-          const newSelectedItems = { ...prevSelectedItems };
-          if (!newSelectedItems[category]) {
-            newSelectedItems[category] = { [item]: true };
-          } else {
-            newSelectedItems[category] = {
-              ...newSelectedItems[category],
-              [item]: !newSelectedItems[category]?.[item],
-            };
-            if (Object.keys(newSelectedItems[category]).every(key => !newSelectedItems[category][key])) {
-              delete newSelectedItems[category];
-            }
-          }
-          return newSelectedItems;
-        });
-      };
-      
-    
-      const toggleFilterMode = () => {
-        setFilterMode(prevMode => (prevMode === 'and' ? 'or' : 'and'));
-      };
-
-  // Function to generate category checkboxes dynamically
-const renderCategoryCheckboxes = () => {
-  // Create a mapping of each category's items and their corresponding index
-  const allItems = {};
-  categoryItems.forEach((profile) => {
-    profile.items.forEach((item, index) => {
-      if (!allItems[profile.category]) allItems[profile.category] = {};
-      allItems[profile.category][item] = index;
-    });
-  });
-
-  // Create the category checkboxes dynamically
-  return categoryItems.map((profile, profileIndex) => (
-    // Category section
-    <div key={`profile-${profileIndex}`} className="category-section">
-      {/* Category name */}
-      <div className="category-name" onClick={() => toggleCategoryVisibility(profile.category)}>
-        {profile.category}
-      </div>
-
-      {/* Category items */}
-      <div style={{ display: categoryVisibility[profile.category] ? 'block' : 'none' }} className="category-checkbox-container">
-        {profile.items.map((item, itemIndex) => (
-          <label key={`${profile.category}-${itemIndex}`} className="category-label">
-            <input
-              type="checkbox"
-              checked={selectedItems[profile.category]?.[item] || false}
-              onChange={() => handleCheckboxChange(profile.category, item)}
-            />
-            {item}
-          </label>
-        ))}
-      </div>
-    </div>
-  ));
-};
-
-  
-    
-const filterProfiles = () => {
-  const selectedItemsArray = Object.entries(selectedItems)
-    .map(([category, items]) => Object.entries(items).map(([item, checked]) => ({ category, item, checked })))
-    .flat();
-
-  const isAndFilter = filterMode === 'and';
-
-  const filteredProfilesData = categoryItems.map(({ category, items }) => {
-    const shouldDisplay = selectedItemsArray.every(
-      (item) => item.checked === false || (item.category === category && items.includes(item.item))
-    );
-
-    return {
-      category,
-      items: shouldDisplay ? items.slice() : Array(items.length).fill('-'),
-    };
-  });
-
-  setFilteredProfiles(filteredProfilesData);
-};
-
-
-
-
-
-
-  useEffect(() => {
-    filterProfiles();
-  }, [selectedItems, filterMode]);
-
-
-
-
-  
-// TOGGLE VISIBILITY OF A SPECIFIC CATEGORY
-const [categoryVisibility, setCategoryVisibility] = useState(() => {
-  const initialVisibility = {};
-  Object.keys(categoryNames).forEach(category => {
-    initialVisibility[category] = true;
-  });
-  return initialVisibility;
-});
-
-const toggleCategoryVisibility = (category) => {
-  setCategoryVisibility(prevVisibility => ({
-    ...prevVisibility,
-    [category]: !prevVisibility[category],
-  }));
-};
-
-const [anyCategoryVisible, setAnyCategoryVisible] = useState();
-
-const toggleAllCategoriesVisibility = () => {
-  setCategoryVisibility(prevVisibility => {
-    const anyCategoryVisible = Object.values(prevVisibility).includes(true);
-    setAnyCategoryVisible(anyCategoryVisible)
-    const updatedVisibility = {};
-    Object.keys(prevVisibility).forEach(category => {
-      updatedVisibility[category] = !anyCategoryVisible;
-    });
-    return updatedVisibility;
-  }
-  );
-};
-const toggleButtonText = !anyCategoryVisible ? "Hide All Categories" : "Show All Categories";
-
-    
 
 
 return (
       <div>
-  
-  {/* <div className="container">
-      <div className="buttons">
-      
 
-      <Button onClick={toggleAllCategoriesVisibility}>
-        {toggleButtonText}
-      </Button>
-      
-        <Button onClick={toggleFilterMode}>
-          Filter Mode: {filterMode === 'and' ? 'AND' : 'OR'}
-        </Button>
-      </div>
-      </div>
-      {renderCategoryCheckboxes()} */}
-
-
-  {/* PARTE DE CODIGO ORIGINAL DE ACA PARA ABAJO */}
+        <div className="container" style={{padding:'0px 8px'}}>
         <div className="filtered-profiles-table-container">
       <table className="filteredProfiles">
         <thead>
           <tr>
-            <th>Category</th>
+            <th>CATEGORY</th>
             {Array.from({ length: 15 }, (_, index) => (
               <th key={index}>Profile {index + 1}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {/* {categoryItems.map(({ category, items }) => ( */}
           {categoryItems.map(({ category, items }) => (
             <tr key={category}>
               <td>{category}</td>
@@ -377,8 +219,9 @@ return (
         </tbody>
       </table>
     </div>
-    
     </div>
+
+</div>
     );
   };
   export default BuildSelectorNew;

@@ -870,22 +870,22 @@ align-items: center !important;
 }
 
 .filteredProfiles th {
-  background-color: #f2f2f2;
+  background-color: #4ea0d7;
 }
 
 
 .filteredProfiles td:first-child,
 .filteredProfiles th:first-child {
 position: sticky;
-left: 10px;
-background-color: #f2f2f2;
+left: -1px;
+color: white;
+background-image:url('./imagenes/bg.png');
 z-index: 1;
 }
 
 .filteredProfiles tr:first-child {
 position: sticky;
 top: 0;
-background-color: #f2f2f2;
 z-index: 1;
 }
 
