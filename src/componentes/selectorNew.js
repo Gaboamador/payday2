@@ -194,9 +194,9 @@ selectedSkills.forEach((profile, profileIndex) => {
 
 
 return (
-      <div>
+      <div className="backgroundColor">
 
-        <div className="container" style={{padding:'0px 8px'}}>
+        <div className="container" style={{padding:'5px 5px'}}>
         <div className="filtered-profiles-table-container">
       <table className="filteredProfiles">
         <thead>

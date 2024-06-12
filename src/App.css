@@ -45,6 +45,10 @@
   background-position: center;*/
 }
 
+.backgroundColor {
+  background-color: rgba(69, 155, 213, 0.5);
+}
+
 .iconDiceRotate:active {
   animation: DiceBounce 1s linear;
 }
@@ -87,31 +91,31 @@
 @font-face {
   font-family: 'RiftBold';
   src: url("./fuentes/Rift-Bold.otf") format("truetype");
-  font-weight: 500;
+  /* font-weight: 500; */
   font-style: normal;
  }
  @font-face {
   font-family: 'RiftDemi';
   src: url("./fuentes/Rift-Demi.otf") format("truetype");
-  font-weight: 500;
+  /* font-weight: 500; */
   font-style: normal;
  }
  @font-face {
   font-family: 'RiftLight';
   src: url("./fuentes/Rift-Light.otf") format("truetype");
-  font-weight: 500;
+  /* font-weight: 500; */
   font-style: normal;
  }
  @font-face {
   font-family: 'RiftMedium';
   src: url("./fuentes/Rift-Medium.otf") format("truetype");
-  font-weight: 500;
+  /* font-weight: 500; */
   font-style: normal;
  }
  @font-face {
   font-family: 'RiftRegular';
   src: url("./fuentes/Rift-Regular.otf") format("truetype");
-  font-weight: 500;
+  /* font-weight: 500; */
   font-style: normal;
  }
  @font-face {
@@ -174,6 +178,15 @@ animation: gradient-shiny 2s ease infinite;
 .container {
   margin: 0 auto;
   padding: 20px;
+  font-family: "RiftDemi";
+}
+
+.randomize-table {
+  font-family: "RiftBold";
+}
+
+.randomize-table td:nth-child(2) {
+  font-family: "RiftMedium";
 }
 
 @media (max-width: 480px) {
@@ -199,6 +212,7 @@ form {
   box-shadow: 3px 3px 5px rgba(69, 155, 213, 0.75);
   padding: 5px 5px 1px 5px;
 }
+
 
 @media (min-width: 768px) {
   /* Target devices with a screen width of 768px or more (desktops) */
@@ -226,6 +240,7 @@ form {
   border-radius: 5px;
   width: 100%;
   margin: 0 auto;
+  font-size: 1.2rem;
 }
 
 .form-check {
@@ -259,7 +274,10 @@ fieldset legend {
   }
 
 button {
-  font-family: 'Figtree', sans-serif;
+  /* font-family: 'Figtree', sans-serif; */
+  font-family: "RiftDemi" !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
   background-color: #459bd5;
   color: white;
   padding: 5px 10px !important;
@@ -271,6 +289,7 @@ button {
   margin: 0px !important;
   width: fit-content !important;
   border: 1px solid #459bd5;
+  line-height: 1px;
 }
 
 button:hover {
@@ -278,27 +297,40 @@ button:hover {
 }
 
 .randomizeButton {
-border: 2px ridge #459bd5 !important;
-color: white !important;
-background: linear-gradient(45deg, #459bd5 0%, #459bd5 30%, #2a5979 30%, #2a5979 70%, #459bd5 70%, #459bd5 100%);
-background-size: 400% 400%;
-animation: gradient-shiny 6s ease infinite;
-
+  font-family: "RiftBold" !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  /* border: 2px ridge #459bd5 !important; */
+  color: white !important;
+  border-radius: 0px !important;
+  background-color: #007aff;
+  padding: 0px 12px !important;
+  /* width: 80% !important; */
+  width: fit-content !important;
+  margin: 15px 0px !important;
+  /* background: linear-gradient(45deg, #459bd5 0%, #459bd5 30%, #2a5979 30%, #2a5979 70%, #459bd5 70%, #459bd5 100%);
+  background-size: 400% 400%;
+  animation: gradient-shiny 6s ease infinite; */
+/**/
+  grid-column: 1 / 2; /* First column */
+  grid-row: 1 / 3; /* Spans two rows */
+  justify-self: center; /* Align to the left */
 }
-@keyframes gradient-shiny {
+/* @keyframes gradient-shiny {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
-}
+} */
 .randomizeButton:hover {
-  background: linear-gradient(45deg, #2a5979 0%, #2a5979 30%, #459bd5 30%, #459bd5 70%, #2a5979 70%, #2a5979 100%);
+  /* background: linear-gradient(45deg, #2a5979 0%, #2a5979 30%, #459bd5 30%, #459bd5 70%, #2a5979 70%, #2a5979 100%);
 background-size: 400% 400%;
-animation: gradient-shiny 6s ease infinite;
+animation: gradient-shiny 6s ease infinite; */
+background-color: #0092ff !important;
 }
 
 .buttonGoToTop {
   width:fit-content !important;
-  background-color: transparent !important;
+  background-color: white !important;
   border: 1px solid #459bd5 !important;
   margin: 0 auto 10px !important;
   display: block !important;
@@ -337,7 +369,7 @@ animation: gradient-shiny 6s ease infinite;
 .randomBuildTable {
   margin-top: 5px !important;
   border-collapse: collapse;
-  border-radius: 15px;
+  border-radius: 5px !important;
   vertical-align: middle !important;
 }
 
@@ -424,8 +456,20 @@ animation: gradient-shiny 6s ease infinite;
 }
 
 .buttons {
+    /* display: flex;
+    justify-content: space-between;
+    padding: 5px 0px; */
+    display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns */
+  grid-template-rows: repeat(2, auto); /* Two rows */
+  gap: 5px; /* Adjust the gap between grid items as needed */
+
+}
+
+.buttons.expand-uncheck {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding: 5px;
 }
 
 .buttonsSkills {
@@ -441,7 +485,24 @@ animation: gradient-shiny 6s ease infinite;
   border: 2px ridge #459bd5 !important;
   /*border: 1px solid #459bd5 !important;*/
   padding: 5px 10px !important;
+  line-height: 15px !important;
+  font-size: 18px !important;
+  /**/
+  grid-column: 2 / 3; /* Second column */
+  justify-self: end; /* Align to the right */
+
 }
+
+.eyeSlashButton:nth-of-type(2) {
+  grid-row: 2 / 3; /* Second button in the second row */
+}
+
+.eyeSlashButton.reset {
+  color: #d24646 !important;
+  border: 2px ridge #d24646 !important;
+  padding: 5px !important;
+}
+
   
 .form-check {
   padding-top: 5px;
@@ -449,8 +510,8 @@ animation: gradient-shiny 6s ease infinite;
 }
 
 .buttons .expandAllCategoriesButton {
-  color: #459bd5;  
-  background-color: transparent;
+  color: #459bd5;
+  background-color: white;
   border: 1px solid #459bd5;
 }
 
@@ -461,14 +522,14 @@ animation: gradient-shiny 6s ease infinite;
 }
 
 .buttons .expandAllCategoriesButton:hover {
-  color: #459bd5;
-  background-color: transparent;
+  color: white;
+  background-color: #459bd5;
   border: 1px solid #459bd5;
 }
 
 .buttons .checkUncheckAllCategoriesButton {
   color: #459bd5;  
-  background-color: transparent;
+  background-color: white;
   border: 1px solid #459bd5;
 }
 .buttons .checkUncheckAllCategoriesButton:active {
@@ -478,8 +539,8 @@ animation: gradient-shiny 6s ease infinite;
 }
 
 .buttons .checkUncheckAllCategoriesButton:hover {
-  color: #459bd5;
-  background-color: transparent;
+  color: white;
+  background-color: #459bd5;
   border: 1px solid #459bd5;
 }
 
@@ -506,7 +567,8 @@ width:100vh !important;
   padding: 5px;
   border: 1px ridge #459bd5;
   box-shadow: 2px 2px 2px #459bd5;
-  border-radius: 15px;
+  border-radius: 10px;
+
 }
 
 .randomBuildTable {
@@ -531,8 +593,19 @@ width:100vh !important;
   flex-wrap: wrap;
   justify-content: center;
   gap: 50px;
-  height: 100vh !important;
+  position: relative;
   padding: 50px;
+}
+
+.navigation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 45px);
+  background-image: url('https://pd2builder.netlify.app/img/bg.png');
+  z-index: -1;
 }
 
 .icon {
@@ -541,6 +614,7 @@ width:100vh !important;
   align-items: center;
   text-decoration: none;
   color: #459bd5;
+  max-height: fit-content;
 }
 
 @media (min-width: 600px) {
@@ -572,7 +646,7 @@ width:100vh !important;
   color: #459bd5;
   margin-top: 0px;
   text-align: center;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: bolder;
   width: 100px;
   overflow: hidden;
@@ -854,6 +928,7 @@ align-items: center !important;
 
 .filteredProfiles {
   margin: 0 auto;
+  background-color: white;
 }
 
 .filteredProfiles table {
@@ -1072,3 +1147,4 @@ input[type="checkbox"] {
   margin-right: 5px;
 }
 /* FIN ProfileConstructor */
+

@@ -406,6 +406,7 @@ const toggleButtonContainerVisibility = () => {
   }
 
         return (
+
 <div className="container">
           
           <div className="totalSkillPointsDIV">

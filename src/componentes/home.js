@@ -67,7 +67,7 @@ function Home() {
   
 
 return (
-<div className="backgroundImage">
+<div >
 
 <Container className="navigation">
   {icons.map((item, index) => (
