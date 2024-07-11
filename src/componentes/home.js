@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import {Container, Spinner} from 'react-bootstrap';
+import {Container, Spinner, Table} from 'react-bootstrap';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
@@ -67,22 +67,22 @@ function Home() {
   
 
 return (
-<div >
-
-<Container className="navigation">
-  {icons.map((item, index) => (
-    <Link to={item.to} key={index} className='icon'>
-      <div className="icon-wrapper">
-        <div className="icon">
-          <item.icon/>
-        </div>
-      </div>
-      <div className="label">{item.label}</div>
-    </Link>
-  ))}
-</Container>
-
-</div>
+<div className="home-background">
+  <div className="home-container">
+      <Link to="/randomizer" className="home-link">
+        <GiPerspectiveDiceSixFacesRandom className="home-icon" />
+        <span className="home-text">Randomizer</span>
+      </Link>
+      <Link to="/builder" className="home-link">
+        <MdBuildCircle className="home-icon" />
+        <span className="home-text">Builder</span>
+      </Link>
+      <Link to="/selectorNew" className="home-link">
+        <BiSelectMultiple className="home-icon" />
+        <span className="home-text">Selector</span>
+      </Link>
+    </div>
+</div>    
 
   /* <div className="backgroundImage">
 {isAuthenticated ? (

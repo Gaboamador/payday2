@@ -81,50 +81,23 @@ const Header = () => {
     };
     
     return (
+      
 <header id="header" className={`header ${sticky ? "header--sticky" : ""}`}>
-        <Link to="/">
-          <ImHome size={32} className="homeIcon"/>
-        </Link>
-        {/* {isAuthenticated ? (
-          <>
-          <div className="userPicture">
-          <img
-          src={user.picture}
-          alt={user.name}
-          style={{ borderRadius: '50%', width: '32px', height: '32px' }}
-          onClick={handleToggleDropdown}
-          />
-           <Dropdown show={showDropdown} onToggle={handleToggleDropdown}>
-              <Dropdown.Toggle className="visually-hidden" variant="primary" id="dropdown-profile" />
-              <Dropdown.Menu className="dropdownMenu">
-              <Link to="/profile" style={{textDecoration:"none"}}>
-                <Dropdown.Item href="#/action-1" className="dropdownItem">Profile</Dropdown.Item>
-                </Link>
-                <Dropdown.Divider />
-                <Dropdown.Item onClick={handleLogout} className="dropdownItem">Log out</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            </div>
-    </> ) : (
-        <div className="userPicture">
-        <div className="login-box2" style={{ maxWidth: "80%", margin: '0 auto' }}>
-            <div className="form2">
-            <Form className="button2" variant="outline-light" type="submit">
-            <AiOutlineLogin
-            className="loginIcon2"
-            onClick={handleToggleDropdown}/>
-            <span className="span2"></span>
-            </Form>
-          </div>
-          </div>
-        <Dropdown show={showDropdown} onToggle={handleToggleDropdown}>
-              <Dropdown.Toggle className="visually-hidden" variant="primary" id="dropdown-profile" />
-              <Dropdown.Menu className="dropdownMenu">
-                <Dropdown.Item onClick={handleLogin} className="dropdownItem">Log in</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>      
-            </div>
-    )} */}
+<div className="d-flex justify-content-between align-items-center w-100 header-padding">
+  <Link to="/">
+    <ImHome size={32} className="homeIcon"/>
+  </Link>
+
+  <div className={`d-flex align-items-center`}>
+    <span>
+      <img src={("https://www.paydaythegame.com/wp-content/themes/pd2tg/img/crimenet/logo-pd2.png")} alt={""} width="90%" height="40px" />
+    </span>
+  </div>
+
+  <div className={`ml-auto `}>
+  </div>
+
+</div>
 </header>
 
     );
