@@ -7,6 +7,7 @@ import BuildSelector from './componentes/selector';
 import ProfileConstructor from './componentes/constructor';
 import Builder from './componentes/builder';
 import BuildSelectorNew from './componentes/selectorNew';
+import BigOil from './componentes/bigoil';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route path="/constructor" element={<ProfileConstructor/>}></Route>
       <Route path="/builder" element={<Builder/>}></Route>
       <Route path="/selectorNew" element={<BuildSelectorNew/>}></Route>
+      <Route path="/bigOil" element={<BigOil/>}></Route>
     </Routes>
 </Router>
 

@@ -407,8 +407,8 @@ const toggleButtonContainerVisibility = () => {
 
         return (
 
-<div className="container">
-          
+<div className="backgroundColor">
+<Container>
           <div className="totalSkillPointsDIV">
             <div className="totalSkillPoints">
               <span>Rem. SP</span>
@@ -782,8 +782,12 @@ const toggleButtonContainerVisibility = () => {
           )}
   </Form>
 {/* SKILLS END */}
+</Container>
 
-          <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>
+  <Container className="buttonGoToTop-container">
+    <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>
+  </Container>
+  
         </div>
       );
   };

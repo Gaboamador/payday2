@@ -45,8 +45,13 @@
   background-position: center;*/
 }
 
+.backgroundImage.bigOil {
+  min-height: calc(100vh - 45px);
+}
+
 .backgroundColor {
   background-color: rgba(69, 155, 213, 0.5);
+  min-height: calc(100vh - 45px);
 }
 
 .iconDiceRotate:active {
@@ -1307,7 +1312,8 @@ input[type="checkbox"] {
   transition: transform 0.3s;
 }
 
-.home-link:hover {
+.home-link:hover,
+.home-link:active {
   transform: scale(1.1);
 }
 
@@ -1507,4 +1513,156 @@ input[type="checkbox"] {
   color: #555;
   text-align: center;
   word-wrap: break-word;
+}
+
+
+/* BIG OIL CALCULATOR */
+.bigOil-container {
+    margin: 0 auto;
+    font-size: 1rem;
+    padding: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+.bigOilHydrogenElement-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bigOilPressure-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.bigOilPressure-container > div,
+.bigOilHydrogenElement-container > div  {
+  padding: 5px;
+  color: rgb(140, 140, 140);
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex; /* Enables flexbox for this element */
+  align-items: center; /* Vertically centers the content */
+  justify-content: center; /* Horizontally centers the content */
+}
+
+.engine-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.engine-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+.bordered {
+  background: linear-gradient(to right, rgb(215, 220, 225) 3px, transparent 3px) 0 0, linear-gradient(to right, rgb(215, 220, 225) 3px, transparent 3px) 0 100%, linear-gradient(to left, rgb(215, 220, 225) 3px, transparent 3px) 100% 0, linear-gradient(to left, rgb(215, 220, 225) 3px, transparent 3px) 100% 100%, linear-gradient(to bottom, rgb(215, 220, 225) 3px, transparent 3px) 0 0, linear-gradient(to bottom, rgb(215, 220, 225) 3px, transparent 3px) 100% 0, linear-gradient(to top, rgb(215, 220, 225) 3px, transparent 3px) 0 100%, linear-gradient(to top, rgb(215, 220, 225) 3px, transparent 3px) 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+}
+
+.engine {
+  padding: 10px;
+  border: 2px solid rgba(204, 204, 204, 0.5);
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.engine-separator {
+  font-family: 'RiftBold';
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: span 1;
+  padding: 10px;
+  color: rgb(240,240,240);
+}
+
+.engine.selectedEngine {
+  /* background-color: #459bd5; */
+  /* color: black; */
+  border: 2px ridge white;
+  font-weight: 700;
+  color: #2a5979;
+  background-color: whitesmoke;
+  border: 2px ridge #459bd5;
+  border-radius: 10px;
+}
+
+.engine.allUnselected {
+  background-color: transparent;
+  color: #212529;
+  border: 2px solid rgba(204, 204, 204, 0.5);
+}
+
+
+.bigOilPressure-container > div {
+  border: 3px solid rgb(0, 85, 5);
+}
+
+.selected.pressure {
+  border: 3px solid rgb(0, 190, 10);
+  background-color: rgb(0, 190, 10, 0.1);
+}
+
+.bigOilHydrogenElement-container > div {
+  border: 3px solid rgb(140, 140, 140);
+}
+
+#nitrogen.selected {
+  border-color: rgb(200, 170, 35);
+  background-color: rgba(200, 170, 35, 0.1);
+}
+
+#deuterium.selected {
+  border-color: rgb(30, 125, 185);
+  background-color: rgba(30, 125, 185, 0.1);
+}
+
+#helium.selected {
+  border-color: rgb(75, 190, 95);
+  background-color: rgba(75, 190, 95, 0.1);
+}
+
+.selected.hydrogen {
+  border: 3px solid rgb(240, 240, 240);
+  background-color: rgba(240, 240, 240, 0.1);
+}
+
+.selected.null {
+  border: 3px solid rgb(240, 240, 240);
+  background-color: rgba(240, 240, 240, 0.1);
+}
+
+#nitrogen {
+  border: 3px solid rgb(105, 80, 0);
+}
+
+#deuterium {
+  border: 3px solid rgb(0, 60, 110);
+}
+
+#helium {
+  border: 3px solid rgb(80, 100, 80);
+}
+
+.selected {
+  color: rgb(240, 240, 240) !important;
+}
+
+#room_stairs {
+  flex-flow: column nowrap;
+  flex-basis: 20%;
+  align-self: stretch;
+  background: repeating-linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4) 5px, transparent 5px, transparent 20px);
 }
