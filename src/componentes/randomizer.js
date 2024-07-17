@@ -523,7 +523,21 @@ const handleRandomizeProfile = () => {
   // const renderProfile = parseProfile(randomizedProfile.profile);
   const renderProfile = randomizedProfile.profile ? parseProfile(randomizedProfile.profile) : randomizedProfile.profile;
 
+  const [selectedItem, setSelectedItem] = useState(null);
 
+  const handleItemClick = (item) => {
+    setSelectedItem((prevSelectedItem) => (prevSelectedItem === item ? null : item));
+  };
+
+  const buildItems = [
+    { key: 'primaryGun', title: 'PRIMARY' },
+    { key: 'secondaryGun', title: 'SECONDARY' },
+    { key: 'perkDeck', title: 'PERK DECK' },
+    { key: 'armor', title: 'ARMOR' },
+    { key: 'throwable', title: 'THROWABLE' },
+    { key: 'equipment', title: 'EQUIPMENT' },
+    { key: 'melee', title: 'MELEE' },
+  ];
 return (
 <div className="backgroundColor">
 {/* <Button onClick={handleReset}>Reset Loaded Profiles</Button> */}
@@ -602,7 +616,7 @@ return (
     )} */}
   </div>
   
-  <div className="randomBuildContainer backgroundImage">
+  <div className={`randomBuildContainer backgroundImage ${showTable && Object.values(randomizedBuild).some(value => value !== "") ? 'inventory' : ''}`}>
   {!isWideScreen && <div className="randomBuildContainer-title">BUILD</div>}
         <div className="buttons">
           <Button className={`${isWideScreen ? 'randomizeButton threeRows' : 'eyeSlashButton'}`} onClick={handleRandomize}>
@@ -665,93 +679,123 @@ return (
       </tbody>
     </Table>)
     :
-    (<div className="grid-container">
+    (
+//     <div className="grid-container">
     
-{randomizedBuild.primaryGun &&
-    <div className="grid-item">
-    <div className="grid-title">PRIMARY</div>
-      <img
-            src={itemsToImage[randomizedBuild.primaryGun]}
-            alt={randomizedBuild.primaryGun}
-            className="grid-image"
-          />
-        <div className="grid-name">{randomizedBuild.primaryGun}</div>
-    </div>
-}
+// {randomizedBuild.primaryGun &&
+//     <div className="grid-item">
+//     <div className="grid-title">PRIMARY</div>
+//       <img
+//             src={itemsToImage[randomizedBuild.primaryGun]}
+//             alt={randomizedBuild.primaryGun}
+//             className="grid-image"
+//           />
+//         <div className="grid-name">{randomizedBuild.primaryGun}</div>
+//     </div>
+// }
     
-{randomizedBuild.secondaryGun &&
-    <div className="grid-item">
-    <div className="grid-title">SECONDARY</div>
-      <img
-            src={itemsToImage[randomizedBuild.secondaryGun]}
-            alt={randomizedBuild.secondaryGun}
-            className="grid-image"
-          />
-          <div className="grid-name">{randomizedBuild.secondaryGun}</div>
-    </div>
-}
+// {randomizedBuild.secondaryGun &&
+//     <div className="grid-item">
+//     <div className="grid-title">SECONDARY</div>
+//       <img
+//             src={itemsToImage[randomizedBuild.secondaryGun]}
+//             alt={randomizedBuild.secondaryGun}
+//             className="grid-image"
+//           />
+//           <div className="grid-name">{randomizedBuild.secondaryGun}</div>
+//     </div>
+// }
 
-{randomizedBuild.perkDeck &&
-    <div className="grid-item">
-    <div className="grid-title">PERK DECK</div>
-      <img
-            src={itemsToImage[randomizedBuild.perkDeck]}
-            alt={randomizedBuild.perkDeck}
-            className="grid-image"
-          />
-          <div className="grid-name">{randomizedBuild.perkDeck}</div>
-    </div>
-}
+// {randomizedBuild.perkDeck &&
+//     <div className="grid-item">
+//     <div className="grid-title">PERK DECK</div>
+//       <img
+//             src={itemsToImage[randomizedBuild.perkDeck]}
+//             alt={randomizedBuild.perkDeck}
+//             className="grid-image grid-image-perkDeck"
+//           />
+//           <div className="grid-name">{randomizedBuild.perkDeck}</div>
+//     </div>
+// }
 
-{randomizedBuild.armor &&
-    <div className="grid-item">
-    <div className="grid-title">ARMOR</div>
-      <img
-            src={itemsToImage[randomizedBuild.armor]}
-            alt={randomizedBuild.armor}
-            className="grid-image"
-          />
-          <div className="grid-name">{randomizedBuild.armor}</div>
-    </div>
-}
+// {randomizedBuild.armor &&
+//     <div className="grid-item">
+//     <div className="grid-title">ARMOR</div>
+//       <img
+//             src={itemsToImage[randomizedBuild.armor]}
+//             alt={randomizedBuild.armor}
+//             className="grid-image grid-image-armor"
+//           />
+//           <div className="grid-name">{randomizedBuild.armor}</div>
+//     </div>
+// }
 
-{randomizedBuild.throwable &&
-    <div className="grid-item">
-    <div className="grid-title">THROWABLE</div>
-      <img
-            src={itemsToImage[randomizedBuild.throwable]}
-            alt={randomizedBuild.throwable}
-            className="grid-image"
-          />
-          <div className="grid-name">{randomizedBuild.throwable}</div>
+// {randomizedBuild.throwable &&
+//     <div className="grid-item">
+//     <div className="grid-title">THROWABLE</div>
+//       <img
+//             src={itemsToImage[randomizedBuild.throwable]}
+//             alt={randomizedBuild.throwable}
+//             className="grid-image"
+//           />
+//           <div className="grid-name">{randomizedBuild.throwable}</div>
+//       </div>
+// }
+
+// {randomizedBuild.equipment &&
+//     <div className="grid-item">
+//     <div className="grid-title">EQUIPMENT</div>
+//       <img
+//             src={itemsToImage[randomizedBuild.equipment]}
+//             alt={randomizedBuild.equipment}
+//             className="grid-image"
+//           />
+//           <div className="grid-name">{randomizedBuild.equipment}</div>
+//     </div>
+// }
+
+// {randomizedBuild.melee &&
+//     <div className="grid-item">
+//     <div className="grid-title">MELEE</div>
+//       <img
+//             src={itemsToImage[randomizedBuild.melee]}
+//             alt={randomizedBuild.melee}
+//             className="grid-image"
+//           />
+//           <div className="grid-name">{randomizedBuild.melee}</div>
+//     </div>
+// }
+
+//   </div>
+<div className="grid-container">
+{buildItems.map(({ key, title }) => {
+  const item = randomizedBuild[key];
+  return (
+    item && (
+      <div
+        key={key}
+        className={`grid-item ${selectedItem === key ? 'selectedItem borderedRandomizer' : ''}`}
+        onClick={() => handleItemClick(key)}
+      >
+        <div className={`grid-title ${selectedItem === key ? 'selectedItem' : ''}`}>
+          {selectedItem === key ? item : title}
+        </div>
+        <img
+          src={itemsToImage[item]}
+          alt={item}
+          // className={`grid-image ${key === 'perkDeck' ? 'grid-image-perkDeck' : ''} ${key === 'armor' ? 'grid-image-armor' : ''}`}
+          className={`grid-image
+            ${selectedItem === key ? 'selected' : ''}
+            ${key === 'perkDeck' ? `perkDeck ${selectedItem === key ? 'perkDeck selected' : ''}` : ''}
+            ${key === 'armor' ? `armor ${selectedItem === key ? 'armor selected' : ''}` : ''}`}
+        />
+        {/* <div className="grid-name"></div> */}
       </div>
-}
-
-{randomizedBuild.equipment &&
-    <div className="grid-item">
-    <div className="grid-title">EQUIPMENT</div>
-      <img
-            src={itemsToImage[randomizedBuild.equipment]}
-            alt={randomizedBuild.equipment}
-            className="grid-image"
-          />
-          <div className="grid-name">{randomizedBuild.equipment}</div>
-    </div>
-}
-
-{randomizedBuild.melee &&
-    <div className="grid-item">
-    <div className="grid-title">MELEE</div>
-      <img
-            src={itemsToImage[randomizedBuild.melee]}
-            alt={randomizedBuild.melee}
-            className="grid-image"
-          />
-          <div className="grid-name">{randomizedBuild.melee}</div>
-    </div>
-}
-
-  </div>)}
+    )
+  );
+})}
+</div>
+)}
   </>
     )}
   </div>
