@@ -14,6 +14,11 @@ import '../App.css';
 import { itemsToImage } from "../database/itemsToImage";
 import Skull from "../imagenes/skull.svg"
 import Skull2 from "../imagenes/skull2.svg"
+import SelectCategories from "./SelectCategories";
+import { IoIosLock, IoIosUnlock } from "react-icons/io";
+
+import { IoLockOpenOutline } from "react-icons/io5";
+import { IoLockClosedSharp } from "react-icons/io5";
 
 
 const options = {
@@ -538,47 +543,58 @@ const handleRandomizeProfile = () => {
     { key: 'equipment', title: 'EQUIPMENT' },
     { key: 'melee', title: 'MELEE' },
   ];
+
+  const getCategoryKey = (key) => {
+    return key.endsWith('s') ? key : `${key}s`;
+  };
+
+
 return (
 <div className="backgroundColor">
-{/* <Button onClick={handleReset}>Reset Loaded Profiles</Button> */}
-{/* {isAuthenticated ? (
-    <> */}
-    <div className="container">
-<Form style={{marginTop: 0, marginBottom: 0}} className="mainForm">
-  <Form.Group>
-    <Form.Label onClick={() => toggleCollapse("selectedCategories")} className="form-title">
-      SELECT CATEGORIES TO RANDOMIZE
-      {/* {selectedCategories.length < 7 ? null : <MdOutlineCheckCircle className="allSelected"/>} */}
-      {!collapsed.selectedCategories ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-      </Form.Label>
-    {!collapsed.selectedCategories && (
-      <>
-        <div className="categories-grid-container">
-        {categories.map((category) => (
-          <div key={category.key} className="categories-grid-item">
-            <Form.Check
-              type="checkbox"
-              label={category.label}
-              checked={selectedCategories.includes(category.key)}
-              onChange={() => handleToggleCategory(category.key)}
-            />
-          </div>
-        ))}
-           <Button
-          className="checkUncheckAllButton"
-          variant="outline-secondary"
-          onClick={handleToggleSelectedCategories}
-        >
-          {selectedCategories.length < 7 ? <ImCheckboxChecked/> : <ImCheckboxUnchecked/>}
-          {selectedCategories.length < 7 ? " Check All" : " Uncheck All"}
-        </Button>
-        </div>
-      </>
-    )}
-  </Form.Group>
-</Form>
-</div>
 
+{/* <div className="container">
+  <Form style={{marginTop: 0, marginBottom: 0}} className="mainForm">
+    <Form.Group>
+      <Form.Label onClick={() => toggleCollapse("selectedCategories")} className="form-title">
+        SELECT CATEGORIES TO RANDOMIZE
+        {!collapsed.selectedCategories ? (<GoChevronUp/>) : (<GoChevronDown/>)}
+        </Form.Label>
+      {!collapsed.selectedCategories && (
+        <>
+          <div className="categories-grid-container">
+          {categories.map((category) => (
+            <div key={category.key} className="categories-grid-item">
+              <Form.Check
+                type="checkbox"
+                label={category.label}
+                checked={selectedCategories.includes(category.key)}
+                onChange={() => handleToggleCategory(category.key)}
+              />
+            </div>
+          ))}
+            <Button
+            className="checkUncheckAllButton"
+            variant="outline-secondary"
+            onClick={handleToggleSelectedCategories}
+          >
+            {selectedCategories.length < 7 ? <ImCheckboxChecked/> : <ImCheckboxUnchecked/>}
+            {selectedCategories.length < 7 ? " Check All" : " Uncheck All"}
+          </Button>
+          </div>
+        </>
+      )}
+    </Form.Group>
+  </Form>
+</div> */}
+
+      <SelectCategories
+        categories={categories}
+        selectedCategories={selectedCategories}
+        collapsed={collapsed}
+        toggleCollapse={toggleCollapse}
+        handleToggleCategory={handleToggleCategory}
+        handleToggleSelectedCategories={handleToggleSelectedCategories}
+      />
 
 <div className="randomBuildContainer backgroundImage"  style={{marginTop: 0}}>
 {!isWideScreen && <div className="randomBuildContainer-title">DIFFICULTY</div>}
@@ -779,6 +795,7 @@ return (
       >
         <div className={`grid-title ${selectedItem === key ? 'selectedItem' : ''}`}>
           {selectedItem === key ? item : title}
+          
         </div>
         <img
           src={itemsToImage[item]}
@@ -789,7 +806,13 @@ return (
             ${key === 'perkDeck' ? `perkDeck ${selectedItem === key ? 'perkDeck selected' : ''}` : ''}
             ${key === 'armor' ? `armor ${selectedItem === key ? 'armor selected' : ''}` : ''}`}
         />
-        {/* <div className="grid-name"></div> */}
+        {/* <div onClick={() => handleToggleCategory(getCategoryKey(key))}>
+          {!selectedCategories.includes(getCategoryKey(key)) ? (
+            <IoLockClosedSharp className="category-lock"/>
+          ) : (
+            <IoLockOpenOutline className="category-lock"/>
+          )}
+          </div> */}
       </div>
     )
   );

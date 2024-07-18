@@ -260,8 +260,21 @@ h1 {
 
 .categories-grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns of equal width */
-  gap: 5px; /* Adjust the gap between grid items if needed */
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+@media(min-width: 400px) and (max-width: 525px) {
+  .categories-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media(max-width: 400px) {
+  .categories-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .categories-grid-item {
@@ -290,8 +303,9 @@ form {
 @media (min-width: 768px) {
   /* Target devices with a screen width of 768px or more (desktops) */
   form {
-    width: 50%;
-  margin: 10px auto;
+    /* width: 50%; */
+    width: 700px;
+    margin: 10px auto;
   }
 }
 
@@ -1775,5 +1789,17 @@ input[type="checkbox"] {
   background: repeating-linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4) 5px, transparent 5px, transparent 20px);
 }
 
+.selectCategories {
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "RiftDemi";
+}
 
-
+.category-lock {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 9999;
+  color: rgb(200,200,200);
+  font-size: 1.25rem;
+}
