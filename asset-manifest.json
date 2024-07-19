@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.c42871d5.css",
-    "main.js": "/payday2/static/js/main.8766873c.js",
+    "main.css": "/payday2/static/css/main.e22b62c5.css",
+    "main.js": "/payday2/static/js/main.18553cc9.js",
     "static/js/787.5769c993.chunk.js": "/payday2/static/js/787.5769c993.chunk.js",
     "static/media/icons.png": "/payday2/static/media/icons.7ad65b2dffcd3fa9a44d.png",
     "static/media/cursed_kill_room.jpg": "/payday2/static/media/cursed_kill_room.8b24eda7b1500b42200a.jpg",
@@ -320,12 +320,12 @@
     "index.html": "/payday2/index.html",
     "static/media/croupiers_rake.webp": "/payday2/static/media/croupiers_rake.0a3b7b834db4e48933ca.webp",
     "static/media/the_pen.webp": "/payday2/static/media/the_pen.24610383a444ced79906.webp",
-    "main.c42871d5.css.map": "/payday2/static/css/main.c42871d5.css.map",
-    "main.8766873c.js.map": "/payday2/static/js/main.8766873c.js.map",
+    "main.e22b62c5.css.map": "/payday2/static/css/main.e22b62c5.css.map",
+    "main.18553cc9.js.map": "/payday2/static/js/main.18553cc9.js.map",
     "787.5769c993.chunk.js.map": "/payday2/static/js/787.5769c993.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c42871d5.css",
-    "static/js/main.8766873c.js"
+    "static/css/main.e22b62c5.css",
+    "static/js/main.18553cc9.js"
   ]
 }
