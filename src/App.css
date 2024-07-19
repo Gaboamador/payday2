@@ -37,6 +37,29 @@
   }
 }
 
+.ir-arriba {
+  display:none;
+  padding: 5px 5px 5px 5px;
+  background: rgba(69, 155, 213, 0.75);
+  font-size: 20px;
+  color:black;
+  /* border: 1px solid black; */
+  box-shadow: 0 0 5px 0 #459bd5;
+  width:40px;
+  text-align: center;
+  cursor:pointer;
+  position: fixed;
+  /* bottom:20px; */
+  bottom:2vh;
+  right:2.5vw;
+  z-index:300;
+}
+.ir-arriba:hover{
+  color: #459bd5;
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 5px 0 #459bd5;
+}
+
 /**/
 .backgroundImage {
   background-image: url('https://pd2builder.netlify.app/img/bg.png');
@@ -306,6 +329,9 @@ form {
     /* width: 50%; */
     width: 700px;
     margin: 10px auto;
+  }
+  .selectCategories {
+    padding: 20px 0 !important;
   }
 }
 
@@ -615,6 +641,23 @@ padding: 0 0 25px 0;
   background-color: transparent !important;
 }
 
+.eyeSlashButton.toggleMode {
+  color: #8bcefa !important;
+  /* border: 2px solid #459bd5 !important;
+  border-top: none !important; */
+  padding: 5px !important;
+  background-image: url('https://pd2builder.netlify.app/img/bg.png') !important;
+  display: flex;
+  margin-top: -5px !important;
+  border-radius: 0 0 5px 5px;
+  margin-bottom: 5px !important;
+  border: 2px ridge transparent !important;
+  border-image: linear-gradient(to bottom, transparent, #459bd5) !important;
+  border-image-slice: 1  !important;
+  font-family: 'DINEngschrift' !important;
+  font-weight: 500 !important;
+}
+
   
 .form-check {
   padding-top: 5px;
@@ -689,7 +732,15 @@ width:100vh !important;
   border: 1px ridge #459bd5;
   box-shadow: 2px 2px 2px #459bd5;
   border-radius: 10px;
+}
 
+.randomBuildContainer.difficulty {
+  margin: 15px 15px auto;
+  margin-top: 0 !important;
+  padding: 5px;
+  border: 1px ridge #459bd5;
+  box-shadow: 2px 2px 2px #459bd5;
+  border-radius: 10px;
 }
 
 .randomBuildContainer-title {
@@ -1557,6 +1608,11 @@ input[type="checkbox"] {
   height: 50px;
 }
 
+.build-title {
+  margin-top: 5px;
+  border-top: 1px solid #459bd5;
+}
+
 .heist-title {
   font-family: 'RiftBold';
   font-size: 1.5rem;
@@ -1791,8 +1847,12 @@ input[type="checkbox"] {
 
 .selectCategories {
   margin: 0 auto;
-  padding: 20px;
+  padding: 15px;
   font-family: "RiftDemi";
+}
+
+.selectedCategories {
+  border-radius: 5px 5px 5px 0 !important;
 }
 
 .category-lock {
@@ -1802,4 +1862,34 @@ input[type="checkbox"] {
   z-index: 9999;
   color: rgb(200,200,200);
   font-size: 1.25rem;
+}
+
+.rolled {
+  /* color: #0d6efd; */
+  background: linear-gradient(to right, transparent, rgba(69, 155, 213, 0.5));
+  border-radius: 10px;
+}
+
+.stickyDiv {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 45px;
+  z-index: 1;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  /* padding: 25px;
+  padding-top: 0; */
+  /* border-radius: 5px;
+  border: none; */
+  /* padding: 0 10px 10px 10px; */
+  border-radius: 0 0 5px 5px;
+  transition: padding 0.3s ease; /* Smooth transition for padding changes */
+
+}
+.stickyDiv.sticky {
+  /* padding-bottom: 10px; */
+  /* background-color: rgba(215, 220, 225, 0.5); */
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #459bd5;
+  padding-bottom: 5px;
+  border-radius: 0;
 }

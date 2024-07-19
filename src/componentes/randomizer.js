@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from "./login";
 import {Button, Row, Col, Container, ListGroup, Table, Form} from 'react-bootstrap';
@@ -26,8 +26,8 @@ const options = {
   secondaryGuns: ["Chimano 88 Pistol (A1)","Signature .40 Pistol (B1)","Gruber Kurz Pistol (C1)","Interceptor 45 Pistol (D1)","White Streak Pistol (A2)","Crosskill Pistol (B2)","Bernetti 9 Pistol (C2)","Bronco .44 Revolver (D2)","Baby Deagle Pistol (A3)","Chimano Custom Pistol (B3)","Broomstick Pistol (C3)","Castigo .44 Revolver (D3)","5/7 AP Pistol (A4)","Contractor Pistol (B4)","Chimano Compact Pistol (C4)","Crosskill Guard Pistol (D4)","LEO Pistol (A5)","STRYK 18c Pistol (B5)","Peacemaker .45 Revolver (C5)","Matever .357 Revolver (D5)","Deagle Pistol (A6)","Swedish K Submachine Gun (A1)","SpecOps Submachine Gun (B1)","Mark 10 Submachine Gun (C1)","CR 805B Submachine Gun (D1)","Jacket's Piece (A2)","Compact-5 Submachine Gun (B2)","Chicago Typewriter Submachine Gun (C2)","Cobra Submachine Gun (D2)","CMP Submachine Gun (A3)","Para Submachine Gun (B3)","Micro Uzi Submachine Gun (C3)","Signature Submachine Gun (D3)","Jackal Submachine Gun (A4)","Heather Submachine Gun (B4)","Krinkov Submachine Gun (C4)","Blaster 9mm Submachine Gun (D4)","Kobus 90 Submachine Gun (A5)","Kross Vertex Submachine Gun (B5)","Tatonka Submachine Gun (C5)","Patchett L2A1 Submachine Gun (D5)","Uzi Submachine Gun (A6)","Pistol Crossbow (A1)","Compact 40mm Grenade Launcher (B1)","HRL-7 Rocket Launcher (C1)","China Puff 40mm Grenade Launcher (D1)","Commando 101 Rocket Launcher (A2)","MA-17 Flamethrower (B2)","Arbiter Grenade Launcher (C2)","OVE9000 Saw (D2)","Locomotive 12G Shotgun (A1)","GSPS 12G Shotgun (B1)","Goliath 12G Shotgun (C1)","Grimm 12G Shotgun (D1)","Street Sweeper Shotgun (A2)","The Judge Shotgun (B2)"],
   perkDecks: ["Crew Chief (1)","Muscle (2)","Armorer (3)","Rogue (4)","Hitman (5)","Crook (6)","Burglar (7)","Infiltrator (8)","Sociopath (9)","Gambler (10)","Grinder (11)","Yakuza (12)","Ex-President (13)","Maniac (14)","Anarchist (15)","Biker (16)","Kingpin (17)","Sicario (18)","Stoic (19)","Hacker (20)"],
   armors: ["Two-piece Suit (A1)","Ballistic Vest (B1)","Lightweight Ballistic Vest (C1)","Heavy Ballistic Vest (A2)","Flak Jacket (B2)","Combined Tactical Vest (C2)","Improved Combined Tactical Vest (A3)"],
-  // throwables: ["Concussion Grenade (A1)","Matryoshka Grenade (B1)","Incendiary Grenade (C1)","Frag Grenade (D1)","HEF Grenade (A2)","Ace of Spades (B2)","Molotov Cocktail (C2)","Dynamite (D2)","Shuriken (A3)","Javelin (B3)","Throwing Knife (C3)","Throwing Axe (D3)"],
-  throwables: ["Concussion Grenade (A1)", "Matryoshka Grenade (B1)", "Incendiary Grenade (C1)", "Frag Grenade (D1)", "HEF Grenade (A2)", "Ace of Spades (B2)", "Molotov Cocktail (C2)", "Dynamite (D2)", "Shuriken (A3)", "Javelin (B3)", "Throwing Knife (C3)", "Throwing Axe (D3)", "Injector", "Pocket ECM", "Smoke Bomb", "Stoic Hip Flask"],
+  throwables: ["Concussion Grenade (A1)","Matryoshka Grenade (B1)","Incendiary Grenade (C1)","Frag Grenade (D1)","HEF Grenade (A2)","Ace of Spades (B2)","Molotov Cocktail (C2)","Dynamite (D2)","Shuriken (A3)","Javelin (B3)","Throwing Knife (C3)","Throwing Axe (D3)"],
+  // throwables: ["Concussion Grenade (A1)", "Matryoshka Grenade (B1)", "Incendiary Grenade (C1)", "Frag Grenade (D1)", "HEF Grenade (A2)", "Ace of Spades (B2)", "Molotov Cocktail (C2)", "Dynamite (D2)", "Shuriken (A3)", "Javelin (B3)", "Throwing Knife (C3)", "Throwing Axe (D3)", "Injector", "Pocket ECM", "Smoke Bomb", "Stoic Hip Flask"],
   equipments: ["Ammo Bag (A1)","Armor Bag (B1)","Body Bag Case (C1)","Doctor Bag (A2)","ECM Jammer (B2)","First Aid Kit (C2)","Sentry Gun (A3)","Suppressed Sentry Gun (B3)","Trip Mines and Shaped Charges (C3)"],
   melees: ["Weapon Butt (1-A1)","50 Blessings Briefcase (1-B1)","URSA Knife (1-C1)","Swagger Stick (1-D1)","Nova's Shank (1-A2)","Fists (1-B2)","350K Brass Knuckles (1-C2)","Ursa Tanto Knife (1-D2)","Pounder (1-A3)","Specialist Knives (1-B3)","The Motherforker (1-C3)","Spatula (1-D3)","K.L.A.S Shovel (1-A4)","Money Bundle (1-B4)","Empty Palm Kata (1-C4)","Bolt Cutters (1-D4)","Shawn's Shears (2-A1)","Utility Knife (2-B1)","Microphone (2-C1)","Selfie-stick (2-D1)","Bayonet Knife (2-A2)","Machete (2-B2)","Chain Whip (2-C2)","The Pen (2-D2)","Ice Pick (2-A3)","Electrical Brass Knuckles (2-B3)","Rezkoye (2-C3)","Telescopic Baton (2-D3)","Jackpot (2-A4)","Baseball Bat (2-B4)","Monkey Wrench (2-C4)","Classic Baton (2-D4)","Hockey Stick (3-A1)","Diving Knife (3-B1)","El Verdugo (3-C1)","Hackaton (3-D1)","Krieger Blade (3-A2)","Buckler Shield (3-B2)","Wing Butterfly Knife (3-C2)","You're Mine (3-D2)","Metal Detector (3-A3)","Croupier's Rake (3-B3)","Compact Hatchet (3-C3)","Lumber Lite L2 (3-D3)","Hotline 8000x (3-A4)","Potato Masher (3-B4)","Scalper Tomahawk (3-C4)","Switchblade (3-D4)","OVERKILL Boxing Gloves (4-A1)","Dragan's Cleaver Knife (4-B1)","Leather Sap (4-C1)","Shinsakuto Katana (4-D1)","Okinawan Style Sai (4-A2)","Pitchfork (4-B2)","Arkansas Toothpick (4-C2)","Microphone Stand (4-D2)","Psycho Knife (4-A3)","X-46 Knife (4-B3)","Talons (4-C3)","Bearded Axe (4-D3)","Hook (4-A4)","Cleaver Knife (4-B4)","Buzzer (4-C4)","Gold Fever (4-D4)","Carpenter's Delight (5-A1)","Clover's Shillelagh (5-B1)","Shepherd's Cane (5-C1)","Scout Knife (5-D1)","Trench Knife (5-A2)","Berger Combat Knife (5-B2)","Survival Tomahawk (5-C2)","Morning Star (5-D2)","Poker (5-A3)","Lucille Baseball Bat (5-B3)","Great Sword (5-C3)","The Spear of Freedom (5-D3)","Rivertown Glen Bottle (5-A4)","Ding Dong Breaching Tool (5-B4)","Tenderizer (5-C4)","Machete Knife (5-D4)","Utility Machete (6-A1)","Kunai Knife (6-B1)","Trautman Knife (6-C1)","Fire Axe (6-D1)"],
   heists: ["Art Gallery (Bain-1)","Bank Heist: Cash (Bain-2)","Bank Heist: Deposit (Bain-3)","Bank Heist: Gold (Bain-4)","Bank Heist: Random (Bain-5)","Car Shop [STEALTH ONLY] (Bain-6)","Cook Off (Bain-7)","Diamond Store (Bain-8)","Jewelry Store (Bain-9)","Shadow Raid [STEALTH ONLY] (Bain-10)","The Alesso Heist (Bain-11)","Transport: Crossroads (Bain-12)","Transport: Downtown (Bain-13)","Transport: Harbor (Bain-14)","Transport: Park (Bain-15)","Transport: Train Heist (Bain-16)","Transport: Underpass (Bain-17)","Counterfeit (Classics-1)","Diamond Heist (Classics-2)","First World Bank (Classics-3)","Green Bridge (Classics-4)","Heat Street (Classics-5)","Panic Room (Classics-6)","Slaughterhouse (Classics-7)","Undercover (Classics-8)","Cursed Kill Room (Events-1)","Lab Rats (Events-2)","Prison Nightmare (Events-3)","Safe House Nightmare (Events-4)","Firestarter (Hector-1)","Rats (Hector-2)","Watchdogs (Hector-3)","Boiling Point (Jimmy-1)","Murky Station [STEALTH ONLY] (Jimmy-2)","Alaskan Deal (Locke-1)","Beneath the Mountain (Locke-2)","Birth of Sky (Locke-3)","Brooklyn Bank (Locke-4)","Scarface Mansion (The Butcher-1)","The Bomb: Dockyard (The Butcher-2)","The Bomb: Forest (The Butcher-3)","Brooklyn 10-10 (The Continental-1)","The Yacht Heist [STEALTH ONLY] (The Continental-2)","Golden Grin Casino (The Dentist-1)","Hotline Miami (The Dentist-2)","Hoxton Breakout (The Dentist-3)","Hoxton Revenge (The Dentist-4)","The Big Bank (The Dentist-5)","The Diamond (The Dentist-6)","Big Oil (The Elephant-1)","Election Day (The Elephant-2)","Framing Frame (The Elephant-3)","The Biker Heist (The Elephant-4)","Aftershock (Vlad-1)","Four Stores (Vlad-2)","Goat Simulator (Vlad-3)","Mallcrasher (Vlad-4)","Meltdown (Vlad-5)","Nightclub (Vlad-6)","Santa's Workshop (Vlad-7)","Stealing Xmas (Vlad-8)","Ukrainian Job (Vlad-9)","White Xmas (Vlad-10)"],
@@ -443,7 +443,6 @@ const handleRandomizeProfile = () => {
     });
   };
   
-  
   function goToTop() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -458,24 +457,54 @@ const handleRandomizeProfile = () => {
     { key: "throwables", label: "Throwables" },
     { key: "equipments", label: "Equipments" },
     { key: "melees", label: "Melees" },
-  ];  
-  const [selectedCategories, setSelectedCategories] = useState([ 
+  ];
+
+  const initialSelectedCategories = [
     "primaryGuns",
     "secondaryGuns",
     "perkDecks",
     "armors",
     "throwables",
     "equipments",
-    "melees"]);
+    "melees"
+  ];
+
+  const [selectedCategories, setSelectedCategories] = useState(initialSelectedCategories);
+  // const handleToggleCategory = (category) => {
+  //   setSelectedCategories((prevSelectedCategories) => {
+  //     if (prevSelectedCategories.includes(category)) {
+  //       return prevSelectedCategories.filter((c) => c !== category);
+  //     } else {
+  //       return [...prevSelectedCategories, category];
+  //     }
+  //   });
+  // };
+
+  const [isCheckboxMode, setIsCheckboxMode] = useState(true);
+
+  const toggleMode = () => {
+    setIsCheckboxMode(!isCheckboxMode);
+    if (isCheckboxMode) {
+      setSelectedCategories([]);
+    } else {
+      setSelectedCategories(initialSelectedCategories);
+    }
+  }
+
   const handleToggleCategory = (category) => {
-    setSelectedCategories((prevSelectedCategories) => {
-      if (prevSelectedCategories.includes(category)) {
-        return prevSelectedCategories.filter((c) => c !== category);
-      } else {
-        return [...prevSelectedCategories, category];
-      }
-    });
+    if (isCheckboxMode) {
+      setSelectedCategories((prevSelectedCategories) => {
+        if (prevSelectedCategories.includes(category)) {
+          return prevSelectedCategories.filter((c) => c !== category);
+        } else {
+          return [...prevSelectedCategories, category];
+        }
+      });
+    } else {
+      setSelectedCategories([category]);
+    }
   };
+
 
   const generateDifficultyImages = (difficulty) => {
     let images = [];
@@ -548,6 +577,29 @@ const handleRandomizeProfile = () => {
     return key.endsWith('s') ? key : `${key}s`;
   };
 
+  /* STICKY BUILD RANDOMIZER */
+  const [isSticky, setIsSticky] = useState(false);
+  const stickyDivRef = useRef(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (stickyDivRef.current) {
+        const rect = stickyDivRef.current.getBoundingClientRect();
+        // Check if the top of the element is less than or equal to the header height
+        setIsSticky(rect.top <= 45);
+      }
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check immediately on mount
+
+    return () => {
+      // Clean up event listener on unmount
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  /**/
+
 
 return (
 <div className="backgroundColor">
@@ -594,9 +646,12 @@ return (
         toggleCollapse={toggleCollapse}
         handleToggleCategory={handleToggleCategory}
         handleToggleSelectedCategories={handleToggleSelectedCategories}
+        isCheckboxMode={isCheckboxMode}
+        toggleMode={toggleMode}
+        randomizedBuild={randomizedBuild}
       />
 
-<div className="randomBuildContainer backgroundImage"  style={{marginTop: 0}}>
+<div className="randomBuildContainer backgroundImage difficulty"  style={{marginTop: 0}}>
 {!isWideScreen && <div className="randomBuildContainer-title">DIFFICULTY</div>}
 <div className="buttons">
           <Button className={`${isWideScreen ? 'randomizeButton' : 'eyeSlashButton'}`} onClick={handleRandomizeDifficulty}>
@@ -633,6 +688,9 @@ return (
   </div>
   
   <div className={`randomBuildContainer backgroundImage ${showTable && Object.values(randomizedBuild).some(value => value !== "") ? 'inventory' : ''}`}>
+  
+{/* <div className="stickyDiv"> */}
+<div ref={stickyDivRef} className={`stickyDiv ${isSticky ? 'sticky' : ''}`}>
   {!isWideScreen && <div className="randomBuildContainer-title">BUILD</div>}
         <div className="buttons">
           <Button className={`${isWideScreen ? 'randomizeButton threeRows' : 'eyeSlashButton'}`} onClick={handleRandomize}>
@@ -644,9 +702,10 @@ return (
           <Button className="eyeSlashButton display" onClick={() => setDisplayType((prevState) => !prevState)}>{displayType ? <CiGrid41/> : <CiBoxList/>}</Button>
           <Button className="eyeSlashButton" onClick={() => setShowTable((prevState) => !prevState)}>{showTable ? <FiEyeOff/> : <FiEye/>}</Button>
         </div>
+</div>
 
     {showTable && Object.values(randomizedBuild).some(value => value !== "") && (
-    <>
+    <div className="build-title">
     {displayType ? (
     <Table className="randomBuildTable randomize-table">
       <tbody>
@@ -819,7 +878,7 @@ return (
 })}
 </div>
 )}
-  </>
+  </div>
     )}
   </div>
 
@@ -973,7 +1032,7 @@ return (
         </div>
       <Form>
         <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("primaryGuns")} className="form-title">
+        <Form.Label onClick={() => toggleCollapse("primaryGuns")} className="form-title stickyDiv">
           PRIMARY GUNS
           {!collapsed.primaryGuns ? (<GoChevronUp/>) : (<GoChevronDown/>)}
           </Form.Label>
@@ -1004,7 +1063,7 @@ return (
 
       <Form>
         <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("secondaryGuns")} className="form-title">
+        <Form.Label onClick={() => toggleCollapse("secondaryGuns")} className="form-title stickyDiv">
           SECONDARY GUNS
           {!collapsed.secondaryGuns ? (<GoChevronUp/>) : (<GoChevronDown/>)}
           </Form.Label>
@@ -1035,7 +1094,7 @@ return (
 
       <Form>
         <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("perkDecks")} className="form-title">
+        <Form.Label onClick={() => toggleCollapse("perkDecks")} className="form-title stickyDiv">
           PERK DECKS
           {!collapsed.perkDecks ? (<GoChevronUp/>) : (<GoChevronDown/>)}
           </Form.Label>
@@ -1066,7 +1125,7 @@ return (
               
       <Form>
         <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("armors")} className="form-title">
+        <Form.Label onClick={() => toggleCollapse("armors")} className="form-title stickyDiv">
           ARMORS
           {!collapsed.armors ? (<GoChevronUp/>) : (<GoChevronDown/>)}
           </Form.Label>
@@ -1097,7 +1156,7 @@ return (
 
       <Form>
         <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("throwables")} className="form-title">
+        <Form.Label onClick={() => toggleCollapse("throwables")} className="form-title stickyDiv">
           THROWABLES
           {!collapsed.throwables ? (<GoChevronUp/>) : (<GoChevronDown/>)}
           </Form.Label>
@@ -1108,13 +1167,13 @@ return (
               {selectedOptions.throwables.length === options.throwables.length ? " Uncheck All" : " Check All"}
             </Button>
             {options.throwables
-              .filter(
-                (option) =>
-                  option !== "Injector" &&
-                  option !== "Pocket ECM" &&
-                  option !== "Smoke Bomb" &&
-                  option !== "Stoic Hip Flask"
-              )
+              // .filter(
+              //   (option) =>
+              //     option !== "Injector" &&
+              //     option !== "Pocket ECM" &&
+              //     option !== "Smoke Bomb" &&
+              //     option !== "Stoic Hip Flask"
+              // )
             .map((option) => (
               <div key={option}>
                 <Form.Check
@@ -1136,7 +1195,7 @@ return (
 
       <Form>
         <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("equipments")} className="form-title">
+        <Form.Label onClick={() => toggleCollapse("equipments")} className="form-title stickyDiv">
           EQUIPMENTS
           {!collapsed.equipments ? (<GoChevronUp/>) : (<GoChevronDown/>)}
           </Form.Label>
@@ -1167,7 +1226,7 @@ return (
 
       <Form>
         <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("melees")} className="form-title">
+        <Form.Label onClick={() => toggleCollapse("melees")} className="form-title stickyDiv">
           MELEES
           {!collapsed.melees ? (<GoChevronUp/>) : (<GoChevronDown/>)}
           </Form.Label>
@@ -1198,7 +1257,7 @@ return (
 
       <Form>
         <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("heists")} className="form-title">
+        <Form.Label onClick={() => toggleCollapse("heists")} className="form-title stickyDiv">
           HEISTS
           {!collapsed.heists ? (<GoChevronUp/>) : (<GoChevronDown/>)}
           </Form.Label>
@@ -1228,9 +1287,9 @@ return (
       </Form>
       
   </div>
-  <Container className="buttonGoToTop-container">
+  {/* <Container className="buttonGoToTop-container">
   <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>
-  </Container>
+  </Container> */}
   {/* </> ) : (
     <Container>
     <LoginButton/>

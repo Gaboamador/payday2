@@ -784,9 +784,9 @@ const toggleButtonContainerVisibility = () => {
 {/* SKILLS END */}
 </Container>
 
-  <Container className="buttonGoToTop-container">
+  {/* <Container className="buttonGoToTop-container">
     <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>
-  </Container>
+  </Container> */}
   
         </div>
       );
