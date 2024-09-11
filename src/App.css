@@ -335,30 +335,32 @@ form {
   }
 }
 
-.form-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5px;
+
+
+
+.none-selected {
+
 }
 
 .allSelected {
   color: rgba(242,242,242,0.8);
 }
 
+.form-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px !important;
+  border-radius: 5px !important;
+}
+
+
 .form-label {
-  /*display: block;*/
-  /*margin: 5px 0px 5px 0px;*/
-  /*color:#459bd5;*/
   cursor: pointer;
-  /*color: #2a5979 !important;*/
   color: #8bcefa !important;
   font-weight: bolder;
-  /*background-color: rgba(69, 155, 213, 0.25);*/
   background-image: url('https://pd2builder.netlify.app/img/bg.png');
-  /*background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;*/
   margin-bottom: 5px !important;
   border-radius: 5px;
   width: 100%;
@@ -366,8 +368,54 @@ form {
   font-size: 1.2rem;
 }
 
+.form-items {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.form-items.card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.form-items.card-header-flex {
+  
+}
+
+.subcategory-checkbox .form-check-input {
+  border-radius: 50% !important;
+  border: 1px solid #8bcefa;
+}
+
+.subcategory-checkbox .form-check-input:checked, .form-check-input:indeterminate {
+  background-color: black !important;
+}
+
+.subcategory-header {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 0;
+  text-align: center;
+  /* color: #459bd5 !important; */
+  color: #459bd5 !important;
+  background-color: whitesmoke !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  border-radius: 0 0 5px 5px;
+  border: none !important;
+}
+
 .form-check {
 text-align: left;
+}
+
+.form-check-label {
+  /* font-family: 'RiftMedium'; */
 }
 
 .checkUncheckAllButton {
@@ -658,7 +706,24 @@ padding: 0 0 25px 0;
   font-weight: 500 !important;
 }
 
-  
+.eyeSlashButton.toggleModeForm {
+  color: #459bd5 !important;
+  display: flex;
+  border-radius: 5px !important;
+  margin: 0 !important;
+  /* border: 2px ridge transparent !important;
+  border-image: linear-gradient(to bottom, transparent, #459bd5) !important; */
+  border: 1px solid #459bd5 !important;
+  border-image-slice: 1  !important;
+  font-family: 'DINEngschrift' !important;
+  font-weight: 500 !important;
+  background-color: white !important;
+}
+
+.card {
+  margin: 5px 0;
+}
+
 .form-check {
   padding-top: 5px;
   padding-bottom: 5px;
@@ -1855,6 +1920,7 @@ input[type="checkbox"] {
   border-radius: 5px 5px 5px 0 !important;
 }
 
+
 .category-lock {
   position: absolute;
   left: 10px;
@@ -1893,3 +1959,49 @@ input[type="checkbox"] {
   padding-bottom: 5px;
   border-radius: 0;
 }
+
+.stickyDiv.stickyCategory {
+  background-color: rgba(69, 155, 213, 0.75);
+  /* border-bottom: 1px solid #459bd5;
+  padding-bottom: 5px;
+  border-radius: 0; */
+}
+
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.full-width {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.shrink-width {
+  flex-grow: 0;
+  width: auto;
+}
+
+.custom-toggle {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  /* background-color: black !important; */
+  cursor: pointer;
+  color: #8bcefa !important;
+  font-weight: bolder;
+  background-image: url('https://pd2builder.netlify.app/img/bg.png');
+  border-radius: 5px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.card-body {
+  padding: 6px !important;
+}
+

@@ -2,35 +2,35 @@
   "subcategories": [
     {
       "name": "Assault Rifles",
-      "weapons": ["AK Rifle","AK.762 Rifle","AK17 Rifle","AK5 Rifle","AMCAR Rifle","AMR-16 Rifle","Bootleg Rifle","CAR-4 Rifle","Cavity 9mm","Clarion Rifle","Commando 553 Rifle","Eagle Heavy Rifle","Falcon Rifle","Gecko 7.62 Rifle","Gewehr 3 Rifle","Golden AK.762 Rifle","JP36 Rifle","Lion's Roar Rifle","Little Friend 7.62 Assault Rifle","M308 Rifle","Queen's Wrath Rifle","UAR Rifle","Valkyria Rifle"]
+      "weapons": ["AMCAR Rifle (A1)","Commando 553 Rifle (B1)","Eagle Heavy Rifle (C1)","AK Rifle (D1)","CAR-4 Rifle (A2)","UAR Rifle (B2)","Cavity 9mm (C2)","AK.762 Rifle (D2)","JP36 Rifle (A3)","AK17 Rifle (B3)","Golden AK.762 Rifle (C3)","Bootleg Rifle (D3)","Queen's Wrath Rifle (A4)","M308 Rifle (B4)","Clarion Rifle (C4)","Lion's Roar Rifle (D4)","Valkyria Rifle (A5)","AK5 Rifle (B5)","Gecko 7.62 Rifle (C5)","AMR-16 Rifle (D5)","Little Friend 7.62 Assault Rifle (A6)","Falcon Rifle (B6)","Gewehr 3 Rifle (C6)"]
     },
     {
       "name": "Shotguns",
-      "weapons": ["Breaker 12G Shotgun","IZHMA 12G Shotgun","Joceline O/U 12G Shotgun","M1014 Shotgun","Mosconi 12G Shotgun","Predator 12G Shotgun","Raven Shotgun","Reinfeld 880 Shotgun","Steakout 12G Shotgun"]
+      "weapons": ["Predator 12G Shotgun (A1)","Breaker 12G Shotgun (B1)","Reinfeld 880 Shotgun (C1)","M1014 Shotgun (D1)","Raven Shotgun (A2)","IZHMA 12G Shotgun (B2)","Mosconi 12G Shotgun (C2)","Joceline O/U 12G Shotgun (D2)","Steakout 12G Shotgun (A3)"]
     },
     {
       "name": "Akimbo Pistols",
-      "weapons": ["Akimbo Baby Deagle Pistols","Akimbo Bernetti 9 Pistols","Akimbo Bronco .44 Revolvers","Akimbo Broomstick Pistols","Akimbo Castigo .44 Revolvers","Akimbo Chimano 88 Pistols","Akimbo Chimano Compact Pistols","Akimbo Chimano Custom Pistols","Akimbo Contractor Pistols","Akimbo Crosskill Guard Pistols","Akimbo Crosskill Pistols","Akimbo Deagle Pistols","Akimbo Gruber Kurz Pistols","Akimbo Interceptor 45 Pistols","Akimbo LEO Pistols","Akimbo Matever .357 Revolvers","Akimbo Signature .40 Pistols","Akimbo STRYK 18c Pistols","Akimbo White Streak Pistols"]
+      "weapons": ["Akimbo Chimano Compact Pistols (A1)","Akimbo Crosskill Pistols (B1)","Akimbo Bernetti 9 Pistols (C1)","Akimbo Deagle Pistols (D1)","Akimbo Chimano 88 Pistols (A2)","Akimbo Chimano Custom Pistols (B2)","Akimbo Signature .40 Pistols (C2)","Akimbo Gruber Kurz Pistols (D2)","Akimbo Interceptor 45 Pistols (A3)","Akimbo Contractor Pistols (B3)","Akimbo Bronco .44 Revolvers (C3)","Akimbo White Streak Pistols (D3)","Akimbo Baby Deagle Pistols (A4)","Akimbo Broomstick Pistols (B4)","Akimbo Castigo .44 Revolvers (C4)","Akimbo Crosskill Guard Pistols (D4)","Akimbo LEO Pistols (A5)","Akimbo STRYK 18c Pistols (B5)","Akimbo Matever .357 Revolvers (C5)"]
     },
     {
       "name": "Akimbo Shotguns",
-      "weapons": ["Akimbo Goliath 12G Shotguns","Akimbo Judge Shotguns","Brother Grimm 12G Shotguns"]
+      "weapons": ["Akimbo Goliath 12G Shotguns (A1)","Brother Grimm 12G Shotguns (B1)","Akimbo Judge Shotguns (C1)"]
     },
     {
       "name": "Akimbo SMGs",
-      "weapons": ["Akimbo Blaster 9mm Submachine Guns","Akimbo Chicago Typewriter SMGs","Akimbo CMP Submachine Guns","Akimbo Cobra Submachine Guns","Akimbo Compact-5 Submachine Guns","Akimbo CR 805B Submachine Guns","Akimbo Heather Submachine Guns","Akimbo Jackal Submachine Guns","Akimbo Jacket's Piece","Akimbo Kobus 90 Submachine Guns","Akimbo Krinkov Submachine Guns","Akimbo Kross Vertex Submachine Guns","Akimbo Mark 10 Submachine Guns","Akimbo Micro Uzi Submachine Guns","Akimbo Para Submachine Guns","Akimbo Patchett L2A1 Submachine Guns","Akimbo Signature Submachine Guns","Akimbo SpecOps Submachine Guns","Akimbo Swedish K Submachine Guns","Akimbo Tatonka Submachine Guns","Akimbo Uzi Submachine Guns"]
+      "weapons": ["Akimbo Krinkov Submachine Guns (A1)","Akimbo Swedish K Submachine Guns (B1)","Akimbo Compact-5 Submachine Guns (C1)","Akimbo SpecOps Submachine Guns (D1)","Akimbo Heather Submachine Guns (A2)","Akimbo CR 805B Submachine Guns (B2)","Akimbo Mark 10 Submachine Guns (C2)","Akimbo Jacket's Piece (D2)","Akimbo Chicago Typewriter SMGs (A3)","Akimbo Cobra Submachine Guns (B3)","Akimbo Micro Uzi Submachine Guns (C3)","Akimbo CMP Submachine Guns (D3)","Akimbo Para Submachine Guns (A4)","Akimbo Jackal Submachine Guns (B4)","Akimbo Signature Submachine Guns (C4)","Akimbo Blaster 9mm Submachine Guns (D4)","Akimbo Kobus 90 Submachine Guns (A5)","Akimbo Kross Vertex Submachine Guns (B5)","Akimbo Tatonka Submachine Guns (C5)","Akimbo Patchett L2A1 Submachine Guns (D5)","Akimbo Uzi Submachine Guns (A6)"]
     },
     {
       "name": "Sniper Rifles",
-      "weapons": ["Contractor .308 Sniper Rifle","Desertfox Sniper Rifle","Grom Sniper Rifle","Lebensauger .308 Sniper Rifle","Nagant Sniper Rifle","Platypus 70 Sniper Rifle","R93 Sniper Rifle","Rattlesnake Sniper Rifle","Repeater 1874 Sniper Rifle","Thanatos .50 cal Sniper Rifle"]
+      "weapons": ["Rattlesnake Sniper Rifle (A1)","Platypus 70 Sniper Rifle (B1)","Lebensauger .308 Sniper Rifle (C1)","Desertfox Sniper Rifle (D1)","Contractor .308 Sniper Rifle (A2)","R93 Sniper Rifle (B2)","Repeater 1874 Sniper Rifle (C2)","Grom Sniper Rifle (D2)","Nagant Sniper Rifle (A3)","Thanatos .50 cal Sniper Rifle (B3)"]
     },
     {
       "name": "Light Machine Guns",
-      "weapons": ["Brenner-21 Light Machine Gun","Buzzsaw 42 Light Machine Gun","KSP 58 Light Machine Gun","KSP Light Machine Gun","RPK Light Machine Gun"]
+      "weapons": ["RPK Light Machine Gun (A1)","KSP 58 Light Machine Gun (B1)","KSP Light Machine Gun (C1)","Buzzsaw 42 Light Machine Gun (D1)","Brenner-21 Light Machine Gun (A2)"]
     },
     {
       "name": "Specials",
-      "weapons": ["English Longbow","Flamethrower Mk.1","GL40 Grenade Launcher","Heavy Crossbow","Light Crossbow","OVE9000 Saw","Piglet Grenade Launcher","Plainsrider Bow","Vulcan Minigun","XL 5.56 Microgun"]
+      "weapons": ["OVE9000 Saw (A1)","Plainsrider Bow (B1)","Light Crossbow (C1)","English Longbow (D1)","XL 5.56 Microgun (A2)","Vulcan Minigun (B2)","Heavy Crossbow (C2)","Piglet Grenade Launcher (D2)","Flamethrower Mk.1 (A3)","GL40 Grenade Launcher (B3)"]
     }
   ]
 }

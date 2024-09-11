@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./login";
-import {Button, Row, Col, Container, ListGroup, Table, Form} from 'react-bootstrap';
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import {Button, Row, Col, Container, ListGroup, Table, Form, Accordion, Card, useAccordionButton} from 'react-bootstrap';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { VscExpandAll, VscCollapseAll } from "react-icons/vsc"
 import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im"
@@ -9,31 +7,13 @@ import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import { CiGrid41, CiBoxList } from "react-icons/ci";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import { BiReset } from "react-icons/bi";
-import { MdOutlineCheckCircle } from "react-icons/md";
 import '../App.css';
 import { itemsToImage } from "../database/itemsToImage";
 import Skull from "../imagenes/skull.svg"
 import Skull2 from "../imagenes/skull2.svg"
 import SelectCategories from "./SelectCategories";
-import { IoIosLock, IoIosUnlock } from "react-icons/io";
+import {options} from "../database/items";
 
-import { IoLockOpenOutline } from "react-icons/io5";
-import { IoLockClosedSharp } from "react-icons/io5";
-
-
-const options = {
-  primaryGuns: ["AMCAR Rifle (A1)","Commando 553 Rifle (B1)","Eagle Heavy Rifle (C1)","AK Rifle (D1)","CAR-4 Rifle (A2)","UAR Rifle (B2)","Cavity 9mm (C2)","AK.762 Rifle (D2)","JP36 Rifle (A3)","AK17 Rifle (B3)","Golden AK.762 Rifle (C3)","Bootleg Rifle (D3)","Queen's Wrath Rifle (A4)","M308 Rifle (B4)","Clarion Rifle (C4)","Lion's Roar Rifle (D4)","Valkyria Rifle (A5)","AK5 Rifle (B5)","Gecko 7.62 Rifle (C5)","AMR-16 Rifle (D5)","Little Friend 7.62 Assault Rifle (A6)","Falcon Rifle (B6)","Gewehr 3 Rifle (C6)","Predator 12G Shotgun (A1)","Breaker 12G Shotgun (B1)","Reinfeld 880 Shotgun (C1)","M1014 Shotgun (D1)","Raven Shotgun (A2)","IZHMA 12G Shotgun (B2)","Mosconi 12G Shotgun (C2)","Joceline O/U 12G Shotgun (D2)","Steakout 12G Shotgun (A3)","RPK Light Machine Gun (A1)","KSP 58 Light Machine Gun (B1)","KSP Light Machine Gun (C1)","Buzzsaw 42 Light Machine Gun (D1)","Brenner-21 Light Machine Gun (A2)","Rattlesnake Sniper Rifle (A1)","Platypus 70 Sniper Rifle (B1)","Lebensauger .308 Sniper Rifle (C1)","Desertfox Sniper Rifle (D1)","Contractor .308 Sniper Rifle (A2)","R93 Sniper Rifle (B2)","Repeater 1874 Sniper Rifle (C2)","Grom Sniper Rifle (D2)","Nagant Sniper Rifle (A3)","Thanatos .50 cal Sniper Rifle (B3)","Akimbo Chimano Compact Pistols (A1)","Akimbo Crosskill Pistols (B1)","Akimbo Bernetti 9 Pistols (C1)","Akimbo Deagle Pistols (D1)","Akimbo Chimano 88 Pistols (A2)","Akimbo Chimano Custom Pistols (B2)","Akimbo Signature .40 Pistols (C2)","Akimbo Gruber Kurz Pistols (D2)","Akimbo Interceptor 45 Pistols (A3)","Akimbo Contractor Pistols (B3)","Akimbo Bronco .44 Revolvers (C3)","Akimbo White Streak Pistols (D3)","Akimbo Baby Deagle Pistols (A4)","Akimbo Broomstick Pistols (B4)","Akimbo Castigo .44 Revolvers (C4)","Akimbo Crosskill Guard Pistols (D4)","Akimbo LEO Pistols (A5)","Akimbo STRYK 18c Pistols (B5)","Akimbo Matever .357 Revolvers (C5)","Akimbo Krinkov Submachine Guns (A1)","Akimbo Swedish K Submachine Guns (B1)","Akimbo Compact-5 Submachine Guns (C1)","Akimbo SpecOps Submachine Guns (D1)","Akimbo Heather Submachine Guns (A2)","Akimbo CR 805B Submachine Guns (B2)","Akimbo Mark 10 Submachine Guns (C2)","Akimbo Jacket's Piece (D2)","Akimbo Chicago Typewriter SMGs (A3)","Akimbo Cobra Submachine Guns (B3)","Akimbo Micro Uzi Submachine Guns (C3)","Akimbo CMP Submachine Guns (D3)","Akimbo Para Submachine Guns (A4)","Akimbo Jackal Submachine Guns (B4)","Akimbo Signature Submachine Guns (C4)","Akimbo Blaster 9mm Submachine Guns (D4)","Akimbo Kobus 90 Submachine Guns (A5)","Akimbo Kross Vertex Submachine Guns (B5)","Akimbo Tatonka Submachine Guns (C5)","Akimbo Patchett L2A1 Submachine Guns (D5)","Akimbo Uzi Submachine Guns (A6)","Akimbo Goliath 12G Shotguns (A1)","Brother Grimm 12G Shotguns (B1)","Akimbo Judge Shotguns (C1)","OVE9000 Saw (A1)","Plainsrider Bow (B1)","Light Crossbow (C1)","English Longbow (D1)","XL 5.56 Microgun (A2)","Vulcan Minigun (B2)","Heavy Crossbow (C2)","Piglet Grenade Launcher (D2)","Flamethrower Mk.1 (A3)","GL40 Grenade Launcher (B3)"],
-  secondaryGuns: ["Chimano 88 Pistol (A1)","Signature .40 Pistol (B1)","Gruber Kurz Pistol (C1)","Interceptor 45 Pistol (D1)","White Streak Pistol (A2)","Crosskill Pistol (B2)","Bernetti 9 Pistol (C2)","Bronco .44 Revolver (D2)","Baby Deagle Pistol (A3)","Chimano Custom Pistol (B3)","Broomstick Pistol (C3)","Castigo .44 Revolver (D3)","5/7 AP Pistol (A4)","Contractor Pistol (B4)","Chimano Compact Pistol (C4)","Crosskill Guard Pistol (D4)","LEO Pistol (A5)","STRYK 18c Pistol (B5)","Peacemaker .45 Revolver (C5)","Matever .357 Revolver (D5)","Deagle Pistol (A6)","Swedish K Submachine Gun (A1)","SpecOps Submachine Gun (B1)","Mark 10 Submachine Gun (C1)","CR 805B Submachine Gun (D1)","Jacket's Piece (A2)","Compact-5 Submachine Gun (B2)","Chicago Typewriter Submachine Gun (C2)","Cobra Submachine Gun (D2)","CMP Submachine Gun (A3)","Para Submachine Gun (B3)","Micro Uzi Submachine Gun (C3)","Signature Submachine Gun (D3)","Jackal Submachine Gun (A4)","Heather Submachine Gun (B4)","Krinkov Submachine Gun (C4)","Blaster 9mm Submachine Gun (D4)","Kobus 90 Submachine Gun (A5)","Kross Vertex Submachine Gun (B5)","Tatonka Submachine Gun (C5)","Patchett L2A1 Submachine Gun (D5)","Uzi Submachine Gun (A6)","Pistol Crossbow (A1)","Compact 40mm Grenade Launcher (B1)","HRL-7 Rocket Launcher (C1)","China Puff 40mm Grenade Launcher (D1)","Commando 101 Rocket Launcher (A2)","MA-17 Flamethrower (B2)","Arbiter Grenade Launcher (C2)","OVE9000 Saw (D2)","Locomotive 12G Shotgun (A1)","GSPS 12G Shotgun (B1)","Goliath 12G Shotgun (C1)","Grimm 12G Shotgun (D1)","Street Sweeper Shotgun (A2)","The Judge Shotgun (B2)"],
-  perkDecks: ["Crew Chief (1)","Muscle (2)","Armorer (3)","Rogue (4)","Hitman (5)","Crook (6)","Burglar (7)","Infiltrator (8)","Sociopath (9)","Gambler (10)","Grinder (11)","Yakuza (12)","Ex-President (13)","Maniac (14)","Anarchist (15)","Biker (16)","Kingpin (17)","Sicario (18)","Stoic (19)","Hacker (20)"],
-  armors: ["Two-piece Suit (A1)","Ballistic Vest (B1)","Lightweight Ballistic Vest (C1)","Heavy Ballistic Vest (A2)","Flak Jacket (B2)","Combined Tactical Vest (C2)","Improved Combined Tactical Vest (A3)"],
-  throwables: ["Concussion Grenade (A1)","Matryoshka Grenade (B1)","Incendiary Grenade (C1)","Frag Grenade (D1)","HEF Grenade (A2)","Ace of Spades (B2)","Molotov Cocktail (C2)","Dynamite (D2)","Shuriken (A3)","Javelin (B3)","Throwing Knife (C3)","Throwing Axe (D3)"],
-  // throwables: ["Concussion Grenade (A1)", "Matryoshka Grenade (B1)", "Incendiary Grenade (C1)", "Frag Grenade (D1)", "HEF Grenade (A2)", "Ace of Spades (B2)", "Molotov Cocktail (C2)", "Dynamite (D2)", "Shuriken (A3)", "Javelin (B3)", "Throwing Knife (C3)", "Throwing Axe (D3)", "Injector", "Pocket ECM", "Smoke Bomb", "Stoic Hip Flask"],
-  equipments: ["Ammo Bag (A1)","Armor Bag (B1)","Body Bag Case (C1)","Doctor Bag (A2)","ECM Jammer (B2)","First Aid Kit (C2)","Sentry Gun (A3)","Suppressed Sentry Gun (B3)","Trip Mines and Shaped Charges (C3)"],
-  melees: ["Weapon Butt (1-A1)","50 Blessings Briefcase (1-B1)","URSA Knife (1-C1)","Swagger Stick (1-D1)","Nova's Shank (1-A2)","Fists (1-B2)","350K Brass Knuckles (1-C2)","Ursa Tanto Knife (1-D2)","Pounder (1-A3)","Specialist Knives (1-B3)","The Motherforker (1-C3)","Spatula (1-D3)","K.L.A.S Shovel (1-A4)","Money Bundle (1-B4)","Empty Palm Kata (1-C4)","Bolt Cutters (1-D4)","Shawn's Shears (2-A1)","Utility Knife (2-B1)","Microphone (2-C1)","Selfie-stick (2-D1)","Bayonet Knife (2-A2)","Machete (2-B2)","Chain Whip (2-C2)","The Pen (2-D2)","Ice Pick (2-A3)","Electrical Brass Knuckles (2-B3)","Rezkoye (2-C3)","Telescopic Baton (2-D3)","Jackpot (2-A4)","Baseball Bat (2-B4)","Monkey Wrench (2-C4)","Classic Baton (2-D4)","Hockey Stick (3-A1)","Diving Knife (3-B1)","El Verdugo (3-C1)","Hackaton (3-D1)","Krieger Blade (3-A2)","Buckler Shield (3-B2)","Wing Butterfly Knife (3-C2)","You're Mine (3-D2)","Metal Detector (3-A3)","Croupier's Rake (3-B3)","Compact Hatchet (3-C3)","Lumber Lite L2 (3-D3)","Hotline 8000x (3-A4)","Potato Masher (3-B4)","Scalper Tomahawk (3-C4)","Switchblade (3-D4)","OVERKILL Boxing Gloves (4-A1)","Dragan's Cleaver Knife (4-B1)","Leather Sap (4-C1)","Shinsakuto Katana (4-D1)","Okinawan Style Sai (4-A2)","Pitchfork (4-B2)","Arkansas Toothpick (4-C2)","Microphone Stand (4-D2)","Psycho Knife (4-A3)","X-46 Knife (4-B3)","Talons (4-C3)","Bearded Axe (4-D3)","Hook (4-A4)","Cleaver Knife (4-B4)","Buzzer (4-C4)","Gold Fever (4-D4)","Carpenter's Delight (5-A1)","Clover's Shillelagh (5-B1)","Shepherd's Cane (5-C1)","Scout Knife (5-D1)","Trench Knife (5-A2)","Berger Combat Knife (5-B2)","Survival Tomahawk (5-C2)","Morning Star (5-D2)","Poker (5-A3)","Lucille Baseball Bat (5-B3)","Great Sword (5-C3)","The Spear of Freedom (5-D3)","Rivertown Glen Bottle (5-A4)","Ding Dong Breaching Tool (5-B4)","Tenderizer (5-C4)","Machete Knife (5-D4)","Utility Machete (6-A1)","Kunai Knife (6-B1)","Trautman Knife (6-C1)","Fire Axe (6-D1)"],
-  heists: ["Art Gallery (Bain-1)","Bank Heist: Cash (Bain-2)","Bank Heist: Deposit (Bain-3)","Bank Heist: Gold (Bain-4)","Bank Heist: Random (Bain-5)","Car Shop [STEALTH ONLY] (Bain-6)","Cook Off (Bain-7)","Diamond Store (Bain-8)","Jewelry Store (Bain-9)","Shadow Raid [STEALTH ONLY] (Bain-10)","The Alesso Heist (Bain-11)","Transport: Crossroads (Bain-12)","Transport: Downtown (Bain-13)","Transport: Harbor (Bain-14)","Transport: Park (Bain-15)","Transport: Train Heist (Bain-16)","Transport: Underpass (Bain-17)","Counterfeit (Classics-1)","Diamond Heist (Classics-2)","First World Bank (Classics-3)","Green Bridge (Classics-4)","Heat Street (Classics-5)","Panic Room (Classics-6)","Slaughterhouse (Classics-7)","Undercover (Classics-8)","Cursed Kill Room (Events-1)","Lab Rats (Events-2)","Prison Nightmare (Events-3)","Safe House Nightmare (Events-4)","Firestarter (Hector-1)","Rats (Hector-2)","Watchdogs (Hector-3)","Boiling Point (Jimmy-1)","Murky Station [STEALTH ONLY] (Jimmy-2)","Alaskan Deal (Locke-1)","Beneath the Mountain (Locke-2)","Birth of Sky (Locke-3)","Brooklyn Bank (Locke-4)","Scarface Mansion (The Butcher-1)","The Bomb: Dockyard (The Butcher-2)","The Bomb: Forest (The Butcher-3)","Brooklyn 10-10 (The Continental-1)","The Yacht Heist [STEALTH ONLY] (The Continental-2)","Golden Grin Casino (The Dentist-1)","Hotline Miami (The Dentist-2)","Hoxton Breakout (The Dentist-3)","Hoxton Revenge (The Dentist-4)","The Big Bank (The Dentist-5)","The Diamond (The Dentist-6)","Big Oil (The Elephant-1)","Election Day (The Elephant-2)","Framing Frame (The Elephant-3)","The Biker Heist (The Elephant-4)","Aftershock (Vlad-1)","Four Stores (Vlad-2)","Goat Simulator (Vlad-3)","Mallcrasher (Vlad-4)","Meltdown (Vlad-5)","Nightclub (Vlad-6)","Santa's Workshop (Vlad-7)","Stealing Xmas (Vlad-8)","Ukrainian Job (Vlad-9)","White Xmas (Vlad-10)"],
-  profiles: [],
-  difficulty: ["Very Hard", "Overkill", "Mayhem"],
-};
 
 (async () => {
   const savedSkills = localStorage.getItem("selectedSkills");
@@ -68,8 +48,6 @@ Equipment:
 
 const Payday2Randomizer = () => {
 
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
-  const [userMetadata, setUserMetadata] = useState(null);
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 767);
   useEffect(() => {
     const handleResize = () => {
@@ -79,49 +57,23 @@ const Payday2Randomizer = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    const getUserMetadata = async () => {
-      const domain = "dev-gm7u55v7jisqivq4.us.auth0.com";
-  
-      try {
-        const accessToken = await getAccessTokenSilently({
-          authorizationParams: {
-            audience: `https://${domain}/api/v2/`,
-            scope: "read:current_user",
-          },
-        });
-  
-        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-  
-        const metadataResponse = await fetch(userDetailsByIdUrl, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-  
-        const { user_metadata } = await metadataResponse.json();
-  
-        setUserMetadata(user_metadata);
-      } catch (e) {
-        // console.log(e.message);
-      }
-    };
-  
-    getUserMetadata();
-  }, [getAccessTokenSilently, user?.sub]);
 
-  const [selectedOptions, setSelectedOptions] = useState({
-    primaryGuns: options.primaryGuns,
-    secondaryGuns: options.secondaryGuns,
-    perkDecks: options.perkDecks,
-    armors: options.armors,
-    throwables: options.throwables,
-    equipments: options.equipments,
-    melees: options.melees,
-    heists: options.heists,
-    profiles: options.profiles,
-    difficulty: options.difficulty,
-  });
+ // Initialize selectedOptions state with all items checked
+ const [selectedOptions, setSelectedOptions] = useState(
+  Object.keys(options).reduce((acc, category) => {
+    acc[category] = Object.values(options[category]).flat(); // All items checked
+    return acc;
+  }, {})
+);
+
+const areAllItemsCheckedInCategory = (category) => {
+  const allItemsInCategory = Object.values(options[category]).flat();
+  const currentlySelected = selectedOptions[category] || [];
+
+  // Check if every item in the category is selected
+  return allItemsInCategory.length > 0 && allItemsInCategory.every(item => currentlySelected.includes(item));
+};
+
 
   const perkDeckToThrowable = {
     "Stoic (19)": "Stoic Hip Flask",
@@ -130,8 +82,6 @@ const Payday2Randomizer = () => {
     "Hacker (20)": "Pocket ECM"
   };
   
-
-  /*const [randomizedBuild, setRandomizedBuild] = useState({});*/
   const [randomizedBuild, setRandomizedBuild] = useState({
     armor: localStorage.getItem("randomizedBuild_armor") || "",
     equipment: localStorage.getItem("randomizedBuild_equipment") || "",
@@ -141,13 +91,6 @@ const Payday2Randomizer = () => {
     secondaryGun: localStorage.getItem("randomizedBuild_secondaryGun") || "",
     throwable: localStorage.getItem("randomizedBuild_throwable") || ""
   });
-  const armor = randomizedBuild.armor;
-  const equipment = randomizedBuild.equipment;
-  const melee = randomizedBuild.melee;
-  const perkDeck = randomizedBuild.perkDeck;
-  const primaryGun = randomizedBuild.primaryGun;
-  const secondaryGun = randomizedBuild.secondaryGun;
-  const throwable = randomizedBuild.throwable;
 
   useEffect(() => {
     localStorage.setItem("randomizedBuild_armor", randomizedBuild.armor);
@@ -159,13 +102,9 @@ const Payday2Randomizer = () => {
     localStorage.setItem("randomizedBuild_throwable", randomizedBuild.throwable);
   }, [randomizedBuild]);
 
-
-  /**/
-  /*const [randomizedHeist, setRandomizedHeist] = useState({});*/
   const [randomizedHeist, setRandomizedHeist] = useState({
     heist: localStorage.getItem("randomizedHeist_heist") || "",
   })
-  const heist = randomizedHeist.heist;
   useEffect(() => {
     localStorage.setItem("randomizedHeist_heist", randomizedHeist.heist);
   }, [randomizedHeist]);
@@ -182,7 +121,6 @@ const Payday2Randomizer = () => {
   const [randomizedProfile, setRandomizedProfile] = useState({
     profile: localStorage.getItem("randomizedProfile_profile") || "",
   })
-  const profile = randomizedProfile.profile;
   useEffect(() => {
     localStorage.setItem("randomizedProfile_profile", randomizedProfile.profile);
   }, [randomizedProfile]);
@@ -242,72 +180,213 @@ const Payday2Randomizer = () => {
   };
 
 
-  const handleOptionChange = (category, item, isChecked) => {
-    setSelectedOptions((prevState) => {
-      const selectedItems = prevState[category];
-      let updatedItems;
-      if (isChecked) {
-        updatedItems = [...selectedItems, item];
-      } else {
-        updatedItems = selectedItems.filter((selectedItem) => selectedItem !== item);
-      }
-      return {
-        ...prevState,
-        [category]: updatedItems,
-      };
-    });
+  const getRandomItemFromSubcategories = (categoryOptions) => {
+    if (!categoryOptions) return "";
+  
+    // If categoryOptions is an object (with subcategories), flatten the options
+    if (typeof categoryOptions === 'object' && !Array.isArray(categoryOptions)) {
+      const allItems = Object.values(categoryOptions).flat();
+      return getRandomItem(allItems);
+    }
+  
+    // If it's already an array, return a random item from it
+    if (Array.isArray(categoryOptions)) {
+      return getRandomItem(categoryOptions);
+    }
+  
+    return ""; // Fallback in case nothing matches
   };
+  
+  const [perkDeckWeights, setPerkDeckWeights] = useState({});
+  const [armorWeights, setArmorWeights] = useState({});
+  const [throwableWeights, setThrowableWeights] = useState({});
+  const [equipmentWeights, setEquipmentWeights] = useState({});
+  const [meleeWeights, setMeleeWeights] = useState({});
+  const [primaryGunWeights, setPrimaryGunWeights] = useState({});
+  const [secondaryGunWeights, setSecondaryGunWeights] = useState({});
+  const [itemWeights, setItemWeights] = useState({
+    primaryGuns: {},
+    secondaryGuns: {},
+  });
 
-  const handleRandomize = () => {
-    
-    const randomizedPerkDeck = selectedCategories.includes('perkDecks') ? getRandomItem(selectedOptions.perkDecks) : localStorage.getItem("randomizedBuild_perkDeck") || "";
+const updateWeights = (category, item) => {
+  switch (category) {
+    case 'perkDecks':
+      setPerkDeckWeights(prev => ({ ...prev, [item]: (prev[item] || 1) * 0.5 }));
+      break;
+    case 'armors':
+      setArmorWeights(prev => ({ ...prev, [item]: (prev[item] || 1) * 0.5 }));
+      break;
+    case 'throwables':
+      setThrowableWeights(prev => ({ ...prev, [item]: (prev[item] || 1) * 0.5 }));
+      break;
+    case 'equipments':
+      setEquipmentWeights(prev => ({ ...prev, [item]: (prev[item] || 1) * 0.5 }));
+      break;
+    case 'melees':
+      setMeleeWeights(prev => ({ ...prev, [item]: (prev[item] || 1) * 0.5 }));
+      break;
+    case 'primaryGuns':
+    case 'secondaryGuns':
+      setItemWeights(prev => ({
+        ...prev,
+        [category]: { ...prev[category], [item]: (prev[category][item] || 1) * 0.5 }
+      }));
+      break;
+    default:
+      break;
+  }
+};
+const getRandomWeightedItemFromSubcategories = (selectedItems, itemWeights) => {
+  // Flatten the subcategories into a single array of items
+  const allItems = Object.values(selectedItems).flat();
+
+  // If no items are selected, return null
+  if (allItems.length === 0) {
+    return null;
+  }
+
+  // Calculate the total weight for the remaining items
+  const totalWeight = allItems.reduce((sum, item) => sum + (itemWeights[item] || 1), 0);
+
+  // Generate a random number between 0 and the total weight
+  const randomNumber = Math.random() * totalWeight;
+
+  // Iterate through the items and pick the one based on the weights
+  let accumulatedWeight = 0;
+  for (const item of allItems) {
+    accumulatedWeight += itemWeights[item] || 1;
+    if (randomNumber <= accumulatedWeight) {
+      return item;
+    }
+  }
+
+  // Fallback in case something went wrong (shouldn't happen)
+  return allItems[allItems.length - 1];
+};
+
+
+  const handleRandomizeOld = () => {
+
+    const randomizedPerkDeck = selectedCategories.includes('perkDecks') ? getRandomWeightedItem(selectedOptions.perkDecks, perkDeckWeights) : localStorage.getItem("randomizedBuild_perkDeck") || "";
 
     const randomizedBuild = {
-      primaryGun: selectedCategories.includes('primaryGuns') ? getRandomItem(selectedOptions.primaryGuns) : localStorage.getItem("randomizedBuild_primaryGun") || "",
-      secondaryGun: selectedCategories.includes('secondaryGuns') ? getRandomItem(selectedOptions.secondaryGuns) : localStorage.getItem("randomizedBuild_secondaryGun") || "",
-      // perkDeck: selectedCategories.includes('perkDecks') ? getRandomItem(selectedOptions.perkDecks) : localStorage.getItem("randomizedBuild_perkDeck") || "",
+      primaryGun: selectedCategories.includes('primaryGuns') 
+        // ? getRandomItemFromSubcategories(selectedOptions.primaryGuns) 
+        ? getRandomWeightedItemFromSubcategories('primaryGuns') 
+        : localStorage.getItem("randomizedBuild_primaryGun") || "",
+    
+      secondaryGun: selectedCategories.includes('secondaryGuns') 
+        // ? getRandomItemFromSubcategories(selectedOptions.secondaryGuns) 
+        ? getRandomWeightedItemFromSubcategories('secondaryGuns') 
+        : localStorage.getItem("randomizedBuild_secondaryGun") || "",
+    
       perkDeck: randomizedPerkDeck,
-      armor: selectedCategories.includes('armors') ? getRandomItem(selectedOptions.armors) : localStorage.getItem("randomizedBuild_armor") || "",
-      // throwable: selectedCategories.includes('throwables') ? getRandomItem(selectedOptions.throwables) : localStorage.getItem("randomizedBuild_throwable") || "",
+    
+      armor: selectedCategories.includes('armors') 
+        // ? getRandomItem(selectedOptions.armors) 
+        ? getRandomWeightedItem(selectedOptions.armors, armorWeights) 
+        : localStorage.getItem("randomizedBuild_armor") || "",
+    
       throwable: selectedCategories.includes('throwables') 
-      ? (perkDeckToThrowable[randomizedPerkDeck] || getRandomItem(selectedOptions.throwables))
-      : localStorage.getItem("randomizedBuild_throwable") || "",
-      equipment: selectedCategories.includes('equipments') ? getRandomItem(selectedOptions.equipments) : localStorage.getItem("randomizedBuild_equipment") || "",
-      melee: selectedCategories.includes('melees') ? getRandomItem(selectedOptions.melees) : localStorage.getItem("randomizedBuild_melee") || "",
+        // ? (perkDeckToThrowable[randomizedPerkDeck] || getRandomItem(selectedOptions.throwables)) 
+        ? (perkDeckToThrowable[randomizedPerkDeck] || "") || getRandomWeightedItem(selectedOptions.throwables, throwableWeights)
+        : localStorage.getItem("randomizedBuild_throwable") || "",
+    
+      equipment: selectedCategories.includes('equipments') 
+        // ? getRandomItem(selectedOptions.equipments) 
+        ? getRandomWeightedItem(selectedOptions.equipments, equipmentWeights) 
+        : localStorage.getItem("randomizedBuild_equipment") || "",
+    
+      melee: selectedCategories.includes('melees') 
+        // ? getRandomItem(selectedOptions.melees) 
+        ? getRandomWeightedItem(selectedOptions.melees, meleeWeights) 
+        : localStorage.getItem("randomizedBuild_melee") || "",
     };
+    
 
     setRandomizedBuild(randomizedBuild);
     setShowTable(true);
   };
 
-  // const handleRandomizeHeist = () => {
-  //   const randomizedHeist = {
-  //     heist: getRandomItem(selectedOptions.heists),
-  //   };
-
-  //   setRandomizedHeist(randomizedHeist);
-  //   setShowTableHeist(true);
-  // };
-
-  const [heistWeights, setHeistWeights] = useState({});
-
-  const handleRandomizeHeist = () => {
-    const remainingHeists = selectedOptions.heists.filter(heist => !heistWeights[heist]);
-    setShowTableHeist(true);
-    if (remainingHeists.length === 0) {
-      // All heists have been picked, reset the weights
-      setHeistWeights({});
-    } else {
-      const randomHeist = getRandomWeightedItem(remainingHeists, heistWeights);
-      const updatedWeights = {
-        ...heistWeights,
-        [randomHeist]: (heistWeights[randomHeist] || 1) * 0.5, // Decrease the weight by half
-      };
-      setHeistWeights(updatedWeights);
-      setRandomizedHeist({ heist: randomHeist });
-      setShowTableHeist(true);
-    }
+  const handleRandomize = () => {
+    const randomizedPrimaryGun = selectedCategories.includes('primaryGuns') 
+      ? getRandomWeightedItemFromSubcategories(selectedOptions.primaryGuns, primaryGunWeights)
+      : localStorage.getItem("randomizedBuild_primaryGun") || "";
+  
+    const randomizedSecondaryGun = selectedCategories.includes('secondaryGuns') 
+      ? getRandomWeightedItemFromSubcategories(selectedOptions.secondaryGuns, secondaryGunWeights)
+      : localStorage.getItem("randomizedBuild_secondaryGun") || "";
+  
+    const randomizedPerkDeck = selectedCategories.includes('perkDecks') 
+      ? getRandomWeightedItem(selectedOptions.perkDecks, perkDeckWeights) 
+      : localStorage.getItem("randomizedBuild_perkDeck") || "";
+  
+    const randomizedArmor = selectedCategories.includes('armors') 
+      ? getRandomWeightedItem(selectedOptions.armors, armorWeights) 
+      : localStorage.getItem("randomizedBuild_armor") || "";
+  
+    const randomizedThrowable = selectedCategories.includes('throwables') 
+      ? (perkDeckToThrowable[randomizedPerkDeck] || getRandomWeightedItem(selectedOptions.throwables, throwableWeights) || "") 
+      : localStorage.getItem("randomizedBuild_throwable") || "";
+  
+    const randomizedEquipment = selectedCategories.includes('equipments') 
+      ? getRandomWeightedItem(selectedOptions.equipments, equipmentWeights) 
+      : localStorage.getItem("randomizedBuild_equipment") || "";
+  
+    const randomizedMelee = selectedCategories.includes('melees') 
+      ? getRandomWeightedItem(selectedOptions.melees, meleeWeights) 
+      : localStorage.getItem("randomizedBuild_melee") || "";
+  
+    // Update weights after randomizing
+    updateWeights('primaryGuns', randomizedPrimaryGun);
+    updateWeights('secondaryGuns', randomizedSecondaryGun);
+    updateWeights('perkDecks', randomizedPerkDeck);
+    updateWeights('armors', randomizedArmor);
+    updateWeights('throwables', randomizedThrowable);
+    updateWeights('equipments', randomizedEquipment);
+    updateWeights('melees', randomizedMelee);
+  
+    const randomizedBuild = {
+      primaryGun: randomizedPrimaryGun,
+      secondaryGun: randomizedSecondaryGun,
+      perkDeck: randomizedPerkDeck,
+      armor: randomizedArmor,
+      throwable: randomizedThrowable,
+      equipment: randomizedEquipment,
+      melee: randomizedMelee,
+    };
+  
+    setRandomizedBuild(randomizedBuild);
+    setShowTable(true);
   };
+  
+
+    const [heistWeights, setHeistWeights] = useState({});
+
+    const handleRandomizeHeist = () => {
+
+        // Check if selectedOptions.heists exists and is an array with elements
+    if (!selectedOptions.heists || selectedOptions.heists.length === 0) {
+        return; // If no heist is selected, exit the function
+    }
+
+      const remainingHeists = selectedOptions.heists.filter(heist => !heistWeights[heist]);
+      setShowTableHeist(true);
+      if (remainingHeists.length === 0) {
+        // All heists have been picked, reset the weights
+        setHeistWeights({});
+      } else {
+        const randomHeist = getRandomWeightedItem(remainingHeists, heistWeights);
+        const updatedWeights = {
+          ...heistWeights,
+          [randomHeist]: (heistWeights[randomHeist] || 1) * 0.5, // Decrease the weight by half
+        };
+        setHeistWeights(updatedWeights);
+        setRandomizedHeist({ heist: randomHeist });
+        setShowTableHeist(true);
+      }
+    };
   
   const getRandomWeightedItem = (items, weights) => {
     // Calculate the total weight
@@ -332,7 +411,7 @@ const Payday2Randomizer = () => {
   // FIN NUEVA FUNCIÓN RANDOMIZER CON WEIGHT
 
   const handleRandomizeDifficulty = () => {
-    const randomDifficulty = getRandomItem(options.difficulty);
+    const randomDifficulty = getRandomItem(options.difficulty.difficulty);
     setRandomizedDifficulty({ difficulty: randomDifficulty });
     setShowTableDifficulty(true);
     return randomDifficulty;
@@ -367,56 +446,136 @@ const handleRandomizeProfile = () => {
     return items[randomIndex];
   };
 
-  const [collapsed, setCollapsed] = useState({
-    primaryGuns: true,
-    secondaryGuns: true,
-    perkDecks: true,
-    armors: true,
-    throwables: true,
-    equipments: true,
-    melees: true,
-    heists: true,
-    profiles: true,
-    all: true,
-    selectedCategories: true,
-  });
 
 
-  const toggleCollapse = (category) => {
-    setCollapsed((prev) => ({
-      ...prev,
-      [category]: !prev[category],
-    }));
+// Initialize collapsed state for categories and subcategories
+const [collapsed, setCollapsed] = useState(
+  Object.keys(options).reduce((acc, key) => {
+    acc[key] = true; // Start all categories collapsed
+    return acc;
+  }, {})
+);
+
+const [collapsedSubcategories, setCollapsedSubcategories] = useState(
+  Object.keys(options).reduce((acc, key) => {
+    acc[key] = Object.keys(options[key]).reduce((subAcc, subKey) => {
+      subAcc[subKey] = true; // Start all subcategories collapsed
+      return subAcc;
+    }, {});
+    return acc;
+  }, {})
+);
+
+const toggleCollapse = (category) => {
+  setCollapsed((prev) => ({
+    ...prev,
+    [category]: !prev[category],
+  }));
+};
+
+const toggleSubcategory = (category, subcategory) => {
+  setCollapsedSubcategories((prev) => ({
+    ...prev,
+    [category]: {
+      ...prev[category],
+      [subcategory]: !prev[category][subcategory],
+    },
+  }));
+};
+
+  const [activeKey, setActiveKey] = useState(null); // For controlled Accordion
+
+    // Handle Accordion change event
+  const handleAccordionSelect = (key) => {
+    setActiveKey(key);
+
+    if (key === null) {
+      // If Accordion is fully collapsed
+      setCollapsed((prev) => 
+        Object.keys(prev).reduce((acc, category) => {
+          acc[category] = true; // Set all categories to collapsed
+          return acc;
+        }, {})
+      );
+    } else {
+      // Extract category from key and update custom state
+      const [category] = key.split('-');
+      if (category) {
+        setCollapsed((prev) => ({
+          ...prev,
+          [category]: false, // Update to reflect Accordion expansion
+        }));
+      }
+    }
   };
+
+const handleToggleCheckAll = (category, subcategory) => {
+  const subcategoryItems = options[category][subcategory];
+  const currentlySelected = selectedOptions[category];
+
+  // Check if all items in the subcategory are currently selected
+  const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
+
+  setSelectedOptions((prev) => {
+    if (allChecked) {
+      // If all items are checked, uncheck them
+      return {
+        ...prev,
+        [category]: prev[category].filter(item => !subcategoryItems.includes(item)),
+      };
+    } else {
+      // If not all items are checked, check them
+      return {
+        ...prev,
+        [category]: [...new Set([...prev[category], ...subcategoryItems])],
+      };
+    }
+  });
+};
+
+const handleOptionChange = (category, item, checked) => {
+  setSelectedOptions((prev) => {
+    const updated = checked
+      ? [...prev[category], item]
+      : prev[category].filter((i) => i !== item);
+    return { ...prev, [category]: updated };
+  });
+};
 
   const toggleAllCollapse = () => {
-    setCollapsed((prev) => ({
-      ...prev,
-      all: !prev.all,
-      primaryGuns: !prev.all,
-      secondaryGuns: !prev.all,
-      perkDecks: !prev.all,
-      armors: !prev.all,
-      throwables: !prev.all,
-      equipments: !prev.all,
-      melees: !prev.all,
-      heists: !prev.all,
-      difficulty: !prev.all,
-      profiles: !prev.all
-    }));
-  };
-
-  const handleToggleCheckAll = (category) => {
-    setSelectedOptions((prevState) => {
-      const allChecked = prevState[category].length === options[category].length;
-      const updatedSelection = allChecked ? [] : options[category];
+    const newCollapseState = !collapsed.all; // Determine if collapsing or expanding
+  
+    // Update top-level category collapse state
+    setCollapsed((prev) => {
+      const updatedCategories = Object.keys(prev).reduce((acc, category) => {
+        acc[category] = newCollapseState;
+        return acc;
+      }, {});
+      
       return {
-        ...prevState,
-        [category]: updatedSelection,
+        ...prev,
+        ...updatedCategories,
+        all: newCollapseState
       };
     });
+  
+    // Update subcategory collapse state
+    setCollapsedSubcategories((prev) => {
+      const updatedSubcategories = Object.keys(prev).reduce((acc, category) => {
+        acc[category] = Object.keys(prev[category] || {}).reduce((subAcc, subcategory) => {
+          subAcc[subcategory] = newCollapseState;
+          return subAcc;
+        }, {});
+        return acc;
+      }, {});
+      
+      return updatedSubcategories;
+    });
   };
+  
+  
 
+  
   const handleToggleSelectedCategories = () => {
     setSelectedCategories((prevState) => {
       return prevState.length === Object.keys(selectedOptions).length ? [] : Object.keys(selectedOptions);
@@ -425,9 +584,11 @@ const handleRandomizeProfile = () => {
   
   const handleToggleCheckAllCategories = () => {
     setSelectedOptions((prevState) => {
-      const allCategoriesChecked = Object.keys(prevState).every(
-        (category) => prevState[category].length === options[category].length
-      );
+      const allCategoriesChecked = Object.keys(prevState).every((category) => {
+        // Flatten the subcategories for comparison
+        const allItemsInCategory = Object.values(options[category]).flat();
+        return prevState[category].length === allItemsInCategory.length;
+      });
   
       const updatedSelection = allCategoriesChecked
         ? Object.keys(prevState).reduce((acc, category) => {
@@ -435,29 +596,56 @@ const handleRandomizeProfile = () => {
             return acc;
           }, {})
         : Object.keys(prevState).reduce((acc, category) => {
-            acc[category] = options[category];
+            // Flatten subcategories to select all items
+            acc[category] = Object.values(options[category]).flat();
             return acc;
           }, {});
   
       return updatedSelection;
     });
   };
+
+  const handleToggleCheckAllInCategory = (category) => {
+    setSelectedOptions((prevState) => {
+      const allItemsInCategory = Object.values(options[category]).flat();
+      const currentlySelected = prevState[category];
   
-  function goToTop() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  }
+      // Check if all items in the category are currently selected
+      const allChecked = allItemsInCategory.every(item => currentlySelected.includes(item));
+  
+      return {
+        ...prevState,
+        [category]: allChecked
+          ? [] // Uncheck all items if they are all currently checked
+          : allItemsInCategory, // Check all items if they are not all currently checked
+      };
+    });
+  };
+  
 
+const categories = [
+  { key: "primaryGuns", label: "Primary Guns" },
+  { key: "secondaryGuns", label: "Secondary Guns" },
+  { key: "perkDecks", label: "Perk Decks" },
+  { key: "armors", label: "Armors" },
+  { key: "throwables", label: "Throwables" },
+  { key: "equipments", label: "Equipments" },
+  { key: "melees", label: "Melees" },
+  { key: "heists", label: "Heists" },
+];
 
-  const categories = [
-    { key: "primaryGuns", label: "Primary Guns" },
-    { key: "secondaryGuns", label: "Secondary Guns" },
-    { key: "perkDecks", label: "Perk Decks" },
-    { key: "armors", label: "Armors" },
-    { key: "throwables", label: "Throwables" },
-    { key: "equipments", label: "Equipments" },
-    { key: "melees", label: "Melees" },
-  ];
+const subcategories = [
+  { key: 'AssaultRifles', label: 'Assault Rifles' },
+  { key: 'Shotguns', label: 'Shotguns' },
+  { key: 'AkimboPistols', label: 'Akimbo Pistols' },
+  { key: 'AkimboShotguns', label: 'Akimbo Shotguns' },
+  { key: 'AkimboSMGs', label: 'Akimbo SMGs' },
+  { key: 'SniperRifles', label: 'Sniper Rifles' },
+  { key: 'LightMachineGuns', label: 'Light Machine Guns' },
+  { key: 'Specials', label: 'Specials' },
+  { key: 'Pistols', label: 'Pistols' },
+  { key: 'SubmachineGuns', label: 'Submachine Guns' },
+]
 
   const initialSelectedCategories = [
     "primaryGuns",
@@ -470,15 +658,6 @@ const handleRandomizeProfile = () => {
   ];
 
   const [selectedCategories, setSelectedCategories] = useState(initialSelectedCategories);
-  // const handleToggleCategory = (category) => {
-  //   setSelectedCategories((prevSelectedCategories) => {
-  //     if (prevSelectedCategories.includes(category)) {
-  //       return prevSelectedCategories.filter((c) => c !== category);
-  //     } else {
-  //       return [...prevSelectedCategories, category];
-  //     }
-  //   });
-  // };
 
   const [isCheckboxMode, setIsCheckboxMode] = useState(true);
 
@@ -527,9 +706,7 @@ const handleRandomizeProfile = () => {
     return (
       <div>
         {part === "heist" && heist}
-        {part === "details" && details.slice(0, -1)} {/* Remove the trailing ')' */}
-        {/* {part === "details" && '('+ details} */}
-        {/* {details && <div>({details}</div>} */}
+        {part === "details" && details.slice(0, -1)}
       </div>
     );
   };
@@ -554,7 +731,7 @@ const handleRandomizeProfile = () => {
     };
     return profile;
   };
-  // const renderProfile = parseProfile(randomizedProfile.profile);
+
   const renderProfile = randomizedProfile.profile ? parseProfile(randomizedProfile.profile) : randomizedProfile.profile;
 
   const [selectedItem, setSelectedItem] = useState(null);
@@ -600,56 +777,117 @@ const handleRandomizeProfile = () => {
   }, []);
   /**/
 
+    /* STICKY CATEGORIES */
+    // const [isStickyCategory, setIsStickyCategory] = useState(false);
+    // const stickyCategoryDivRef = useRef(null);
+    // useEffect(() => {
+    //   const handleScroll = () => {
+    //     if (stickyCategoryDivRef.current) {
+    //       const rect = stickyCategoryDivRef.current.getBoundingClientRect();
+    //       setIsStickyCategory(rect.top <= 45);
+    //     }
+    //   };
+  
+    //   window.addEventListener('scroll', handleScroll);
+    //   handleScroll();
+  
+    //   return () => {
+    //     window.removeEventListener('scroll', handleScroll);
+    //   };
+    // }, []);
+    const [stickyStates, setStickyStates] = useState({});
+  const refs = useRef({});
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const updatedStickyStates = {};
+      
+      // Check sticky state for each category
+      Object.keys(refs.current).forEach((category) => {
+        const ref = refs.current[category];
+        if (ref && ref.current) {
+          const rect = ref.current.getBoundingClientRect();
+          // Set sticky state based on whether the element has reached the top
+          updatedStickyStates[category] = rect.top <= 45;
+        }
+      });
+
+      setStickyStates(updatedStickyStates);
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+    
+    // Run the handler once to set initial state
+    handleScroll();
+
+    return () => {
+      // Clean up event listener on unmount
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+    /**/
+
+const excludedCategories = ["profiles", "difficulty"]; // Categories you don't want to include in the form
+
+function CustomToggle({ children, eventKey, category }) {
+  const decoratedOnClick = useAccordionButton(eventKey, () => {
+      // Update collapsed state: only expand the clicked category
+      
+      setCollapsed(prev => {
+        const updatedCollapsed = Object.keys(prev).reduce((acc, cat) => {
+          // acc[cat] = cat === category ? false : true;
+          acc[cat] = cat === category ? !prev[cat] : true;
+          return acc;
+        }, {});
+        return updatedCollapsed;
+      });
+    });
+
+  return (
+    <Button
+      type="button"
+      className={`custom-toggle ${!collapsed[category] ? "shrink-width" : "full-width"}`}
+      onClick={decoratedOnClick}
+    >
+      {children} {!collapsed[category] ? <GoChevronUp /> : <GoChevronDown />}
+    </Button>
+  );
+}
+
+function SubcategoryToggle({ children, eventKey, category, subcategory }) {
+  const decoratedOnClick = useAccordionButton(eventKey, () =>
+    toggleSubcategory(category, subcategory)
+  );
+
+  return (
+    <Button
+      type="button"
+      className="subcategory-header"
+      onClick={decoratedOnClick}
+    >
+      {children} {!collapsedSubcategories[category]?.[subcategory] ? <GoChevronUp /> : <GoChevronDown />}
+    </Button>
+  );
+}
+
+
 
 return (
 <div className="backgroundColor">
 
-{/* <div className="container">
-  <Form style={{marginTop: 0, marginBottom: 0}} className="mainForm">
-    <Form.Group>
-      <Form.Label onClick={() => toggleCollapse("selectedCategories")} className="form-title">
-        SELECT CATEGORIES TO RANDOMIZE
-        {!collapsed.selectedCategories ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-        </Form.Label>
-      {!collapsed.selectedCategories && (
-        <>
-          <div className="categories-grid-container">
-          {categories.map((category) => (
-            <div key={category.key} className="categories-grid-item">
-              <Form.Check
-                type="checkbox"
-                label={category.label}
-                checked={selectedCategories.includes(category.key)}
-                onChange={() => handleToggleCategory(category.key)}
-              />
-            </div>
-          ))}
-            <Button
-            className="checkUncheckAllButton"
-            variant="outline-secondary"
-            onClick={handleToggleSelectedCategories}
-          >
-            {selectedCategories.length < 7 ? <ImCheckboxChecked/> : <ImCheckboxUnchecked/>}
-            {selectedCategories.length < 7 ? " Check All" : " Uncheck All"}
-          </Button>
-          </div>
-        </>
-      )}
-    </Form.Group>
-  </Form>
-</div> */}
-
-      <SelectCategories
-        categories={categories}
-        selectedCategories={selectedCategories}
-        collapsed={collapsed}
-        toggleCollapse={toggleCollapse}
-        handleToggleCategory={handleToggleCategory}
-        handleToggleSelectedCategories={handleToggleSelectedCategories}
-        isCheckboxMode={isCheckboxMode}
-        toggleMode={toggleMode}
-        randomizedBuild={randomizedBuild}
-      />
+<SelectCategories
+  categories={categories.filter(category => category.key !== "heists")}
+  selectedCategories={selectedCategories}
+  collapsed={collapsed}
+  toggleCollapse={toggleCollapse}
+  handleToggleCategory={handleToggleCategory}
+  handleToggleSelectedCategories={handleToggleSelectedCategories}
+  isCheckboxMode={isCheckboxMode}
+  toggleMode={toggleMode}
+  randomizedBuild={randomizedBuild}
+/>
 
 <div className="randomBuildContainer backgroundImage difficulty"  style={{marginTop: 0}}>
 {!isWideScreen && <div className="randomBuildContainer-title">DIFFICULTY</div>}
@@ -675,19 +913,11 @@ return (
   </div>
   </>
     )}
-        {/* {showTableDifficulty && (
-    <Table className="randomBuildTable randomize-table">
-      <tbody>
-          <tr>
-              <td>Difficulty</td>
-              <td>{randomizedDifficulty.difficulty}</td>
-          </tr>
-      </tbody>
-    </Table>
-    )} */}
   </div>
   
-  <div className={`randomBuildContainer backgroundImage ${showTable && Object.values(randomizedBuild).some(value => value !== "") ? 'inventory' : ''}`}>
+  {/* <div className={`randomBuildContainer backgroundImage ${showTable && Object.values(randomizedBuild).some(value => value !== "") ? 'inventory' : ''}`}> */}
+  <div className={`randomBuildContainer backgroundImage ${showTable && Object.values(randomizedBuild).some(value => value != null && value !== "") ? 'inventory' : ''}`}>
+
   
 {/* <div className="stickyDiv"> */}
 <div ref={stickyDivRef} className={`stickyDiv ${isSticky ? 'sticky' : ''}`}>
@@ -704,7 +934,7 @@ return (
         </div>
 </div>
 
-    {showTable && Object.values(randomizedBuild).some(value => value !== "") && (
+    {showTable && Object.values(randomizedBuild).some(value => value != null && value !== "") && (
     <div className="build-title">
     {displayType ? (
     <Table className="randomBuildTable randomize-table">
@@ -755,93 +985,7 @@ return (
     </Table>)
     :
     (
-//     <div className="grid-container">
-    
-// {randomizedBuild.primaryGun &&
-//     <div className="grid-item">
-//     <div className="grid-title">PRIMARY</div>
-//       <img
-//             src={itemsToImage[randomizedBuild.primaryGun]}
-//             alt={randomizedBuild.primaryGun}
-//             className="grid-image"
-//           />
-//         <div className="grid-name">{randomizedBuild.primaryGun}</div>
-//     </div>
-// }
-    
-// {randomizedBuild.secondaryGun &&
-//     <div className="grid-item">
-//     <div className="grid-title">SECONDARY</div>
-//       <img
-//             src={itemsToImage[randomizedBuild.secondaryGun]}
-//             alt={randomizedBuild.secondaryGun}
-//             className="grid-image"
-//           />
-//           <div className="grid-name">{randomizedBuild.secondaryGun}</div>
-//     </div>
-// }
 
-// {randomizedBuild.perkDeck &&
-//     <div className="grid-item">
-//     <div className="grid-title">PERK DECK</div>
-//       <img
-//             src={itemsToImage[randomizedBuild.perkDeck]}
-//             alt={randomizedBuild.perkDeck}
-//             className="grid-image grid-image-perkDeck"
-//           />
-//           <div className="grid-name">{randomizedBuild.perkDeck}</div>
-//     </div>
-// }
-
-// {randomizedBuild.armor &&
-//     <div className="grid-item">
-//     <div className="grid-title">ARMOR</div>
-//       <img
-//             src={itemsToImage[randomizedBuild.armor]}
-//             alt={randomizedBuild.armor}
-//             className="grid-image grid-image-armor"
-//           />
-//           <div className="grid-name">{randomizedBuild.armor}</div>
-//     </div>
-// }
-
-// {randomizedBuild.throwable &&
-//     <div className="grid-item">
-//     <div className="grid-title">THROWABLE</div>
-//       <img
-//             src={itemsToImage[randomizedBuild.throwable]}
-//             alt={randomizedBuild.throwable}
-//             className="grid-image"
-//           />
-//           <div className="grid-name">{randomizedBuild.throwable}</div>
-//       </div>
-// }
-
-// {randomizedBuild.equipment &&
-//     <div className="grid-item">
-//     <div className="grid-title">EQUIPMENT</div>
-//       <img
-//             src={itemsToImage[randomizedBuild.equipment]}
-//             alt={randomizedBuild.equipment}
-//             className="grid-image"
-//           />
-//           <div className="grid-name">{randomizedBuild.equipment}</div>
-//     </div>
-// }
-
-// {randomizedBuild.melee &&
-//     <div className="grid-item">
-//     <div className="grid-title">MELEE</div>
-//       <img
-//             src={itemsToImage[randomizedBuild.melee]}
-//             alt={randomizedBuild.melee}
-//             className="grid-image"
-//           />
-//           <div className="grid-name">{randomizedBuild.melee}</div>
-//     </div>
-// }
-
-//   </div>
 <div className="grid-container">
 {buildItems.map(({ key, title }) => {
   const item = randomizedBuild[key];
@@ -859,19 +1003,11 @@ return (
         <img
           src={itemsToImage[item]}
           alt={item}
-          // className={`grid-image ${key === 'perkDeck' ? 'grid-image-perkDeck' : ''} ${key === 'armor' ? 'grid-image-armor' : ''}`}
           className={`grid-image
             ${selectedItem === key ? 'selected' : ''}
             ${key === 'perkDeck' ? `perkDeck ${selectedItem === key ? 'perkDeck selected' : ''}` : ''}
             ${key === 'armor' ? `armor ${selectedItem === key ? 'armor selected' : ''}` : ''}`}
         />
-        {/* <div onClick={() => handleToggleCategory(getCategoryKey(key))}>
-          {!selectedCategories.includes(getCategoryKey(key)) ? (
-            <IoLockClosedSharp className="category-lock"/>
-          ) : (
-            <IoLockOpenOutline className="category-lock"/>
-          )}
-          </div> */}
       </div>
     )
   );
@@ -911,14 +1047,6 @@ return (
       {splitHeistString(randomizedHeist.heist, 'details')}
       </div>
       </>
-    // <Table className="randomBuildTable randomize-table">
-    //   <tbody>
-    //       <tr>
-    //           <td>Heist</td>
-    //           <td>{randomizedHeist.heist}</td>
-    //       </tr>
-    //   </tbody>
-    // </Table>
     )}
   </div>
 
@@ -991,310 +1119,163 @@ return (
         </div>
       </div>
     </div>
-      
       </>
-    // <Table className="randomBuildTable">
-    //   <tbody>
-    //       <tr>
-    //           <td>Profile</td>
-    //           <td>{randomizedProfile.profile}</td>
-    //       </tr>
-    //   </tbody>
-    // </Table>
-    
-  //   <Table className="randomBuildTable randomize-table">
-  //   <tbody>
-  //     <tr>
-  //       <td>Profile</td>
-  //       <td>
-  //         <div style={{ whiteSpace: "pre-wrap" }}>
-  //           {/* {Array.isArray(randomizedProfile.profile)
-  //             ? randomizedProfile.profile.join("\n")
-  //             : randomizedProfile.profile} */}
-  //             {randomizedProfile.profile}
-  //         </div>
-  //       </td>
-  //     </tr>
-  //   </tbody>
-  // </Table>
     )}
   </div>
 
 <div className="separator"></div>
 
-  <div className="container">
-        <div className="buttons expand-uncheck">
-        <Button className="expandAllCategoriesButton" onClick={toggleAllCollapse}>{collapsed.all ? (<VscExpandAll/>) : (<VscCollapseAll/>)}{collapsed.all ? " Expand All" : " Collapse All"}</Button>
-        <Button className="checkUncheckAllCategoriesButton" onClick={() => handleToggleCheckAllCategories()}>
-          {selectedOptions.primaryGuns.length === options.primaryGuns.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-          {selectedOptions.primaryGuns.length === options.primaryGuns.length ? " Uncheck All Categories" : " Check All Categories"}
-        </Button>
-        </div>
-      <Form>
-        <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("primaryGuns")} className="form-title stickyDiv">
-          PRIMARY GUNS
-          {!collapsed.primaryGuns ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-          </Form.Label>
-        {!collapsed.primaryGuns && (
-          <>
-            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("primaryGuns")}>
-              {selectedOptions.primaryGuns.length === options.primaryGuns.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-              {selectedOptions.primaryGuns.length === options.primaryGuns.length ? " Uncheck All" : " Check All"}
-            </Button>
-            {options.primaryGuns.map((option) => (
-              <div key={option}>
-                <Form.Check
-                  type="checkbox"
-                  label={option}
-                  id={option}
-                  value={option}
-                  checked={selectedOptions.primaryGuns.includes(option)}
-                  onChange={(e) =>
-                    handleOptionChange("primaryGuns", option, e.target.checked)
-                  }
-                />
-              </div>
-            ))}
-          </>
-        )}
-      </Form.Group>
-      </Form>
+<div className="container">
+    <div className="buttons expand-uncheck">
 
-      <Form>
-        <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("secondaryGuns")} className="form-title stickyDiv">
-          SECONDARY GUNS
-          {!collapsed.secondaryGuns ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-          </Form.Label>
-        {!collapsed.secondaryGuns && (
-          <>
-            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("secondaryGuns")}>
-              {selectedOptions.secondaryGuns.length === options.secondaryGuns.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-              {selectedOptions.secondaryGuns.length === options.secondaryGuns.length ? " Uncheck All" : " Check All"}
-            </Button>
-            {options.secondaryGuns.map((option) => (
-              <div key={option}>
-                <Form.Check
-                  type="checkbox"
-                  label={option}
-                  id={option}
-                  value={option}
-                  checked={selectedOptions.secondaryGuns.includes(option)}
-                  onChange={(e) =>
-                    handleOptionChange("secondaryGuns", option, e.target.checked)
-                  }
-                />
-              </div>
-            ))}
-          </>
-        )}
-      </Form.Group>
-      </Form>
+      {/* <Button className="expandAllCategoriesButton" onClick={toggleAllCollapse}>
+        {!collapsed.all ? (<VscCollapseAll/>) : (<VscExpandAll/>)}
+        {!collapsed.all ? " Collapse All" : " Expand All"}
+      </Button> */}
 
-      <Form>
-        <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("perkDecks")} className="form-title stickyDiv">
-          PERK DECKS
-          {!collapsed.perkDecks ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-          </Form.Label>
-        {!collapsed.perkDecks && (
-          <>
-            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("perkDecks")}>
-              {selectedOptions.perkDecks.length === options.perkDecks.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-              {selectedOptions.perkDecks.length === options.perkDecks.length ? " Uncheck All" : " Check All"}
-            </Button>
-            {options.perkDecks.map((option) => (
-              <div key={option}>
-                <Form.Check
-                  type="checkbox"
-                  label={option}
-                  id={option}
-                  value={option}
-                  checked={selectedOptions.perkDecks.includes(option)}
-                  onChange={(e) =>
-                    handleOptionChange("perkDecks", option, e.target.checked)
-                  }
-                />
-              </div>
-            ))}
-          </>
+      <Button className="checkUncheckAllCategoriesButton" onClick={() => handleToggleCheckAllCategories()}>
+        {Object.keys(selectedOptions).every(category => 
+          selectedOptions[category].length === Object.values(options[category]).flat().length
+        ) ? (
+        <><ImCheckboxChecked /> Uncheck All Categories</>
+        ) : (
+        <><ImCheckboxUnchecked /> Check All Categories</>
         )}
-      </Form.Group>
-      </Form>
-              
-      <Form>
-        <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("armors")} className="form-title stickyDiv">
-          ARMORS
-          {!collapsed.armors ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-          </Form.Label>
-        {!collapsed.armors && (
-          <>
-            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("armors")}>
-              {selectedOptions.armors.length === options.armors.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-              {selectedOptions.armors.length === options.armors.length ? " Uncheck All" : " Check All"}
-            </Button>
-            {options.armors.map((option) => (
-              <div key={option}>
-                <Form.Check
-                  type="checkbox"
-                  label={option}
-                  id={option}
-                  value={option}
-                  checked={selectedOptions.armors.includes(option)}
-                  onChange={(e) =>
-                    handleOptionChange("armors", option, e.target.checked)
-                  }
-                />
-              </div>
-            ))}
-          </>
-        )}
-      </Form.Group>
-      </Form>
+      </Button>
 
-      <Form>
-        <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("throwables")} className="form-title stickyDiv">
-          THROWABLES
-          {!collapsed.throwables ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-          </Form.Label>
-        {!collapsed.throwables && (
-          <>
-            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("throwables")}>
-              {selectedOptions.throwables.length === options.throwables.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-              {selectedOptions.throwables.length === options.throwables.length ? " Uncheck All" : " Check All"}
-            </Button>
-            {options.throwables
-              // .filter(
-              //   (option) =>
-              //     option !== "Injector" &&
-              //     option !== "Pocket ECM" &&
-              //     option !== "Smoke Bomb" &&
-              //     option !== "Stoic Hip Flask"
-              // )
-            .map((option) => (
-              <div key={option}>
-                <Form.Check
-                  type="checkbox"
-                  label={option}
-                  id={option}
-                  value={option}
-                  checked={selectedOptions.throwables.includes(option)}
-                  onChange={(e) =>
-                    handleOptionChange("throwables", option, e.target.checked)
-                  }
-                />
-              </div>
-            ))}
-          </>
-        )}
-      </Form.Group>
-      </Form>
+    </div>
 
-      <Form>
-        <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("equipments")} className="form-title stickyDiv">
-          EQUIPMENTS
-          {!collapsed.equipments ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-          </Form.Label>
-        {!collapsed.equipments && (
-          <>
-            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("equipments")}>
-              {selectedOptions.equipments.length === options.equipments.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-              {selectedOptions.equipments.length === options.equipments.length ? " Uncheck All" : " Check All"}
-            </Button>
-            {options.equipments.map((option) => (
-              <div key={option}>
-                <Form.Check
-                  type="checkbox"
-                  label={option}
-                  id={option}
-                  value={option}
-                  checked={selectedOptions.equipments.includes(option)}
-                  onChange={(e) =>
-                    handleOptionChange("equipments", option, e.target.checked)
-                  }
-                />
-              </div>
-            ))}
-          </>
-        )}
-      </Form.Group>
-      </Form>
+    <Accordion defaultActiveKey="">
+  {Object.keys(options)
+    .filter((category) => !excludedCategories.includes(category)) // Exclude specified categories
+    .map((category, index) => (
+      <Card key={category}>
+        
+        
+        <Card.Header
+        ref={(el) => (refs.current[category] = { current: el })}
+        className={`form-title stickyDiv ${stickyStates[category] && !collapsed[category] ? 'stickyCategory' : ''} ${!collapsed[category] ? "selectedCategories" : "collapsed"} ${areAllItemsCheckedInCategory(category) ? "" : "none-selected"}`}
+        >
+          <div className="card-header-flex">
+          <CustomToggle
+          
+          eventKey={String(index)}
+          category={category}
+          
+          >
+            {categories.find((cat) => cat.key === category)?.label || category}
+            
+          </CustomToggle>
 
-      <Form>
-        <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("melees")} className="form-title stickyDiv">
-          MELEES
-          {!collapsed.melees ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-          </Form.Label>
-        {!collapsed.melees && (
-          <>
-            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("melees")}>
-              {selectedOptions.melees.length === options.melees.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-              {selectedOptions.melees.length === options.melees.length ? " Uncheck All" : " Check All"}
+          {!collapsed[category] && (
+            <Button
+              className="eyeSlashButton toggleModeForm"
+              onClick={() => handleToggleCheckAllInCategory(category)}
+            >
+              {areAllItemsCheckedInCategory(category) ? "Uncheck all " : "Check all "}
             </Button>
-            {options.melees.map((option) => (
-              <div key={option}>
-                <Form.Check
-                  type="checkbox"
-                  label={option}
-                  id={option}
-                  value={option}
-                  checked={selectedOptions.melees.includes(option)}
-                  onChange={(e) =>
-                    handleOptionChange("melees", option, e.target.checked)
-                  }
-                />
-              </div>
-            ))}
-          </>
-        )}
-      </Form.Group>
-      </Form>
+          )}
+            </div>
+        </Card.Header>
 
-      <Form>
-        <Form.Group>
-        <Form.Label onClick={() => toggleCollapse("heists")} className="form-title stickyDiv">
-          HEISTS
-          {!collapsed.heists ? (<GoChevronUp/>) : (<GoChevronDown/>)}
-          </Form.Label>
-        {!collapsed.heists && (
-          <>
-            <Button className="checkUncheckAllButton" variant="outline-secondary" onClick={() => handleToggleCheckAll("heists")}>
-              {selectedOptions.heists.length === options.heists.length ? (<ImCheckboxUnchecked/>) : (<ImCheckboxChecked/>)}
-              {selectedOptions.heists.length === options.heists.length ? " Uncheck All" : " Check All"}
-            </Button>
-            {options.heists.map((option) => (
-              <div key={option}>
-                <Form.Check
-                  type="checkbox"
-                  label={option}
-                  id={option}
-                  value={option}
-                  checked={selectedOptions.heists.includes(option)}
-                  onChange={(e) =>
-                    handleOptionChange("heists", option, e.target.checked)
-                  }
-                />
-              </div>
-            ))}
-          </>
-        )}
-      </Form.Group>
-      </Form>
-      
+        <Accordion.Collapse eventKey={String(index)}>
+          <Card.Body>
+            {/* Subcategories Accordion */}
+            {category === "primaryGuns" || category === "secondaryGuns" ? (
+              <Accordion>
+                {Object.keys(options[category]).map((subcategory, subIndex) => (
+                  <Card key={subcategory}>
+                    
+                    <Card.Header className="form-items">
+
+                      <SubcategoryToggle
+                        eventKey={String(subIndex)}
+                        category={category}
+                        subcategory={subcategory}
+                      >
+                        {subcategories.find((cat) => cat.key === subcategory)?.label || subcategory}
+                      </SubcategoryToggle>
+                      
+                      <div className="form-items">
+                          <Form.Check
+                            type="checkbox"
+                            className="subcategory-checkbox"
+                            ref={(input) => {
+                              if (input) {
+                                const totalItems = options[category][subcategory].length;
+                                const selectedItems = selectedOptions[category].filter((item) =>
+                                  options[category][subcategory].includes(item)
+                                ).length;
+
+                                // Set the indeterminate property
+                                input.indeterminate =
+                                  selectedItems > 0 && selectedItems < totalItems;
+                              }
+                            }}
+                            checked={
+                              selectedOptions[category].filter((item) =>
+                                options[category][subcategory].includes(item)
+                              ).length === options[category][subcategory].length
+                            }
+                            onChange={() => handleToggleCheckAll(category, subcategory)}
+                          />
+                        </div>
+
+                    </Card.Header>
+
+                    <Accordion.Collapse eventKey={String(subIndex)}>
+                      <Card.Body>
+                        {/* Only show items if subcategory is expanded */}
+                        {options[category][subcategory].map((item) => (
+                          <Form.Check
+                            type="checkbox"
+                            label={item}
+                            id={item}
+                            key={item}
+                            value={item}
+                            checked={selectedOptions[category].includes(item)}
+                            onChange={(e) =>
+                              handleOptionChange(category, item, e.target.checked)
+                            }
+                          />
+                        ))}
+                      </Card.Body>
+                    </Accordion.Collapse>
+
+                  </Card>
+                ))}
+              </Accordion>
+            ) : (
+              // Handle categories without subcategories (e.g., perkDecks)
+              Object.keys(options[category]).map((subcategory) =>
+                options[category][subcategory].map((item) => (
+                  <Form.Check
+                    type="checkbox"
+                    label={item}
+                    id={item}
+                    key={item}
+                    value={item}
+                    checked={selectedOptions[category].includes(item)}
+                    onChange={(e) =>
+                      handleOptionChange(category, item, e.target.checked)
+                    }
+                  />
+                ))
+              )
+            )}
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+    ))}
+</Accordion>
+
+
+
+
+
+
+ 
   </div>
-  {/* <Container className="buttonGoToTop-container">
-  <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>
-  </Container> */}
-  {/* </> ) : (
-    <Container>
-    <LoginButton/>
-    </Container>
-  )} */}
 </div>
 );
 };

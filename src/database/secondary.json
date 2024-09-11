@@ -2,19 +2,19 @@
   "subcategories": [
     {
       "name": "Pistols",
-      "weapons": ["5/7 AP Pistol","Baby Deagle Pistol","Bernetti 9 Pistol","Bronco .44 revolver","Broomstick Pistol","Castigo .44 Revolver","Chimano 88 Pistol","Chimano Compact Pistol","Chimano Custom Pistol","Contractor Pistol","Crosskill Guard Pistol","Crosskill Pistol","Deagle Pistol","Gruber Kurz Pistol","Interceptor 45 Pistol","LEO Pistol","Matever .357 Revolver","Pacemaker .45 Revolver","Signature .40 Pistol","STRYK 18c Pistol","White Streak Pistol"]
+      "weapons": ["Chimano 88 Pistol (A1)","Signature .40 Pistol (B1)","Gruber Kurz Pistol (C1)","Interceptor 45 Pistol (D1)","White Streak Pistol (A2)","Crosskill Pistol (B2)","Bernetti 9 Pistol (C2)","Bronco .44 Revolver (D2)","Baby Deagle Pistol (A3)","Chimano Custom Pistol (B3)","Broomstick Pistol (C3)","Castigo .44 Revolver (D3)","5/7 AP Pistol (A4)","Contractor Pistol (B4)","Chimano Compact Pistol (C4)","Crosskill Guard Pistol (D4)","LEO Pistol (A5)","STRYK 18c Pistol (B5)","Peacemaker .45 Revolver (C5)","Matever .357 Revolver (D5)","Deagle Pistol (A6)"]
     },
     {
       "name": "Submachine Guns",
-      "weapons": ["Blaster 9mm Submachine Gun","Chicago Typewriter Submachine Gun","CMP Submachine Gun","Cobra Submachine Gun","Compact-5 Submachine Gun","CR 805B Submachine Gun","Heather Submachine Gun","Jackal Submachine Gun","Jacket's Piece","Kobus 90 Submachine Gun","Krinkov Submachine Gun","Kross Vertex Submachine Gun","Mark 10 Submachine Gun","Micro Uzi Submachine Gun","Para Submachine Gun","Patchett L2A1 Submachine Gun","Signature Submachine Gun","SpecOps Submachine Gun","Swedish K Submachine Gun","Tatonka Submachine Gun","Uzi Submachine Gun"]
+      "weapons": ["Swedish K Submachine Gun (A1)","SpecOps Submachine Gun (B1)","Mark 10 Submachine Gun (C1)","CR 805B Submachine Gun (D1)","Jacket's Piece (A2)","Compact-5 Submachine Gun (B2)","Chicago Typewriter Submachine Gun (C2)","Cobra Submachine Gun (D2)","CMP Submachine Gun (A3)","Para Submachine Gun (B3)","Micro Uzi Submachine Gun (C3)","Signature Submachine Gun (D3)","Jackal Submachine Gun (A4)","Heather Submachine Gun (B4)","Krinkov Submachine Gun (C4)","Blaster 9mm Submachine Gun (D4)","Kobus 90 Submachine Gun (A5)","Kross Vertex Submachine Gun (B5)","Tatonka Submachine Gun (C5)","Patchett L2A1 Submachine Gun (D5)","Uzi Submachine Gun (A6)"]
     },
     {
       "name": "Shotguns",
-      "weapons": ["Goliath 12G Shotgun","Grimm 12G Shotgun","GSPS 12G Shotgun","Locomotive 12G Shotgun","Street Sweeper Shotgun","The Judge Shotgun"]
+      "weapons": ["Locomotive 12G Shotgun (A1)","GSPS 12G Shotgun (B1)","Goliath 12G Shotgun (C1)","Grimm 12G Shotgun (D1)","Street Sweeper Shotgun (A2)","The Judge Shotgun (B2)"]
     },
     {
       "name": "Specials",
-      "weapons": ["Arbiter Grenade Launcher","China Puff 40mm Grenade Launcher","Commando 101 Rocket Launcher","Compact 40mm Grenade Launcher","HRL-7 Rocket Launcher","MA-17 Flamethrower","OVE9000 Saw","Pistol Crossbow"]
+      "weapons": ["Pistol Crossbow (A1)","Compact 40mm Grenade Launcher (B1)","HRL-7 Rocket Launcher (C1)","China Puff 40mm Grenade Launcher (D1)","Commando 101 Rocket Launcher (A2)","MA-17 Flamethrower (B2)","Arbiter Grenade Launcher (C2)","OVE9000 Saw (D2)"]
     }
   ]
 }
