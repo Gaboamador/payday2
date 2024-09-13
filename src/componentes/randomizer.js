@@ -13,6 +13,9 @@ import Skull from "../imagenes/skull.svg"
 import Skull2 from "../imagenes/skull2.svg"
 import SelectCategories from "./SelectCategories";
 import {options} from "../database/items";
+import {heists} from "../database/items";
+import {Clock} from "./clock"
+import { PiGhost, PiGhostFill } from "react-icons/pi";
 
 
 (async () => {
@@ -58,13 +61,29 @@ const Payday2Randomizer = () => {
   }, []);
 
 
- // Initialize selectedOptions state with all items checked
- const [selectedOptions, setSelectedOptions] = useState(
-  Object.keys(options).reduce((acc, category) => {
-    acc[category] = Object.values(options[category]).flat(); // All items checked
+//  // Initialize selectedOptions state with all items checked
+//  const [selectedOptions, setSelectedOptions] = useState(
+//   Object.keys(options).reduce((acc, category) => {
+//     acc[category] = Object.values(options[category]).flat(); // All items checked
+//     return acc;
+//   }, {})
+// );
+const [selectedOptions, setSelectedOptions] = useState(() => {
+  const initialOptions = Object.keys(options).reduce((acc, category) => {
+    if (category === 'heists') {
+      // For heists, initialize all items as checked
+      const allHeists = Object.keys(heists);
+      acc[category] = allHeists;
+    } else {
+      // For other categories, initialize all items as checked
+      acc[category] = Object.values(options[category]).flat();
+    }
     return acc;
-  }, {})
-);
+  }, {});
+
+  return initialOptions;
+});
+
 
 const areAllItemsCheckedInCategory = (category) => {
   const allItemsInCategory = Object.values(options[category]).flat();
@@ -237,6 +256,7 @@ const updateWeights = (category, item) => {
       break;
   }
 };
+
 const getRandomWeightedItemFromSubcategories = (selectedItems, itemWeights) => {
   // Flatten the subcategories into a single array of items
   const allItems = Object.values(selectedItems).flat();
@@ -365,28 +385,28 @@ const getRandomWeightedItemFromSubcategories = (selectedItems, itemWeights) => {
     const [heistWeights, setHeistWeights] = useState({});
 
     const handleRandomizeHeist = () => {
-
-        // Check if selectedOptions.heists exists and is an array with elements
-    if (!selectedOptions.heists || selectedOptions.heists.length === 0) {
+      if (!selectedOptions.heists || selectedOptions.heists.length === 0) {
         return; // If no heist is selected, exit the function
-    }
-
-      const remainingHeists = selectedOptions.heists.filter(heist => !heistWeights[heist]);
+      }
+    
+      const remainingHeists = selectedOptions.heists.filter(heistKey => !heistWeights[heistKey]);
       setShowTableHeist(true);
       if (remainingHeists.length === 0) {
         // All heists have been picked, reset the weights
         setHeistWeights({});
       } else {
-        const randomHeist = getRandomWeightedItem(remainingHeists, heistWeights);
+        const randomHeistKey = getRandomWeightedItem(remainingHeists, heistWeights);
         const updatedWeights = {
           ...heistWeights,
-          [randomHeist]: (heistWeights[randomHeist] || 1) * 0.5, // Decrease the weight by half
+          [randomHeistKey]: (heistWeights[randomHeistKey] || 1) * 0.5, // Decrease the weight by half
         };
         setHeistWeights(updatedWeights);
-        setRandomizedHeist({ heist: randomHeist });
+        setRandomizedHeist({ heist: randomHeistKey });
         setShowTableHeist(true);
       }
     };
+    
+    
   
   const getRandomWeightedItem = (items, weights) => {
     // Calculate the total weight
@@ -509,38 +529,93 @@ const toggleSubcategory = (category, subcategory) => {
     }
   };
 
+// const handleToggleCheckAll = (category, subcategory) => {
+//   const subcategoryItems = options[category][subcategory];
+//   const currentlySelected = selectedOptions[category];
+
+//   // Check if all items in the subcategory are currently selected
+//   const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
+
+//   setSelectedOptions((prev) => {
+//     if (allChecked) {
+//       // If all items are checked, uncheck them
+//       return {
+//         ...prev,
+//         [category]: prev[category].filter(item => !subcategoryItems.includes(item)),
+//       };
+//     } else {
+//       // If not all items are checked, check them
+//       return {
+//         ...prev,
+//         [category]: [...new Set([...prev[category], ...subcategoryItems])],
+//       };
+//     }
+//   });
+// };
 const handleToggleCheckAll = (category, subcategory) => {
-  const subcategoryItems = options[category][subcategory];
-  const currentlySelected = selectedOptions[category];
+  if (category === 'heists') {
+    // Special handling for heists
+    const subcategoryItems = sortedHeists.filter(heist => heists[heist][sortCriteria] === subcategory);
+    const currentlySelected = selectedOptions.heists;
 
-  // Check if all items in the subcategory are currently selected
-  const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
+    // Check if all items in the subcategory are currently selected
+    const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
 
-  setSelectedOptions((prev) => {
-    if (allChecked) {
-      // If all items are checked, uncheck them
-      return {
-        ...prev,
-        [category]: prev[category].filter(item => !subcategoryItems.includes(item)),
-      };
+    setSelectedOptions((prev) => {
+      if (allChecked) {
+        // If all items are checked, uncheck them
+        return {
+          ...prev,
+          heists: prev.heists.filter(item => !subcategoryItems.includes(item)),
+        };
+      } else {
+        // If not all items are checked, check them
+        return {
+          ...prev,
+          heists: [...new Set([...prev.heists, ...subcategoryItems])],
+        };
+      }
+    });
+  } else {
+    // Existing handling for other categories
+    const subcategoryItems = options[category][subcategory];
+    const currentlySelected = selectedOptions[category];
+
+    // Check if all items in the subcategory are currently selected
+    const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
+
+    setSelectedOptions((prev) => {
+      if (allChecked) {
+        // If all items are checked, uncheck them
+        return {
+          ...prev,
+          [category]: prev[category].filter(item => !subcategoryItems.includes(item)),
+        };
+      } else {
+        // If not all items are checked, check them
+        return {
+          ...prev,
+          [category]: [...new Set([...prev[category], ...subcategoryItems])],
+        };
+      }
+    });
+  }
+};
+
+
+
+const handleOptionChange = (category, itemKey, isChecked) => {
+  setSelectedOptions(prevOptions => {
+    const updatedOptions = { ...prevOptions };
+    if (isChecked) {
+      updatedOptions[category] = [...(updatedOptions[category] || []), itemKey];
     } else {
-      // If not all items are checked, check them
-      return {
-        ...prev,
-        [category]: [...new Set([...prev[category], ...subcategoryItems])],
-      };
+      updatedOptions[category] = (updatedOptions[category] || []).filter(item => item !== itemKey);
     }
+    return updatedOptions;
   });
 };
 
-const handleOptionChange = (category, item, checked) => {
-  setSelectedOptions((prev) => {
-    const updated = checked
-      ? [...prev[category], item]
-      : prev[category].filter((i) => i !== item);
-    return { ...prev, [category]: updated };
-  });
-};
 
   const toggleAllCollapse = () => {
     const newCollapseState = !collapsed.all; // Determine if collapsing or expanding
@@ -856,10 +931,32 @@ function CustomToggle({ children, eventKey, category }) {
   );
 }
 
+
+// function SubcategoryToggle({ children, eventKey, category, subcategory }) {
+//   const decoratedOnClick = useAccordionButton(eventKey, () =>
+//     toggleSubcategory(category, subcategory)
+//   );
+
+//   return (
+//     <Button
+//       type="button"
+//       className="subcategory-header"
+//       onClick={decoratedOnClick}
+//     >
+//       {children} {!collapsedSubcategories[category]?.[subcategory] ? <GoChevronUp /> : <GoChevronDown />}
+//     </Button>
+//   );
+// }
 function SubcategoryToggle({ children, eventKey, category, subcategory }) {
   const decoratedOnClick = useAccordionButton(eventKey, () =>
     toggleSubcategory(category, subcategory)
   );
+
+  // Determine if the current subcategory is collapsed
+  const isCollapsed = !collapsedSubcategories[category]?.[subcategory];
+
+  // Apply different logic based on the category
+  const isHeistCategory = category === 'heists';
 
   return (
     <Button
@@ -867,27 +964,63 @@ function SubcategoryToggle({ children, eventKey, category, subcategory }) {
       className="subcategory-header"
       onClick={decoratedOnClick}
     >
-      {children} {!collapsedSubcategories[category]?.[subcategory] ? <GoChevronUp /> : <GoChevronDown />}
+      {children}
+      {isHeistCategory ? (
+        // For heists category, reverse the logic
+        isCollapsed ? <GoChevronDown /> : <GoChevronUp />
+      ) : (
+        // For other categories, use normal logic
+        isCollapsed ? <GoChevronUp /> : <GoChevronDown />
+      )}
     </Button>
   );
 }
 
 
 
-return (
-<div className="backgroundColor">
+const [sortCriteria, setSortCriteria] = useState('name'); // Default sorting by name
+  const [isSortedAsc, setIsSortedAsc] = useState(true); // Default sorting order (ascending)
 
-<SelectCategories
-  categories={categories.filter(category => category.key !== "heists")}
-  selectedCategories={selectedCategories}
-  collapsed={collapsed}
-  toggleCollapse={toggleCollapse}
-  handleToggleCategory={handleToggleCategory}
-  handleToggleSelectedCategories={handleToggleSelectedCategories}
-  isCheckboxMode={isCheckboxMode}
-  toggleMode={toggleMode}
-  randomizedBuild={randomizedBuild}
-/>
+  // Sort heists based on the selected criteria
+  const sortedHeists = [...options.heists.heists].sort((a, b) => {
+    const aValue = heists[a][sortCriteria];
+    const bValue = heists[b][sortCriteria];
+
+    if (aValue < bValue) return isSortedAsc ? -1 : 1;
+    if (aValue > bValue) return isSortedAsc ? 1 : -1;
+    return 0;
+  });
+
+  // Get unique values for subcategories based on the sorting criteria
+  const getSubcategories = () => {
+    const values = new Set(sortedHeists.map((heist) => heists[heist][sortCriteria]));
+    return Array.from(values).sort();
+  };
+
+  const subcategoriesHeist = getSubcategories();
+
+  const handleSortChange = (criteria) => {
+    if (sortCriteria === criteria) {
+      setIsSortedAsc(!isSortedAsc);
+    } else {
+      setSortCriteria(criteria);
+      setIsSortedAsc(true); // Default to ascending when changing criteria
+    }
+  };
+
+  const removePrefix = (text) => {
+    return text.replace(/^\d+\. /, ''); // Remove prefix like "1. ", "2. ", etc.
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = useAccordionButton(0, () => {
+    setIsOpen(prevState => !prevState); // Toggle the state
+  });
+  
+return (
+<div className="backgroundColor" style={{paddingTop: 20, paddingBottom: 45}}>
+
 
 <div className="randomBuildContainer backgroundImage difficulty"  style={{marginTop: 0}}>
 {!isWideScreen && <div className="randomBuildContainer-title">DIFFICULTY</div>}
@@ -1032,21 +1165,84 @@ return (
 
     {showTableHeist && randomizedHeist.heist && (
       <>
+<div className="heist-title">
+  {heists[randomizedHeist.heist]?.name || 'Unknown Heist'}
+</div>
+<img
+  src={itemsToImage[randomizedHeist.heist]}
+  alt={randomizedHeist.heist}
+  className="heist-image"
+/>
+{/* <div className="heist-subtitle">
+  {`Contractor: ${heists[randomizedHeist.heist]?.contractor || 'N/A'}`}
+  <br />
+  {`Days: ${heists[randomizedHeist.heist]?.days || 'N/A'}`}
+  <br />
+  {`Tactic: ${heists[randomizedHeist.heist]?.tactic || 'N/A'}`}
+  <br />
+  {`XP: ${removePrefix(heists[randomizedHeist.heist]?.xp || 'N/A')}`}
+</div> */}
+<div className="heist-subtitle grid-container">
+  
+  {/* HEIST CONTRACTOR */}
+  <div className="contractor">{heists[randomizedHeist.heist]?.contractor || 'N/A'}</div>
+
+  {/* HEIST DAYS */}
+  <div className="days">
+    {(() => {
+      const days = heists[randomizedHeist.heist]?.days;
+      let clockComponent = null;
+      if (days === 1) {
+        clockComponent = <Clock duration={10} className="clock" />;
+      } else if (days === 2) {
+        clockComponent = <Clock duration={25} className="clock" />;
+      } else if (days === 3) {
+        clockComponent = <Clock duration={40} className="clock" />;
+      }
+      return (
+        <>
+          <span>{clockComponent}</span>
+          <span className="clock-text">{`${days || 'N/A'} ${days === 1 ? 'day' : 'days'}`}</span>
+        </>
+      );
+    })()}
+  </div>
+
+  {/* HEIST BASE XP */}
+  <div className="xp">{`${removePrefix(heists[randomizedHeist.heist]?.xp || 'N/A')} BASE XP`}</div>
+
+  {/* HEIST TACTIC */}
+  {/* <div>{heists[randomizedHeist.heist]?.tactic || 'N/A'}</div> */}
+  <div className="tactic">
+    {(() => {
+      const tactic = heists[randomizedHeist.heist]?.tactic;
+      let iconComponent = null;
+
+      if (tactic === 'Stealth possible') {
+        iconComponent = <PiGhost className="ghost" />;
+      } else if (tactic === 'Stealth only') {
+        iconComponent = <PiGhostFill className="ghost" />;
+      }
+
+      return (
+        <>
+          <span>{iconComponent}</span>
+          <span className="ghost-text">{tactic || 'N/A'}</span>
+        </>
+      );
+    })()}
+  </div>
+
+</div>
+
+
+
+
+
       
-      <div className="heist-title">
-      {splitHeistString(randomizedHeist.heist, 'heist')}
-      </div>
-      
-      <img
-        src={itemsToImage[randomizedHeist.heist]}
-        alt={randomizedHeist.heist}
-        className="heist-image"
-      />
-      
-      <div className="heist-subtitle">
-      {splitHeistString(randomizedHeist.heist, 'details')}
-      </div>
       </>
+    
+    
     )}
   </div>
 
@@ -1125,7 +1321,35 @@ return (
 
 <div className="separator"></div>
 
-<div className="container">
+<Accordion className="configuration-accordion">
+<Accordion.Item eventKey="0">
+<Accordion.Header onClick={toggleAccordion} className={`configuration-header ${isOpen ? "open" : "closed"}`}>
+{isOpen ? 'CLOSE CONFIGURATION' : 'OPEN CONFIGURATION'}
+</Accordion.Header>
+<Accordion.Body>
+        
+
+{/* <Button onClick={toggleConfig}>
+        {configActive ? "Close configuration" : "Open configuration"}
+      </Button> */}
+{/* <div className={`container configuration ${configActive ? "active" : ""}`}> */}
+<div className="container configuration">
+    
+<SelectCategories
+  categories={categories.filter(category => category.key !== "heists")}
+  selectedCategories={selectedCategories}
+  collapsed={collapsed}
+  toggleCollapse={toggleCollapse}
+  handleToggleCategory={handleToggleCategory}
+  handleToggleSelectedCategories={handleToggleSelectedCategories}
+  isCheckboxMode={isCheckboxMode}
+  toggleMode={toggleMode}
+  randomizedBuild={randomizedBuild}
+/>
+
+{/* <div className={`separator internal ${!collapsed.selectedCategories ? "green" : "red"}`} style={{marginTop: 10, marginBottom: 20}}></div> */}
+<div className="separator" style={{marginTop: 10, marginBottom: 20}}></div>
+    
     <div className="buttons expand-uncheck">
 
       {/* <Button className="expandAllCategoriesButton" onClick={toggleAllCollapse}>
@@ -1137,145 +1361,243 @@ return (
         {Object.keys(selectedOptions).every(category => 
           selectedOptions[category].length === Object.values(options[category]).flat().length
         ) ? (
-        <><ImCheckboxChecked /> Uncheck All Categories</>
+        <><ImCheckboxChecked /> Uncheck All Items</>
         ) : (
-        <><ImCheckboxUnchecked /> Check All Categories</>
+        <><ImCheckboxUnchecked /> Check All Items</>
         )}
       </Button>
 
     </div>
 
-    <Accordion defaultActiveKey="">
-  {Object.keys(options)
-    .filter((category) => !excludedCategories.includes(category)) // Exclude specified categories
-    .map((category, index) => (
-      <Card key={category}>
-        
-        
-        <Card.Header
-        ref={(el) => (refs.current[category] = { current: el })}
-        className={`form-title stickyDiv ${stickyStates[category] && !collapsed[category] ? 'stickyCategory' : ''} ${!collapsed[category] ? "selectedCategories" : "collapsed"} ${areAllItemsCheckedInCategory(category) ? "" : "none-selected"}`}
-        >
-          <div className="card-header-flex">
-          <CustomToggle
-          
-          eventKey={String(index)}
-          category={category}
-          
-          >
-            {categories.find((cat) => cat.key === category)?.label || category}
-            
-          </CustomToggle>
-
-          {!collapsed[category] && (
-            <Button
-              className="eyeSlashButton toggleModeForm"
-              onClick={() => handleToggleCheckAllInCategory(category)}
+    <Accordion>
+      {Object.keys(options)
+        .filter((category) => !excludedCategories.includes(category)) // Exclude specified categories
+        .map((category, index) => (
+          <Card key={category}>
+            <Card.Header
+              ref={(el) => (refs.current[category] = { current: el })}
+              className={`form-title stickyDiv ${stickyStates[category] && !collapsed[category] ? 'stickyCategory' : ''} ${!collapsed[category] ? "selectedCategories" : "collapsed"} ${areAllItemsCheckedInCategory(category) ? "" : "none-selected"}`}
             >
-              {areAllItemsCheckedInCategory(category) ? "Uncheck all " : "Check all "}
-            </Button>
-          )}
-            </div>
-        </Card.Header>
+              <div className="card-header-flex">
+                <CustomToggle
+                  eventKey={String(index)}
+                  category={category}
+                >
+                  {categories.find((cat) => cat.key === category)?.label || category}
+                </CustomToggle>
 
-        <Accordion.Collapse eventKey={String(index)}>
-          <Card.Body>
-            {/* Subcategories Accordion */}
-            {category === "primaryGuns" || category === "secondaryGuns" ? (
-              <Accordion>
-                {Object.keys(options[category]).map((subcategory, subIndex) => (
-                  <Card key={subcategory}>
-                    
-                    <Card.Header className="form-items">
+                {!collapsed[category] && (
+                  <Button
+                    className="eyeSlashButton toggleModeForm"
+                    onClick={() => handleToggleCheckAllInCategory(category)}
+                  >
+                    {areAllItemsCheckedInCategory(category) ? "Uncheck all " : "Check all "}
+                  </Button>
+                )}
+              </div>
+            </Card.Header>
 
-                      <SubcategoryToggle
-                        eventKey={String(subIndex)}
-                        category={category}
-                        subcategory={subcategory}
-                      >
-                        {subcategories.find((cat) => cat.key === subcategory)?.label || subcategory}
-                      </SubcategoryToggle>
-                      
-                      <div className="form-items">
-                          <Form.Check
-                            type="checkbox"
-                            className="subcategory-checkbox"
-                            ref={(input) => {
-                              if (input) {
-                                const totalItems = options[category][subcategory].length;
-                                const selectedItems = selectedOptions[category].filter((item) =>
+            <Accordion.Collapse eventKey={String(index)}>
+              <Card.Body>
+                {category === "primaryGuns" || category === "secondaryGuns" ? (
+                  <Accordion className="card-body guns">
+                    {Object.keys(options[category]).map((subcategory, subIndex) => (
+                      <Card key={subcategory}>
+                        <Card.Header className="form-items">
+                          <SubcategoryToggle
+                            eventKey={String(subIndex)}
+                            category={category}
+                            subcategory={subcategory}
+                          >
+                            {subcategories.find((cat) => cat.key === subcategory)?.label || subcategory}
+                          </SubcategoryToggle>
+
+                          <div className="form-items">
+                            <Form.Check
+                              type="checkbox"
+                              className="subcategory-checkbox"
+                              ref={(input) => {
+                                if (input) {
+                                  const totalItems = options[category][subcategory].length;
+                                  const selectedItems = selectedOptions[category].filter((item) =>
+                                    options[category][subcategory].includes(item)
+                                  ).length;
+
+                                  // Set the indeterminate property
+                                  input.indeterminate =
+                                    selectedItems > 0 && selectedItems < totalItems;
+                                }
+                              }}
+                              checked={
+                                selectedOptions[category].filter((item) =>
                                   options[category][subcategory].includes(item)
-                                ).length;
-
-                                // Set the indeterminate property
-                                input.indeterminate =
-                                  selectedItems > 0 && selectedItems < totalItems;
+                                ).length === options[category][subcategory].length
                               }
-                            }}
-                            checked={
-                              selectedOptions[category].filter((item) =>
-                                options[category][subcategory].includes(item)
-                              ).length === options[category][subcategory].length
-                            }
-                            onChange={() => handleToggleCheckAll(category, subcategory)}
-                          />
-                        </div>
+                              onChange={() => handleToggleCheckAll(category, subcategory)}
+                            />
+                          </div>
+                        </Card.Header>
 
-                    </Card.Header>
+                        <Accordion.Collapse eventKey={String(subIndex)}>
+                          <Card.Body>
+                            {/* Only show items if subcategory is expanded */}
+                            {options[category][subcategory].map((item) => (
+                              <Form.Check
+                                type="checkbox"
+                                label={item}
+                                id={item}
+                                key={item}
+                                value={item}
+                                checked={selectedOptions[category].includes(item)}
+                                onChange={(e) =>
+                                  handleOptionChange(category, item, e.target.checked)
+                                }
+                              />
+                            ))}
+                          </Card.Body>
+                        </Accordion.Collapse>
+                      </Card>
+                    ))}
+                  </Accordion>
+                ) : category === 'heists' ? (
+                  <>
+                    
+                      <Accordion defaultActiveKey="">
+                          <Accordion.Item>
+                          <Accordion.Header className="sorting-label">GROUP BY</Accordion.Header>
+                          <Accordion.Body className="sorting-controls">
+                            <Button onClick={() => handleSortChange('name')} className={`${sortCriteria === 'name' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Name</Button>
+                            <Button onClick={() => handleSortChange('contractor')} className={`${sortCriteria === 'contractor' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Contractor</Button>
+                            <Button onClick={() => handleSortChange('days')} className={`${sortCriteria === 'days' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Days</Button>
+                            <Button onClick={() => handleSortChange('tactic')} className={`${sortCriteria === 'tactic' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Tactic</Button>
+                            <Button onClick={() => handleSortChange('xp')} className={`${sortCriteria === 'xp' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Base XP</Button>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    
+                    {sortCriteria === 'days' || sortCriteria === 'contractor' || sortCriteria === 'tactic' || sortCriteria === 'xp' ? (
+                      <Accordion className="card-body guns">
+                        {subcategoriesHeist.map((subcat, subIndex) => (
+                          <Card key={subcat}>
+                            <Card.Header className="form-items">
+                              <SubcategoryToggle
+                                eventKey={String(subIndex)}
+                                category={category}
+                                subcategory={subcat}
+                              >
+                              {
+                                sortCriteria === 'days' ? (
+                                  <>{subcat} {subcat === 1 ? 'day' : 'days'}</>
+                                ) : (
+                                  <>{removePrefix(subcat)}</>
+                                )
+                              }
+                              </SubcategoryToggle>
 
-                    <Accordion.Collapse eventKey={String(subIndex)}>
-                      <Card.Body>
-                        {/* Only show items if subcategory is expanded */}
-                        {options[category][subcategory].map((item) => (
+                              <div className="form-items">
+                                <Form.Check
+                                  type="checkbox"
+                                  className="subcategory-checkbox"
+                                  ref={(input) => {
+                                    if (input) {
+                                      const totalItems = sortedHeists.filter((heist) => heists[heist][sortCriteria] === subcat).length;
+                                      const selectedItems = selectedOptions.heists.filter((item) =>
+                                        sortedHeists.includes(item) && heists[item][sortCriteria] === subcat
+                                      ).length;
+
+                                      // Set the indeterminate property
+                                      input.indeterminate =
+                                        selectedItems > 0 && selectedItems < totalItems;
+                                    }
+                                  }}
+                                  checked={
+                                    selectedOptions.heists.filter((item) =>
+                                      heists[item][sortCriteria] === subcat
+                                    ).length ===
+                                    sortedHeists.filter((heist) => heists[heist][sortCriteria] === subcat).length
+                                  }
+                                  onChange={() => handleToggleCheckAll(category, subcat)}
+                                />
+                              </div>
+                            </Card.Header>
+
+                            <Accordion.Collapse eventKey={String(subIndex)}>
+                              <Card.Body>
+                                {/* Only show items if subcategory is expanded */}
+                                {sortedHeists
+                                .filter((heist) => heists[heist][sortCriteria] === subcat)
+                                .sort((a, b) => {return heists[a].name.localeCompare(heists[b].name);})
+                                .map((heistKey) => (
+                                  <Form.Check
+                                    type="checkbox"
+                                    label={heists[heistKey]?.name || 'Unknown Heist'}
+                                    id={heistKey}
+                                    key={heistKey}
+                                    value={heistKey}
+                                    checked={selectedOptions.heists.includes(heistKey)}
+                                    onChange={(e) =>
+                                      handleOptionChange('heists', heistKey, e.target.checked)
+                                    }
+                                  />
+                                ))}
+                              </Card.Body>
+                            </Accordion.Collapse>
+                          </Card>
+                        ))}
+                      </Accordion>
+                    ) : (
+                      <div className="heist-list">
+                        {sortedHeists.map((heistKey) => (
                           <Form.Check
                             type="checkbox"
-                            label={item}
-                            id={item}
-                            key={item}
-                            value={item}
-                            checked={selectedOptions[category].includes(item)}
+                            label={heists[heistKey]?.name || 'Unknown Heist'}
+                            id={heistKey}
+                            key={heistKey}
+                            value={heistKey}
+                            checked={selectedOptions.heists.includes(heistKey)}
                             onChange={(e) =>
-                              handleOptionChange(category, item, e.target.checked)
+                              handleOptionChange('heists', heistKey, e.target.checked)
                             }
                           />
                         ))}
-                      </Card.Body>
-                    </Accordion.Collapse>
-
-                  </Card>
-                ))}
-              </Accordion>
-            ) : (
-              // Handle categories without subcategories (e.g., perkDecks)
-              Object.keys(options[category]).map((subcategory) =>
-                options[category][subcategory].map((item) => (
-                  <Form.Check
-                    type="checkbox"
-                    label={item}
-                    id={item}
-                    key={item}
-                    value={item}
-                    checked={selectedOptions[category].includes(item)}
-                    onChange={(e) =>
-                      handleOptionChange(category, item, e.target.checked)
-                    }
-                  />
-                ))
-              )
-            )}
-          </Card.Body>
-        </Accordion.Collapse>
-      </Card>
-    ))}
-</Accordion>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  // Handle categories without subcategories (e.g., perkDecks)
+                  Object.keys(options[category]).map((subcategory) =>
+                    options[category][subcategory].map((item) => (
+                      <Form.Check
+                        type="checkbox"
+                        label={item}
+                        id={item}
+                        key={item}
+                        value={item}
+                        checked={selectedOptions[category].includes(item)}
+                        onChange={(e) =>
+                          handleOptionChange(category, item, e.target.checked)
+                        }
+                      />
+                    ))
+                  )
+                )}
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+        ))}
+    </Accordion>
 
 
 
-
+{/* <div>{heistOptions}</div> */}
 
 
  
   </div>
+  </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+
 </div>
 );
 };
