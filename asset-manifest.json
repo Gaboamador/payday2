@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.230c88c2.css",
-    "main.js": "/payday2/static/js/main.d2141db8.js",
+    "main.css": "/payday2/static/css/main.600a56d5.css",
+    "main.js": "/payday2/static/js/main.09e2693c.js",
     "static/js/787.5769c993.chunk.js": "/payday2/static/js/787.5769c993.chunk.js",
     "static/media/icons.png": "/payday2/static/media/icons.7ad65b2dffcd3fa9a44d.png",
     "static/media/cursed_kill_room.jpg": "/payday2/static/media/cursed_kill_room.8b24eda7b1500b42200a.jpg",
@@ -72,6 +72,7 @@
     "static/media/maniac.png": "/payday2/static/media/maniac.1873f1643208b19180f2.png",
     "static/media/DINEngschrift.otf": "/payday2/static/media/DINEngschrift.87a617d2f7f920531281.otf",
     "static/media/flak.png": "/payday2/static/media/flak.687ce3621e10fbf491fd.png",
+    "static/media/Padaloma.ttf": "/payday2/static/media/Padaloma.ada2b3a2c590dcdc0f99.ttf",
     "static/media/ballistic.png": "/payday2/static/media/ballistic.ba542ad0ae8809eaf701.png",
     "static/media/heavy_ballistic.png": "/payday2/static/media/heavy_ballistic.7ba9fb8deb033f49a256.png",
     "static/media/ctv.png": "/payday2/static/media/ctv.7369cf0d94a16ce27eb8.png",
@@ -320,12 +321,12 @@
     "index.html": "/payday2/index.html",
     "static/media/croupiers_rake.webp": "/payday2/static/media/croupiers_rake.0a3b7b834db4e48933ca.webp",
     "static/media/the_pen.webp": "/payday2/static/media/the_pen.24610383a444ced79906.webp",
-    "main.230c88c2.css.map": "/payday2/static/css/main.230c88c2.css.map",
-    "main.d2141db8.js.map": "/payday2/static/js/main.d2141db8.js.map",
+    "main.600a56d5.css.map": "/payday2/static/css/main.600a56d5.css.map",
+    "main.09e2693c.js.map": "/payday2/static/js/main.09e2693c.js.map",
     "787.5769c993.chunk.js.map": "/payday2/static/js/787.5769c993.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.230c88c2.css",
-    "static/js/main.d2141db8.js"
+    "static/css/main.600a56d5.css",
+    "static/js/main.09e2693c.js"
   ]
 }
