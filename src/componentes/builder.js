@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { BiExport, BiImport } from "react-icons/bi";
 import skillsData from '../database/skills.json';
 import primaryWeapons from '../database/primary.json';
@@ -8,12 +8,19 @@ import armors from '../database/armors.json';
 import throwables from '../database/throwables.json';
 import equipments from '../database/equipments.json';
 import melees from '../database/melees.json';
-import {Button, Row, Col, Container, ListGroup, Table, Form} from 'react-bootstrap';
+import tagsRaw from '../database/tags.json'
+import {Button, Row, Col, Container, ListGroup, Table, Form, Carousel} from 'react-bootstrap';
 import aceImage from '../imagenes/ace.png';
 import iconSkills from '../imagenes/icons.png'
+import { itemsToImage } from "../database/itemsToImage";
+import { IoPricetags, IoPricetagsOutline } from "react-icons/io5";
+import Context from "../context";
+
+const tags = tagsRaw.sort()
 
 const Builder = () => {
-    const MAX_SKILL_POINTS = 120;
+  const context= useContext(Context)  
+  const MAX_SKILL_POINTS = 120;
   
   //  // State to keep track of selected skills and their points for all profiles
   // const [selectedSkills, setSelectedSkills] = useState(() => {
@@ -40,18 +47,21 @@ const Builder = () => {
     equipment2: null, // Add this property for primary equipment
     }));
   };
-  const [selectedSkills, setSelectedSkills] = useState(() => {
-    return loadSelectedSkillsFromLocalStorage();
-  });
+  
+  const selectedSkills = context.selectedSkills
+  // const [selectedSkills, setSelectedSkills] = useState(() => {
+  //   return loadSelectedSkillsFromLocalStorage();
+  // });
   
   useEffect(() => {
     saveSelectedSkillsToLocalStorage(selectedSkills);
-  }, [selectedSkills]);
+    context.setSelectedSkills(selectedSkills)
+  }, [context.selectedSkills, selectedSkills]);
 
   const handleResetSkills = () => {
     const confirmed = window.confirm(`Are you sure you want to reset all profiles? This will clear all skills and categories.`);
   if (confirmed) {
-    setSelectedSkills(Array.from({ length: 15 }, () => ({})));
+    context.setSelectedSkills(Array.from({ length: 15 }, () => ({})));
     localStorage.removeItem('selectedSkills');
   }
   };
@@ -59,7 +69,7 @@ const Builder = () => {
  const handleResetProfile = () => {
     const confirmed = window.confirm(`Are you sure you want to reset Profile ${currentProfile}? This will clear all selected skills and categories.`);
   if (confirmed) {
-    setSelectedSkills((prevSelectedSkills) => {
+    context.setSelectedSkills((prevSelectedSkills) => {
       const newSelectedSkills = [...prevSelectedSkills];
       newSelectedSkills[currentProfile - 1] = {};
       return newSelectedSkills;
@@ -138,7 +148,7 @@ const Builder = () => {
     const skillInfo = organizedSkillsFlat.find((skill) => skill.name === skillName);
   console.log(organizedSkillsFlat, "organizedSkillsFlat")
     if (skillInfo) {
-      setSelectedSkills((prevSelectedSkills) => {
+      context.setSelectedSkills((prevSelectedSkills) => {
         const newSelectedSkills = prevSelectedSkills.map((profileSkills) => ({ ...profileSkills }));
         const currentSelected = newSelectedSkills[currentProfile - 1][skillName];
   
@@ -202,7 +212,7 @@ const totalSkillPoints = getProfileTotalPoints(selectedSkills, currentProfile - 
 
 
  const handleSelectPrimaryWeapon = (profileIndex, subcategoryName, weaponName) => {
-  setSelectedSkills((prevSelectedSkills) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
 
@@ -214,7 +224,7 @@ const totalSkillPoints = getProfileTotalPoints(selectedSkills, currentProfile - 
 };
 
 const handleSelectSecondaryWeapon = (profileIndex, subcategoryName, weaponName) => {
-  setSelectedSkills((prevSelectedSkills) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
 
@@ -226,7 +236,7 @@ const handleSelectSecondaryWeapon = (profileIndex, subcategoryName, weaponName) 
 };
 
 const handleSelectPerkDeck = (profileIndex, selectedPerkDeck) => {
-  setSelectedSkills((prevSelectedSkills) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
 
@@ -238,7 +248,7 @@ const handleSelectPerkDeck = (profileIndex, selectedPerkDeck) => {
 };
 
 const handleSelectArmor = (profileIndex, selectedArmor) => {
-  setSelectedSkills((prevSelectedSkills) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
     selectedProfile.armor = selectedArmor;
@@ -247,7 +257,7 @@ const handleSelectArmor = (profileIndex, selectedArmor) => {
 };
 
 const handleSelectThrowable = (profileIndex, selectedThrowable) => {
-  setSelectedSkills((prevSelectedSkills) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
     selectedProfile.throwable = selectedThrowable;
@@ -265,7 +275,7 @@ const handleSelectThrowable = (profileIndex, selectedThrowable) => {
 // };
 
 const handleSelectEquipment = (profileIndex, selectedEquipment) => {
-  setSelectedSkills((prevSelectedSkills) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
 
@@ -290,13 +300,39 @@ const handleSelectEquipment = (profileIndex, selectedEquipment) => {
 
 
 const handleSelectMelee = (profileIndex, selectedMelee) => {
-  setSelectedSkills((prevSelectedSkills) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
     selectedProfile.melee = selectedMelee;
     return newSelectedSkills;
   });
 };
+
+
+const handleSelectTags = (profileIndex, selectedTag, isChecked) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
+    const newSelectedSkills = [...prevSelectedSkills];
+    const selectedProfile = newSelectedSkills[profileIndex];
+
+    // Ensure selectedProfile.tags is always an array
+    if (!Array.isArray(selectedProfile.tags)) {
+      selectedProfile.tags = selectedProfile.tags ? [selectedProfile.tags] : [];
+    }
+
+    if (isChecked) {
+      // Add the tag if it's not already in the array
+      if (!selectedProfile.tags.includes(selectedTag)) {
+        selectedProfile.tags.push(selectedTag);
+      }
+    } else {
+      // Remove the tag if it's unchecked
+      selectedProfile.tags = selectedProfile.tags.filter(tag => tag !== selectedTag);
+    }
+
+    return newSelectedSkills;
+  });
+};
+
 
 
 
@@ -315,6 +351,11 @@ const handleSelectMelee = (profileIndex, selectedMelee) => {
       ...prevVisibility,
       [category]: !prevVisibility[category],
     }));
+  };
+
+  const [expandedTreeSkills, setExpandedTreeSkills] = useState(null);
+  const toggleTreeSkills = (index) => {
+    setExpandedTreeSkills(prevIndex => prevIndex === index ? null : index);
   };
 
   // State to toggle the visibility of the button container
@@ -390,7 +431,7 @@ const toggleButtonContainerVisibility = () => {
     reader.onload = (e) => {
       try {
         const importedSkills = JSON.parse(e.target.result);
-        setSelectedSkills(importedSkills);
+        context.setSelectedSkills(importedSkills);
         // alert('Selected skills imported successfully!');
       } catch (error) {
         alert('Error importing selected skills.');
@@ -400,6 +441,12 @@ const toggleButtonContainerVisibility = () => {
     reader.readAsText(file);
   };  
 
+  const [isTagsActive, setIsTagsActive] = useState(false);
+
+  const toggleTagsVisibility = () => {
+    setIsTagsActive((prevState) => !prevState);
+  };
+
   function goToTop() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -408,7 +455,8 @@ const toggleButtonContainerVisibility = () => {
         return (
 
 <div className="backgroundColor">
-<Container>
+    <div className="component-title">PROFILE BUILDER</div>
+<Container style={{paddingTop: 0}}>
           <div className="totalSkillPointsDIV">
             <div className="totalSkillPoints">
               <span>Rem. SP</span>
@@ -417,19 +465,29 @@ const toggleButtonContainerVisibility = () => {
             </div>
           </div>
 
-<Form.Group>
-  <Button variant="success" onClick={toggleButtonContainerVisibility}>Toggle Buttons</Button>
-  {buttonContainerVisible && (
-    <Form className="buttonContainer">
-      <Button onClick={exportSelectedSkills} className="mainButtons"><BiExport size={20} style={{ marginRight: '8px' }}/>Export Profiles</Button>
-      <Button onClick={handleResetSkills} variant="danger" className="mainButtons">Reset All Profiles</Button>
-      <UploadButton handleFileChange={handleFileChange} className="mainButtons"/>
-      <Button onClick={handleResetProfile} className="mainButtons">Reset Profile {currentProfile}</Button>
-    </Form>
-  )}
-</Form.Group>
 
-          <div className="container">
+
+
+<Container className="carousel-container">
+  <Carousel
+    activeIndex={currentProfile - 1} // Set the currently active index (0-based)
+    onSelect={(selectedIndex) => setCurrentProfile(selectedIndex + 1)} // Update the currentProfile on select
+    controls={true}
+    indicators={false}
+    interval={null}
+    className="carousel-profile"
+  >
+    {Array.from({ length: 15 }, (_, index) => index + 1).map((profileNumber) => (
+      <Carousel.Item key={profileNumber}>
+        <div className="carousel-content">
+          <div>Profile {profileNumber}</div>
+        </div>
+      </Carousel.Item>
+    ))}
+  </Carousel>
+</Container>
+
+          {/* <div className="container">
           <Form.Group className="selectProfile">
         <Form.Control as="select" value={currentProfile} onChange={(e) => setCurrentProfile(Number(e.target.value))}>
           {Array.from({ length: 15 }, (_, index) => index + 1).map((profileNumber) => (
@@ -439,13 +497,16 @@ const toggleButtonContainerVisibility = () => {
           ))}
         </Form.Control>
         </Form.Group>
-        </div>
+        </div> */}
 
+
+
+        <div>
 {/* PRIMARY WEAPON START*/}
-<Form>
+<Form className="grid-form-builder">
         <Form.Label onClick={() => toggleCategoryVisibility('primaryWeapon')} className="categoryName">
         PRIMARY WEAPON</Form.Label>
-        {categoryVisibility['primaryWeapon'] && (
+        {categoryVisibility['primaryWeapon'] && !selectedSkills[currentProfile - 1]?.primaryWeapon?.weapon && (
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.primaryWeapon?.subcategory || ''}
           onChange={(e) => {
@@ -473,21 +534,48 @@ const toggleButtonContainerVisibility = () => {
           >
             <option value="">Select Weapon</option>
             {primaryWeapons.subcategories
-              .find((subcategory) => subcategory.name === selectedSkills[currentProfile - 1]?.primaryWeapon?.subcategory)
-              ?.weapons.map((weapon) => (
-                <option key={weapon} value={weapon}>
-                  {weapon}
-                </option>
-              ))}
-          </Form.Control>
+  .find((subcategory) => subcategory.name === selectedSkills[currentProfile - 1]?.primaryWeapon?.subcategory)
+  ?.weapons.map((weapon) => {
+    const normalizedWeapon = weapon.replace(/\s?\([^)]+\)/, '').trim();
+    return (
+      <option key={normalizedWeapon} value={normalizedWeapon}>
+        {normalizedWeapon}
+      </option>
+    );
+  })}
+        </Form.Control>
         )}
-      </Form>
-      {/* PRIMARY WEAPON END*/}
+<div className="grid-container builder">
+{selectedSkills[currentProfile - 1]?.primaryWeapon?.weapon && categoryVisibility['primaryWeapon'] && (
+    (() => {
+      const subcategory = primaryWeapons.subcategories
+        .find((subcategory) => subcategory.name === selectedSkills[currentProfile - 1]?.primaryWeapon?.subcategory);
+      // Find the full weapon name from primaryGuns where the trimmed version matches selectedSkills
+      const selectedWeapon = selectedSkills[currentProfile - 1]?.primaryWeapon?.weapon;
+      const matchedWeapon = subcategory?.weapons.find((weapon) => {
+        const trimmedWeapon = weapon.replace(/\s?\([^)]+\)/, '').trim(); // Trim parentheses from primaryGuns weapon
+        return trimmedWeapon === selectedWeapon; // Match it to the selectedSkills weapon
+      });
+      return matchedWeapon ? (
+        <div className="grid-item builder">
+        <img
+          src={itemsToImage[matchedWeapon]}
+          alt={matchedWeapon}
+          className="grid-image builder"
+        />
+        </div>
+      ) : null;
+    })()
+  )}
+  </div>
+</Form>
+{/* PRIMARY WEAPON END*/}
 
 {/* SECONDARY WEAPON START*/}
-<Form>
-<Form.Label onClick={() => toggleCategoryVisibility('secondaryWeapon')} className="categoryName">SECONDARY WEAPON</Form.Label>
-        {categoryVisibility['secondaryWeapon'] && (
+<Form className="grid-form-builder">
+        <Form.Label onClick={() => toggleCategoryVisibility('secondaryWeapon')} className="categoryName">
+        SECONDARY WEAPON</Form.Label>
+        {categoryVisibility['secondaryWeapon'] && !selectedSkills[currentProfile - 1]?.secondaryWeapon?.weapon &&(
         <Form.Control as="select"
           value={selectedSkills[currentProfile - 1]?.secondaryWeapon?.subcategory || ''}
           onChange={(e) => {
@@ -504,7 +592,6 @@ const toggleButtonContainerVisibility = () => {
           ))}
         </Form.Control>
         )}
-
         {selectedSkills[currentProfile - 1]?.secondaryWeapon?.subcategory && categoryVisibility['secondaryWeapon'] && (
           <Form.Control as="select"
             value={selectedSkills[currentProfile - 1]?.secondaryWeapon?.weapon || ''}
@@ -516,19 +603,45 @@ const toggleButtonContainerVisibility = () => {
           >
             <option value="">Select Weapon</option>
             {secondaryWeapons.subcategories
-              .find((subcategory) => subcategory.name === selectedSkills[currentProfile - 1]?.secondaryWeapon?.subcategory)
-              ?.weapons.map((weapon) => (
-                <option key={weapon} value={weapon}>
-                  {weapon}
-                </option>
-              ))}
-          </Form.Control>
+  .find((subcategory) => subcategory.name === selectedSkills[currentProfile - 1]?.secondaryWeapon?.subcategory)
+  ?.weapons.map((weapon) => {
+    const normalizedWeapon = weapon.replace(/\s?\([^)]+\)/, '').trim();
+    return (
+      <option key={normalizedWeapon} value={normalizedWeapon}>
+        {normalizedWeapon}
+      </option>
+    );
+  })}
+        </Form.Control>
         )}
-      </Form>
+<div className="grid-container builder">
+{selectedSkills[currentProfile - 1]?.secondaryWeapon?.weapon && categoryVisibility['secondaryWeapon'] && (
+    (() => {
+      const subcategory = secondaryWeapons.subcategories
+        .find((subcategory) => subcategory.name === selectedSkills[currentProfile - 1]?.secondaryWeapon?.subcategory);
+      // Find the full weapon name from secondaryGuns where the trimmed version matches selectedSkills
+      const selectedWeapon = selectedSkills[currentProfile - 1]?.secondaryWeapon?.weapon;
+      const matchedWeapon = subcategory?.weapons.find((weapon) => {
+        const trimmedWeapon = weapon.replace(/\s?\([^)]+\)/, '').trim(); // Trim parentheses from secondaryGuns weapon
+        return trimmedWeapon === selectedWeapon; // Match it to the selectedSkills weapon
+      });
+      return matchedWeapon ? (
+        <div className="grid-item builder">
+        <img
+          src={itemsToImage[matchedWeapon]}
+          alt={matchedWeapon}
+          className="grid-image selected builder"
+        />
+        </div>
+      ) : null;
+    })()
+  )}
+</div>  
+</Form>
 {/* SECONDARY WEAPON END */}
 
 {/* PERK DECK START */}
-<Form>
+{/* <Form>
 <Form.Label onClick={() => toggleCategoryVisibility('perkDeck')} className="categoryName">PERK DECK</Form.Label>
         {categoryVisibility['perkDeck'] && (
         <Form.Control as="select"
@@ -547,11 +660,59 @@ const toggleButtonContainerVisibility = () => {
           ))}
         </Form.Control>
         )}
-      </Form>
+      </Form> */}
+ <Form className="grid-form-builder">
+  <Form.Label onClick={() => toggleCategoryVisibility('perkDeck')} className="categoryName">PERK DECK</Form.Label>
+  {categoryVisibility['perkDeck'] && (
+    <Form.Control as="select"
+      value={selectedSkills[currentProfile - 1]?.perkDeck || ''}
+      onChange={(e) => {
+        const selectedPerkDeck = e.target.value;
+        handleSelectPerkDeck(currentProfile - 1, selectedPerkDeck);
+      }}
+      className="tree"
+    >
+      <option value="">Select Perk Deck</option>
+      {perkDecks.map((perkDeck) => {
+        // Normalize the perk deck name for display (remove parentheses or unwanted characters)
+        const normalizedPerkDeck = perkDeck.replace(/\s?\([^)]+\)/, '').trim();
+        return (
+          <option key={normalizedPerkDeck} value={normalizedPerkDeck}>
+            {normalizedPerkDeck}
+          </option>
+        );
+      })}
+    </Form.Control>
+  )}
+<div className="grid-container builder">
+  {/* Rendering the image */}
+  {selectedSkills[currentProfile - 1]?.perkDeck && categoryVisibility['perkDeck'] && (
+    (() => {
+      const selectedPerkDeck = selectedSkills[currentProfile - 1]?.perkDeck;
+
+      // Find the full perk deck name from perkDecks where the trimmed version matches selectedSkills
+      const matchedPerkDeck = perkDecks.find((perkDeck) => {
+        const trimmedPerkDeck = perkDeck.replace(/\s?\([^)]+\)/, '').trim(); // Trim parentheses from perkDecks name
+        return trimmedPerkDeck === selectedPerkDeck; // Match it to the selectedSkills perk deck
+      });
+
+      return matchedPerkDeck ? (
+        <div className="grid-item builder">
+        <img
+          src={itemsToImage[matchedPerkDeck]}
+          alt={matchedPerkDeck}
+          className="grid-image builder perkDeck"
+        />
+        </div>
+      ) : null;
+    })()
+  )}
+  </div>
+</Form>
 {/* PERK DECK END */}
 
 {/* ARMOR START */}
-<Form>
+{/* <Form>
 <Form.Label onClick={() => toggleCategoryVisibility('armor')} className="categoryName">ARMOR</Form.Label>
         {categoryVisibility['armor'] && (
         <Form.Control as="select"
@@ -570,11 +731,57 @@ const toggleButtonContainerVisibility = () => {
           ))}
         </Form.Control>
         )}
-      </Form>
+      </Form> */}
+<Form className="grid-form-builder">
+  <Form.Label onClick={() => toggleCategoryVisibility('armor')} className="categoryName">ARMOR</Form.Label>
+  {categoryVisibility['armor'] && (
+    <Form.Control as="select"
+      value={selectedSkills[currentProfile - 1]?.armor || ''}
+      onChange={(e) => {
+        const selected = e.target.value;
+        handleSelectArmor(currentProfile - 1, selected);
+      }}
+      className="tree"
+    >
+      <option value="">Select Armor</option>
+      {armors.map((armor) => {
+        const normalized = armor.replace(/\s?\([^)]+\)/, '').trim();
+        return (
+          <option key={normalized} value={normalized}>
+            {normalized}
+          </option>
+        );
+      })}
+    </Form.Control>
+  )}
+<div className="grid-container builder">
+  {/* Rendering the image */}
+  {selectedSkills[currentProfile - 1]?.armor && categoryVisibility['armor'] && (
+    (() => {
+      const selected = selectedSkills[currentProfile - 1]?.armor;
+
+      const matched = armors.find((armor) => {
+        const trimmed = armor.replace(/\s?\([^)]+\)/, '').trim();
+        return trimmed === selected;
+      });
+
+      return matched ? (
+        <div className="grid-item builder">
+        <img
+          src={itemsToImage[matched]}
+          alt={matched}
+          className="grid-image builder"
+        />
+        </div>
+      ) : null;
+    })()
+  )}
+  </div>
+</Form>
 {/* ARMOR END */}
 
 {/* THROWABLES START */}
-<Form>
+{/* <Form>
 <Form.Label onClick={() => toggleCategoryVisibility('throwable')} className="categoryName">THROWABLE</Form.Label>
         {categoryVisibility['throwable'] && (
         <Form.Control as="select"
@@ -593,12 +800,57 @@ const toggleButtonContainerVisibility = () => {
           ))}
         </Form.Control>
         )}
-      </Form>
+      </Form> */}
+ <Form className="grid-form-builder">
+  <Form.Label onClick={() => toggleCategoryVisibility('throwable')} className="categoryName">THROWABLES</Form.Label>
+  {categoryVisibility['throwable'] && (
+    <Form.Control as="select"
+      value={selectedSkills[currentProfile - 1]?.throwable || ''}
+      onChange={(e) => {
+        const selected = e.target.value;
+        handleSelectThrowable(currentProfile - 1, selected);
+      }}
+      className="tree"
+    >
+      <option value="">Select Throwable</option>
+      {throwables.map((throwable) => {
+        const normalized = throwable.replace(/\s?\([^)]+\)/, '').trim();
+        return (
+          <option key={normalized} value={normalized}>
+            {normalized}
+          </option>
+        );
+      })}
+    </Form.Control>
+  )}
+<div className="grid-container builder">
+  {/* Rendering the image */}
+  {selectedSkills[currentProfile - 1]?.throwable && categoryVisibility['throwable'] && (
+    (() => {
+      const selected = selectedSkills[currentProfile - 1]?.throwable;
+
+      const matched = throwables.find((throwable) => {
+        const trimmed = throwable.replace(/\s?\([^)]+\)/, '').trim();
+        return trimmed === selected;
+      });
+
+      return matched ? (
+        <div className="grid-item builder">
+        <img
+          src={itemsToImage[matched]}
+          alt={matched}
+          className="grid-image builder"
+        />
+        </div>
+      ) : null;
+    })()
+  )}
+  </div>
+</Form>
 {/* THROWABLES END */}
 
 {/* EQUIPMENTS START */}
-
-<Form>
+{/* <Form>
   <Form.Label onClick={() => toggleCategoryVisibility('equipment')} className="categoryName">EQUIPMENT</Form.Label>
   {categoryVisibility['equipment'] && (
     <Form.Control
@@ -619,7 +871,6 @@ const toggleButtonContainerVisibility = () => {
     </Form.Control>
   )}
 
-  {/* Render secondary equipment select when "Jack of All Trades" has an "ace" value */}
   {selectedSkills[currentProfile - 1]?.["Jack of All Trades"] === "ace" && categoryVisibility['equipment'] && (
     <Form.Control
   as="select"
@@ -642,12 +893,107 @@ const toggleButtonContainerVisibility = () => {
   ))}
 </Form.Control>
   )}
-</Form>
+</Form> */}
+ <Form className="grid-form-builder">
+  <Form.Label onClick={() => toggleCategoryVisibility('equipment')} className="categoryName">EQUIPMENT</Form.Label>
 
+  {/* Primary Equipment */}
+  {categoryVisibility['equipment'] && (
+    <Form.Control
+      as="select"
+      value={selectedSkills[currentProfile - 1]?.equipment1 || ''}
+      onChange={(e) => {
+        const selectedPrimaryEquipment = e.target.value;
+        handleSelectEquipment(currentProfile - 1, { primary: selectedPrimaryEquipment });
+      }}
+      className="tree"
+    >
+      <option value="">Select Equipment</option>
+      {equipments.map((equipment) => {
+        const normalized = equipment.replace(/\s?\([^)]+\)/, '').trim();
+        return (
+          <option key={normalized} value={normalized}>
+            {normalized}
+          </option>
+        );
+      })}
+    </Form.Control>
+  )}
+<div className="grid-container builder">
+  {/* Rendering Primary Equipment Image */}
+  {selectedSkills[currentProfile - 1]?.equipment1 && categoryVisibility['equipment'] && (
+    (() => {
+      const selectedPrimary = selectedSkills[currentProfile - 1]?.equipment1;
+      const matchedPrimary = equipments.find((equipment) => {
+        const trimmedPrimary = equipment.replace(/\s?\([^)]+\)/, '').trim();
+        return trimmedPrimary === selectedPrimary;
+      });
+      return matchedPrimary ? (
+        <div className="grid-item builder">
+        <img
+          src={itemsToImage[matchedPrimary]}
+          alt={matchedPrimary}
+          className="grid-image builder"
+        />
+        </div>
+      ) : null;
+    })()
+  )}
+</div>
+
+  {/* Secondary Equipment (Only if "Jack of All Trades" is aced) */}
+  {selectedSkills[currentProfile - 1]?.["Jack of All Trades"] === "ace" && categoryVisibility['equipment'] && (
+    <Form.Control
+      as="select"
+      value={selectedSkills[currentProfile - 1]?.equipment2 || ''}
+      onChange={(e) => {
+        const selectedPrimaryEquipment = selectedSkills[currentProfile - 1]?.equipment1 || '';
+        const selectedSecondaryEquipment = e.target.value;
+        handleSelectEquipment(currentProfile - 1, {
+          primary: selectedPrimaryEquipment,
+          secondary: selectedSecondaryEquipment,
+        });
+      }}
+      className="tree"
+    >
+      <option value="">Select Secondary Equipment</option>
+      {equipments.map((equipment) => {
+        const normalized = equipment.replace(/\s?\([^)]+\)/, '').trim();
+        return (
+          <option key={normalized} value={normalized}>
+            {normalized}
+          </option>
+        );
+      })}
+    </Form.Control>
+  )}
+
+<div className="grid-container builder">
+  {/* Rendering Secondary Equipment Image */}
+  {selectedSkills[currentProfile - 1]?.equipment2 && categoryVisibility['equipment'] && (
+    (() => {
+      const selectedSecondary = selectedSkills[currentProfile - 1]?.equipment2;
+      const matchedSecondary = equipments.find((equipment) => {
+        const trimmedSecondary = equipment.replace(/\s?\([^)]+\)/, '').trim();
+        return trimmedSecondary === selectedSecondary;
+      });
+      return matchedSecondary ? (
+        <div className="grid-item builder">
+        <img
+          src={itemsToImage[matchedSecondary]}
+          alt={matchedSecondary}
+          className="grid-image builder"
+        />
+        </div>
+      ) : null;
+    })()
+  )}
+</div>
+</Form>
 {/* EQUIPMENTS END */}
 
 {/* MELEES START */}
-<Form>
+{/* <Form>
 <Form.Label onClick={() => toggleCategoryVisibility('melee')} className="categoryName">MELEE</Form.Label>
         {categoryVisibility['melee'] && (
         <Form.Control as="select"
@@ -666,16 +1012,65 @@ const toggleButtonContainerVisibility = () => {
           ))}
         </Form.Control>
         )}
-      </Form>
-{/* MELEES END */}
+      </Form> */}
+ <Form className="grid-form-builder">
+  <Form.Label onClick={() => toggleCategoryVisibility('melee')} className="categoryName">MELEE</Form.Label>
+  {categoryVisibility['melee'] && (
+    <Form.Control as="select"
+      value={selectedSkills[currentProfile - 1]?.melee || ''}
+      onChange={(e) => {
+        const selected = e.target.value;
+        handleSelectMelee(currentProfile - 1, selected);
+      }}
+      className="tree"
+    >
+      <option value="">Select Melee</option>
+      {melees.map((melee) => {
+        const normalized = melee.replace(/\s?\([^)]+\)/, '').trim();
+        return (
+          <option key={normalized} value={normalized}>
+            {normalized}
+          </option>
+        );
+      })}
+    </Form.Control>
+  )}
 
+  {/* Rendering the image */}
+  <div className="grid-container builder">
+  {selectedSkills[currentProfile - 1]?.melee && categoryVisibility['melee'] && (
+    (() => {
+      const selected = selectedSkills[currentProfile - 1]?.melee;
+
+      const matched = melees.find((melee) => {
+        const trimmed = melee.replace(/\s?\([^)]+\)/, '').trim();
+        return trimmed === selected;
+      });
+
+      return matched ? (
+        <div className="grid-item builder">
+        <img
+          src={itemsToImage[matched]}
+          alt={matched}
+          className="grid-image builder"
+        />
+        </div>
+      ) : null;
+    })()
+  )}
+  </div>
+</Form>
+{/* MELEES END */}
+</div>
 {/* SKILLS START */}
-<Form>
+<Form className="grid-form-builder">
           <Form.Label onClick={() => toggleCategoryVisibility('skill')} className="categoryName">SKILLS</Form.Label>
           {categoryVisibility['skill'] && (
             <>
           {Object.entries(sortedOrganizedSkills).map(([treeName, subtrees]) => (
             <div key={treeName} className="tree">
+              {/* <Form.Label onClick={() => toggleTreeSkills(treeName)} className="skillTreeName">{treeName.toUpperCase()} ({treeSubtotals[treeName]})</Form.Label>
+              {expandedTreeSkills === treeName && ( */}
               <Form.Label onClick={() => toggleCategoryVisibility(treeName)} className="skillTreeName">{treeName.toUpperCase()} ({treeSubtotals[treeName]})</Form.Label>
               {categoryVisibility[treeName] && (
             <React.Fragment>
@@ -782,7 +1177,62 @@ const toggleButtonContainerVisibility = () => {
           )}
   </Form>
 {/* SKILLS END */}
+
+{/* TAGS START */}
+{/* <Form className="grid-form-builder">
+  <Form.Label onClick={() => toggleCategoryVisibility('tags')} className="categoryName">TAGS</Form.Label>
+  {categoryVisibility['tags'] && (
+    <div className="tree">
+      <Row>
+      {tags.map((tag) => (
+        <Col xs={6} md={4} lg={3} key={tag} className="mb-2">
+          <Form.Check
+            type="checkbox"
+            id={`tag-${tag}`}
+            value={tag}
+            checked={selectedSkills[currentProfile - 1]?.tags?.includes(tag) || false}
+            onChange={(e) => handleSelectTags(currentProfile - 1, tag, e.target.checked)}
+            label={tag}
+          />
+        </Col>
+      ))}
+      </Row>
+    </div>
+  )}
+</Form> */}
+{/* TAGS END */}
+
 </Container>
+{/* TAGS START */}
+   {/* Floating Tags Container */}
+   <Container className={`floating-tags-container ${isTagsActive ? "active" : ""}`}>
+          <div className="floating-tags-title">TAGS</div>
+            <Row>
+              {tags.map((tag) => (
+                <Col xs={6} key={tag} className="mb-1 mt-1">
+                  <Form.Check
+                    type="checkbox"
+                    id={`tag-${tag}`}
+                    value={tag}
+                    checked={selectedSkills[currentProfile - 1]?.tags?.includes(tag) || false}
+                    onChange={(e) =>
+                      handleSelectTags(currentProfile - 1, tag, e.target.checked)
+                    }
+                    label={tag}
+                  />
+                </Col>
+              ))}
+            </Row>
+      </Container>
+
+      {/* Toggle Button */}
+      <div
+        className={`toggle-button-tags ${isTagsActive ? "active" : ""}`}
+        onClick={toggleTagsVisibility}
+      >
+        {isTagsActive ? <IoPricetagsOutline/> : <IoPricetags/>}
+      </div>
+{/* TAGS END */}
 
   {/* <Container className="buttonGoToTop-container">
     <Button className="buttonGoToTop" onClick={() => goToTop()}>Go to top</Button>

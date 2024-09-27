@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import {Button, Row, Col, Container, ListGroup, Table, Form, Accordion, Card, useAccordionButton} from 'react-bootstrap';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { VscExpandAll, VscCollapseAll } from "react-icons/vsc"
@@ -16,40 +16,73 @@ import {options} from "../database/items";
 import {heists} from "../database/items";
 import {Clock} from "./clock"
 import { PiGhost, PiGhostFill } from "react-icons/pi";
-
-
-(async () => {
-  const savedSkills = localStorage.getItem("selectedSkills");
-  if (savedSkills) {
-    const selectedSkills = JSON.parse(savedSkills);
-    options.profiles = selectedSkills.map(
-      (profile, index) => `Profile ${index + 1} (${profile.perkDeck})
-
-Primary Weapon:
-- ${profile.primaryWeapon.weapon}
-
-Secondary Weapon:
-- ${profile.secondaryWeapon.weapon}
-
-Melee:
-- ${profile.melee}
-
-Throwable:
-- ${profile.throwable}
-
-Armor:
-- ${profile.armor}
-
-Equipment:
-- ${profile.equipment}
-`
-    );
-  } else {
-    options.profiles = ["Profile 1","Profile 2","Profile 3","Profile 4","Profile 5","Profile 6","Profile 7","Profile 8","Profile 9","Profile 10","Profile 11","Profile 12","Profile 13","Profile 14","Profile 15"]
-  }
-})();
+import Context from '../context'
 
 const Payday2Randomizer = () => {
+
+  const context= useContext(Context)
+  useEffect(() => {
+    // const selectedSkills = JSON.parse(localStorage.getItem('selectedSkills')) || [];
+    const selectedSkills = context.selectedSkills
+    if (selectedSkills.length > 0) {
+      const newProfiles = selectedSkills.map((profile, index) => {
+        // Check each property for data
+        const perkDeck = profile.perkDeck || 'No data available';
+        const primaryWeapon = profile.primaryWeapon?.weapon || 'No data available';
+        const secondaryWeapon = profile.secondaryWeapon?.weapon || 'No data available';
+        const melee = profile.melee || 'No data available';
+        const throwable = profile.throwable || 'No data available';
+        const armor = profile.armor || 'No data available';
+        const equipment = profile.equipment || 'No data available';
+        const tags = profile.tags?.length > 0 ? profile.tags.sort() : ['No data available'];
+  
+        const allPropertiesEmpty = [
+          perkDeck,
+          primaryWeapon,
+          secondaryWeapon,
+          melee,
+          throwable,
+          armor,
+          equipment,
+          tags.join(', ')
+        ].every(value => value === 'No data available');
+  
+        // Set profileName based on data availability
+        return {
+          profileName: allPropertiesEmpty ? "No profiles loaded" : `Profile ${index + 1}`,
+          perkDeck,
+          primaryWeapon,
+          secondaryWeapon,
+          melee,
+          throwable,
+          armor,
+          equipment,
+          tags,
+        };
+      });
+  
+      // options.profiles = newProfiles;
+      options.profiles = Array.isArray(newProfiles) ? newProfiles : [];
+  
+      // Update selectedOptions.profiles based on new profiles
+      setSelectedOptions(prev => ({
+        ...prev,
+        profiles: newProfiles
+      }));
+  
+    } else {
+      const defaultProfile = [{ profileName: "No profiles loaded" }];
+      options.profiles = defaultProfile;
+  
+      setSelectedOptions(prev => ({
+        ...prev,
+        profiles: defaultProfile
+      }));
+    }
+  }, []);
+  
+  
+   
 
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 767);
   useEffect(() => {
@@ -83,7 +116,6 @@ const [selectedOptions, setSelectedOptions] = useState(() => {
 
   return initialOptions;
 });
-
 
 const areAllItemsCheckedInCategory = (category) => {
   const allItemsInCategory = Object.values(options[category]).flat();
@@ -137,12 +169,23 @@ const areAllItemsCheckedInCategory = (category) => {
   }, [randomizedDifficulty]);
 
 
-  const [randomizedProfile, setRandomizedProfile] = useState({
-    profile: localStorage.getItem("randomizedProfile_profile") || "",
-  })
+  const [randomizedProfile, setRandomizedProfile] = useState(() => {
+    try {
+      const storedProfile = localStorage.getItem("randomizedProfile_profile");
+      return storedProfile ? JSON.parse(storedProfile) : {};
+    } catch (error) {
+      console.error("Error parsing JSON from localStorage:", error);
+      return {}; // Return an empty object in case of error
+    }
+  });
+  
+  
   useEffect(() => {
-    localStorage.setItem("randomizedProfile_profile", randomizedProfile.profile);
+    if (randomizedProfile.profileName) {
+      localStorage.setItem("randomizedProfile_profile", JSON.stringify(randomizedProfile));
+    }
   }, [randomizedProfile]);
+  
 
   const [showTable, setShowTable] = useState(false);
 
@@ -440,22 +483,56 @@ const getRandomWeightedItemFromSubcategories = (selectedItems, itemWeights) => {
 
 const [profilesWeights, setProfilesWeights] = useState({});
 
+// const handleRandomizeProfile = () => {
+//   const remainingProfiles = options.profiles.filter(profile => !profilesWeights[profile.profileName]);
+  
+//   if (remainingProfiles.length === 0) {
+//     // All profiles have been picked, reset the weights
+//     setProfilesWeights({});
+//   } else {
+//     const randomProfile = getRandomWeightedItem(remainingProfiles, profilesWeights);
+    
+//     const updatedWeights = {
+//       ...profilesWeights,
+//       [randomProfile.profileName]: (profilesWeights[randomProfile.profileName] || 1) * 0.5, // Decrease the weight by half
+//     };
+    
+//     setProfilesWeights(updatedWeights);
+    
+//     // Update with the selected profile object instead of just a name
+//     setRandomizedProfile(randomProfile);
+//     setShowTableProfile(true);
+//   }
+// };
 const handleRandomizeProfile = () => {
-  const remainingProfiles = options.profiles.filter(profile => !profilesWeights[profile]);
-    if (remainingProfiles.length === 0) {
-      // All heists have been picked, reset the weights
-      setProfilesWeights({});
-    } else {
-      const randomProfile = getRandomWeightedItem(remainingProfiles, profilesWeights);
-      const updatedWeights = {
-        ...profilesWeights,
-        [randomProfile]: (profilesWeights[randomProfile] || 1) * 0.5, // Decrease the weight by half
-      };
-      setProfilesWeights(updatedWeights);
-      setRandomizedProfile({ profile: randomProfile });
-      setShowTableProfile(true);
-    }
-}
+  console.log('Selected profiles:', selectedOptions.profiles); // Debugging
+
+  if (!selectedOptions.profiles || selectedOptions.profiles.length === 0) {
+    return; // Exit if no profiles are selected
+  }
+
+  const remainingProfiles = selectedOptions.profiles.filter(
+    profile => !profilesWeights[profile.profileName]
+  );
+
+  if (remainingProfiles.length === 0) {
+    setProfilesWeights({});
+  } else {
+    const randomProfile = getRandomWeightedItem(remainingProfiles, profilesWeights);
+    
+    const updatedWeights = {
+      ...profilesWeights,
+      [randomProfile.profileName]: (profilesWeights[randomProfile.profileName] || 1) * 0.5,
+    };
+
+    setProfilesWeights(updatedWeights);
+    setRandomizedProfile(randomProfile);
+    setShowTableProfile(true);
+  }
+};
+
+
+
 
 
   const getRandomItem = (items) => {
@@ -552,47 +629,148 @@ const toggleSubcategory = (category, subcategory) => {
 //     }
 //   });
 // };
+// const handleToggleCheckAll = (category, subcategory) => {
+//   if (category === 'heists') {
+//     // Special handling for heists
+//     const subcategoryItems = sortedHeists.filter(heist => heists[heist][sortCriteria] === subcategory);
+//     const currentlySelected = selectedOptions.heists;
+
+//     // Check if all items in the subcategory are currently selected
+//     const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
+
+//     setSelectedOptions((prev) => {
+//       if (allChecked) {
+//         // If all items are checked, uncheck them
+//         return {
+//           ...prev,
+//           heists: prev.heists.filter(item => !subcategoryItems.includes(item)),
+//         };
+//       } else {
+//         // If not all items are checked, check them
+//         return {
+//           ...prev,
+//           heists: [...new Set([...prev.heists, ...subcategoryItems])],
+//         };
+//       }
+//     });
+//   } else {
+//     // Existing handling for other categories
+//     const subcategoryItems = options[category][subcategory];
+//     const currentlySelected = selectedOptions[category];
+
+//     // Check if all items in the subcategory are currently selected
+//     const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
+
+//     setSelectedOptions((prev) => {
+//       if (allChecked) {
+//         // If all items are checked, uncheck them
+//         return {
+//           ...prev,
+//           [category]: prev[category].filter(item => !subcategoryItems.includes(item)),
+//         };
+//       } else {
+//         // If not all items are checked, check them
+//         return {
+//           ...prev,
+//           [category]: [...new Set([...prev[category], ...subcategoryItems])],
+//         };
+//       }
+//     });
+//   }
+// };
 const handleToggleCheckAll = (category, subcategory) => {
   if (category === 'heists') {
     // Special handling for heists
     const subcategoryItems = sortedHeists.filter(heist => heists[heist][sortCriteria] === subcategory);
     const currentlySelected = selectedOptions.heists;
 
-    // Check if all items in the subcategory are currently selected
     const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
 
     setSelectedOptions((prev) => {
       if (allChecked) {
-        // If all items are checked, uncheck them
+        // Uncheck all items in subcategory
         return {
           ...prev,
           heists: prev.heists.filter(item => !subcategoryItems.includes(item)),
         };
       } else {
-        // If not all items are checked, check them
+        // Check all items in subcategory
         return {
           ...prev,
           heists: [...new Set([...prev.heists, ...subcategoryItems])],
         };
       }
     });
+  } else if (category === 'profiles') {
+    // Handle profiles based on tag subcategory
+    if (sortProfileCriteria === 'tags') {
+      const subcategoryItems = options.profiles.filter(profile => profile.tags.includes(subcategory));
+      const currentlySelected = selectedOptions.profiles;
+
+      const allChecked = subcategoryItems.every(profile => 
+        currentlySelected.some(selectedProfile => selectedProfile.profileName === profile.profileName)
+      );
+
+      setSelectedOptions((prev) => {
+        if (allChecked) {
+          // Uncheck all profiles with the current tag
+          return {
+            ...prev,
+            profiles: prev.profiles.filter(profile => 
+              !subcategoryItems.some(subProfile => subProfile.profileName === profile.profileName)
+            ),
+          };
+        } else {
+          // Check all profiles with the current tag
+          return {
+            ...prev,
+            profiles: [...new Set([...prev.profiles, ...subcategoryItems])],
+          };
+        }
+      });
+    } else {
+      // Handle sorting by other criteria (e.g., perkDeck, primaryWeapon)
+      const subcategoryItems = sortedProfiles.filter(profile => profile[sortProfileCriteria] === subcategory);
+      const currentlySelected = selectedOptions.profiles;
+
+      const allChecked = subcategoryItems.every(profile => 
+        currentlySelected.some(selectedProfile => selectedProfile.profileName === profile.profileName)
+      );
+
+      setSelectedOptions((prev) => {
+        if (allChecked) {
+          // Uncheck all profiles in the subcategory
+          return {
+            ...prev,
+            profiles: prev.profiles.filter(profile => 
+              !subcategoryItems.some(subProfile => subProfile.profileName === profile.profileName)
+            ),
+          };
+        } else {
+          // Check all profiles in the subcategory
+          return {
+            ...prev,
+            profiles: [...new Set([...prev.profiles, ...subcategoryItems])],
+          };
+        }
+      });
+    }
   } else {
-    // Existing handling for other categories
+    // Handle other categories
     const subcategoryItems = options[category][subcategory];
     const currentlySelected = selectedOptions[category];
 
-    // Check if all items in the subcategory are currently selected
     const allChecked = subcategoryItems.every(item => currentlySelected.includes(item));
 
     setSelectedOptions((prev) => {
       if (allChecked) {
-        // If all items are checked, uncheck them
+        // Uncheck all items in the subcategory
         return {
           ...prev,
           [category]: prev[category].filter(item => !subcategoryItems.includes(item)),
         };
       } else {
-        // If not all items are checked, check them
+        // Check all items in the subcategory
         return {
           ...prev,
           [category]: [...new Set([...prev[category], ...subcategoryItems])],
@@ -601,6 +779,7 @@ const handleToggleCheckAll = (category, subcategory) => {
     });
   }
 };
+
 
 
 
@@ -786,28 +965,28 @@ const subcategories = [
     );
   };
 
-  const parseProfile = (profileString) => {
-    if (!profileString) {
-      return null;
-    }  
-    const lines = profileString.split('\n').filter(line => line.trim() !== '');
-    if (lines.length < 13) {
-      return null;
-    }
-    const profile = {
-      profileName: lines[0].split(' (')[0],
-      perkDeck: lines[0].split('(')[1].slice(0, -1),
-      primaryWeapon: lines[2].slice(2),
-      secondaryWeapon: lines[4].slice(2),
-      melee: lines[6].slice(2),
-      throwable: lines[8].slice(2),
-      armor: lines[10].slice(2),
-      equipment: lines[12].slice(2)
-    };
-    return profile;
-  };
+  // const parseProfile = (profileString) => {
+  //   if (!profileString) {
+  //     return null;
+  //   }  
+  //   const lines = profileString.split('\n').filter(line => line.trim() !== '');
+  //   if (lines.length < 13) {
+  //     return null;
+  //   }
+  //   const profile = {
+  //     profileName: lines[0].split(' (')[0],
+  //     perkDeck: lines[0].split('(')[1].slice(0, -1),
+  //     primaryWeapon: lines[2].slice(2),
+  //     secondaryWeapon: lines[4].slice(2),
+  //     melee: lines[6].slice(2),
+  //     throwable: lines[8].slice(2),
+  //     armor: lines[10].slice(2),
+  //     equipment: lines[12].slice(2)
+  //   };
+  //   return profile;
+  // };
 
-  const renderProfile = randomizedProfile.profile ? parseProfile(randomizedProfile.profile) : randomizedProfile.profile;
+  // const renderProfile = randomizedProfile.profile ? parseProfile(randomizedProfile.profile) : randomizedProfile.profile;
 
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -904,7 +1083,7 @@ const subcategories = [
 
     /**/
 
-const excludedCategories = ["profiles", "difficulty"]; // Categories you don't want to include in the form
+const excludedCategories = ["difficulty"]; // Categories you don't want to include in the form
 
 function CustomToggle({ children, eventKey, category }) {
   const decoratedOnClick = useAccordionButton(eventKey, () => {
@@ -976,6 +1155,36 @@ function SubcategoryToggle({ children, eventKey, category, subcategory }) {
   );
 }
 
+function ProfilesToggle ({ children, eventKey, category, subcategory }) {
+  const decoratedOnClick = useAccordionButton(eventKey, () =>
+    toggleSubcategory(category, subcategory)
+  );
+
+  // Determine if the current subcategory is collapsed
+  const isCollapsed = !collapsedSubcategories[category]?.[subcategory];
+
+  // Apply different logic based on the category
+  const isProfileCategory = category === 'profiles';
+
+  return (
+    <Button
+      type="button"
+      className="subcategory-header"
+      onClick={decoratedOnClick}
+    >
+      {children}
+      {isProfileCategory ? (
+        // For profiles category, use normal logic
+        !isCollapsed ? <GoChevronUp /> : <GoChevronDown />
+      ) : (
+        // For other categories, use normal logic
+        !isCollapsed ? <GoChevronDown /> : <GoChevronUp />
+      )}
+    </Button>
+  );
+};
+
+
 
 
 const [sortCriteria, setSortCriteria] = useState('name'); // Default sorting by name
@@ -1018,9 +1227,44 @@ const [sortCriteria, setSortCriteria] = useState('name'); // Default sorting by 
     setIsOpen(prevState => !prevState); // Toggle the state
   });
   
-return (
-<div className="backgroundColor" style={{paddingTop: 20, paddingBottom: 45}}>
 
+  // State for sorting profiles
+const [sortProfileCriteria, setSortProfileCriteria] = useState(''); // Default to no sorting
+const [sortedProfiles, setSortedProfiles] = useState(options.profiles); // Start with all profiles
+const [sortedProfilesByProperty, setSortedProfilesByProperty] = useState([]);
+const handleProfileSortChange = (criteria) => {
+  setSortProfileCriteria(criteria);
+
+  // Filter out "No data available" entries from the sorted profiles
+  const filteredProfiles = options.profiles.filter(profile => profile[criteria] !== 'No data available');
+  
+  // Extract unique values for the selected criteria
+  const sortedByProperty = [...new Set(filteredProfiles.map((profile) => profile[criteria]))];
+  
+  // Remove any empty or invalid entries
+  const validSortedByProperty = sortedByProperty.filter(value => value && value !== 'No data available');
+
+  // Update the state with valid sorted profiles
+  setSortedProfilesByProperty(validSortedByProperty);
+
+  // Sort profiles based on the selected criteria
+  const sorted = filteredProfiles.sort((a, b) => {
+    if (a[criteria] < b[criteria]) return -1;
+    if (a[criteria] > b[criteria]) return 1;
+    return 0;
+  });
+
+  setSortedProfiles(sorted);
+};
+
+
+
+
+
+return (
+<div className="backgroundColor">
+
+<div className="component-title">RANDOMIZER</div>
 
 <div className="randomBuildContainer backgroundImage difficulty"  style={{marginTop: 0}}>
 {!isWideScreen && <div className="randomBuildContainer-title">DIFFICULTY</div>}
@@ -1258,65 +1502,91 @@ return (
           <Button className="eyeSlashButton" onClick={() => setShowTableProfile((prevState) => !prevState)}>{showTableProfile ? <FiEyeOff/> : <FiEye/>}</Button>
         </div>
 
-    {showTableProfile && randomizedProfile.profile && (
-      <>
-        <div className="profile-grid-container">
-        
-        <div className="profile-grid-item number">
-        <div className="profile-grid-title number">{renderProfile.profileName.toUpperCase()}</div>
-        </div>
-        
-        <div className="profile-grid-item">
-        <div className="profile-grid-content">
-        <div className="profile-grid-title">PERK DECK</div>
-        <div className="profile-grid-name">{renderProfile.perkDeck}</div>
-        </div>
-        </div>
+        {showTableProfile && randomizedProfile && (
+  <>
+    <div className="profile-grid-container">
       
-      <div className="profile-grid-item">
-      <div className="profile-grid-content">
-        <div className="profile-grid-title">PRIMARY</div>
-        <div className="profile-grid-name">{renderProfile.primaryWeapon}</div>
-        </div>
+      {/* Always render the profileName */}
+      <div className="profile-grid-item number">
+        <div className="profile-grid-title number">{randomizedProfile.profileName}</div>
       </div>
 
-      <div className="profile-grid-item">
-      <div className="profile-grid-content">
-        <div className="profile-grid-title">SECONDARY</div>
-        <div className="profile-grid-name">{renderProfile.secondaryWeapon}</div>
+      {/* Conditionally render the rest of the profile details */}
+      {randomizedProfile.perkDeck && (
+        <div className="profile-grid-item">
+          <div className="profile-grid-content">
+            <div className="profile-grid-title">PERK DECK</div>
+            <div className="profile-grid-name">{randomizedProfile.perkDeck}</div>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="profile-grid-item">
-      <div className="profile-grid-content">
-        <div className="profile-grid-title">MELEE</div>
-        <div className="profile-grid-name">{renderProfile.melee}</div>
+      {randomizedProfile.primaryWeapon && (
+        <div className="profile-grid-item">
+          <div className="profile-grid-content">
+            <div className="profile-grid-title">PRIMARY</div>
+            <div className="profile-grid-name">{randomizedProfile.primaryWeapon}</div>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="profile-grid-item">
-      <div className="profile-grid-content">
-        <div className="profile-grid-title">THROWABLE</div>
-        <div className="profile-grid-name">{renderProfile.throwable}</div>
+      {randomizedProfile.secondaryWeapon && (
+        <div className="profile-grid-item">
+          <div className="profile-grid-content">
+            <div className="profile-grid-title">SECONDARY</div>
+            <div className="profile-grid-name">{randomizedProfile.secondaryWeapon}</div>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="profile-grid-item">
-      <div className="profile-grid-content">
-        <div className="profile-grid-title">ARMOR</div>
-        <div className="profile-grid-name">{renderProfile.armor}</div>
+      {randomizedProfile.melee && (
+        <div className="profile-grid-item">
+          <div className="profile-grid-content">
+            <div className="profile-grid-title">MELEE</div>
+            <div className="profile-grid-name">{randomizedProfile.melee}</div>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="profile-grid-item">
-      <div className="profile-grid-content">
-        <div className="profile-grid-title">EQUIPMENT</div>
-        <div className="profile-grid-name">{renderProfile.equipment}</div>
+      {randomizedProfile.throwable && (
+        <div className="profile-grid-item">
+          <div className="profile-grid-content">
+            <div className="profile-grid-title">THROWABLE</div>
+            <div className="profile-grid-name">{randomizedProfile.throwable}</div>
+          </div>
         </div>
-      </div>
+      )}
+
+      {randomizedProfile.armor && (
+        <div className="profile-grid-item">
+          <div className="profile-grid-content">
+            <div className="profile-grid-title">ARMOR</div>
+            <div className="profile-grid-name">{randomizedProfile.armor}</div>
+          </div>
+        </div>
+      )}
+
+      {randomizedProfile.equipment && (
+        <div className="profile-grid-item">
+          <div className="profile-grid-content">
+            <div className="profile-grid-title">EQUIPMENT</div>
+            <div className="profile-grid-name">{randomizedProfile.equipment}</div>
+          </div>
+        </div>
+      )}
+
+      {randomizedProfile.tags && randomizedProfile.tags.length > 0 && (
+        <div className="profile-grid-item">
+          <div className="profile-grid-content">
+            <div className="profile-grid-title">TAGS</div>
+            <div className="profile-grid-name">{randomizedProfile.tags.join(', ')}</div>
+          </div>
+        </div>
+      )}
     </div>
-      </>
-    )}
+  </>
+)}
+
   </div>
 
 <div className="separator"></div>
@@ -1563,6 +1833,185 @@ return (
                       </div>
                     )}
                   </>
+                ) : category === 'profiles' ? (
+                  // Special handling for profiles
+<>
+  {/* Sorting Controls */}
+  <Accordion defaultActiveKey="">
+    <Accordion.Item>
+      <Accordion.Header className="sorting-label">GROUP BY</Accordion.Header>
+      <Accordion.Body className="sorting-controls">
+        <Button onClick={() => handleProfileSortChange('profileName')} className={`${sortProfileCriteria === 'profileName' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Name</Button>
+        <Button onClick={() => handleProfileSortChange('tags')} className={`${sortProfileCriteria === 'tags' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Tags</Button>
+        <Button onClick={() => handleProfileSortChange('perkDeck')} className={`${sortProfileCriteria === 'perkDeck' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Perk Deck</Button>
+        <Button onClick={() => handleProfileSortChange('primaryWeapon')} className={`${sortProfileCriteria === 'primaryWeapon' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Primary</Button>
+        <Button onClick={() => handleProfileSortChange('secondaryWeapon')} className={`${sortProfileCriteria === 'secondaryWeapon' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Secondary</Button>
+        <Button onClick={() => handleProfileSortChange('melee')} className={`${sortProfileCriteria === 'melee' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Melee</Button>
+        <Button onClick={() => handleProfileSortChange('throwable')} className={`${sortProfileCriteria === 'throwable' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Throwable</Button>
+        <Button onClick={() => handleProfileSortChange('armor')} className={`${sortProfileCriteria === 'armor' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Armor</Button>
+        <Button onClick={() => handleProfileSortChange('equipment')} className={`${sortProfileCriteria === 'equipment' ? 'sortingKey' : 'sortingKeyUnselected'}`}>Equipment</Button>
+        {/* Add buttons for other properties you want to sort by */}
+      </Accordion.Body>
+    </Accordion.Item>
+  </Accordion>
+
+  {/* Filtered Profiles Display */}
+  {Array.isArray(options.profiles) ? (
+    sortProfileCriteria === 'tags' ||
+    sortProfileCriteria === 'perkDeck' ||
+    sortProfileCriteria === 'primaryWeapon' ||
+    sortProfileCriteria === 'secondaryWeapon' ||
+    sortProfileCriteria === 'melee' ||
+    sortProfileCriteria === 'throwable' ||
+    sortProfileCriteria === 'armor' ||
+    sortProfileCriteria === 'equipment'
+    ? (
+      <Accordion className="card-body profiles">
+        {sortProfileCriteria === 'tags' ? (
+          // Unique Tags Rendering
+          [...new Set(options.profiles.flatMap(profile => profile.tags))]
+          .filter(tag => tag !== "No data available")
+          .map((tag, subIndex) => (
+            <Card key={tag}>
+              <Card.Header className="form-items">
+                <ProfilesToggle
+                  eventKey={String(subIndex)}
+                  category="profiles"
+                  subcategory={tag}
+                >
+                  {tag}
+                </ProfilesToggle>
+
+                <div className="form-items">
+                  <Form.Check
+                    type="checkbox"
+                    className="subcategory-checkbox"
+                    ref={(input) => {
+                      if (input) {
+                        const totalProfiles = options.profiles.filter(profile => profile.tags.includes(tag)).length;
+                        const selectedProfiles = selectedOptions.profiles.filter(selectedProfile =>
+                          options.profiles.some(profile =>
+                            profile.profileName === selectedProfile.profileName &&
+                            profile.tags.includes(tag)
+                          )
+                        ).length;
+
+                        input.indeterminate = selectedProfiles > 0 && selectedProfiles < totalProfiles;
+                      }
+                    }}
+                    checked={selectedOptions.profiles.filter(profile =>
+                      profile.tags.includes(tag)
+                    ).length === options.profiles.filter(profile => profile.tags.includes(tag)).length}
+                    onChange={() => handleToggleCheckAll('profiles', tag)}
+                  />
+                </div>
+              </Card.Header>
+
+              <Accordion.Collapse eventKey={String(subIndex)}>
+                <Card.Body>
+                  {options.profiles
+                    .filter(profile => profile.tags.includes(tag))
+                    .map((profile, index) => (
+                      <Form.Check
+                        type="checkbox"
+                        label={profile.profileName}
+                        id={`profile-${index}`}
+                        key={profile.profileName}
+                        value={profile.profileName}
+                        checked={selectedOptions.profiles.some(
+                          (selectedProfile) => selectedProfile.profileName === profile.profileName
+                        )}
+                        onChange={(e) => handleOptionChange('profiles', profile, e.target.checked)}
+                      />
+                    ))}
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          ))
+        ) : (
+          // Existing logic for other criteria
+          sortedProfilesByProperty.map((propertyValue, subIndex) => (
+            <Card key={propertyValue}>
+              <Card.Header className="form-items">
+                <ProfilesToggle
+                  eventKey={String(subIndex)}
+                  category="profiles"
+                  subcategory={propertyValue}
+                >
+                  {propertyValue}
+                </ProfilesToggle>
+
+                <div className="form-items">
+                  <Form.Check
+                    type="checkbox"
+                    className="subcategory-checkbox"
+                    ref={(input) => {
+                      if (input) {
+                        const totalProfiles = sortedProfiles.filter(profile => profile[sortProfileCriteria] === propertyValue).length;
+                        const selectedProfiles = selectedOptions.profiles.filter(selectedProfile =>
+                          sortedProfiles.some(profile =>
+                            profile.profileName === selectedProfile.profileName &&
+                            profile[sortProfileCriteria] === propertyValue
+                          )
+                        ).length;
+
+                        input.indeterminate = selectedProfiles > 0 && selectedProfiles < totalProfiles;
+                      }
+                    }}
+                    checked={selectedOptions.profiles.filter(profile =>
+                      sortedProfiles.some(sortedProfile => sortedProfile.profileName === profile.profileName && sortedProfile[sortProfileCriteria] === propertyValue)
+                    ).length === sortedProfiles.filter(profile => profile[sortProfileCriteria] === propertyValue).length}
+                    onChange={() => handleToggleCheckAll('profiles', propertyValue)}
+                  />
+                </div>
+              </Card.Header>
+
+              <Accordion.Collapse eventKey={String(subIndex)}>
+                <Card.Body>
+                  {sortedProfiles
+                    .filter(profile => profile[sortProfileCriteria] === propertyValue)
+                    .map((profile, index) => (
+                      <Form.Check
+                        type="checkbox"
+                        label={profile.profileName}
+                        id={`profile-${index}`}
+                        key={profile.profileName}
+                        value={profile.profileName}
+                        checked={selectedOptions.profiles.some(
+                          (selectedProfile) => selectedProfile.profileName === profile.profileName
+                        )}
+                        onChange={(e) => handleOptionChange('profiles', profile, e.target.checked)}
+                      />
+                    ))}
+                </Card.Body>
+              </Accordion.Collapse>
+            </Card>
+          ))
+        )}
+      </Accordion>
+    ) : (
+      options.profiles.map((profile, index) => (
+        <Form.Check
+          type="checkbox"
+          label={profile.profileName}
+          id={`profile-${index}`}
+          key={profile.profileName}
+          value={profile.profileName}
+          checked={selectedOptions.profiles.some(
+            (selectedProfile) => selectedProfile.profileName === profile.profileName
+          )}
+          onChange={(e) => handleOptionChange('profiles', profile, e.target.checked)}
+        />
+      ))
+    )
+  ) : (
+    <div>No profiles available</div>
+  )}
+</>
+
+
+
+
                 ) : (
                   // Handle categories without subcategories (e.g., perkDecks)
                   Object.keys(options[category]).map((subcategory) =>

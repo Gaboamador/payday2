@@ -1,5 +1,6 @@
 import './App.css';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import GlobalState from "./globalState";
 import $ from 'jquery'
 import Header from './componentes/header';
 import Home from './componentes/home'
@@ -8,7 +9,9 @@ import BuildSelector from './componentes/selector';
 import ProfileConstructor from './componentes/constructor';
 import Builder from './componentes/builder';
 import BuildSelectorNew from './componentes/selectorNew';
+import BuildSelectorTags from './componentes/selectorTags';
 import BigOil from './componentes/bigoil';
+import ProfilesConfiguration from './componentes/profilesConfig';
 import { BsChevronUp } from "react-icons/bs";
 
 
@@ -36,6 +39,7 @@ function App() {
     <div className="App">
       
 <Router>
+<GlobalState>
   <Header/>
   <Routes>
       <Route exact path="/" element={<Home/>}></Route>
@@ -44,8 +48,11 @@ function App() {
       <Route path="/constructor" element={<ProfileConstructor/>}></Route>
       <Route path="/builder" element={<Builder/>}></Route>
       <Route path="/selectorNew" element={<BuildSelectorNew/>}></Route>
+      <Route path="/selectorTags" element={<BuildSelectorTags/>}></Route>
       <Route path="/bigOil" element={<BigOil/>}></Route>
+      <Route path="/profilesConfig" element={<ProfilesConfiguration/>}></Route>
     </Routes>
+</GlobalState>
     <span className="ir-arriba">
       <BsChevronUp/>
     </span>

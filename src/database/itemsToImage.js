@@ -375,6 +375,7 @@ export const itemsToImage = {
 'Pocket ECM': PocketECM,
 'Smoke Bomb': SmokeBomb,
 'Stoic Hip Flask': StoicHipFlask,
+"Stoic's Hip Flask": StoicHipFlask,
 
 //DEPLOYABLES
 "Ammo Bag (A1)": AmmoBag,

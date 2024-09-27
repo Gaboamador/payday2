@@ -10,6 +10,7 @@ const BuildSelectorNew = () => {
   // Convert skillsData object to an array of skills
  const skillsArray = Object.values(skillsData);
  // Organize skills by trees and subtrees
+ console.log(skillsArray)
  const organizedSkills = {};
  for (const skill of skillsArray) {
    const { idWidth, idHeight, name, description, basic, ace, tier, subtree, tree, selector } = skill;
