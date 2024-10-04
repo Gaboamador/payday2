@@ -25,11 +25,23 @@ function GlobalState(props){
         return loadSelectedSkillsFromLocalStorage();
         });
 
+        const [emailPrefix, setEmailPrefix] = useState('')
+        const [user, setUser]=useState(sessionStorage.getItem('user')!==undefined && sessionStorage.getItem('user')!==null? sessionStorage.getItem('user') : '')
+        const [pass,setPass]=useState('')
+        const [login, setLogin]=useState(sessionStorage.getItem('login')!==undefined && sessionStorage.getItem('login')!==null ? sessionStorage.getItem('login') : false)
 
     return(
         <Context.Provider value={{
             selectedSkills:selectedSkills,
             setSelectedSkills:setSelectedSkills,
+            emailPrefix:emailPrefix,
+            setEmailPrefix:setEmailPrefix,
+            user:user,
+            setUser:setUser,
+            pass:pass,
+            setPass:setPass,
+            login:login,
+            setLogin:setLogin,
         }}>
             {props.children}
         </Context.Provider>

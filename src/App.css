@@ -1574,6 +1574,9 @@ input[type="checkbox"] {
   text-decoration: none;
   text-align: center;
   transition: transform 0.3s;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .home-link:hover,
@@ -1583,16 +1586,28 @@ input[type="checkbox"] {
 
 .home-icon {
   font-size: 50px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   color: #459bd5;
 }
+
+.home-text-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
 
 .home-text {
   font-size: 1.5rem;
   font-weight: bold;
   color: #459bd5;
   font-family: 'RiftBold';
-  margin-left: 10px;
+  /* margin-left: 10px; */
+}
+
+.home-subtext {
+  font-size: 0.9rem;
+  color: #a3a3a3;
 }
 
 .grid-container {
@@ -1632,6 +1647,14 @@ input[type="checkbox"] {
   padding-top: 100%;
   cursor: pointer;
   background: rgba(0, 0, 0, 0.5);
+}
+
+.lock-icon {
+  position: absolute; /* Positioning it absolutely */
+  bottom: 10px; /* Adjust the value to your design */
+  right: 10px; /* Adjust the value to your design */
+  cursor: pointer; /* Indicate it's clickable */
+  color: rgb(215, 220, 225);
 }
 
 .borderedRandomizer {
@@ -2327,6 +2350,14 @@ input[type="checkbox"] {
   width: 100%!important;
 }
 
+.configuration-header.open .accordion-button {
+  color: green !important;
+  text-shadow: 1px 1px 10px white;
+}
+.configuration-header.closed .accordion-button {
+  color: #d24646 !important;
+  text-shadow: 1px 1px 10px white;
+}
 
 .configuration-header .accordion-button::before {
   content: '';
@@ -2335,15 +2366,21 @@ input[type="checkbox"] {
   width: 15px;
   height: 15px;
   right: -25px;
-  border-radius: 50px;
-  border: 2px inset whitesmoke;
+  border-radius: 0px;
+  /* border: 2px inset whitesmoke; */
+  /* clip-path: polygon(50% 0%, 0% 100%, 100% 100%); */
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+  transform: rotate(90deg);
 }
 
 .configuration-header.open .accordion-button::before {
   background-color: green !important;
+  transform: rotate(-90deg);
+  transition: 0.5s;
 }
 .configuration-header.closed .accordion-button::before {
   background-color: #d24646 !important;
+  transition: 0.5s;
 }
 
 .accordion-button,
@@ -2483,3 +2520,59 @@ input[type="checkbox"] {
  .carousel-control-next-icon {
    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23285a82'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg>") !important;
  }
+
+
+ .userDataContainer {
+  padding: 6px 12px;
+ }
+
+ .userData {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: baseline;
+  gap: 5px;
+  
+ }
+
+ .userName {
+  /* padding: 2px;
+  width: fit-content;
+  margin: 0 auto; */
+  font-family: 'RiftLight';
+  /* position: relative; */
+}
+
+/* .userName::after {
+  content: '';
+  display: block;
+  width: 90%;
+  border-bottom: 2px solid #459bd5;
+  margin: 2px auto;
+  box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.5);
+} */
+
+
+ .dropdownLocalProfiles {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+ }
+
+ .userAuthButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+ }
+
+ .signUpContainer {
+  align-items: center !important;
+ }
+
+ .user-button-container {
+  flex-basis: 100%; 
+}
+
+.inputField {
+  font-family: 'DINEngschrift';
+}

@@ -15,6 +15,7 @@ import iconSkills from '../imagenes/icons.png'
 import { itemsToImage } from "../database/itemsToImage";
 import { IoPricetags, IoPricetagsOutline } from "react-icons/io5";
 import Context from "../context";
+import { supabase } from '../supabaseClient';
 
 const tags = tagsRaw.sort()
 
@@ -81,8 +82,6 @@ const Builder = () => {
   
   const [currentProfile, setCurrentProfile] = useState(1); // The default selected profile
 
-
-  
  // Convert skillsData object to an array of skills
  const skillsArray = Object.values(skillsData);
 
@@ -452,10 +451,13 @@ const toggleButtonContainerVisibility = () => {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
+
+  
+
         return (
 
 <div className="backgroundColor">
-    <div className="component-title">PROFILE BUILDER</div>
+    <div className="component-title">BUILD / EDIT</div>
 <Container style={{paddingTop: 0}}>
           <div className="totalSkillPointsDIV">
             <div className="totalSkillPoints">

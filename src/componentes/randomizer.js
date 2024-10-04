@@ -7,6 +7,7 @@ import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
 import { CiGrid41, CiBoxList } from "react-icons/ci";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import { BiReset } from "react-icons/bi";
+import { FaLock, FaLockOpen } from 'react-icons/fa';
 import '../App.css';
 import { itemsToImage } from "../database/itemsToImage";
 import Skull from "../imagenes/skull.svg"
@@ -505,7 +506,7 @@ const [profilesWeights, setProfilesWeights] = useState({});
 //   }
 // };
 const handleRandomizeProfile = () => {
-  console.log('Selected profiles:', selectedOptions.profiles); // Debugging
+  // console.log('Selected profiles:', selectedOptions.profiles); // Debugging
 
   if (!selectedOptions.profiles || selectedOptions.profiles.length === 0) {
     return; // Exit if no profiles are selected
@@ -1258,6 +1259,34 @@ const handleProfileSortChange = (criteria) => {
 };
 
 
+// const handleToggleLock = (key) => {
+//   setSelectedCategories(prevSelectedCategories =>
+//     prevSelectedCategories.includes(key)
+//       ? prevSelectedCategories.filter(category => category !== key) // Remove if already selected
+//       : [...prevSelectedCategories, key] // Add if not selected
+//   );
+// };
+const handleToggleLock = (key) => {
+  const pluralKey = key + 's'; // Convert to plural (e.g., "primaryGuns")
+
+  setSelectedCategories((prevSelectedCategories) => {
+
+    if (prevSelectedCategories.includes(pluralKey)) {
+      // Item is currently locked, remove it from selectedCategories
+      const updatedCategories = prevSelectedCategories.filter(category => category !== pluralKey);
+      return updatedCategories;
+    } else {
+      // Item is currently unlocked, add it to selectedCategories
+      const updatedCategories = [...prevSelectedCategories, pluralKey];
+      return updatedCategories;
+    }
+  });
+};
+
+
+
+
+
 
 
 
@@ -1366,6 +1395,7 @@ return (
 <div className="grid-container">
 {buildItems.map(({ key, title }) => {
   const item = randomizedBuild[key];
+  const isLocked = selectedCategories.includes(key + 's');
   return (
     item && (
       <div
@@ -1385,6 +1415,16 @@ return (
             ${key === 'perkDeck' ? `perkDeck ${selectedItem === key ? 'perkDeck selected' : ''}` : ''}
             ${key === 'armor' ? `armor ${selectedItem === key ? 'armor selected' : ''}` : ''}`}
         />
+        {/* Lock Icon */}
+        <div
+            className="lock-icon"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleToggleLock(key);
+            }}
+          >
+            {isLocked ? <FaLockOpen /> : <FaLock />}
+          </div>
       </div>
     )
   );
