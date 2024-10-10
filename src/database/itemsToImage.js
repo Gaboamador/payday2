@@ -139,6 +139,270 @@ import UtilityMachete from '../imagenes/melees/utility_machete.webp';
 import KunaiKnife from '../imagenes/melees/kunai_knife.webp';
 import TrautmanKnife from '../imagenes/melees/trautman_knife.webp';
 import FireAxe from '../imagenes/melees/fire_axe.webp';
+
+//MODS
+import Triple0Buckshot from '../imagenes/mods/000_buckshot.webp';
+import AccuracyMinus from '../imagenes/mods/accuracy_minus.webp';
+import AccuracyPlus from '../imagenes/mods/accuracy_plus.webp';
+import AcoughOpticScope from '../imagenes/mods/acough_optic_scope.webp';
+import AdvancedCombatSight from '../imagenes/mods/advanced_combat_sight.webp';
+import AftermarketShorty from '../imagenes/mods/aftermarket_shorty.webp';
+import AgressorBarrel from '../imagenes/mods/aggressor_barrel.webp';
+import AgressorCompensator from '../imagenes/mods/aggressor_compensator.webp';
+import AKPlasticGrip from '../imagenes/mods/ak_plastic_grip.webp';
+import AKQuadstackedMag from '../imagenes/mods/ak_quadstacked_mag.webp';
+import AKRubberGrip from '../imagenes/mods/ak_rubber_grip.webp';
+import AKSlavicDragonBarrel from '../imagenes/mods/ak_slavic_dragon_barrel.webp';
+import AKWoodGrip from '../imagenes/mods/ak_wood_grip.webp';
+import AluminumForegrip from '../imagenes/mods/aluminum_foregrip.webp';
+import AluminumGrip from '../imagenes/mods/aluminum_grip.webp';
+import AngledSight from '../imagenes/mods/angled_sight.webp';
+import APSlug from '../imagenes/mods/ap_slug.webp';
+import AsepsisSuppressor from '../imagenes/mods/asepsis_suppressor.webp';
+import AssaultLight from '../imagenes/mods/assault_light.webp';
+import AutoFire from '../imagenes/mods/auto_fire.webp';
+import BattleprovenHandguard from '../imagenes/mods/battleproven_handgaurd.webp';
+import BigBrotherMagazine from '../imagenes/mods/big_brother_magazine.webp';
+import BlingGrip from '../imagenes/mods/bling_grip.webp';
+import BombardierBarrel from '../imagenes/mods/bombardier_barrel.webp';
+import BoxBuddySight from '../imagenes/mods/box_buddy_sight.webp';
+import BudgetSuppressor from '../imagenes/mods/budget_suppressor.webp';
+import CARQuadstackedMag from '../imagenes/mods/car_quadstacked_mag.webp';
+import CarnivalGrip from '../imagenes/mods/carnival_grip.webp';
+import CartelGrip from '../imagenes/mods/cartel_grip.webp';
+import ChampionsSuppressor from '../imagenes/mods/champions_suppressor.webp';
+import CivilianBarrel from '../imagenes/mods/civilian_barrel.webp';
+import CivilianMarketBarrel from '../imagenes/mods/civilian_market_barrel.webp';
+import ClassicStock from '../imagenes/mods/classic_stock.webp';
+import CombatSight from '../imagenes/mods/combat_sight.webp';
+import CombinedModule from '../imagenes/mods/combined_module.webp';
+import CompactHolosight from '../imagenes/mods/compact_holosight.webp';
+import CompactLaserModule from '../imagenes/mods/compact_laser_module.webp';
+import CompactProfileSight from '../imagenes/mods/compact_profile_sight.webp';
+import CompetitorsCompensator from '../imagenes/mods/competitors_compensator.webp';
+import Concealment from '../imagenes/mods/concealment.webp';
+import ContractorCompensator from '../imagenes/mods/contractor_compensator.webp';
+import ContractorGrip from '../imagenes/mods/contractor_grip.webp';
+import ContractorStock from '../imagenes/mods/contractor_stock.webp';
+import CrabsRail from '../imagenes/mods/crabs_rail.webp';
+import CruzGrip from '../imagenes/mods/cruz_grip.webp';
+import CustomAssaultFrame from '../imagenes/mods/custom_assault_frame.webp';
+import CustomBarrel from '../imagenes/mods/custom_barrel.webp';
+import CutomBuiltFrame from '../imagenes/mods/custom_built_frame.webp';
+import CustomReinforcedFrame from '../imagenes/mods/custom_reinforced_frame.webp';
+import CustomSlide from '../imagenes/mods/custom_slide.webp';
+import Damage from '../imagenes/mods/damage.webp';
+import DamperL44Nozzle from '../imagenes/mods/damper_l44_nozzle.webp';
+import DelightfulGrip from '../imagenes/mods/delightful_grip.webp';
+import DiabloBarrel from '../imagenes/mods/diablo_barrel.webp';
+import DiminutiveBarrel from '../imagenes/mods/diminutive_barrel.webp';
+import DiscreteForegrip from '../imagenes/mods/discrete_foregrip.webp';
+import DiscreteGrip from '../imagenes/mods/discrete_grip.webp';
+import DMRKit from '../imagenes/mods/dmr_kit.webp';
+import DonaldsHorizontalLeveler from '../imagenes/mods/donalds_horizontal_leveller.webp';
+import DragonsBreath from '../imagenes/mods/dragons_breath.webp';
+import DurableBlade from '../imagenes/mods/durable_blade.webp';
+import EightiesCalling from '../imagenes/mods/eighties_calling.webp';
+import EngravedGrip from '../imagenes/mods/engraved_grip.webp';
+import EnlightenedForegrip from '../imagenes/mods/enlightened_foregrip.webp';
+import ErgoGrip from '../imagenes/mods/ergo_grip.webp';
+import ErgoWoodenGrip from '../imagenes/mods/ergo_wooden_grip.webp';
+import ErgonomicGrip from '../imagenes/mods/ergonomic_grip.webp';
+import ExotiqueReceiver from '../imagenes/mods/exotique_receiver.webp';
+import ExpertMag from '../imagenes/mods/expert_mag.webp';
+import ExpertSlide from '../imagenes/mods/expert_slide.webp';
+import ExtendedMagazine from '../imagenes/mods/extended_magazine.webp';
+import FacepunchCompensator from '../imagenes/mods/facepunch_compensator.webp';
+import FastMotor from '../imagenes/mods/fast_motor.webp';
+import FederalesGrip from '../imagenes/mods/federales_grip.webp';
+import FederalesStock from '../imagenes/mods/federales_stock.webp';
+import FireBreatherNozzle from '../imagenes/mods/fire_breather_nozzle.webp';
+import FlashHider from '../imagenes/mods/flash_hider.webp';
+import Flechette from '../imagenes/mods/flechette.webp';
+import FoldingStock from '../imagenes/mods/folding_stock.webp';
+import FortyfiveDegreeIronsights from '../imagenes/mods/fortyfive_degree_ironsights.webp';
+import FortyfiveDegreeRedDotSight from '../imagenes/mods/fortyfive_degree_red_dot_sight.webp';
+import FunnelOfFunNozzle from '../imagenes/mods/funnel_of_fun_nozzle.webp';
+import FutomakiSuppressor from '../imagenes/mods/futomaki_suppressor.webp';
+import GhettoBlaster from '../imagenes/mods/ghetto_blaster.webp';
+import GreaseBarrel from '../imagenes/mods/grease_barrel.webp';
+import HERound from '../imagenes/mods/he_round.webp';
+import HeatsinkedSuppressedBarrel from '../imagenes/mods/heatsinked_suppressed_barrel.webp';
+import HighCapacityMag from '../imagenes/mods/high_capacity_mag.webp';
+import HighTemperatureMixture from '../imagenes/mods/high_temperature_mixture.webp';
+import HollowHandle from '../imagenes/mods/hollow_handle.webp';
+import HolographicSight from '../imagenes/mods/holographic_sight.webp';
+import HPSSuppressor from '../imagenes/mods/hps_suppressor.webp';
+import HurricaneCompensator from '../imagenes/mods/hurricane_compensator.webp';
+import IWantMoreMagazine from '../imagenes/mods/i_want_more_magazine.webp';
+import IncendiaryRound from '../imagenes/mods/incendiary_round.webp';
+import IPSCCompensator from '../imagenes/mods/ipsc_compensator.webp';
+import JP36LongForegrip from '../imagenes/mods/jp36_long_foregrip.webp';
+import JungleNinjaSuppressor from '../imagenes/mods/jungle_ninja_suppressor.webp';
+import KeymodRail from '../imagenes/mods/keymod_rail.webp';
+import KingsCrownCompensator from '../imagenes/mods/kings_crown_compensator.webp';
+import L5Magazine from '../imagenes/mods/l5_magazine.webp';
+import LaFemmeCompensator from '../imagenes/mods/la_femme_compensator.webp';
+import LaserGrip from '../imagenes/mods/laser_grip.webp';
+import LedCombo from '../imagenes/mods/led_combo.webp';
+import LightweightRail from '../imagenes/mods/lightweight_rail.webp';
+import LionsBipod from '../imagenes/mods/lions_bipod.webp';
+import LittleBrotherForegrip from '../imagenes/mods/little_brother_foregrip.webp';
+import LongBarrel from '../imagenes/mods/long_barrel.webp';
+import LongSlide from '../imagenes/mods/long_slide.webp';
+import LongVentedSlide from '../imagenes/mods/long_vented_slide.webp';
+import LowDragMagazine from '../imagenes/mods/low_drag_magazine.webp';
+import LowProfileSuppresor from '../imagenes/mods/low_profile_suppressor.webp';
+import LowTemperatureMixture from '../imagenes/mods/low_temperature_mixture.webp';
+import LWUpperReceiver from '../imagenes/mods/lw_upper_receiver.webp';
+import MaelstromSight from '../imagenes/mods/maelstrom_sight.webp';
+import MagazineWithAmeritude from '../imagenes/mods/magazine_with_ameritude.webp';
+import MakiSuppressor from '../imagenes/mods/maki_suppressor.webp';
+import MallNinjaBarrel from '../imagenes/mods/mall_ninja_barrel.webp';
+import MarksmanSight from '../imagenes/mods/marksman_sight.webp';
+import MarmonCompensator from '../imagenes/mods/marmon_compensator.webp';
+import MatchSlide from '../imagenes/mods/match_slide.webp';
+import MedioBarrel from '../imagenes/mods/medio_barrel.webp';
+import MediumBarrel from '../imagenes/mods/medium_barrel.webp';
+import MediumSuppressor from '../imagenes/mods/medium_suppressor.webp';
+import MerlinNozzle from '../imagenes/mods/merlin_nozzle.webp';
+import MicroLaser from '../imagenes/mods/micro_laser.webp';
+import MilitaryLaserModule from '../imagenes/mods/military_laser_module.webp';
+import MilitaryRedDotSight from '../imagenes/mods/military_red_dot_sight.webp';
+import MilledSlide from '../imagenes/mods/milled_slide.webp';
+import MilspecMag from '../imagenes/mods/milspec_mag.webp';
+import MIlspecScope from '../imagenes/mods/milspec_scope.webp';
+import ModernBarrel from '../imagenes/mods/modern_barrel.webp';
+import MonolithSuppressor from '../imagenes/mods/monolith_suppressor.webp';
+import MoscowSpecialRail from '../imagenes/mods/moscow_special_rail.webp';
+import MuldonStock from '../imagenes/mods/muldon_stock.webp';
+import NoStock from '../imagenes/mods/no_stock.webp';
+import NoirGrip from '../imagenes/mods/noir_grip.webp';
+import OvercompensatingBarrel from '../imagenes/mods/overcompensating_barrel.webp';
+import OvekillCompensator from '../imagenes/mods/overkill_compensator.webp';
+import PBSSuppressor from '../imagenes/mods/pbs_suppressor.webp';
+import PesanteBarrel from '../imagenes/mods/pesante_barrel.webp';
+import PiccoloBarrel from '../imagenes/mods/piccolo_barrel.webp';
+import PistorRedDotSight from '../imagenes/mods/pistol_red_dot_sight.webp';
+import PlatypusGrip from '../imagenes/mods/platypus_grip.webp';
+import PocketLaser from '../imagenes/mods/pocket_laser.webp';
+import PocketSurpriseBarrel from '../imagenes/mods/pocket_suprise_barrel.webp';
+import PolizeiTacticalBarrel from '../imagenes/mods/polizei_tactical_barrel.webp';
+import PolymerFlashlight from '../imagenes/mods/polymer_flashlight.webp';
+import PortedBarrel from '../imagenes/mods/ported_barrel.webp';
+import PortedCompensator from '../imagenes/mods/ported_compensator.webp';
+import PrecisionBarrel from '../imagenes/mods/precision_barrel.webp';
+import ProGrip from '../imagenes/mods/pro_grip.webp';
+import ProdigiousBarrel from '../imagenes/mods/prodigious_barrel.webp';
+import PrototypeBarrel from '../imagenes/mods/prototype_barrel.webp';
+import PunisherCompensator from '../imagenes/mods/punisher_compensator.webp';
+import RailedHandguard from '../imagenes/mods/railed_handguard.webp';
+import RailedWoodenGrip from '../imagenes/mods/railed_wooden_grip.webp';
+import ReconnaissanceSight from '../imagenes/mods/reconnaissance_sight.webp';
+import ReinforcedBarrel from '../imagenes/mods/reinforced_barrel.webp';
+import Riktpunkt45DegreeSight from '../imagenes/mods/riktpunkt_45_degree_sight.webp';
+import RiktpunktHolosight from '../imagenes/mods/riktpunkt_holosight.webp';
+import RiktpunktMagnifierGadget from '../imagenes/mods/riktpunkt_magnifier_gadget.webp';
+import RoctecSuppressor from '../imagenes/mods/roctec_suppressor.webp';
+import RubberGrip from '../imagenes/mods/rubber_grip.webp';
+import ScopeMount from '../imagenes/mods/scope_mount.webp';
+import SeeMoreSight from '../imagenes/mods/see_more_sight.webp';
+import SehrKurzeBarrel from '../imagenes/mods/sehr_kurze_barrel.webp';
+import SharkTeethNoozle from '../imagenes/mods/shark_teeth_nozzle.webp';
+import SharpBlade from '../imagenes/mods/sharp_blade.webp';
+import ShellRack from '../imagenes/mods/shell_rack.webp';
+import Shh from '../imagenes/mods/shh.webp';
+import ShortBarrel from '../imagenes/mods/short_barrel.webp';
+import ShortForegrip from '../imagenes/mods/short_foregrip.webp';
+import ShortMag from '../imagenes/mods/short_mag.webp';
+import ShortMagazine from '../imagenes/mods/short_magazine.webp';
+import SicarioBarrel from '../imagenes/mods/sicario_barrel.webp';
+import SicarioGrip from '../imagenes/mods/sicario_grip.webp';
+import SignatureMagnifierGadget from '../imagenes/mods/signature_magnifier_gadget.webp';
+import SilencedBarrel from '../imagenes/mods/silenced_barrel.webp';
+import SilentDeath from '../imagenes/mods/silent_death.webp';
+import SilentMotor from '../imagenes/mods/silent_motor.webp';
+import SilentgearSilencer from '../imagenes/mods/silentgear_silencer.webp';
+import SingleFire from '../imagenes/mods/single_fire.webp';
+import SizeDoesntMatterSuppressor from '../imagenes/mods/size_doesnt_matter_suppressor.webp';
+import SkeletalStock from '../imagenes/mods/skeletal_stock.webp';
+import SkoldMicroReflexSight from '../imagenes/mods/skold_micro_reflex_sight.webp';
+import SlimlineBody from '../imagenes/mods/slimline_body.webp';
+import SlottedBarrelExtension from '../imagenes/mods/slotted_barrel_extension.webp';
+import SolarSight from '../imagenes/mods/solar_sight.webp';
+import SolidStock from '../imagenes/mods/solid_stock.webp';
+import SpeculatorSight from '../imagenes/mods/speculator_sight.webp';
+import SpeedPullMagazine from '../imagenes/mods/speed_pull_magazine.webp';
+import SpikeGrip from '../imagenes/mods/spike_grip.webp';
+import SpikeKit from '../imagenes/mods/spike_kit.webp';
+import SpringSuppressor from '../imagenes/mods/spring_suppressor.webp';
+import Stability from '../imagenes/mods/stability.webp';
+import StandardIssueSuppressor from '../imagenes/mods/standard_issue_suppressor.webp';
+import StandardStock from '../imagenes/mods/standard_stock.webp';
+import StraightGrip from '../imagenes/mods/straight_grip.webp';
+import StraightMagazine from '../imagenes/mods/straight_magazine.webp';
+import StrikingBodyKit from '../imagenes/mods/striking_body_kit.webp';
+import StrikingMag from '../imagenes/mods/striking_mag.webp';
+import StrikingSlide from '../imagenes/mods/striking_slide.webp';
+import StubbyBarrel from '../imagenes/mods/stubby_barrel.webp';
+import StubbyCompensator from '../imagenes/mods/stubby_compensator.webp';
+import SuppressedBarrel from '../imagenes/mods/suppressed_barrel.webp';
+import Suppressor from '../imagenes/mods/suppressor.webp';
+import SurgeonSight from '../imagenes/mods/surgeon_sight.webp';
+import SwedishBarrel from '../imagenes/mods/swedish_barrel.webp';
+import SwedishBody from '../imagenes/mods/swedish_body.webp';
+import TacticalCompensator from '../imagenes/mods/tactical_compensator.webp';
+import TacticalForegrip from '../imagenes/mods/tactical_foregrip.webp';
+import TacticalLaserModule from '../imagenes/mods/tactical_laser_module.webp';
+import TacticalMag from '../imagenes/mods/tactical_mag.webp';
+import TacticalPistolLight from '../imagenes/mods/tactical_pistol_light.webp';
+import TacticalStock from '../imagenes/mods/tactical_stock.webp';
+import TacticalSuppressor from '../imagenes/mods/tactical_suppressor.webp';
+import TeamBoost from '../imagenes/mods/team_boost.webp';
+import TheBiggerTheBetterSuppressor from '../imagenes/mods/the_bigger_the_better_suppressor.webp';
+import TheCompetitorCompensator from '../imagenes/mods/the_competitor_compensator.webp';
+import TheEliteSlide from '../imagenes/mods/the_elite_slide.webp';
+import TheNinjaBarrel from '../imagenes/mods/the_ninja_barrel.webp';
+import TheProfessionalCompensator from '../imagenes/mods/the_professional_compensator.webp';
+import TheProfessionalChoiceSight from '../imagenes/mods/the_professionals_choice_sight.webp';
+import TheSilentKillerSuppressor from '../imagenes/mods/the_silent_killer_suppressor.webp';
+import TheTacticalRussianHandguard from '../imagenes/mods/the_tactical_russian_handguard.webp';
+import TheTacticalRussianRail from '../imagenes/mods/the_tactical_russian_rail.webp';
+import TheTankCompensator from '../imagenes/mods/the_tank_compensator.webp';
+import TheiaMagnifiedScope from '../imagenes/mods/theia_magnified_scope.webp';
+import ThreadedBarrel from '../imagenes/mods/threaded_barrel.webp';
+import ThrustLowerReceiver from '../imagenes/mods/thrust_lower_receiver.webp';
+import ThrustUpperReceiver from '../imagenes/mods/thrust_upper_receiver.webp';
+import TiradorBarrel from '../imagenes/mods/tirador_barrel.webp';
+import TiradorStock from '../imagenes/mods/tirador_stock.webp';
+import TishinaSuppresor from '../imagenes/mods/tishina_suppressor.webp';
+import TitaniumSkeletonGrip from '../imagenes/mods/titanium_skeleton_grip.webp';
+import TotalAmmo from '../imagenes/mods/total_ammo.webp';
+import TrigonomSight from '../imagenes/mods/trigonom_sight.webp';
+import TritiumSights from '../imagenes/mods/tritium_sights.webp';
+import TwelveRoundMagazine from '../imagenes/mods/twelve_rnd_mag.webp';
+import TwinkleGrip from '../imagenes/mods/twinkle_grip.webp';
+import TwoPieceStock from '../imagenes/mods/two_piece_stock.webp';
+import TwoToneSlide from '../imagenes/mods/two_tone_slide.webp';
+import UnfoldedStock from '../imagenes/mods/unfolded_stock.webp';
+import Velocity40 from '../imagenes/mods/velocity_40.webp';
+import Velocity45 from '../imagenes/mods/velocity_45.webp';
+import VelocityCompensator from '../imagenes/mods/velocity_compensator.webp';
+import VentedSlide from '../imagenes/mods/vented_slide.webp';
+import Ventilated40 from '../imagenes/mods/ventilated_40.webp';
+import Ventilated45 from '../imagenes/mods/ventilated_45.webp';
+import VentilatedBarrel from '../imagenes/mods/ventilated_barrel.webp';
+import VentilatedCompensator from '../imagenes/mods/ventilated_compensator.webp';
+import VesatileForegrip from '../imagenes/mods/versatile_foregrip.webp';
+import VintageMag from '../imagenes/mods/vintage_mag.webp';
+import WarTornStock from '../imagenes/mods/war_torn_stock.webp';
+import WellerBarrel from '../imagenes/mods/weller_barrel.webp';
+import WellerGrip from '../imagenes/mods/weller_grip.webp';
+import WebellsSuppresor from '../imagenes/mods/werbells_suppressor.webp';
+import WideStock from '../imagenes/mods/wide_stock.webp';
+import WoodenGrip from '../imagenes/mods/wooden_grip.webp';
+import WoodenSniperStock from '../imagenes/mods/wooden_sniper_stock.webp';
+
 //PRIMARY GUNS
 import AmcarRifle from '../imagenes/primary_guns/amcar_rifle.webp';
 import Commando553Rifle from '../imagenes/primary_guns/commando_553.webp';
@@ -504,6 +768,269 @@ export const itemsToImage = {
 'Kunai Knife (6-B1)': KunaiKnife,
 'Trautman Knife (6-C1)': TrautmanKnife,
 'Fire Axe (6-D1)': FireAxe,
+
+//MODS
+"000 Buckshot": Triple0Buckshot,
+"Accuracy +": AccuracyMinus,
+"Accuracy -": AccuracyPlus,
+"Acough Optic Scope": AcoughOpticScope,
+"Advanced Combat Sight": AdvancedCombatSight,
+"Aftermarket Shorty": AftermarketShorty,
+"Aggressor Barrel": AgressorBarrel,
+"Aggressor Compensator": AgressorCompensator,
+"AK Plastic Grip": AKPlasticGrip,
+"AK Quadstacked Mag": AKQuadstackedMag,
+"AK Rubber Grip": AKRubberGrip,
+"AK Slavic Dragon Barrel": AKSlavicDragonBarrel,
+"AK Wood Grip": AKWoodGrip,
+"Aluminum Foregrip": AluminumForegrip,
+"Aluminum Grip": AluminumGrip,
+"Angled Sight": AngledSight,
+"AP Slug": APSlug,
+"Asepsis Suppressor": AsepsisSuppressor,
+"Assault Light": AssaultLight,
+"Auto Fire": AutoFire,
+"Battleproven Handguard": BattleprovenHandguard,
+"Big Brother Magazine": BigBrotherMagazine,
+"Bling Grip": BlingGrip,
+"Bombardier Barrel": BombardierBarrel,
+"Box Buddy Sight": BoxBuddySight,
+"Budget Suppressor": BudgetSuppressor,
+"CAR Quadstacked Mag": CARQuadstackedMag,
+"Carnival Grip": CarnivalGrip,
+"Cartel Grip": CartelGrip,
+"Champion's Suppressor": ChampionsSuppressor,
+"Civilian Barrel": CivilianBarrel,
+"Civilian Market Barrel": CivilianMarketBarrel,
+"Classic Stock": ClassicStock,
+"Combat Sight": CombatSight,
+"Combined Module": CombinedModule,
+"Compact Holosight": CompactHolosight,
+"Compact Laser Module": CompactLaserModule,
+"Compact Profile Sight": CompactProfileSight,
+"Competitor's Compensator": CompetitorsCompensator,
+"Concealment": Concealment,
+"Contractor Compensator": ContractorCompensator,
+"Contractor Grip": ContractorGrip,
+"Contractor Stock": ContractorStock,
+"Crabs Rail": CrabsRail,
+"Cruz Grip": CruzGrip,
+"Custom Assault Frame": CustomAssaultFrame,
+"Custom Barrel": CustomBarrel,
+"Custom Built Frame": CutomBuiltFrame,
+"Custom Reinforced Frame": CustomReinforcedFrame,
+"Custom Slide": CustomSlide,
+"Damage": Damage,
+"Damper.L 44 Nozzle": DamperL44Nozzle,
+"Delightful Grip": DelightfulGrip,
+"Diablo Barrel": DiabloBarrel,
+"Diminutive Barrel": DiminutiveBarrel,
+"Discrete Foregrip": DiscreteForegrip,
+"Discrete Grip": DiscreteGrip,
+"DMR Kit": DMRKit,
+"Donald's Horizontal Leveller": DonaldsHorizontalLeveler,
+"Dragon's Breath Round": DragonsBreath,
+"Durable Blade": DurableBlade,
+"80's Calling": EightiesCalling,
+"Engraved Grip": EngravedGrip,
+"Enlightened Foregrip": EnlightenedForegrip,
+"Ergo Grip": ErgoGrip,
+"Ergo Wooden Grip": ErgoWoodenGrip,
+"Ergonomic Grip": ErgonomicGrip,
+"Exotique Receiver": ExotiqueReceiver,
+"Expert Mag": ExpertMag,
+"Expert Slide": ExpertSlide,
+"Extended Magazine": ExtendedMagazine,
+"Facepunch Compensator": FacepunchCompensator,
+"Fast Motor": FastMotor,
+"Federales Grip": FederalesGrip,
+"Federales Stock": FederalesStock,
+"Fire Breather Nozzle": FireBreatherNozzle,
+"Flash Hider": FlashHider,
+"Flechette": Flechette,
+"Folding Stock": FoldingStock,
+"45 Degree Ironsights": FortyfiveDegreeIronsights,
+"45 Degree Red-Dot Sight": FortyfiveDegreeRedDotSight,
+"Funnel of Fun Nozzle": FunnelOfFunNozzle,
+"Futomaki Suppressor": FutomakiSuppressor,
+"Ghetto Blaster": GhettoBlaster,
+"Grease Barrel": GreaseBarrel,
+"HE Round": HERound,
+"Heatsinked Suppressed Barrel": HeatsinkedSuppressedBarrel,
+"High Capacity Mag": HighCapacityMag,
+"High Temperature Mixture": HighTemperatureMixture,
+"Hollow Handle": HollowHandle,
+"Holographic Sight": HolographicSight,
+"HPS Suppressor": HPSSuppressor,
+"Hurricane Compensator": HurricaneCompensator,
+"I want more Magazine!": IWantMoreMagazine,
+"Incendiary Round": IncendiaryRound,
+"IPSC Compensator": IPSCCompensator,
+"JP36 Long Foregrip": JP36LongForegrip,
+"Jungle Ninja Suppressor": JungleNinjaSuppressor,
+"Keymod Rail": KeymodRail,
+"King's Crown Compensator": KingsCrownCompensator,
+"L5 Magazine": L5Magazine,
+"La Femme Compensator": LaFemmeCompensator,
+"Laser Grip": LaserGrip,
+"LED Combo": LedCombo,
+"Lightweight Rail": LightweightRail,
+"Lion's Bipod": LionsBipod,
+"Little Brother Foregrip": LittleBrotherForegrip,
+"Long Barrel": LongBarrel,
+"Long Slide": LongSlide,
+"Long Vented Slide": LongVentedSlide,
+"Low Drag Magazine": LowDragMagazine,
+"Low Profile Suppressor": LowProfileSuppresor,
+"Low Temperature Mixture": LowTemperatureMixture,
+"LW Upper Receiver": LWUpperReceiver,
+"Maelstrom Sight": MaelstromSight,
+"Magazine with Ameritude!": MagazineWithAmeritude,
+"Maki Suppressor": MakiSuppressor,
+"Mall Ninja Barrel": MallNinjaBarrel,
+"Marksman Sight": MarksmanSight,
+"Marmon Compensator": MarmonCompensator,
+"Match Slide": MatchSlide,
+"Medio Barrel": MedioBarrel,
+"Medium Barrel": MediumBarrel,
+"Medium Suppressor": MediumSuppressor,
+"Merlin Nozzle": MerlinNozzle,
+"Micro Laser": MicroLaser,
+"Military Laser Module": MilitaryLaserModule,
+"Military Red Dot Sight": MilitaryRedDotSight,
+"Milled Slide": MilledSlide,
+"Milspec Mag.": MilspecMag,
+"Milspec Scope": MIlspecScope,
+"Modern Barrel": ModernBarrel,
+"Monolith Suppressor": MonolithSuppressor,
+"Moscow Special Rail": MoscowSpecialRail,
+"Muldon Stock": MuldonStock,
+"No Stock": NoStock,
+"Noir Grip": NoirGrip,
+"Overcompensating Barrel": OvercompensatingBarrel,
+"OVERKILL Compensator": OvekillCompensator,
+"PBS Suppressor": PBSSuppressor,
+"Pesante Barrel": PesanteBarrel,
+"Piccolo Barrel": PiccoloBarrel,
+"Pistol Red Dot Sight": PistorRedDotSight,
+"Platypus Grip": PlatypusGrip,
+"Pocket Laser": PocketLaser,
+"Pocket Surprise Barrel": PocketSurpriseBarrel,
+"Polizei Tactical Barrel": PolizeiTacticalBarrel,
+"Polymer Flashlight": PolymerFlashlight,
+"Ported Barrel": PortedBarrel,
+"Ported Compensator": PortedCompensator,
+"Precision Barrel": PrecisionBarrel,
+"Pro Grip": ProGrip,
+"Prodigious Barrel": ProdigiousBarrel,
+"Prototype Barrel": PrototypeBarrel,
+"Punisher Compensator": PunisherCompensator,
+"Railed Handguard": RailedHandguard,
+"Railed Wooden Grip": RailedWoodenGrip,
+"Reconnaissance Sight": ReconnaissanceSight,
+"Reinforced Barrel": ReinforcedBarrel,
+"Riktpunkt 45 degree Sight": Riktpunkt45DegreeSight,
+"Riktpunkt Holosight": RiktpunktHolosight,
+"Riktpunkt Magnifier Gadget": RiktpunktMagnifierGadget,
+"Roctec Suppressor": RoctecSuppressor,
+"Rubber Grip": RubberGrip,
+"Scope Mount": ScopeMount,
+"See More Sight": SeeMoreSight,
+"Sehr Kurze Barrel": SehrKurzeBarrel,
+"Shark Teeth Nozzle": SharkTeethNoozle,
+"Sharp Blade": SharpBlade,
+"Shell Rack": ShellRack,
+"Shh!": Shh,
+"Short Barrel": ShortBarrel,
+"Short Foregrip": ShortForegrip,
+"Short Mag": ShortMag,
+"Short Magazine": ShortMagazine,
+"Sicario Barrel": SicarioBarrel,
+"Sicario Grip": SicarioGrip,
+"Signature Magnifier Gadget": SignatureMagnifierGadget,
+"Silenced Barrel": SilencedBarrel,
+"Silent Death": SilentDeath,
+"Silent Motor": SilentMotor,
+"Silentgear Silencer": SilentgearSilencer,
+"Single Fire": SingleFire,
+"Size Doesn't Matter Suppressor": SizeDoesntMatterSuppressor,
+"Skeletal Stock": SkeletalStock,
+"SKOLD Micro Reflex Sight": SkoldMicroReflexSight,
+"Slimline Body": SlimlineBody,
+"Slotted Barrel Extension": SlottedBarrelExtension,
+"Solar Sight": SolarSight,
+"Solid Stock": SolidStock,
+"Speculator Sight": SpeculatorSight,
+"Speed Pull Magazine": SpeedPullMagazine,
+"Spike Grip": SpikeGrip,
+"Spike Kit": SpikeKit,
+"Spring Suppressor": SpringSuppressor,
+"Stability": Stability,
+"Standard Issue Suppressor": StandardIssueSuppressor,
+"Standard Stock": StandardStock,
+"Straight Grip": StraightGrip,
+"Straight Magazine": StraightMagazine,
+"Striking Body Kit": StrikingBodyKit,
+"Striking Mag": StrikingMag,
+"Striking Slide": StrikingSlide,
+"Stubby Barrel": StubbyBarrel,
+"Stubby Compensator": StubbyCompensator,
+"Suppressed Barrel": SuppressedBarrel,
+"Suppressor": Suppressor,
+"Surgeon Sight": SurgeonSight,
+"Swedish Barrel": SwedishBarrel,
+"Swedish Body": SwedishBody,
+"Tactical Compensator": TacticalCompensator,
+"Tactical Foregrip": TacticalForegrip,
+"Tactical Laser Module": TacticalLaserModule,
+"Tactical Mag.": TacticalMag,
+"Tactical Pistol Light": TacticalPistolLight,
+"Tactical Stock": TacticalStock,
+"Tactical Suppressor": TacticalSuppressor,
+"Team Boost": TeamBoost,
+"The Bigger The Better Suppressor": TheBiggerTheBetterSuppressor,
+"The Competitor Compensator": TheCompetitorCompensator,
+"The Elite Slide": TheEliteSlide,
+"The Ninja Barrel": TheNinjaBarrel,
+"The Professional Compensator": TheProfessionalCompensator,
+"The Professional's Choice Sight": TheProfessionalChoiceSight,
+"The Silent Killer Suppressor": TheSilentKillerSuppressor,
+"The Tactical Russian Handguard": TheTacticalRussianHandguard,
+"The Tactical Russian Rail": TheTacticalRussianRail,
+"The Tank Compensator": TheTankCompensator,
+"Theia Magnified Scope": TheiaMagnifiedScope,
+"Threaded Barrel": ThreadedBarrel,
+"THRUST Lower Receiver": ThrustLowerReceiver,
+"THRUST Upper Receiver": ThrustUpperReceiver,
+"Tirador Barrel": TiradorBarrel,
+"Tirador Stock": TiradorStock,
+"Tishina Suppressor": TishinaSuppresor,
+"Titanium Skeleton Grip": TitaniumSkeletonGrip,
+"Total Ammo": TotalAmmo,
+"Trigonom Sight": TrigonomSight,
+"Tritium Sights": TritiumSights,
+"12rnd Mag.": TwelveRoundMagazine,
+"Twinkle Grip": TwinkleGrip,
+"2 Piece Stock": TwoPieceStock,
+"Two Tone Slide": TwoToneSlide,
+"Unfolded Stock": UnfoldedStock,
+"Velocity .40": Velocity40,
+"Velocity .45": Velocity45,
+"Velocity Compensator": VelocityCompensator,
+"Vented Slide": VentedSlide,
+"Ventilated .40": Ventilated40,
+"Ventilated .45": Ventilated45,
+"Ventilated Barrel": VentilatedBarrel,
+"Ventilated Compensator": VentilatedCompensator,
+"Versatile Foregrip": VesatileForegrip,
+"Vintage Mag.": VintageMag,
+"War-Torn Stock": WarTornStock,
+"Weller Barrel": WellerBarrel,
+"Weller Grip": WellerGrip,
+"Werbell's Suppressor": WebellsSuppresor,
+"Wide Stock": WideStock,
+"Wooden Grip": WoodenGrip,
+"Wooden Sniper Stock": WoodenSniperStock,
 
 //PRIMARY GUNS
 'AMCAR Rifle (A1)': AmcarRifle,

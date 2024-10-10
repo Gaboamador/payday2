@@ -2576,3 +2576,130 @@ input[type="checkbox"] {
 .inputField {
   font-family: 'DINEngschrift';
 }
+
+
+/**/
+@media (min-width: 768px) {
+  .container-mod {
+    width: 700px;
+    margin: 0 auto;
+  }
+}
+
+.container-mod-button {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.mod-button {
+  background-color: #459bd5 !important;
+}
+
+.mod-dropdown {
+  background-color: #282c34 !important;
+  max-width: 20%;
+}
+
+.mod-dropdown-menu {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.mod-selection-container {
+  max-width: 100%;
+  border-radius: 10px;
+  background-image: url('https://pd2builder.netlify.app/img/bg.png');
+  background-size: cover;
+  background-position: center;
+  margin-top: 10px;
+}
+
+.mod-filter-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+.mod-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.mod-item {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: transparent;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  text-align: center;
+}
+
+.mod-item img {
+  max-width: 100%;
+  height: auto;
+}
+
+.mod-item p {
+  font-size: 0.9em;
+  margin-top: 5px;
+  color: whitesmoke;
+}
+
+.mod-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.mod-item.selected {
+  background:
+  linear-gradient(
+    to right, 
+    rgba(215, 220, 225, 1) 0%, 
+    rgba(215, 220, 225, 0.2) 10%, 
+    rgba(215, 220, 225, 0.7) 21%, 
+    rgba(215, 220, 225, 1) 40%, 
+    rgba(215, 220, 225, 0.5) 50%, 
+    rgba(215, 220, 225, 1) 60%, 
+    rgba(215, 220, 225, 0.7) 70%, 
+    rgba(215, 220, 225, 1) 80%, 
+    rgba(215, 220, 225, 0.2) 90%, 
+    rgba(215, 220, 225, 1) 100%
+  ) left top / 100% 3px no-repeat,
+  linear-gradient(
+    to right, 
+    rgba(215, 220, 225, 1) 0%, 
+    rgba(215, 220, 225, 0.2) 10%, 
+    rgba(215, 220, 225, 0.7) 21%, 
+    rgba(215, 220, 225, 1) 40%, 
+    rgba(215, 220, 225, 1) 60%, 
+    rgba(215, 220, 225, 0.7) 70%, 
+    rgba(215, 220, 225, 0.2) 90%, 
+    rgba(215, 220, 225, 1) 100%
+  ) left bottom / 100% 3px no-repeat,
+  linear-gradient(
+    to bottom, 
+    rgba(215, 220, 225, 1) 0%, 
+    rgba(215, 220, 225, 0.2) 10%, 
+    rgba(215, 220, 225, 0.7) 21%, 
+    rgba(215, 220, 225, 1) 40%, 
+    rgba(215, 220, 225, 0.5) 50%,
+    rgba(215, 220, 225, 1) 60%, 
+    rgba(215, 220, 225, 0.7) 70%, 
+    rgba(215, 220, 225, 1) 80%, 
+    rgba(215, 220, 225, 0.2) 90%, 
+    rgba(215, 220, 225, 1) 100%
+  ) left top / 3px 100% no-repeat,
+  linear-gradient(
+    to bottom, 
+    rgba(215, 220, 225, 1) 0%, 
+    rgba(215, 220, 225, 0.2) 10%, 
+    rgba(215, 220, 225, 0.7) 21%, 
+    rgba(215, 220, 225, 1) 40%, 
+    rgba(215, 220, 225, 0.2) 75%, 
+    rgba(215, 220, 225, 1) 100%
+  ) right top / 3px 100% no-repeat,
+  rgba(0, 0, 0, 0.5);
+}

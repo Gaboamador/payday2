@@ -3,13 +3,14 @@ import { BiExport, BiImport } from "react-icons/bi";
 import skillsData from '../database/skills.json';
 import primaryWeapons from '../database/primary.json';
 import secondaryWeapons from '../database/secondary.json';
+import weaponMods from '../database/weaponMods.json'
 import perkDecks from '../database/perkDecks.json';
 import armors from '../database/armors.json';
 import throwables from '../database/throwables.json';
 import equipments from '../database/equipments.json';
 import melees from '../database/melees.json';
 import tagsRaw from '../database/tags.json'
-import {Button, Row, Col, Container, ListGroup, Table, Form, Carousel} from 'react-bootstrap';
+import {Button, Row, Col, Container, ListGroup, Table, Form, Carousel, Dropdown, DropdownButton, ButtonGroup} from 'react-bootstrap';
 import aceImage from '../imagenes/ace.png';
 import iconSkills from '../imagenes/icons.png'
 import { itemsToImage } from "../database/itemsToImage";
@@ -215,7 +216,6 @@ const totalSkillPoints = getProfileTotalPoints(selectedSkills, currentProfile - 
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
 
-    // Update the selected primary weapon for the selected profile
     selectedProfile.primaryWeapon = { subcategory: subcategoryName, weapon: weaponName };
 
     return newSelectedSkills;
@@ -227,12 +227,96 @@ const handleSelectSecondaryWeapon = (profileIndex, subcategoryName, weaponName) 
     const newSelectedSkills = [...prevSelectedSkills];
     const selectedProfile = newSelectedSkills[profileIndex];
 
-    // Update the selected primary weapon for the selected profile
     selectedProfile.secondaryWeapon = { subcategory: subcategoryName, weapon: weaponName };
 
     return newSelectedSkills;
   });
 };
+
+const handleSelectPrimaryWeaponMod = (profileIndex, modCategory, modValue) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
+    const newSelectedSkills = [...prevSelectedSkills];
+    const selectedProfile = newSelectedSkills[profileIndex];
+
+    // Initialize mods if not already set
+    selectedProfile.primaryWeapon.mods = selectedProfile.primaryWeapon.mods || {};
+
+     // Check if the mod is already selected
+     const currentModValue = selectedProfile.primaryWeapon.mods[modCategory];
+
+    //  // Check if the mod is already selected
+    //  if (selectedProfile.primaryWeapon.mods[modCategory]) {
+    //   // If mod is already selected, remove the mod category
+    //   delete selectedProfile.primaryWeapon.mods[modCategory];
+    // } else {
+    //   // Otherwise, update the mod for the selected weapon
+    //   selectedProfile.primaryWeapon.mods[modCategory] = modValue;
+    // }
+    if (currentModValue) {
+      if (currentModValue === modValue) {
+        // If the selected mod is the same as the current, remove the mod category
+        delete selectedProfile.primaryWeapon.mods[modCategory];
+      } else {
+        // If a different mod is selected, update the mod category
+        selectedProfile.primaryWeapon.mods[modCategory] = modValue;
+      }
+    } else {
+      // If no mod is selected for this category, add the new mod
+      selectedProfile.primaryWeapon.mods[modCategory] = modValue;
+    }
+
+    return newSelectedSkills;
+  });
+};
+// const handleSelectPrimaryWeaponMod = (profileIndex, modCategory, modValue) => {
+//   context.setSelectedSkills((prevSkills) => {
+//     const updatedSkills = [...prevSkills];
+//     if (!updatedSkills[profileIndex].primaryWeapon.mods) {
+//       updatedSkills[profileIndex].primaryWeapon.mods = {};
+//     }
+//     updatedSkills[profileIndex].primaryWeapon.mods[modCategory] = modValue;
+//     return updatedSkills;
+//   });
+// };
+
+
+
+const handleSelectSecondaryWeaponMod = (profileIndex, modCategory, modValue) => {
+  context.setSelectedSkills((prevSelectedSkills) => {
+    const newSelectedSkills = [...prevSelectedSkills];
+    const selectedProfile = newSelectedSkills[profileIndex];
+
+    // Initialize mods if not already set
+    selectedProfile.secondaryWeapon.mods = selectedProfile.secondaryWeapon.mods || {};
+
+     // Check if the mod is already selected
+     const currentModValue = selectedProfile.secondaryWeapon.mods[modCategory];
+
+    //  // Check if the mod is already selected
+    //  if (selectedProfile.secondaryWeapon.mods[modCategory]) {
+    //   // If mod is already selected, remove the mod category
+    //   delete selectedProfile.secondaryWeapon.mods[modCategory];
+    // } else {
+    //   // Otherwise, update the mod for the selected weapon
+    //   selectedProfile.secondaryWeapon.mods[modCategory] = modValue;
+    // }
+    if (currentModValue) {
+      if (currentModValue === modValue) {
+        // If the selected mod is the same as the current, remove the mod category
+        delete selectedProfile.secondaryWeapon.mods[modCategory];
+      } else {
+        // If a different mod is selected, update the mod category
+        selectedProfile.secondaryWeapon.mods[modCategory] = modValue;
+      }
+    } else {
+      // If no mod is selected for this category, add the new mod
+      selectedProfile.secondaryWeapon.mods[modCategory] = modValue;
+    }
+
+    return newSelectedSkills;
+  });
+};
+
 
 const handleSelectPerkDeck = (profileIndex, selectedPerkDeck) => {
   context.setSelectedSkills((prevSelectedSkills) => {
@@ -446,6 +530,132 @@ const toggleButtonContainerVisibility = () => {
     setIsTagsActive((prevState) => !prevState);
   };
 
+  const [selectedCategory, setSelectedCategory] = useState(Object.keys(weaponMods.weaponMods)[0]);
+  const [showMods, setShowMods] = useState(false); 
+
+  const modCategoryNames = {
+    ammo: 'Ammo',
+    barrel: 'Barrel',
+    barrelExtension: 'Barrel Ext.',
+    bipod: 'Bipod',
+    boost: 'Boost',
+    custom: 'Custom',
+    extra: 'Extra',
+    foregrip: 'Foregrip',
+    gadget: 'Gadget',
+    grip: 'Grip',
+    lowerReceiver: 'Lower Receiver',
+    magazine: 'Magazine',
+    sight: 'Sight',
+    slide: 'Slide',
+    stock: 'Stock',
+    upperReceiver: 'Upper Receiver',
+    };
+
+  const ModSelectionContainer = ({
+    selectedSkills,
+    currentProfile,
+    primaryWeapon,
+    secondaryWeapon,
+    handleSelectPrimaryWeaponMod,
+    handleSelectSecondaryWeaponMod,
+    categoryVisibility,
+    weaponMods,
+    selectedCategory,
+    setSelectedCategory
+  }) => {
+    const [filter, setFilter] = useState('');
+    const isPrimaryWeapon = primaryWeapon && categoryVisibility['primaryWeapon'];
+    const toggleModVisibility = () => {
+      setShowMods((prev) => !prev);
+    };
+  
+
+    return (
+      <div className="container-mod">
+      <Dropdown as={ButtonGroup} className="container-mod-button">
+          <Button variant="success" onClick={toggleModVisibility} className="mod-button">
+          {showMods 
+            ? `Hide Mods | ${modCategoryNames[selectedCategory] || selectedCategory || 'Select Mod Category'}`
+            : 'Show Mods'}
+          </Button>
+        <Dropdown.Toggle split variant="success" id="dropdown-split-basic" className="mod-dropdown"/>
+
+        <Dropdown.Menu className="mod-dropdown-menu">
+          {Object.keys(weaponMods.weaponMods).map((modCategory) => (
+            <Dropdown.Item
+              key={modCategory}
+              onClick={() => {
+                setSelectedCategory(modCategory);
+                setShowMods(true);
+              }}
+            >
+              {modCategoryNames[modCategory] || modCategory} {/* Use the mapping for display */}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
+  
+        {/* Mod Selection Component for the Selected Category */}
+        {showMods && (
+        <div>
+          {isPrimaryWeapon && selectedSkills[currentProfile - 1]?.primaryWeapon?.weapon && (
+            <ModSelectionComponent
+              modCategory={selectedCategory}
+              mods={weaponMods.weaponMods[selectedCategory]} // Array of mods for the selected category
+              selectedMod={selectedSkills[currentProfile - 1]?.primaryWeapon?.mods?.[selectedCategory] || ''}
+              onSelectMod={(modValue) => handleSelectPrimaryWeaponMod(currentProfile - 1, selectedCategory, modValue)}
+              filter={filter} // Pass down the filter to the ModSelectionComponent
+              setFilter={setFilter} // Pass down the function to update the filter
+            />
+          )}
+          {secondaryWeapon && categoryVisibility['secondaryWeapon'] && selectedSkills[currentProfile - 1]?.secondaryWeapon?.weapon && (
+            <ModSelectionComponent
+              modCategory={selectedCategory}
+              mods={weaponMods.weaponMods[selectedCategory]} // Array of mods for the selected category
+              selectedMod={selectedSkills[currentProfile - 1]?.secondaryWeapon?.mods?.[selectedCategory] || ''}
+              onSelectMod={(modValue) => handleSelectSecondaryWeaponMod(currentProfile - 1, selectedCategory, modValue)}
+              filter={filter} // Pass down the filter to the ModSelectionComponent
+              setFilter={setFilter} // Pass down the function to update the filter
+            />
+          )}
+        </div>
+        )}
+      </div>
+    );
+  };
+  
+  const ModSelectionComponent = ({ mods, selectedMod, onSelectMod, filter, setFilter }) => {
+    // Filter the mods based on the search term
+    const filteredMods = mods.filter((mod) =>
+      mod.toLowerCase().includes(filter.toLowerCase())
+    );
+  
+    return (
+      <div className="mod-selection-container">
+        <input
+          type="text"
+          placeholder="Search mods..."
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="mod-filter-input"
+        />
+        <div className="mod-items-grid">
+          {filteredMods.map((mod) => (
+            <div
+              key={mod}
+              className={`mod-item ${selectedMod === mod ? 'selected' : ''}`}
+              onClick={() => onSelectMod(mod)}
+            >
+              <img src={itemsToImage[mod]} alt={mod} />
+              <p>{mod}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   function goToTop() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
@@ -573,6 +783,21 @@ const toggleButtonContainerVisibility = () => {
 </Form>
 {/* PRIMARY WEAPON END*/}
 
+{/* PRIMARY WEAPON MOD SELECTION START */}
+    {selectedSkills[currentProfile - 1]?.primaryWeapon?.weapon && categoryVisibility['primaryWeapon'] && (
+      <ModSelectionContainer
+        selectedSkills={selectedSkills}
+        currentProfile={currentProfile}
+        primaryWeapon={selectedSkills[currentProfile - 1]?.primaryWeapon?.weapon}
+        handleSelectPrimaryWeaponMod={handleSelectPrimaryWeaponMod}
+        categoryVisibility={categoryVisibility}
+        weaponMods={weaponMods}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
+    )}
+{/* PRIMARY WEAPON MOD SELECTION END */}
+
 {/* SECONDARY WEAPON START*/}
 <Form className="grid-form-builder">
         <Form.Label onClick={() => toggleCategoryVisibility('secondaryWeapon')} className="categoryName">
@@ -641,6 +866,21 @@ const toggleButtonContainerVisibility = () => {
 </div>  
 </Form>
 {/* SECONDARY WEAPON END */}
+
+{/* SECONDARY WEAPON MOD SELECTION START */}
+ {selectedSkills[currentProfile - 1]?.secondaryWeapon?.weapon && categoryVisibility['secondaryWeapon'] && (
+      <ModSelectionContainer
+        selectedSkills={selectedSkills}
+        currentProfile={currentProfile}
+        secondaryWeapon={selectedSkills[currentProfile - 1]?.secondaryWeapon?.weapon}
+        handleSelectSecondaryWeaponMod={handleSelectSecondaryWeaponMod}
+        categoryVisibility={categoryVisibility}
+        weaponMods={weaponMods}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
+    )}
+{/* SECONDARY WEAPON MOD SELECTION END */}
 
 {/* PERK DECK START */}
 {/* <Form>
@@ -1027,14 +1267,25 @@ const toggleButtonContainerVisibility = () => {
       className="tree"
     >
       <option value="">Select Melee</option>
-      {melees.map((melee) => {
+      {/* {melees.map((melee) => {
         const normalized = melee.replace(/\s?\([^)]+\)/, '').trim();
         return (
           <option key={normalized} value={normalized}>
             {normalized}
           </option>
         );
-      })}
+      })} */}
+       {melees
+      .map((melee) => {
+        const normalized = melee.replace(/\s?\([^)]+\)/, '').trim(); // Normalize the melee name
+        return normalized; // Return the normalized name
+      })
+      .sort((a, b) => a.localeCompare(b)) // Sort alphabetically
+      .map((normalized) => ( // Render the options using the normalized names
+        <option key={normalized} value={normalized}>
+          {normalized}
+        </option>
+      ))}
     </Form.Control>
   )}
 
