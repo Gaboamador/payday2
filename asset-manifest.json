@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.9468a1eb.css",
-    "main.js": "/payday2/static/js/main.949329e2.js",
+    "main.css": "/payday2/static/css/main.008e8013.css",
+    "main.js": "/payday2/static/js/main.08b2a709.js",
     "static/js/289.09e720a0.chunk.js": "/payday2/static/js/289.09e720a0.chunk.js",
     "static/js/787.517fa3a8.chunk.js": "/payday2/static/js/787.517fa3a8.chunk.js",
     "static/media/icons.png": "/payday2/static/media/icons.7ad65b2dffcd3fa9a44d.png",
@@ -583,13 +583,13 @@
     "static/media/stability.webp": "/payday2/static/media/stability.a71044ea7363bfd71fe2.webp",
     "static/media/total_ammo.webp": "/payday2/static/media/total_ammo.a71044ea7363bfd71fe2.webp",
     "static/media/the_pen.webp": "/payday2/static/media/the_pen.24610383a444ced79906.webp",
-    "main.9468a1eb.css.map": "/payday2/static/css/main.9468a1eb.css.map",
-    "main.949329e2.js.map": "/payday2/static/js/main.949329e2.js.map",
+    "main.008e8013.css.map": "/payday2/static/css/main.008e8013.css.map",
+    "main.08b2a709.js.map": "/payday2/static/js/main.08b2a709.js.map",
     "289.09e720a0.chunk.js.map": "/payday2/static/js/289.09e720a0.chunk.js.map",
     "787.517fa3a8.chunk.js.map": "/payday2/static/js/787.517fa3a8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9468a1eb.css",
-    "static/js/main.949329e2.js"
+    "static/css/main.008e8013.css",
+    "static/js/main.08b2a709.js"
   ]
 }
