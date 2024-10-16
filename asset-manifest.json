@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.008e8013.css",
-    "main.js": "/payday2/static/js/main.08b2a709.js",
+    "main.css": "/payday2/static/css/main.ade54a22.css",
+    "main.js": "/payday2/static/js/main.0dd1670c.js",
     "static/js/289.09e720a0.chunk.js": "/payday2/static/js/289.09e720a0.chunk.js",
     "static/js/787.517fa3a8.chunk.js": "/payday2/static/js/787.517fa3a8.chunk.js",
     "static/media/icons.png": "/payday2/static/media/icons.7ad65b2dffcd3fa9a44d.png",
@@ -219,6 +219,7 @@
     "static/media/heather_submachine_gun.webp": "/payday2/static/media/heather_submachine_gun.a0d06fdba62be8e64899.webp",
     "static/media/skeletal_stock.webp": "/payday2/static/media/skeletal_stock.f3a30e498e3d2f48c70c.webp",
     "static/media/aggressor_barrel.webp": "/payday2/static/media/aggressor_barrel.251186435b5ab4ed77b3.webp",
+    "static/media/drum_mag.webp": "/payday2/static/media/drum_mag.227889e257e1f7a6adf1.webp",
     "static/media/ghetto_blaster.webp": "/payday2/static/media/ghetto_blaster.3faf5fc47b74ac3be29f.webp",
     "static/media/akimbo_leo_pistols.webp": "/payday2/static/media/akimbo_leo_pistols.948f4c20093895a6ac2f.webp",
     "static/media/ak_slavic_dragon_barrel.webp": "/payday2/static/media/ak_slavic_dragon_barrel.06f69e8abc9cb5c47e49.webp",
@@ -250,6 +251,7 @@
     "static/media/la_femme_compensator.webp": "/payday2/static/media/la_femme_compensator.b3b76379ac18d267e299.webp",
     "static/media/tactical_stock.webp": "/payday2/static/media/tactical_stock.da85b85e5a1efe2886db.webp",
     "static/media/polymer_flashlight.webp": "/payday2/static/media/polymer_flashlight.8244845e7bbf508583c2.webp",
+    "static/media/contractor_silencer.webp": "/payday2/static/media/contractor_silencer.29e14c5a48422c9fca2b.webp",
     "static/media/shh.webp": "/payday2/static/media/shh.0ad0dcf5b6b2cc2d29ff.webp",
     "static/media/slimline_body.webp": "/payday2/static/media/slimline_body.7a05ac52fba981014b95.webp",
     "static/media/pistol_crossbow.webp": "/payday2/static/media/pistol_crossbow.63347c5d52086f7f84cc.webp",
@@ -374,10 +376,12 @@
     "static/media/brenner_21_light_machine_gun.webp": "/payday2/static/media/brenner_21_light_machine_gun.2471b1648a409777a925.webp",
     "static/media/commando_553.webp": "/payday2/static/media/commando_553.d9c0b9027174dd0bcdb3.webp",
     "static/media/carnival_grip.webp": "/payday2/static/media/carnival_grip.413b255b9223fb7ed41f.webp",
+    "static/media/cqb_barrel.webp": "/payday2/static/media/cqb_barrel.1414e2f2018ef96088b4.webp",
     "static/media/skold_micro_reflex_sight.webp": "/payday2/static/media/skold_micro_reflex_sight.beda1abc58f2fa3feb64.webp",
     "static/media/aluminum_grip.webp": "/payday2/static/media/aluminum_grip.335b61f6603e2b6ac175.webp",
     "static/media/kobus_90_submachine_gun.webp": "/payday2/static/media/kobus_90_submachine_gun.0dd51caff0475cfba7c8.webp",
     "static/media/scope_mount.webp": "/payday2/static/media/scope_mount.77db2704a505d27d77ee.webp",
+    "static/media/tin_treated_barrel.webp": "/payday2/static/media/tin_treated_barrel.8df2b7d5c46728aef1f3.webp",
     "static/media/amcar_rifle.webp": "/payday2/static/media/amcar_rifle.91350eb66b751258a1a2.webp",
     "static/media/steakout_12g.webp": "/payday2/static/media/steakout_12g.1dc5ed12e39982fe6d61.webp",
     "static/media/swedish_body.webp": "/payday2/static/media/swedish_body.d49683ee2b064d899b32.webp",
@@ -500,6 +504,7 @@
     "static/media/light_crossbow.webp": "/payday2/static/media/light_crossbow.64670a1206e854ef1ad3.webp",
     "static/media/berger_combat_knife.webp": "/payday2/static/media/berger_combat_knife.4a9a8ecabab2116b3138.webp",
     "static/media/repeater_1874_sniper_rifle.webp": "/payday2/static/media/repeater_1874_sniper_rifle.a3fc56d4bcd483bc4e74.webp",
+    "static/media/discreet_stock.webp": "/payday2/static/media/discreet_stock.b4807484615289e96c62.webp",
     "static/media/arkansas_toothpick.webp": "/payday2/static/media/arkansas_toothpick.92b7b9b5a888056b87e5.webp",
     "static/media/federales_grip.webp": "/payday2/static/media/federales_grip.41758a32f72e3d5db0fa.webp",
     "static/media/expert_slide.webp": "/payday2/static/media/expert_slide.69b049dcc243aca4d7af.webp",
@@ -532,6 +537,7 @@
     "static/media/shawns_shears.webp": "/payday2/static/media/shawns_shears.26574e821a0eb2508dc6.webp",
     "static/media/low_profile_suppressor.webp": "/payday2/static/media/low_profile_suppressor.cd1546858cb1003bf4ef.webp",
     "static/media/switchblade.webp": "/payday2/static/media/switchblade.c06cede7fa251f643ba9.webp",
+    "static/media/tank_buster_barrel.webp": "/payday2/static/media/tank_buster_barrel.1d75f209b0aabcc22677.webp",
     "static/media/okinawan_style_sai.webp": "/payday2/static/media/okinawan_style_sai.c5aee5ba2a42589a731a.webp",
     "static/media/joceline_ou_12g.webp": "/payday2/static/media/joceline_ou_12g.684fdfe3d1d0a204e641.webp",
     "static/media/krieger_blade.webp": "/payday2/static/media/krieger_blade.ff8736919e66bc7af5c7.webp",
@@ -575,6 +581,7 @@
     "static/media/pitchfork.webp": "/payday2/static/media/pitchfork.7b1b7ecf0f5d51422c9f.webp",
     "static/media/team_boost.webp": "/payday2/static/media/team_boost.e4a70ed1f54aebb3e55b.webp",
     "index.html": "/payday2/index.html",
+    "static/media/nagant_bayonet.webp": "/payday2/static/media/nagant_bayonet.baa2147c80b76a69b849.webp",
     "static/media/croupiers_rake.webp": "/payday2/static/media/croupiers_rake.0a3b7b834db4e48933ca.webp",
     "static/media/accuracy_minus.webp": "/payday2/static/media/accuracy_minus.a71044ea7363bfd71fe2.webp",
     "static/media/accuracy_plus.webp": "/payday2/static/media/accuracy_plus.a71044ea7363bfd71fe2.webp",
@@ -583,13 +590,13 @@
     "static/media/stability.webp": "/payday2/static/media/stability.a71044ea7363bfd71fe2.webp",
     "static/media/total_ammo.webp": "/payday2/static/media/total_ammo.a71044ea7363bfd71fe2.webp",
     "static/media/the_pen.webp": "/payday2/static/media/the_pen.24610383a444ced79906.webp",
-    "main.008e8013.css.map": "/payday2/static/css/main.008e8013.css.map",
-    "main.08b2a709.js.map": "/payday2/static/js/main.08b2a709.js.map",
+    "main.ade54a22.css.map": "/payday2/static/css/main.ade54a22.css.map",
+    "main.0dd1670c.js.map": "/payday2/static/js/main.0dd1670c.js.map",
     "289.09e720a0.chunk.js.map": "/payday2/static/js/289.09e720a0.chunk.js.map",
     "787.517fa3a8.chunk.js.map": "/payday2/static/js/787.517fa3a8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.008e8013.css",
-    "static/js/main.08b2a709.js"
+    "static/css/main.ade54a22.css",
+    "static/js/main.0dd1670c.js"
   ]
 }
