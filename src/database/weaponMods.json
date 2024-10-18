@@ -13,6 +13,7 @@
         "Bombardier Barrel",
         "Civilian Barrel",
         "Civilian Market Barrel",
+        "CQB Barrel",
         "Custom Barrel",
         "Diablo Barrel",
         "Diminutive Barrel",
@@ -32,6 +33,7 @@
         "Precision Barrel",
         "Prodigious Barrel",
         "Prototype Barrel",
+        "Riot Barrel",
         "Reinforced Barrel",
         "Short Barrel",
         "Sicario Barrel",
@@ -39,7 +41,9 @@
         "Stubby Barrel",
         "Suppressed Barrel",
         "Swedish Barrel",
+        "Tank Buster Barrel",
         "Threaded Barrel",
+        "TiN Treated Barrel",
         "Tirador Barrel",
         "Weller Barrel"
       ],
@@ -50,6 +54,7 @@
         "Champion's Suppressor",
         "Competitor's Compensator",
         "Contractor Compensator",
+        "Contractor Silencer",
         "Damper.L 44 Nozzle",
         "Donald's Horizontal Leveller",
         "Facepunch Compensator",
@@ -98,6 +103,9 @@
         "Ventilated .45",
         "Ventilated Compensator",
         "Werbell's Suppressor"
+      ],
+      "bayonet": [
+        "Nagant Bayonet"
       ],
       "bipod": [
         "Lion's Bipod"
@@ -204,6 +212,7 @@
         "AK Quadstacked Mag",
         "Big Brother Magazine",
         "CAR Quadstacked Mag",
+        "Drum Mag",
         "Durable Blade",
         "Expert Mag",
         "Extended Magazine",
@@ -270,6 +279,7 @@
         "2 Piece Stock",
         "Classic Stock",
         "Contractor Stock",
+        "Discreet Stock",
         "Federales Stock",
         "Folding Stock",
         "Muldon Stock",

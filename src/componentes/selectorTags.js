@@ -1,17 +1,32 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import {ButtonGroup, Button, Row, Col, Container, ListGroup, Table, Form, Card} from 'react-bootstrap';
-import { VscExpandAll, VscCollapseAll } from "react-icons/vsc"
-import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im"
 import { GoChevronUp, GoChevronDown } from 'react-icons/go';
 import '../App.css';
-import skillsData from '../database/skills.json'
-import tagsRaw from '../database/tags.json'
+// import tagsRaw from '../database/tags.json'
+import { modCategoryNames } from "../database/modCategoryNames";
 import Context from "../context";
+import { fetchData } from './DataService';
 
-const tags = tagsRaw.sort()
 
 const BuildSelectorTags = () => {
   const context= useContext(Context)
+
+  const [tagsRaw, setTagsRaw] = useState([]);
+  useEffect(() => {
+    const fetchDataFromAPI = async () => {
+      try {
+        const { tagsRawOnline } = await fetchData();
+        setTagsRaw(tagsRawOnline);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchDataFromAPI();
+  }, []);
+  
+  const tags = tagsRaw.sort()
+
  // Retrieve and parse profiles from localStorage
 //  const profiles = JSON.parse(localStorage.getItem('selectedSkills')) || [];
     const profiles = context.selectedSkills
@@ -55,16 +70,69 @@ const BuildSelectorTags = () => {
  const getProfileData = (profile) => {
   if (!profile) return 'No profile data';
 
+   // Helper function to format mods as a string
+   const formatMods = (mods) => {
+    if (!mods || Object.keys(mods).length === 0) return '';
+
+    return Object.entries(mods)
+      .map(([modCategory, modValue]) => `${modCategoryNames[modCategory] || modCategory}: ${modValue}`)
+      .join(', ');
+  };
+
+   // Helper function to get tags
+   const getTags = (tags) => {
+    if (!tags || tags.length === 0) return [];
+    return tags.sort(); // Sort tags for display
+  };
+
+
   return {
     perkDeck: profile.perkDeck || 'No data available',
     primaryWeapon: profile.primaryWeapon ? `${profile.primaryWeapon.weapon}` : 'No data available',
+    primaryWeaponMods: profile.primaryWeapon ? formatMods(profile.primaryWeapon.mods) : 'No data available',
     secondaryWeapon: profile.secondaryWeapon ? `${profile.secondaryWeapon.weapon}` : 'No data available',
+    secondaryWeaponMods: profile.secondaryWeapon ? formatMods(profile.secondaryWeapon.mods) : 'No data available',
     melee: profile.melee || 'No data available',
     throwable: profile.throwable || 'No data available',
     armor: profile.armor || 'No data available',
     equipment: profile.equipment || 'No data available',
-    tags: profile.tags && profile.tags.length > 0 ? profile.tags.sort().join(', ') : 'No tags available'
+    // tags: profile.tags && profile.tags.length > 0 ? profile.tags.sort().join(', ') : 'No tags available'
+    tags: getTags(profile.tags), 
   };
+};
+
+// Helper function to render mods in a grid layout
+const renderModsGrid = (mods) => {
+  if (!mods || Object.keys(mods).length === 0) {
+    // return <div>No mods available</div>;
+    return ;
+  }
+
+  return (
+    <div className="mods-grid">
+      {Object.entries(mods).map(([modCategory, modValue], index) => (
+        <React.Fragment key={index}>
+          <div className="profile-grid-title mods">{modCategoryNames[modCategory] || modCategory}</div>
+          <div className="profile-grid-name mods">{modValue}</div>
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
+// Helper function to render tags in a grid layout
+const renderTagsGrid = (tags) => {
+  if (!tags || tags.length === 0) {
+    return <div>No tags available</div>;
+  }
+
+  return (
+    <div className="tags-grid">
+      {tags.map((tag, index) => (
+        <div key={index} className="tag-item">{tag}</div>
+      ))}
+    </div>
+  );
 };
 
 const [isFormVisible, setIsFormVisible] = useState(false);
@@ -128,6 +196,7 @@ return (
                       <div className="profile-grid-title">PRIMARY</div>
                       <div className="profile-grid-name">{profileData.primaryWeapon}</div>
                     </div>
+                      {profile.primaryWeapon && renderModsGrid(profile.primaryWeapon.mods)}
                   </div>
 
                   <div className="profile-grid-item">
@@ -135,6 +204,7 @@ return (
                       <div className="profile-grid-title">SECONDARY</div>
                       <div className="profile-grid-name">{profileData.secondaryWeapon}</div>
                     </div>
+                    {profile.secondaryWeapon && renderModsGrid(profile.secondaryWeapon.mods)}
                   </div>
 
                   <div className="profile-grid-item">
@@ -168,8 +238,8 @@ return (
                   <div className="profile-grid-item">
                     <div className="profile-grid-content">
                       <div className="profile-grid-title">TAGS</div>
-                      <div className="profile-grid-name">{profileData.tags}</div>
                     </div>
+                    {renderTagsGrid(profileData.tags)}
                   </div>
                 </div>
               )}

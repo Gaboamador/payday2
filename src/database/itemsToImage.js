@@ -402,6 +402,15 @@ import WebellsSuppresor from '../imagenes/mods/werbells_suppressor.webp';
 import WideStock from '../imagenes/mods/wide_stock.webp';
 import WoodenGrip from '../imagenes/mods/wooden_grip.webp';
 import WoodenSniperStock from '../imagenes/mods/wooden_sniper_stock.webp';
+import CQBBarrel from '../imagenes/mods/cqb_barrel.webp';
+import TankBusterBarrel from '../imagenes/mods/tank_buster_barrel.webp';
+import TiNTreatedBarrel from '../imagenes/mods/tin_treated_barrel.webp';
+import DrumMag from '../imagenes/mods/drum_mag.webp';
+import ContractorSilencer from '../imagenes/mods/contractor_silencer.webp';
+import DiscreetStock from '../imagenes/mods/discreet_stock.webp';
+import NagantBayonet from '../imagenes/mods/nagant_bayonet.webp';
+import RiotBarrel from '../imagenes/mods/riot_barrel.webp';
+
 
 //PRIMARY GUNS
 import AmcarRifle from '../imagenes/primary_guns/amcar_rifle.webp';
@@ -1031,6 +1040,14 @@ export const itemsToImage = {
 "Wide Stock": WideStock,
 "Wooden Grip": WoodenGrip,
 "Wooden Sniper Stock": WoodenSniperStock,
+"CQB Barrel": CQBBarrel,
+"Tank Buster Barrel": TankBusterBarrel,
+"TiN Treated Barrel": TiNTreatedBarrel,
+"Drum Mag": DrumMag,
+"Contractor Silencer": ContractorSilencer,
+"Discreet Stock": DiscreetStock,
+"Nagant Bayonet": NagantBayonet,
+"Riot Barrel": RiotBarrel,
 
 //PRIMARY GUNS
 'AMCAR Rifle (A1)': AmcarRifle,

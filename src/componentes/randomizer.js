@@ -16,12 +16,35 @@ import SelectCategories from "./SelectCategories";
 import {options} from "../database/items";
 import {heists} from "../database/items";
 import {Clock} from "./clock"
+import { modCategoryNames } from "../database/modCategoryNames";
 import { PiGhost, PiGhostFill } from "react-icons/pi";
 import Context from '../context'
 
 const Payday2Randomizer = () => {
 
   const context= useContext(Context)
+  
+    // Helper function to get tags
+  const getTags = (tags) => {
+    if (!tags || tags.length === 0) return ['No tags available']; // Return as an array for consistency
+    return tags.sort(); // Sort tags for display
+  };
+
+  // Helper function to render tags in a grid layout
+  const renderTagsGrid = (tags) => {
+    if (!tags || tags.length === 0 || tags.includes('No tags available')) {
+      return <div>No tags available</div>;
+    }
+
+    return (
+      <div className="tags-grid">
+        {tags.map((tag, index) => (
+          <div key={index} className="tag-item">{tag}</div>
+        ))}
+      </div>
+    );
+  };
+  
   useEffect(() => {
     // const selectedSkills = JSON.parse(localStorage.getItem('selectedSkills')) || [];
     const selectedSkills = context.selectedSkills
@@ -30,12 +53,15 @@ const Payday2Randomizer = () => {
         // Check each property for data
         const perkDeck = profile.perkDeck || 'No data available';
         const primaryWeapon = profile.primaryWeapon?.weapon || 'No data available';
+        const primaryWeaponMods = profile.primaryWeapon?.mods ? Object.entries(profile.primaryWeapon.mods) : [];
         const secondaryWeapon = profile.secondaryWeapon?.weapon || 'No data available';
+        const secondaryWeaponMods = profile.secondaryWeapon?.mods ? Object.entries(profile.secondaryWeapon.mods) : [];
         const melee = profile.melee || 'No data available';
         const throwable = profile.throwable || 'No data available';
         const armor = profile.armor || 'No data available';
         const equipment = profile.equipment || 'No data available';
-        const tags = profile.tags?.length > 0 ? profile.tags.sort() : ['No data available'];
+        // const tags = profile.tags?.length > 0 ? profile.tags.sort() : ['No data available'];
+        const tags = getTags(profile.tags);
   
         const allPropertiesEmpty = [
           perkDeck,
@@ -53,7 +79,9 @@ const Payday2Randomizer = () => {
           profileName: allPropertiesEmpty ? "No profiles loaded" : `Profile ${index + 1}`,
           perkDeck,
           primaryWeapon,
+          primaryWeaponMods,
           secondaryWeapon,
+          secondaryWeaponMods,
           melee,
           throwable,
           armor,
@@ -82,8 +110,16 @@ const Payday2Randomizer = () => {
     }
   }, []);
   
+  const [showModsPrimary, setShowModsPrimary] = useState(true);
+  const [showModsSecondary, setShowModsSecondary] = useState(true);
   
-   
+  const handleModsToggle = (slot) => {
+    if (slot === "primary") {
+      setShowModsPrimary((prevState) => !prevState);
+  } else if (slot === "secondary") {
+    setShowModsSecondary((prevState) => !prevState);
+  }
+  };
 
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 767);
   useEffect(() => {
@@ -1562,7 +1598,7 @@ return (
       )}
 
       {randomizedProfile.primaryWeapon && (
-        <div className="profile-grid-item">
+        <div className="profile-grid-item" onClick={() => handleModsToggle("primary")}>
           <div className="profile-grid-content">
             <div className="profile-grid-title">PRIMARY</div>
             <div className="profile-grid-name">{randomizedProfile.primaryWeapon}</div>
@@ -1570,14 +1606,36 @@ return (
         </div>
       )}
 
+      {randomizedProfile.primaryWeaponMods && randomizedProfile.primaryWeaponMods.length > 0 && showModsPrimary && (
+            <div className="mods-grid randomizer">
+              {randomizedProfile.primaryWeaponMods.map(([modCategory, modValue], index) => (
+                <React.Fragment key={index}>
+                  <div className="profile-grid-title mods">{modCategoryNames[modCategory] || modCategory}</div>
+                  <div className="profile-grid-name mods">{modValue}</div>
+                </React.Fragment>
+              ))}
+            </div>
+          )}
+          
       {randomizedProfile.secondaryWeapon && (
-        <div className="profile-grid-item">
+        <div className="profile-grid-item" onClick={() => handleModsToggle("secondary")}>
           <div className="profile-grid-content">
             <div className="profile-grid-title">SECONDARY</div>
             <div className="profile-grid-name">{randomizedProfile.secondaryWeapon}</div>
           </div>
         </div>
       )}
+
+      {randomizedProfile.secondaryWeaponMods && randomizedProfile.secondaryWeaponMods.length > 0 && showModsSecondary && (
+                  <div className="mods-grid randomizer">
+                    {randomizedProfile.secondaryWeaponMods.map(([modCategory, modValue], index) => (
+                      <React.Fragment key={index}>
+                        <div className="profile-grid-title mods">{modCategoryNames[modCategory] || modCategory}</div>
+                        <div className="profile-grid-name mods">{modValue}</div>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                )}
 
       {randomizedProfile.melee && (
         <div className="profile-grid-item">
@@ -1616,12 +1674,18 @@ return (
       )}
 
       {randomizedProfile.tags && randomizedProfile.tags.length > 0 && (
+        // <div className="profile-grid-item">
+        //   <div className="profile-grid-content">
+        //     <div className="profile-grid-title">TAGS</div>
+        //     <div className="profile-grid-name">{randomizedProfile.tags.join(', ')}</div>
+        //   </div>
+        // </div>
         <div className="profile-grid-item">
-          <div className="profile-grid-content">
-            <div className="profile-grid-title">TAGS</div>
-            <div className="profile-grid-name">{randomizedProfile.tags.join(', ')}</div>
-          </div>
+        <div className="profile-grid-content">
+          <div className="profile-grid-title">TAGS</div>
         </div>
+        {renderTagsGrid(randomizedProfile.tags)}
+      </div>
       )}
     </div>
   </>
