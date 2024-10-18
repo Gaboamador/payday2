@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.1a647e86.css",
-    "main.js": "/payday2/static/js/main.6bada549.js",
+    "main.css": "/payday2/static/css/main.24d76458.css",
+    "main.js": "/payday2/static/js/main.3edc26ee.js",
     "static/js/289.09e720a0.chunk.js": "/payday2/static/js/289.09e720a0.chunk.js",
     "static/js/787.517fa3a8.chunk.js": "/payday2/static/js/787.517fa3a8.chunk.js",
+    "static/media/weapon_attachments_background.png": "/payday2/static/media/weapon_attachments_background.f6ec47fe2152afb54ea8.png",
     "static/media/icons.png": "/payday2/static/media/icons.7ad65b2dffcd3fa9a44d.png",
     "static/media/cursed_kill_room.jpg": "/payday2/static/media/cursed_kill_room.8b24eda7b1500b42200a.jpg",
     "static/media/lab_rats.jpg": "/payday2/static/media/lab_rats.f8966581f83e7ffb9449.jpg",
@@ -13,6 +14,7 @@
     "static/media/heat_street.jpg": "/payday2/static/media/heat_street.805b78769186b1b9d1fe.jpg",
     "static/media/brooklyn_bank.jpg": "/payday2/static/media/brooklyn_bank.75695991c7159f4dbf0e.jpg",
     "static/media/transport_train_heist.jpg": "/payday2/static/media/transport_train_heist.460354e3c947e5bc9539.jpg",
+    "static/media/weapon_attachments_background_mod3.png": "/payday2/static/media/weapon_attachments_background_mod3.91d4c7a1e1fcfbd62bbe.png",
     "static/media/the_bomb_forest.jpg": "/payday2/static/media/the_bomb_forest.3da59a3294e893df33c6.jpg",
     "static/media/biker_heist.jpg": "/payday2/static/media/biker_heist.229096cd6f589ef450dc.jpg",
     "static/media/alaskan_deal.jpg": "/payday2/static/media/alaskan_deal.4939cd2791abbf6e0a5b.jpg",
@@ -407,6 +409,7 @@
     "static/media/pro_grip.webp": "/payday2/static/media/pro_grip.41c14c1faf8642f01f48.webp",
     "static/media/signature_40_pistol.webp": "/payday2/static/media/signature_40_pistol.d066ac350a8b7f6236f3.webp",
     "static/media/surgeon_sight.webp": "/payday2/static/media/surgeon_sight.ce6c5fd62ad1f4ae87d2.webp",
+    "static/media/riot_barrel.webp": "/payday2/static/media/riot_barrel.803fe5200460c1c0bf8f.webp",
     "static/media/klas_shovel.webp": "/payday2/static/media/klas_shovel.209557e85da17bdd7bbf.webp",
     "static/media/tactical_compensator.webp": "/payday2/static/media/tactical_compensator.96edc7b08358c8ef7d84.webp",
     "static/media/custom_built_frame.webp": "/payday2/static/media/custom_built_frame.ff8a1916f50c4128d154.webp",
@@ -590,13 +593,13 @@
     "static/media/stability.webp": "/payday2/static/media/stability.a71044ea7363bfd71fe2.webp",
     "static/media/total_ammo.webp": "/payday2/static/media/total_ammo.a71044ea7363bfd71fe2.webp",
     "static/media/the_pen.webp": "/payday2/static/media/the_pen.24610383a444ced79906.webp",
-    "main.1a647e86.css.map": "/payday2/static/css/main.1a647e86.css.map",
-    "main.6bada549.js.map": "/payday2/static/js/main.6bada549.js.map",
+    "main.24d76458.css.map": "/payday2/static/css/main.24d76458.css.map",
+    "main.3edc26ee.js.map": "/payday2/static/js/main.3edc26ee.js.map",
     "289.09e720a0.chunk.js.map": "/payday2/static/js/289.09e720a0.chunk.js.map",
     "787.517fa3a8.chunk.js.map": "/payday2/static/js/787.517fa3a8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1a647e86.css",
-    "static/js/main.6bada549.js"
+    "static/css/main.24d76458.css",
+    "static/js/main.3edc26ee.js"
   ]
 }
