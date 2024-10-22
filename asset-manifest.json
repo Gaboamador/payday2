@@ -1,10 +1,9 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.24d76458.css",
-    "main.js": "/payday2/static/js/main.3edc26ee.js",
+    "main.css": "/payday2/static/css/main.4528f852.css",
+    "main.js": "/payday2/static/js/main.b1706d7d.js",
     "static/js/289.09e720a0.chunk.js": "/payday2/static/js/289.09e720a0.chunk.js",
     "static/js/787.517fa3a8.chunk.js": "/payday2/static/js/787.517fa3a8.chunk.js",
-    "static/media/weapon_attachments_background.png": "/payday2/static/media/weapon_attachments_background.f6ec47fe2152afb54ea8.png",
     "static/media/icons.png": "/payday2/static/media/icons.7ad65b2dffcd3fa9a44d.png",
     "static/media/cursed_kill_room.jpg": "/payday2/static/media/cursed_kill_room.8b24eda7b1500b42200a.jpg",
     "static/media/lab_rats.jpg": "/payday2/static/media/lab_rats.f8966581f83e7ffb9449.jpg",
@@ -593,13 +592,13 @@
     "static/media/stability.webp": "/payday2/static/media/stability.a71044ea7363bfd71fe2.webp",
     "static/media/total_ammo.webp": "/payday2/static/media/total_ammo.a71044ea7363bfd71fe2.webp",
     "static/media/the_pen.webp": "/payday2/static/media/the_pen.24610383a444ced79906.webp",
-    "main.24d76458.css.map": "/payday2/static/css/main.24d76458.css.map",
-    "main.3edc26ee.js.map": "/payday2/static/js/main.3edc26ee.js.map",
+    "main.4528f852.css.map": "/payday2/static/css/main.4528f852.css.map",
+    "main.b1706d7d.js.map": "/payday2/static/js/main.b1706d7d.js.map",
     "289.09e720a0.chunk.js.map": "/payday2/static/js/289.09e720a0.chunk.js.map",
     "787.517fa3a8.chunk.js.map": "/payday2/static/js/787.517fa3a8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.24d76458.css",
-    "static/js/main.3edc26ee.js"
+    "static/css/main.4528f852.css",
+    "static/js/main.b1706d7d.js"
   ]
 }
