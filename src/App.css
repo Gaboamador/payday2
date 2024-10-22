@@ -2794,8 +2794,8 @@ color: gray;
 .mod-selection-container {
   max-width: 100%;
   border-radius: 10px;
-  /* background-image: url('https://pd2builder.netlify.app/img/bg.png'); */
-  background-image: url('./imagenes/weapon_attachments_background.png');
+  background-image: url('https://pd2builder.netlify.app/img/bg.png');
+  /* background-image: url('./imagenes/weapon_attachments_background.png'); */
   background-size: cover;
   background-position: center;
   /* margin-top: 10px; */
