@@ -410,7 +410,10 @@ import ContractorSilencer from '../imagenes/mods/contractor_silencer.webp';
 import DiscreetStock from '../imagenes/mods/discreet_stock.webp';
 import NagantBayonet from '../imagenes/mods/nagant_bayonet.webp';
 import RiotBarrel from '../imagenes/mods/riot_barrel.webp';
-
+import StealthLaserModule from '../imagenes/mods/stealth_laser_module.webp';
+import IllTakeHalfThatKit from '../imagenes/mods/ill_take_half_that_kit.webp';
+import TheStumpBarrel from '../imagenes/mods/the_stump_barrel.webp';
+import AerialAssaultBarrel from '../imagenes/mods/aerial_assault_barrel.webp';
 
 //PRIMARY GUNS
 import AmcarRifle from '../imagenes/primary_guns/amcar_rifle.webp';
@@ -1048,6 +1051,10 @@ export const itemsToImage = {
 "Discreet Stock": DiscreetStock,
 "Nagant Bayonet": NagantBayonet,
 "Riot Barrel": RiotBarrel,
+"Stealth Laser Module": StealthLaserModule,
+"I'll Take Half That Kit": IllTakeHalfThatKit,
+"The Stump Barrel": TheStumpBarrel,
+"Aerial Assault Barrel": AerialAssaultBarrel,
 
 //PRIMARY GUNS
 'AMCAR Rifle (A1)': AmcarRifle,

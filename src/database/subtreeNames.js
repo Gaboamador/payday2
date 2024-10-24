@@ -1,0 +1,18 @@
+export const subtreeNames = {
+    upperReceiver: 'UPPER RECEIVER',
+    medic: 'MEDIC',
+    controller: 'CONTROLLER',
+    sharpshooter: 'SHARPSHOOTER',
+    shotgunner: 'SHOTGUNNER',
+    tank: 'TANK',
+    ammo_specialist: 'AMMO SPECIALIST',
+    engineer: 'ENGINEER',
+    breacher: 'BREACHER',
+    oppressor: 'OPPRESSOR',
+    shinobi: 'SHINOBI',
+    artful_dodger: 'ARTFUL DODGER',
+    silent_killer: 'SILENT KILLER',
+    gunslinger: 'GUNSLINGER',
+    revenant: 'REVENANT',
+    brawler: 'BRAWLER',
+    };

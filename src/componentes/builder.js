@@ -5,6 +5,7 @@ import primaryWeapons from '../database/primary.json';
 import secondaryWeapons from '../database/secondary.json';
 import weaponMods from '../database/weaponMods.json'
 import { modCategoryNames } from '../database/modCategoryNames';
+import { subtreeNames } from '../database/subtreeNames';
 import perkDecks from '../database/perkDecks.json';
 import armors from '../database/armors.json';
 import throwables from '../database/throwables.json';
@@ -13,6 +14,7 @@ import melees from '../database/melees.json';
 // import tagsRaw from '../database/tags.json'
 import {Button, Row, Col, Container, ListGroup, Table, Form, Carousel, Dropdown, DropdownButton, NavItem, NavLink, ButtonGroup, Nav, Tab, Tabs } from 'react-bootstrap';
 import aceImage from '../imagenes/ace.png';
+import lockSkill from '../imagenes/padlock.png'
 import iconSkills from '../imagenes/icons.png'
 import { itemsToImage } from "../database/itemsToImage";
 import { IoPricetags, IoPricetagsOutline } from "react-icons/io5";
@@ -21,6 +23,9 @@ import { GoChevronRight } from "react-icons/go";
 import Context from "../context";
 import { supabase } from '../supabaseClient';
 import { fetchData } from './DataService';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+
 
 
 
@@ -168,7 +173,7 @@ const Builder = () => {
    // Function to handle selecting or unselecting a skill for the current profile
    const handleSkillSelect = (skillName) => {
     const skillInfo = organizedSkillsFlat.find((skill) => skill.name === skillName);
-  console.log(organizedSkillsFlat, "organizedSkillsFlat")
+  
     if (skillInfo) {
       context.setSelectedSkills((prevSelectedSkills) => {
         const newSelectedSkills = prevSelectedSkills.map((profileSkills) => ({ ...profileSkills }));
@@ -197,6 +202,22 @@ const Builder = () => {
     }
   };
   
+const calculateSubtreePoints = (subtree) => {
+  let totalPoints = 0;
+
+  subtree.forEach((skill) => {
+    const skillState = selectedSkills[currentProfile - 1][skill.name];
+
+    if (skillState === 'basic') {
+      totalPoints += skill.basic; // Add basic points
+    } else if (skillState === 'ace') {
+      totalPoints += skill.basic + skill.ace; // Add both basic and ace points
+    }
+  });
+
+  return totalPoints;
+};
+
   
   
   
@@ -740,12 +761,15 @@ const toggleButtonContainerVisibility = () => {
   };
 
 
+  const [currentSlide, setCurrentSlide] = useState(1);
+  const totalSlides = 3; // Total number of slides
+
   function goToTop() {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
-
+console.log(context.selectedSkills)
         return ( // return part
 
 <div className="backgroundColor builder">
@@ -916,6 +940,10 @@ const toggleButtonContainerVisibility = () => {
     )}
 {/* PRIMARY WEAPON MOD SELECTION END */}
 
+{categoryVisibility['primaryWeapon'] &&
+<div className="separatorBuilder"></div>
+}
+
 {/* SECONDARY WEAPON START*/}
 <Form className="grid-form-builder">
         <Form.Label onClick={() => toggleCategoryVisibility('secondaryWeapon')} className="categoryName">
@@ -1019,6 +1047,10 @@ const toggleButtonContainerVisibility = () => {
     )}
 {/* SECONDARY WEAPON MOD SELECTION END */}
 
+{categoryVisibility['secondaryWeapon'] &&
+<div className="separatorBuilder"></div>
+}
+
 {/* PERK DECK START */}
 {/* <Form>
 <Form.Label onClick={() => toggleCategoryVisibility('perkDeck')} className="categoryName">PERK DECK</Form.Label>
@@ -1090,6 +1122,10 @@ const toggleButtonContainerVisibility = () => {
 </Form>
 {/* PERK DECK END */}
 
+{/* {categoryVisibility['perkDeck'] &&
+<div className="separatorBuilder"></div>
+} */}
+
 {/* ARMOR START */}
 {/* <Form>
 <Form.Label onClick={() => toggleCategoryVisibility('armor')} className="categoryName">ARMOR</Form.Label>
@@ -1159,6 +1195,10 @@ const toggleButtonContainerVisibility = () => {
 </Form>
 {/* ARMOR END */}
 
+{/* {categoryVisibility['armor'] &&
+<div className="separatorBuilder"></div>
+} */}
+
 {/* THROWABLES START */}
 {/* <Form>
 <Form.Label onClick={() => toggleCategoryVisibility('throwable')} className="categoryName">THROWABLE</Form.Label>
@@ -1227,6 +1267,10 @@ const toggleButtonContainerVisibility = () => {
   </div>
 </Form>
 {/* THROWABLES END */}
+
+{/* {categoryVisibility['throwable'] &&
+<div className="separatorBuilder"></div>
+} */}
 
 {/* EQUIPMENTS START */}
 {/* <Form>
@@ -1371,6 +1415,10 @@ const toggleButtonContainerVisibility = () => {
 </Form>
 {/* EQUIPMENTS END */}
 
+{/* {categoryVisibility['equipment'] &&
+<div className="separatorBuilder"></div>
+} */}
+
 {/* MELEES START */}
 {/* <Form>
 <Form.Label onClick={() => toggleCategoryVisibility('melee')} className="categoryName">MELEE</Form.Label>
@@ -1451,121 +1499,155 @@ const toggleButtonContainerVisibility = () => {
   </div>
 </Form>
 {/* MELEES END */}
+
+{/* {categoryVisibility['melee'] &&
+<div className="separatorBuilder"></div>
+} */}
+
 </div>
 {/* SKILLS START */}
 <Form className="grid-form-builder">
-          <Form.Label onClick={() => toggleCategoryVisibility('skill')} className="categoryName">SKILLS</Form.Label>
-          {categoryVisibility['skill'] && (
+  <Form.Label onClick={() => toggleCategoryVisibility('skill')} className="categoryName">SKILLS</Form.Label>
+  {categoryVisibility['skill'] && (
+    <>
+      {Object.entries(sortedOrganizedSkills).map(([treeName, subtrees]) => (
+        <div key={treeName} className="tree">
+          <Form.Label onClick={() => toggleCategoryVisibility(treeName)} className="skillTreeName">
+            <div>{treeName.toUpperCase()} ({treeSubtotals[treeName]})</div>
+            {categoryVisibility[treeName] && (<div className="slideCounter">{currentSlide}/{totalSlides}</div>)}
+          </Form.Label>
+          
+          {categoryVisibility[treeName] && (
             <>
-          {Object.entries(sortedOrganizedSkills).map(([treeName, subtrees]) => (
-            <div key={treeName} className="tree">
-              {/* <Form.Label onClick={() => toggleTreeSkills(treeName)} className="skillTreeName">{treeName.toUpperCase()} ({treeSubtotals[treeName]})</Form.Label>
-              {expandedTreeSkills === treeName && ( */}
-              <Form.Label onClick={() => toggleCategoryVisibility(treeName)} className="skillTreeName">{treeName.toUpperCase()} ({treeSubtotals[treeName]})</Form.Label>
-              {categoryVisibility[treeName] && (
-            <React.Fragment>
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              navigation={false}
+              // loop={true}
+              grabCursor={true}
+              onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex + 1)} // Update current slide
+            >
               {Object.entries(subtrees).map(([subtreeName, skills]) => {
                 const tiers = [1, 2, 3, 4].reverse(); // Inverted tiers
                 return (
-                  <div key={subtreeName} className="subtree">
-                    
-                    {tiers.map((tier) => {
-                      const tierSkills = skills.filter((skill) => skill.tier === tier);
-    
-                      return (
-                        <Row key={tier}>
-                          {tierSkills.map((skill) => (
-                            <Col key={skill.name} className="skillCol">
-                        <Button
-                        onClick={() => handleSkillSelect(skill.name)}
-                        className={
-                        'skillButton ' +
-                        (selectedSkills[currentProfile - 1][skill.name] === 'basic'
-                        ? 'basicButton'
-                        : selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                        ? 'aceButton'
-                        : 'unselectedButton')
-                        }  
-                        title={skill.description}
-                        style={{
-                        backgroundImage: selectedSkills[currentProfile - 1][skill.name] === 'basic'
-                        ? 'none'
-                        : selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                        ? {aceImage}
-                        : 'none',
-                        backgroundPosition: 'center',
-                        backgroundSize: '80px',
-                        backgroundRepeat: 'no-repeat',
-                        overflow: 'visible',
-                        }}
-                        >
-                        {(selectedSkills[currentProfile - 1][skill.name] === 'basic' || selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                        ?
-                        <img
-                        src={iconSkills}
-                        alt={skill.name}
-                        style={{
-                        width: '80px',
-                        height: '80px',
-                        objectFit: 'none',
-                        objectPosition: `-${skill.idWidth}px -${skill.idHeight}px`,
-                        display: 'block',
-                        marginTop: '0px',
-                        marginLeft: '0px',
-                        }}
-                        />
-                        :
-                        <img
-                        src={iconSkills}
-                        alt={skill.name}
-                        style={{
-                        width: '80px',
-                        height: '80px',
-                        objectFit: 'none',
-                        objectPosition: `-${skill.idWidth}px -${skill.idHeight}px`,
-                        display: 'block',
-                        marginTop: '0px',
-                        marginLeft: '0px',
-                        opacity: '40%',
-                        }}
-                        />
-                        )}
-                        </Button>
-                              <div>
-                                <span
-                                  style={{
-                                    fontWeight:
-                                      selectedSkills[currentProfile - 1][skill.name] === 'basic' || selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                                        ? 'bold'
-                                        : '',
-                                    color:
-                                      selectedSkills[currentProfile - 1][skill.name] === 'basic'
-                                        ? 'white'
-                                        : selectedSkills[currentProfile - 1][skill.name] === 'ace'
-                                        ? '#08AFFF'
-                                        : '#6C757D',
-                                  }}
-                                >
-                                  {skill.name}
-                                </span>
-                              </div>
-                            </Col>
-                          ))}
-                        </Row>
-                      );
-                    })}
-                    <h3 className="subtreeName">{subtreeName.toUpperCase()}</h3>
-                  </div>
+                  <SwiperSlide key={subtreeName}>
+                    <div className="subtree">
+                      {tiers.map((tier) => {
+                        const tierSkills = skills.filter((skill) => skill.tier === tier);
+                        const pointsSpentInSubtree = calculateSubtreePoints(skills);
+                        const isTierUnlocked = // Logic to check if the tier is unlocked
+                          tier === 1 || 
+                          (tier === 2 && pointsSpentInSubtree >= 1) || 
+                          (tier === 3 && pointsSpentInSubtree >= 3) || 
+                          (tier === 4 && pointsSpentInSubtree >= 16);
 
+                        return (
+                          <div key={tier} className={`tierContainer ${isTierUnlocked ? 'unlockedTier' : ''}`}>
+                            <Row>
+                              {tierSkills.map((skill) => (
+                                <Col key={skill.name} className="skillCol">
+                                  <Button
+                                    onClick={() => handleSkillSelect(skill.name)}
+                                    className={
+                                      'skillButton ' +
+                                      (selectedSkills[currentProfile - 1][skill.name] === 'basic'
+                                        ? 'basicButton'
+                                        : selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                                          ? 'aceButton'
+                                          : 'unselectedButton')
+                                    }
+                                    title={skill.description}
+                                    style={{
+                                      backgroundImage:
+                                        selectedSkills[currentProfile - 1][skill.name] === 'basic'
+                                          ? 'none'
+                                          : selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                                            ? aceImage
+                                            : 'none',
+                                      backgroundPosition: 'center',
+                                      backgroundSize: '80px',
+                                      backgroundRepeat: 'no-repeat',
+                                      overflow: 'visible',
+                                    }}
+                                    disabled={!isTierUnlocked}
+                                  >
+                                    {(selectedSkills[currentProfile - 1][skill.name] === 'basic' ||
+                                      selectedSkills[currentProfile - 1][skill.name] === 'ace') ? (
+                                        <img
+                                          src={iconSkills}
+                                          alt={skill.name}
+                                          style={{
+                                            width: '80px',
+                                            height: '80px',
+                                            objectFit: 'none',
+                                            objectPosition: `-${skill.idWidth}px -${skill.idHeight}px`,
+                                            display: 'block',
+                                          }}
+                                        />
+                                      ) : (
+                                        <img
+                                          src={iconSkills}
+                                          alt={skill.name}
+                                          style={{
+                                            width: '80px',
+                                            height: '80px',
+                                            objectFit: 'none',
+                                            objectPosition: `-${skill.idWidth}px -${skill.idHeight}px`,
+                                            opacity: '40%',
+                                          }}
+                                        />
+                                      )}
+                                    {!isTierUnlocked && (
+                                      <img
+                                        src={lockSkill}
+                                        alt={skill.name}
+                                        style={{
+                                          position: 'absolute',
+                                          width: '45px',
+                                          height: '45px',
+                                          marginTop: '15px',
+                                          marginLeft: '-60px',
+                                        }}
+                                      />
+                                    )}
+                                  </Button>
+                                  <div>
+                                    <span
+                                      style={{
+                                        fontWeight:
+                                          selectedSkills[currentProfile - 1][skill.name] === 'basic' ||
+                                          selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                                            ? 'bold'
+                                            : '',
+                                        color:
+                                          selectedSkills[currentProfile - 1][skill.name] === 'basic'
+                                            ? 'white'
+                                            : selectedSkills[currentProfile - 1][skill.name] === 'ace'
+                                              ? '#08AFFF'
+                                              : '#6C757D',
+                                      }}
+                                    >
+                                      {skill.name}
+                                    </span>
+                                  </div>
+                                </Col>
+                              ))}
+                            </Row>
+                          </div>
+                        );
+                      })}
+                      <h3 className="subtreeName">{subtreeNames[subtreeName] || subtreeName}</h3>
+                    </div>
+                  </SwiperSlide>
                 );
               })}
-              </React.Fragment>
-          )}
-            </div>
-          ))}
-          </>
-          )}
-  </Form>
+            </Swiper>
+            </>)}
+        </div>
+      ))}
+    </>
+  )}
+</Form>
 {/* SKILLS END */}
 
 {/* TAGS START */}

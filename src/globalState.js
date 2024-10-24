@@ -29,6 +29,7 @@ function GlobalState(props){
         const [user, setUser]=useState(sessionStorage.getItem('user')!==undefined && sessionStorage.getItem('user')!==null? sessionStorage.getItem('user') : '')
         const [pass,setPass]=useState('')
         const [login, setLogin]=useState(sessionStorage.getItem('login')!==undefined && sessionStorage.getItem('login')!==null ? sessionStorage.getItem('login') : false)
+        const [selectedCategoryPrimary, setSelectedCategoryPrimary] = useState('ammo')
 
     return(
         <Context.Provider value={{
@@ -42,6 +43,8 @@ function GlobalState(props){
             setPass:setPass,
             login:login,
             setLogin:setLogin,
+            selectedCategoryPrimary:selectedCategoryPrimary,
+            setSelectedCategoryPrimary:setSelectedCategoryPrimary,
         }}>
             {props.children}
         </Context.Provider>

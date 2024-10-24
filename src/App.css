@@ -317,6 +317,39 @@ animation: gradient-shiny 2s ease infinite;
   right: 0;
 }
 
+
+/**/
+.separatorBuilder {
+  height: 5px;
+  /* background: #d24646; */
+  background: #edda26;
+  /* background-image: url('https://pd2builder.netlify.app/img/bg.png'); */
+  /* background: transparent; */
+  margin: 20px auto;
+  border-radius: 10px;
+  /* box-shadow: 0 0 15px rgba(210, 70, 70, 0.7), 0 0 30px rgba(210, 70, 70, 0.5); */
+  box-shadow: 0 0 15px rgba(0,0,25, 0.7), 0 0 30px rgba(0,0,25, 0.5);
+  animation: neonPulse 1s ease-in-out infinite;
+  max-width: 700px;
+
+}
+
+@keyframes neonPulse {
+  0% {
+    /* box-shadow: 0 0 5px rgba(210, 70, 70, 0.6), 0 0 10px rgba(210, 70, 70, 0.4); */
+    box-shadow: 0 0 5px rgba(0,0,25, 0.6), 0 0 10px rgba(0,0,25, 0.4);
+  }
+  50% {
+    /* box-shadow: 0 0 20px rgba(210, 70, 70, 1), 0 0 40px rgba(210, 70, 70, 0.7); */
+    box-shadow: 0 0 20px rgba(0,0,25, 1), 0 0 40px rgba(0,0,25, 0.7);
+  }
+  100% {
+    /* box-shadow: 0 0 5px rgba(210, 70, 70, 0.6), 0 0 10px rgba(210, 70, 70, 0.4); */
+    box-shadow: 0 0 5px rgba(0,0,25, 0.6), 0 0 10px rgba(0,0,25, 0.4);
+  }
+}
+/**/
+
 .randomize-table {
   font-family: "RiftBold";
 }
@@ -1429,6 +1462,10 @@ z-index: 1;
   background-image: url('./imagenes/bg.png') !important;
 }
 
+.tierContainer:not(:first-child) {
+  border-top: 1px solid #28648c;
+}
+
 .categoryName {
   color: whitesmoke;
   font-weight: bold;
@@ -1456,6 +1493,12 @@ z-index: 1;
 .skillTreeName {
 margin: 0 auto !important;
 color: whitesmoke !important;
+display: grid;
+grid-template-columns: 1fr auto;
+}
+
+.slideCounter {
+  color: #08afff;
 }
 
 .subtreeName {
@@ -1465,6 +1508,23 @@ color: whitesmoke !important;
   border-top: solid #afb3b6 2px;
   padding-top: 5px;
   margin: 0 auto !important;
+}
+
+/* Background for unlocked tiers */
+
+
+.unlockedTier {
+  background-image: url('./imagenes/background.png');
+  background-size: cover;
+  background-position: center;
+  transition: height 0.3s ease-in-out;
+  /* border-top: 1px solid #28648c; */
+  box-sizing: border-box;
+}
+
+.unlockedTier:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .totalSkillPointsDIV {
@@ -1511,14 +1571,36 @@ color: whitesmoke !important;
 
 .toggle-button-mods {
   display: flex;
+  cursor: pointer;
   flex-direction: row;
   justify-content: center;
   text-align: center;
   align-items: center;
+  width: fit-content;
+  padding: 0 12px;
+  margin: 0 auto;
   margin-top: -10px;
+  border: 2px inset #28648c;
+  border-top: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   /* background-image: url('../src/imagenes/weapon_attachments_background.png'); */
-  
+  transition: 1s;
+  background-color: #f2f2f2;
 }
+
+.toggle-button-mods.active {
+  transition: 1s;
+  border: 2px outset #28648c;;
+  border-bottom: none;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top: 10px;
+  background-color: whitesmoke;
+}
+
 
 .toggle-button-mods p {
   margin: 0;
@@ -3024,7 +3106,8 @@ color: gray;
 }
 
 .mod-category-tabs .nav-link {
-  color: #1489d8;
+  /* color: #1489d8; */
+  color: #27a2f5;
   /* background-color: rgba(0,0,0, 0.1) !important; */
   margin-right: 10px;
   padding: 2px 5px !important;

@@ -9,6 +9,7 @@
         "Incendiary Round"
       ],
       "barrel": [
+        "Aerial Assault Barrel",
         "AK Slavic Dragon Barrel",
         "Bombardier Barrel",
         "Civilian Barrel",
@@ -42,6 +43,7 @@
         "Suppressed Barrel",
         "Swedish Barrel",
         "Tank Buster Barrel",
+        "The Stump Barrel",
         "Threaded Barrel",
         "TiN Treated Barrel",
         "Tirador Barrel",
@@ -124,6 +126,7 @@
         "Single Fire"
       ],
       "extra": [
+        "I'll Take Half That Kit",
         "Scope Mount"
       ],
       "foregrip": [
@@ -164,6 +167,7 @@
         "Riktpunkt 45 degree Sight",
         "Riktpunkt Magnifier Gadget",
         "Signature Magnifier Gadget",
+        "Stealth Laser Module",
         "Tactical Laser Module",
         "Tactical Pistol Light"
       ],
