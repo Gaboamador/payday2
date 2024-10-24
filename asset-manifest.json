@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/payday2/static/css/main.3e3bb103.css",
-    "main.js": "/payday2/static/js/main.b77ae4b3.js",
-    "static/js/289.09e720a0.chunk.js": "/payday2/static/js/289.09e720a0.chunk.js",
-    "static/js/787.517fa3a8.chunk.js": "/payday2/static/js/787.517fa3a8.chunk.js",
+    "main.css": "/payday2/static/css/main.501aa072.css",
+    "main.js": "/payday2/static/js/main.6846315c.js",
+    "static/js/289.c6604e2a.chunk.js": "/payday2/static/js/289.c6604e2a.chunk.js",
+    "static/js/787.5769c993.chunk.js": "/payday2/static/js/787.5769c993.chunk.js",
     "static/media/icons.png": "/payday2/static/media/icons.7ad65b2dffcd3fa9a44d.png",
     "static/media/cursed_kill_room.jpg": "/payday2/static/media/cursed_kill_room.8b24eda7b1500b42200a.jpg",
     "static/media/lab_rats.jpg": "/payday2/static/media/lab_rats.f8966581f83e7ffb9449.jpg",
@@ -123,12 +123,14 @@
     "static/media/wooden_sniper_stock.webp": "/payday2/static/media/wooden_sniper_stock.379e98d9900804c95c50.webp",
     "static/media/maki_suppressor.webp": "/payday2/static/media/maki_suppressor.8cc3e8bfd44bb4352320.webp",
     "static/media/akimbo_jackets_piece_submachine_guns.webp": "/payday2/static/media/akimbo_jackets_piece_submachine_guns.5303c895d3138ac9962f.webp",
+    "static/media/stealth_laser_module.webp": "/payday2/static/media/stealth_laser_module.f2cc9fd572ae63329abb.webp",
     "static/media/akimbo_kobus_90_submachine_guns.webp": "/payday2/static/media/akimbo_kobus_90_submachine_guns.96eb61190b79f09e29d4.webp",
     "static/media/war_torn_stock.webp": "/payday2/static/media/war_torn_stock.56f9bd20f5976d4d2c1e.webp",
     "static/media/little_friend.webp": "/payday2/static/media/little_friend.739f8b66d3c98dc0e822.webp",
     "static/media/no_stock.webp": "/payday2/static/media/no_stock.24f8a1464e6f3169c3fe.webp",
     "static/media/tatonka_submachine_gun.webp": "/payday2/static/media/tatonka_submachine_gun.5037ac9002930e20df03.webp",
     "static/media/akimbo_swedish_k_submachine_guns.webp": "/payday2/static/media/akimbo_swedish_k_submachine_guns.4cba7f3f200157e298c5.webp",
+    "static/media/ill_take_half_that_kit.webp": "/payday2/static/media/ill_take_half_that_kit.12a7aee1affd2c8163e7.webp",
     "static/media/spring_suppressor.webp": "/payday2/static/media/spring_suppressor.b75901f7f611af9a66e9.webp",
     "static/media/vulcan_minigun.webp": "/payday2/static/media/vulcan_minigun.ee352ed5867094c17aea.webp",
     "static/media/akimbo_judge_shotguns.webp": "/payday2/static/media/akimbo_judge_shotguns.0123ce97c11ff03edf5e.webp",
@@ -192,6 +194,7 @@
     "static/media/the_professional_compensator.webp": "/payday2/static/media/the_professional_compensator.d94fcf0504bcdbc19cde.webp",
     "static/media/classic_stock.webp": "/payday2/static/media/classic_stock.6073b7c203432677afa0.webp",
     "static/media/the_elite_slide.webp": "/payday2/static/media/the_elite_slide.000cd97387885b21da3a.webp",
+    "static/media/the_stump_barrel.webp": "/payday2/static/media/the_stump_barrel.f29efcc9c710730c63c3.webp",
     "static/media/akimbo_krinkov_submachine_guns.webp": "/payday2/static/media/akimbo_krinkov_submachine_guns.9d45f6c1e25493585513.webp",
     "static/media/sehr_kurze_barrel.webp": "/payday2/static/media/sehr_kurze_barrel.373394c0213be0feab58.webp",
     "static/media/compact_profile_sight.webp": "/payday2/static/media/compact_profile_sight.03e81e3a7773a1626551.webp",
@@ -224,6 +227,7 @@
     "static/media/drum_mag.webp": "/payday2/static/media/drum_mag.227889e257e1f7a6adf1.webp",
     "static/media/ghetto_blaster.webp": "/payday2/static/media/ghetto_blaster.3faf5fc47b74ac3be29f.webp",
     "static/media/akimbo_leo_pistols.webp": "/payday2/static/media/akimbo_leo_pistols.948f4c20093895a6ac2f.webp",
+    "static/media/aerial_assault_barrel.webp": "/payday2/static/media/aerial_assault_barrel.9b4bd9a3db8740116134.webp",
     "static/media/ak_slavic_dragon_barrel.webp": "/payday2/static/media/ak_slavic_dragon_barrel.06f69e8abc9cb5c47e49.webp",
     "static/media/vented_slide.webp": "/payday2/static/media/vented_slide.e6969ae1e7b3dc506874.webp",
     "static/media/velocity_40.webp": "/payday2/static/media/velocity_40.3e44d1dfe615e83034ad.webp",
@@ -593,13 +597,13 @@
     "static/media/stability.webp": "/payday2/static/media/stability.a71044ea7363bfd71fe2.webp",
     "static/media/total_ammo.webp": "/payday2/static/media/total_ammo.a71044ea7363bfd71fe2.webp",
     "static/media/the_pen.webp": "/payday2/static/media/the_pen.24610383a444ced79906.webp",
-    "main.3e3bb103.css.map": "/payday2/static/css/main.3e3bb103.css.map",
-    "main.b77ae4b3.js.map": "/payday2/static/js/main.b77ae4b3.js.map",
-    "289.09e720a0.chunk.js.map": "/payday2/static/js/289.09e720a0.chunk.js.map",
-    "787.517fa3a8.chunk.js.map": "/payday2/static/js/787.517fa3a8.chunk.js.map"
+    "main.501aa072.css.map": "/payday2/static/css/main.501aa072.css.map",
+    "main.6846315c.js.map": "/payday2/static/js/main.6846315c.js.map",
+    "289.c6604e2a.chunk.js.map": "/payday2/static/js/289.c6604e2a.chunk.js.map",
+    "787.5769c993.chunk.js.map": "/payday2/static/js/787.5769c993.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3e3bb103.css",
-    "static/js/main.b77ae4b3.js"
+    "static/css/main.501aa072.css",
+    "static/js/main.6846315c.js"
   ]
 }
