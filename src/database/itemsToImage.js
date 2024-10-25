@@ -414,6 +414,11 @@ import StealthLaserModule from '../imagenes/mods/stealth_laser_module.webp';
 import IllTakeHalfThatKit from '../imagenes/mods/ill_take_half_that_kit.webp';
 import TheStumpBarrel from '../imagenes/mods/the_stump_barrel.webp';
 import AerialAssaultBarrel from '../imagenes/mods/aerial_assault_barrel.webp';
+import BroncoScopeMount from '../imagenes/mods/bronco_scope_mount.webp';
+import DourifMuzzle from '../imagenes/mods/dourif_muzzle.webp';
+import RamiSuppressor from '../imagenes/mods/rami_suppressor.webp';
+import MedvedR4Suppressor from '../imagenes/mods/medved_r4_suppressor.webp';
+import VerdunkelnMuzzleBrake from '../imagenes/mods/verdunkeln_muzzle_brake.webp';
 
 //PRIMARY GUNS
 import AmcarRifle from '../imagenes/primary_guns/amcar_rifle.webp';
@@ -822,6 +827,8 @@ export const itemsToImage = {
 "Compact Profile Sight": CompactProfileSight,
 "Competitor's Compensator": CompetitorsCompensator,
 "Concealment": Concealment,
+"Concealment +2": Concealment,
+"Concealment +3": Concealment,
 "Contractor Compensator": ContractorCompensator,
 "Contractor Grip": ContractorGrip,
 "Contractor Stock": ContractorStock,
@@ -1055,6 +1062,11 @@ export const itemsToImage = {
 "I'll Take Half That Kit": IllTakeHalfThatKit,
 "The Stump Barrel": TheStumpBarrel,
 "Aerial Assault Barrel": AerialAssaultBarrel,
+"Bronco Scope Mount": BroncoScopeMount,
+"Dourif Muzzle": DourifMuzzle,
+"Rami Suppressor": RamiSuppressor,
+"Medved R4 Suppressor": MedvedR4Suppressor,
+"Verdunkeln Muzzle Brake": VerdunkelnMuzzleBrake,
 
 //PRIMARY GUNS
 'AMCAR Rifle (A1)': AmcarRifle,

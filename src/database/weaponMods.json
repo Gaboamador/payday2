@@ -59,6 +59,7 @@
         "Contractor Silencer",
         "Damper.L 44 Nozzle",
         "Donald's Horizontal Leveller",
+        "Dourif Muzzle",
         "Facepunch Compensator",
         "Fire Breather Nozzle",
         "Flash Hider",
@@ -74,11 +75,13 @@
         "Maki Suppressor",
         "Marmon Compensator",
         "Medium Suppressor",
+        "Medved R4 Suppressor",
         "Monolith Suppressor",
         "OVERKILL Compensator",
         "PBS Suppressor",
         "Ported Compensator",
         "Punisher Compensator",
+        "Rami Suppressor",
         "Roctec Suppressor",
         "Shark Teeth Nozzle",
         "Shh!",
@@ -104,6 +107,7 @@
         "Ventilated .40",
         "Ventilated .45",
         "Ventilated Compensator",
+        "Verdunkeln Muzzle Brake",
         "Werbell's Suppressor"
       ],
       "bayonet": [
@@ -117,6 +121,8 @@
         "Accuracy -",
         "Damage",
         "Concealment",
+        "Concealment +2",
+        "Concealment +3",
         "Stability",
         "Team Boost",
         "Total Ammo"
@@ -126,6 +132,7 @@
         "Single Fire"
       ],
       "extra": [
+        "Bronco Scope Mount",
         "I'll Take Half That Kit",
         "Scope Mount"
       ],

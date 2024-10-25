@@ -1391,6 +1391,10 @@ z-index: 1;
   
 }
 
+.tree.active {
+  background-color: red !important;
+}
+
 .selectProfileText {
   color: #285a82 !important;
   border: 2px ridge rgba(0, 0, 0, 0.2);

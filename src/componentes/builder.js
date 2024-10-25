@@ -763,6 +763,13 @@ const toggleButtonContainerVisibility = () => {
 
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = 3; // Total number of slides
+  const [currentSlides, setCurrentSlides] = useState({});
+  const setTreeSlide = (treeName, activeIndex) => {
+    setCurrentSlides((prev) => ({
+      ...prev,
+      [treeName]: activeIndex + 1,
+    }));
+  };
 
   function goToTop() {
     document.body.scrollTop = 0; // For Safari
@@ -1510,11 +1517,19 @@ console.log(context.selectedSkills)
   <Form.Label onClick={() => toggleCategoryVisibility('skill')} className="categoryName">SKILLS</Form.Label>
   {categoryVisibility['skill'] && (
     <>
-      {Object.entries(sortedOrganizedSkills).map(([treeName, subtrees]) => (
+      {Object.entries(sortedOrganizedSkills).map(([treeName, subtrees]) => {
+        const totalSlides = Object.keys(subtrees).length;
+
+        return (
         <div key={treeName} className="tree">
           <Form.Label onClick={() => toggleCategoryVisibility(treeName)} className="skillTreeName">
             <div>{treeName.toUpperCase()} ({treeSubtotals[treeName]})</div>
-            {categoryVisibility[treeName] && (<div className="slideCounter">{currentSlide}/{totalSlides}</div>)}
+            {/* {categoryVisibility[treeName] && (<div className="slideCounter">{currentSlide}/{totalSlides}</div>)} */}
+            {categoryVisibility[treeName] && (
+                    <div className="slideCounter">
+                      {currentSlides[treeName] || 1}/{totalSlides}
+                    </div>
+                  )}
           </Form.Label>
           
           {categoryVisibility[treeName] && (
@@ -1525,7 +1540,8 @@ console.log(context.selectedSkills)
               navigation={false}
               // loop={true}
               grabCursor={true}
-              onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex + 1)} // Update current slide
+              onSlideChange={(swiper) => setTreeSlide(treeName, swiper.activeIndex)}
+              // onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex + 1)}
             >
               {Object.entries(subtrees).map(([subtreeName, skills]) => {
                 const tiers = [1, 2, 3, 4].reverse(); // Inverted tiers
@@ -1644,7 +1660,8 @@ console.log(context.selectedSkills)
             </Swiper>
             </>)}
         </div>
-      ))}
+        )}
+      )}
     </>
   )}
 </Form>
